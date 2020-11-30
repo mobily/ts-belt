@@ -10,7 +10,7 @@ There are many ways to import `ts-belt` functions into your project:
 #### Compact:
 
 ```typescript
-import { O, R, A, pipe } from '@mobily/ts-belt'
+import { A, O, R, pipe } from '@mobily/ts-belt'
 ```
 
 | O      | R      | A     |
