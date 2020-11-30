@@ -4,7 +4,7 @@ import { Redirect } from '@docusaurus/router'
 
 const Home = () => {
   return (
-    <Redirect to="/docs/" />
+    <Redirect to="/ts-belt/docs/" />
   )
 }
 

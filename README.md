@@ -28,7 +28,7 @@ npm install @mobily/ts-belt --save
 
 ## Api Reference
 
-Full documentation is available [here](https://mobily.github.io/ts-belt).
+Full documentation is available [here](https://mobily.github.io/ts-belt/).
 
 ## Contributors
 
