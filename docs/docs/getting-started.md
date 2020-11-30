@@ -8,7 +8,7 @@ slug: /
 
 ### Features
 
-- [lightweight](https://bundlephobia.com/result?p=@mobily/ts-belt), no dependencies, less than 1kb
+- [lightweight](https://bundlephobia.com/result?p=@mobily/ts-belt), no dependencies
 - type safety, full TypeScript support
 - high tests coverage
 - all functions are [curried](https://medium.com/javascript-scene/curry-and-function-composition-2c208d774983)
