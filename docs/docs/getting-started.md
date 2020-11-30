@@ -4,7 +4,7 @@ title: Getting started
 slug: /
 ---
 
-**🔧 TS Belt** is a library for functional programming in TypeScript. It solves a problem of the existence of both `undefined` and `null`. TS Belt is inspired by the [Belt](https://rescript-lang.org/docs/manual/latest/api/belt) module for ReScript/Reason.
+**🔧 TS Belt** is a library for functional programming in TypeScript. It solves the problem of the existence of both `undefined` and `null`. TS Belt is inspired by the [Belt](https://rescript-lang.org/docs/manual/latest/api/belt) module for ReScript/Reason.
 
 ### Features
 
