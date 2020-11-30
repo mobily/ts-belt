@@ -1,8 +1,8 @@
 module.exports = {
   title: 'ts-belt',
   tagline: 'The tagline of my site',
-  url: 'https://your-docusaurus-test-site.com',
-  baseUrl: '/',
+  url: 'https://mobily.github.io',
+  baseUrl: '/ts-belt/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
