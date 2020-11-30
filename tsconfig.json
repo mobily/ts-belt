@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "lib": ["es2015"],
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": false,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "target": "es2015",
+    "module": "commonjs",
+    "allowJs": false,
+    "composite": true,
+    "declaration": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "removeComments": true,
+    "noEmit": false,
+    "outDir": "dist",
+    "rootDir": ".",
+    "baseUrl": ".",
+    "paths": {
+      "@mobily/ts-belt": ["./src"],
+      "@mobily/ts-belt/*": ["./src/*"]
+    }
+  },
+  "include": [
+    "./src/**/*",
+    "./__tests__/**/*"
+  ],
+  "exclude": [
+    "playground"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "projectName": "ts-belt",
+  "projectOwner": "mobily",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "mobily",
+      "name": "Marcin Dziewulski",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/1467712?v=4",
+      "profile": "https://twitter.com/__marcin_",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    }
+  ]
+}
