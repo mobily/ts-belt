@@ -8,7 +8,7 @@ export const withinRange = <T>(index: number, list: T[]) => {
 }
 
 export const isNotNil = <T>(value: T | null | undefined): value is NonNullable<T> => {
-  return value == null
+  return value != null
 }
 
 export const toBoolean = <T>(value: T): value is NonNullable<T> => {
