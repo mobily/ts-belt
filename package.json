@@ -8,7 +8,7 @@
   "sideEffects": false,
   "files": [
     "src",
-    "dist",
+    "dist/src",
     "*.md",
     "package.json"
   ],
