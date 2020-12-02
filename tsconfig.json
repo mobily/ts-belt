@@ -29,9 +29,7 @@
   },
   "include": [
     "./src/**/*",
-    "./__tests__/**/*"
-  ],
-  "exclude": [
-    "playground"
+    "./__tests__/**/*",
+    "./playground/*"
   ]
 }
