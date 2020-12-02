@@ -7,6 +7,14 @@ export const withinRange = <T>(index: number, list: T[]) => {
   return index >= 0 && index <= list.length
 }
 
+export const isNotNil = <T>(value: T | null | undefined): value is NonNullable<T> => {
+  return value == null
+}
+
+export const toBoolean = <T>(value: T): value is NonNullable<T> => {
+  return !!value
+}
+
 export const curry2 = <A, B, C>(fn: (arg0: A, arg1: B) => C) => {
   return function curry(arg0: A, arg1?: B) {
     if (arguments.length === 1) {
@@ -31,9 +39,7 @@ export const curry3 = <A, B, C, D>(fn: (arg0: A, arg1: B, arg2: C) => D) => {
   }
 }
 
-export const curry4 = <A, B, C, D, E>(
-  fn: (arg0: A, arg1: B, arg2: C, arg3: D) => E,
-) => {
+export const curry4 = <A, B, C, D, E>(fn: (arg0: A, arg1: B, arg2: C, arg3: D) => E) => {
   return function curry(arg0: A, arg1?: B, arg2?: C, arg3?: D) {
     if (arguments.length === 1) {
       return (x: B) => curry(arg0, x)
