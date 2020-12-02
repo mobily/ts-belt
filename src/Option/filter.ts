@@ -8,8 +8,6 @@ type Curry2 = {
   <T>(predicate: Predicate<[T]>, option: Option<T>): Option<T>
 }
 
-export const filter: Curry2 = curry2(
-  <T>(predicate: Predicate<[T]>, option: Option<T>): any => {
-    return predicate(option.value) ? Some(option.value) : None
-  },
-)
+export const filter: Curry2 = curry2(<T>(predicate: Predicate<[T]>, option: Option<T>): any => {
+  return predicate(option.value) ? Some(option.value) : None
+})

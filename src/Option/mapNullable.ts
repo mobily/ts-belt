@@ -1,14 +1,18 @@
-import type { MapFn, Option } from '../types'
+import type * as Type from '../types'
 import { None } from './None'
 import { curry2 } from '../utils'
 import { fromNullable } from './fromNullable'
 import { isNone } from './isNone'
 
 type Curry2 = {
-  <T, R>(mapFn: MapFn<T, R | null | undefined>): (option: Option<T>) => Option<R>
-  <T, R>(mapFn: MapFn<T, R | null | undefined>, option: Option<T>): Option<R>
+  <T>(mapFn: Type.MapFn<T, null | undefined>): (option: Type.Option<T>) => Type.None
+  <T, R>(mapFn: Type.MapFn<T, R>): (option: Type.Option<T>) => Type.Some<NonNullable<R>>
+  <T>(mapFn: Type.MapFn<T, null | undefined>, option: Type.Option<T>): Type.None
+  <T, R>(mapFn: Type.MapFn<T, R>, option: Type.Option<T>): Type.Some<NonNullable<R>>
 }
 
-export const mapNullable: Curry2 = curry2(<T, R>(fn: MapFn<T, R>, option: Option<T>): any => {
-  return isNone(option) ? None : fromNullable(fn(option.value))
-})
+export const mapNullable: Curry2 = curry2(
+  <T, R>(fn: Type.MapFn<T, R>, option: Type.Option<T>): any => {
+    return isNone(option) ? None : fromNullable(fn(option.value))
+  },
+)
