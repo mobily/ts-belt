@@ -6,9 +6,9 @@ import { isNone } from './isNone'
 
 type Curry2 = {
   <T>(mapFn: Type.MapFn<T, null | undefined>): (option: Type.Option<T>) => Type.None
-  <T, R>(mapFn: Type.MapFn<T, R>): (option: Type.Option<T>) => Type.Some<NonNullable<R>>
+  <T, R>(mapFn: Type.MapFn<T, R>): (option: Type.Option<T>) => Type.Some<R>
   <T>(mapFn: Type.MapFn<T, null | undefined>, option: Type.Option<T>): Type.None
-  <T, R>(mapFn: Type.MapFn<T, R>, option: Type.Option<T>): Type.Some<NonNullable<R>>
+  <T, R>(mapFn: Type.MapFn<T, R>, option: Type.Option<T>): Type.Some<R>
 }
 
 export const mapNullable: Curry2 = curry2(
