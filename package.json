@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "clean": "rm -rf ./dist && rm -f ./tsconfig.tsbuildinfo",
-    "build": "yarn clean && yarn tsc -p tsconfig.build.json",
+    "build": "yarn test && yarn clean && yarn tsc -p tsconfig.build.json",
     "test": "yarn jest",
     "test:watch": "yarn jest --watch",
     "generate:contributors": "yarn all-contributors generate"
