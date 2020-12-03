@@ -2,7 +2,7 @@ import { getBy } from '@mobily/ts-belt/Array'
 import { None, Some } from '@mobily/ts-belt/Option'
 
 describe('getBy', () => {
-  it('*', () => {
+  it('should return None', () => {
     expect(getBy(n => n === 0, [1, 2, 3])).toEqual(None)
     expect(getBy(state => state, [false, false, false])).toEqual(None)
     expect(
@@ -10,7 +10,7 @@ describe('getBy', () => {
     ).toEqual(None)
   })
 
-  it('*', () => {
+  it('should return Some', () => {
     expect(getBy(str => str.length === 2, ['a', 'ab', 'bc'])).toEqual(Some('ab'))
     expect(getBy(value => value === 2, [1, 2, 3])).toEqual(Some(2))
     expect(

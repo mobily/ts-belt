@@ -2,13 +2,13 @@ import { splitAt } from '@mobily/ts-belt/Array'
 import { None, Some } from '@mobily/ts-belt/Option'
 
 describe('splitAt', () => {
-  it('*', () => {
+  it('should return None', () => {
     expect(splitAt(1, [])).toEqual(None)
     expect(splitAt(-1, [1, 2, 3])).toEqual(None)
     expect(splitAt(4, [1, 2, 3])).toEqual(None)
   })
 
-  it('*', () => {
+  it('should return Some', () => {
     expect(splitAt(0, [])).toEqual(Some([[], []]))
     expect(splitAt(1, [1])).toEqual(Some([[1], []]))
     expect(splitAt(1, [1, 2])).toEqual(Some([[1], [2]]))
