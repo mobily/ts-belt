@@ -2,7 +2,7 @@ import { pipe } from '@mobily/ts-belt'
 import { None, Some, flatMap, fromNullable } from '@mobily/ts-belt/Option'
 
 describe('flatMap', () => {
-  it('*', () => {
+  it('should return None', () => {
     expect(
       pipe(
         fromNullable(null),
@@ -14,17 +14,24 @@ describe('flatMap', () => {
       pipe(
         fromNullable(undefined),
         flatMap(_ => None),
-        flatMap(_ => Some('string')),
+        flatMap(_ => Some('value')),
+      ),
+    ).toEqual(None)
+
+    expect(
+      pipe(
+        fromNullable('value'),
+        flatMap(_ => None),
       ),
     ).toEqual(None)
   })
 
-  it('*', () => {
+  it('should return Some', () => {
     expect(
       pipe(
-        fromNullable('string'),
-        flatMap(_ => None),
+        fromNullable('value'),
+        flatMap(_ => Some('this is fine')),
       ),
-    ).toEqual(None)
+    ).toEqual(Some('this is fine'))
   })
 })

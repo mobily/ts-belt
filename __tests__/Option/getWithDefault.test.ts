@@ -1,12 +1,26 @@
 import { pipe } from '@mobily/ts-belt'
-import { fromNullable, getWithDefault } from '@mobily/ts-belt/Option'
+import { fromNullable, getWithDefault, map, mapNullable } from '@mobily/ts-belt/Option'
 
 describe('getWithDefault', () => {
-  it('*', () => {
-    expect(pipe(fromNullable(null), getWithDefault('string'))).toBe('string')
+  it('should return a default value', () => {
+    expect(pipe(fromNullable(null), getWithDefault('default value'))).toBe('default value')
+    expect(
+      pipe(
+        fromNullable('value'),
+        mapNullable(_ => null),
+        getWithDefault('default value'),
+      ),
+    ).toBe('default value')
   })
 
-  it('*', () => {
-    expect(pipe(fromNullable(1), getWithDefault(1))).toBe(1)
+  it('should skip a default value', () => {
+    expect(pipe(fromNullable('value'), getWithDefault('default value'))).toBe('value')
+    expect(
+      pipe(
+        fromNullable('value'),
+        map(_ => 'this is fine'),
+        getWithDefault('default value'),
+      ),
+    ).toBe('this is fine')
   })
 })

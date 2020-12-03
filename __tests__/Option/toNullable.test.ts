@@ -2,11 +2,8 @@ import { pipe } from '@mobily/ts-belt'
 import { None, Some, fromNullable, mapNullable, toNullable } from '@mobily/ts-belt/Option'
 
 describe('toNullable', () => {
-  it('*', () => {
+  it('should return null', () => {
     expect(pipe(None, toNullable)).toBe(null)
-  })
-
-  it('*', () => {
     expect(
       pipe(
         fromNullable({ prop: null }),
@@ -16,17 +13,14 @@ describe('toNullable', () => {
     ).toBe(null)
   })
 
-  it('*', () => {
-    expect(pipe(Some('string'), toNullable)).toBe('string')
-  })
-
-  it('*', () => {
+  it('should return a value', () => {
+    expect(pipe(Some('value'), toNullable)).toBe('value')
     expect(
       pipe(
-        fromNullable({ prop: 'string' }),
+        fromNullable({ prop: 'value' }),
         mapNullable(obj => obj.prop),
         toNullable,
       ),
-    ).toBe('string')
+    ).toBe('value')
   })
 })

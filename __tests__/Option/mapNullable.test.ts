@@ -2,38 +2,37 @@ import { pipe } from '@mobily/ts-belt'
 import { None, Some, fromNullable, mapNullable } from '@mobily/ts-belt/Option'
 
 describe('mapNullable', () => {
-  it('*', () => {
+  it('should return None', () => {
     expect(
       pipe(
         fromNullable(null),
-        mapNullable(value => value),
+        mapNullable(_ => 'value'),
       ),
     ).toEqual(None)
-  })
 
-  it('*', () => {
     expect(
       pipe(
         fromNullable({ prop: null }),
-        mapNullable(value => value.prop),
+        mapNullable(obj => obj.prop),
       ),
     ).toEqual(None)
-  })
 
-  it('*', () => {
     expect(
       pipe(
-        fromNullable(null),
-        mapNullable(_ => 'string'),
+        fromNullable('this is fine'),
+        mapNullable(_ => null),
       ),
     ).toEqual(None)
   })
 
-  it('*', () => {
+  it('should return Some', () => {
     expect(
       pipe(
         fromNullable([1, 2, 3]),
-        mapNullable(([first]) => first),
+        mapNullable(arr => {
+          const [fst] = arr
+          return fst
+        }),
       ),
     ).toEqual(Some(1))
   })

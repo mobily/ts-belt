@@ -1,13 +1,13 @@
 import { None, Some, fromNullable } from '@mobily/ts-belt/Option'
 
 describe('fromNullable', () => {
-  it('*', () => {
+  it('should return None', () => {
     expect(fromNullable(null)).toEqual(None)
     expect(fromNullable(undefined)).toEqual(None)
   })
 
-  it('*', () => {
-    expect(fromNullable('string')).toEqual(Some('string'))
+  it('should return Some', () => {
+    expect(fromNullable('value')).toEqual(Some('value'))
     expect(fromNullable([])).toEqual(Some([]))
     expect(fromNullable({})).toEqual(Some({}))
     expect(fromNullable(0)).toEqual(Some(0))

@@ -2,11 +2,8 @@ import { pipe } from '@mobily/ts-belt'
 import { None, Some, fromNullable, mapNullable, toUndefined } from '@mobily/ts-belt/Option'
 
 describe('toUndefined', () => {
-  it('*', () => {
+  it('should return undefined', () => {
     expect(pipe(None, toUndefined)).toBe(undefined)
-  })
-
-  it('*', () => {
     expect(
       pipe(
         fromNullable({ prop: null }),
@@ -16,17 +13,14 @@ describe('toUndefined', () => {
     ).toBe(undefined)
   })
 
-  it('*', () => {
-    expect(pipe(Some('string'), toUndefined)).toBe('string')
-  })
-
-  it('*', () => {
+  it('should return a value', () => {
+    expect(pipe(Some('value'), toUndefined)).toBe('value')
     expect(
       pipe(
-        fromNullable({ prop: 'string' }),
+        fromNullable({ prop: 'value' }),
         mapNullable(obj => obj.prop),
         toUndefined,
       ),
-    ).toBe('string')
+    ).toBe('value')
   })
 })

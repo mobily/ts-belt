@@ -2,21 +2,21 @@ import { pipe } from '@mobily/ts-belt'
 import { Some, fromNullable, mapWithDefault } from '@mobily/ts-belt/Option'
 
 describe('mapWithDefault', () => {
-  it('*', () => {
+  it('should return a default value', () => {
     expect(
       pipe(
         fromNullable(null),
-        mapWithDefault('default', _ => 'string'),
+        mapWithDefault('default value', _ => 'value'),
       ),
-    ).toEqual(Some('default'))
+    ).toEqual(Some('default value'))
   })
 
-  it('*', () => {
+  it('should skip a default value', () => {
     expect(
       pipe(
         fromNullable([1, 2, 3]),
-        mapWithDefault('default', _ => 'string'),
+        mapWithDefault('default value', _ => 'value'),
       ),
-    ).toEqual(Some('string'))
+    ).toEqual(Some('value'))
   })
 })
