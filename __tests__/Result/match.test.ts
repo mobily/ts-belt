@@ -2,27 +2,27 @@ import { pipe } from '@mobily/ts-belt'
 import { fromNullable, match } from '@mobily/ts-belt/Result'
 
 describe('match', () => {
-  it('*', () => {
+  it('should return a result of errorFn', () => {
     expect(
       pipe(
-        fromNullable('error', null),
+        fromNullable('this is bad', null),
         match(
-          _ => 'ok',
-          value => value,
+          _ => 'this is fine',
+          error => `${error}!`,
         ),
       ),
-    ).toEqual('error')
+    ).toEqual('this is bad!')
   })
 
-  it('*', () => {
+  it('should return a result of okFn', () => {
     expect(
       pipe(
-        fromNullable('error', 'ok'),
+        fromNullable('this is bad', 'this is fine'),
         match(
-          str => str,
-          () => 'none',
+          str => `${str}!`,
+          error => error,
         ),
       ),
-    ).toEqual('ok')
+    ).toEqual('this is fine!')
   })
 })

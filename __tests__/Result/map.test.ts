@@ -2,21 +2,24 @@ import { pipe } from '@mobily/ts-belt'
 import { Error, Ok, fromNullable, map } from '@mobily/ts-belt/Result'
 
 describe('map', () => {
-  it('*', () => {
+  it('should return Error', () => {
     expect(
       pipe(
-        fromNullable('error', null),
+        fromNullable('this is bad', null),
         map(_ => 'string'),
       ),
-    ).toEqual(Error('error'))
+    ).toEqual(Error('this is bad'))
   })
 
-  it('*', () => {
+  it('should return Ok', () => {
     expect(
       pipe(
-        fromNullable('error', [1, 2, 3]),
-        map(_ => 'string'),
+        fromNullable('this is bad', [1, 2, 3]),
+        map(arr => {
+          const [fst] = arr
+          return fst
+        }),
       ),
-    ).toEqual(Ok('string'))
+    ).toEqual(Ok(1))
   })
 })

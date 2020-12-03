@@ -11,6 +11,8 @@ describe('fromNullable', () => {
     expect(fromNullable([])).toEqual(Some([]))
     expect(fromNullable({})).toEqual(Some({}))
     expect(fromNullable(0)).toEqual(Some(0))
+    expect(fromNullable(1)).toEqual(Some(1))
     expect(fromNullable(false)).toEqual(Some(false))
+    expect(fromNullable(true)).toEqual(Some(true))
   })
 })

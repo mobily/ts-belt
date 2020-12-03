@@ -1,17 +1,18 @@
 import { Error, Ok, fromFalsy } from '@mobily/ts-belt/Result'
 
 describe('fromFalsy', () => {
-  it('*', () => {
-    expect(fromFalsy('1', null)).toEqual(Error('1'))
-    expect(fromFalsy('2', undefined)).toEqual(Error('2'))
-    expect(fromFalsy('3', 0)).toEqual(Error('3'))
-    expect(fromFalsy('4', '')).toEqual(Error('4'))
-    expect(fromFalsy('5', false)).toEqual(Error('5'))
+  it('should return Error', () => {
+    const error = Error('this is bad')
+    expect(fromFalsy('this is bad', null)).toEqual(error)
+    expect(fromFalsy('this is bad', undefined)).toEqual(error)
+    expect(fromFalsy('this is bad', 0)).toEqual(error)
+    expect(fromFalsy('this is bad', '')).toEqual(error)
+    expect(fromFalsy('this is bad', false)).toEqual(error)
   })
 
-  it('*', () => {
-    expect(fromFalsy('1', 'string')).toEqual(Ok('string'))
-    expect(fromFalsy('2', [])).toEqual(Ok([]))
-    expect(fromFalsy('3', {})).toEqual(Ok({}))
+  it('should return Ok', () => {
+    expect(fromFalsy('this is bad', 'value')).toEqual(Ok('value'))
+    expect(fromFalsy('this is bad', [])).toEqual(Ok([]))
+    expect(fromFalsy('this is bad', {})).toEqual(Ok({}))
   })
 })

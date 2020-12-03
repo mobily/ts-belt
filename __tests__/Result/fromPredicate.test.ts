@@ -1,14 +1,19 @@
 import { Error, Ok, fromPredicate } from '@mobily/ts-belt/Result'
 
 describe('fromPredicate', () => {
-  it('*', () => {
-    expect(fromPredicate(str => str.length > 10, '1', 'string')).toEqual(Error('1'))
-    expect(fromPredicate(n => n !== 0, '2', 0)).toEqual(Error('2'))
-    expect(fromPredicate(state => !state, '3', true)).toEqual(Error('3'))
+  it('should return Error', () => {
+    const error = Error('this is bad')
+    expect(fromPredicate(str => str.length > 10, 'this is bad', 'value')).toEqual(error)
+    expect(fromPredicate(n => n !== 0, 'this is bad', 0)).toEqual(error)
+    expect(fromPredicate(state => !state, 'this is bad', true)).toEqual(error)
   })
 
-  it('*', () => {
-    expect(fromPredicate(arr => arr.some(x => x === 2), '1', [1, 2, 3])).toEqual(Ok([1, 2, 3]))
-    expect(fromPredicate(obj => obj.prop === null, '2', { prop: null })).toEqual(Ok({ prop: null }))
+  it('should return Ok', () => {
+    expect(fromPredicate(arr => arr.some(x => x === 2), 'this is bad', [1, 2, 3])).toEqual(
+      Ok([1, 2, 3]),
+    )
+    expect(
+      fromPredicate(obj => obj.prop === 'this is fine', 'this is bad', { prop: 'this is fine' }),
+    ).toEqual(Ok({ prop: 'this is fine' }))
   })
 })
