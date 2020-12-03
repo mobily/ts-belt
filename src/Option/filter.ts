@@ -2,6 +2,7 @@ import { None } from './None'
 import type { Option, Predicate } from '../types'
 import { Some } from './Some'
 import { curry2 } from '../utils'
+import { isSome } from './isSome'
 
 type Curry2 = {
   <T>(predicate: Predicate<[T]>): (option: Option<T>) => Option<T>
@@ -9,5 +10,5 @@ type Curry2 = {
 }
 
 export const filter: Curry2 = curry2(<T>(predicate: Predicate<[T]>, option: Option<T>): any => {
-  return predicate(option.value) ? Some(option.value) : None
+  return isSome(option) && predicate(option.value) ? Some(option.value) : None
 })
