@@ -1,5 +1,6 @@
-import { None, Some } from '../Option'
+import { None } from '../Option/None'
 import type { Option } from '../types'
+import { Some } from '../Option/Some'
 
 export const tail = <T>(list: T[]): Option<T[]> => {
   const tl = list.slice(1)

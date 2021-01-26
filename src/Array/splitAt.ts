@@ -1,5 +1,6 @@
-import { None, Some } from '../Option'
+import { None } from '../Option/None'
 import type { Option } from '../types'
+import { Some } from '../Option/Some'
 import { curry2, withinRange } from '../utils'
 
 type Tuple<T> = [T[], T[]]

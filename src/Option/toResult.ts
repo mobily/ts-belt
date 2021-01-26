@@ -1,5 +1,6 @@
 import type * as Type from '../types'
-import { Error, Ok } from '../Result'
+import { Error } from '../Result/Error'
+import { Ok } from '../Result/Ok'
 import { curry2 } from '../utils'
 import { isNone } from './isNone'
 

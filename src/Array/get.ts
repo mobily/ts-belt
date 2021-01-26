@@ -1,6 +1,6 @@
 import type { Option } from '../types'
 import { curry2 } from '../utils'
-import { fromNullable } from '../Option'
+import { fromNullable } from '../Option/fromNullable'
 
 type Curry2 = {
   (index: number): <T>(list: T[]) => Option<T>
