@@ -1,7 +1,7 @@
 {
   "name": "@mobily/ts-belt",
   "description": "🔧 TS Belt is a library for functional programming in TypeScript. It solves the problem of the existence of both `undefined` and `null`. TS Belt is inspired by the Belt module for ReScript/Reason.",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "source": "./src/index.ts",
   "main": "./dist/src/index.js",
   "types": "./dist/src/index.d.ts",
