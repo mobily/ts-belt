@@ -5,14 +5,14 @@ import { isError } from './isError'
 
 type Curry3 = {
   <A, B, R>(defaultValue: NonNullable<R>): (
-    fn: MapFn<A, NonNullable<R>>,
+    fn: MapFn<NonNullable<A>, NonNullable<R>>,
   ) => (result: Result<A, B>) => Result<R, B>
-  <A, B, R>(defaultValue: NonNullable<R>, fn: MapFn<A, NonNullable<R>>): (
+  <A, B, R>(defaultValue: NonNullable<R>, fn: MapFn<NonNullable<A>, NonNullable<R>>): (
     result: Result<A, B>,
   ) => Result<R, B>
   <A, B, R>(
     defaultValue: NonNullable<R>,
-    fn: MapFn<A, NonNullable<R>>,
+    fn: MapFn<NonNullable<A>, NonNullable<R>>,
     result: Result<A, B>,
   ): Result<R, B>
 }
@@ -20,7 +20,7 @@ type Curry3 = {
 export const mapWithDefault: Curry3 = curry3(
   <A, B, R>(
     defaultValue: NonNullable<R>,
-    fn: MapFn<A, NonNullable<R>>,
+    fn: MapFn<NonNullable<A>, NonNullable<R>>,
     result: Result<A, B>,
   ): any => {
     return Ok(isError(result) ? defaultValue : fn(result.value))
