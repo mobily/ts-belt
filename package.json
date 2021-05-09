@@ -45,20 +45,23 @@
     "url": "https://github.com/mobily/ts-belt.git"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.15",
-    "@typescript-eslint/eslint-plugin": "^4.8.2",
-    "@typescript-eslint/parser": "^4.8.2",
-    "all-contributors-cli": "^6.19.0",
+    "@types/jest": "^26.0.23",
+    "all-contributors-cli": "^6.20.0",
+    "bs-platform": "^9.0.2",
     "coveralls": "^3.1.0",
-    "eslint": "^7.14.0",
-    "import-sort-style": "^6.0.0",
-    "import-sort-style-mobily": "^0.1.0",
+    "esbuild": "^0.11.18",
+    "flow-bin": "^0.150.0",
+    "flowgen": "^1.14.1",
+    "gentype": "^3.48.0",
+    "globby": "^11.0.3",
     "jest": "^26.6.3",
+    "jscodeshift": "^0.12.0",
+    "minimatch": "^3.0.4",
     "prettier": "^2.2.0",
-    "prettier-plugin-import-sort": "^0.0.6",
-    "ts-jest": "^26.4.4",
-    "tsd": "^0.13.1",
-    "typescript": "^4.1.2"
+    "ts-jest": "^26.5.5",
+    "tsd": "^0.14.0",
+    "typescript": "^4.2.4",
+    "wonka": "^4.0.15"
   },
   "cacheDirectories": [
     "node_modules"
