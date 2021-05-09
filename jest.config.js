@@ -8,8 +8,5 @@ module.exports = {
   moduleFileExtensions: ['ts', 'js'],
   collectCoverage: true,
   rootDir: __dirname,
-  moduleNameMapper: {
-    '@mobily/ts-belt/(.*)': '<rootDir>/src/$1',
-    '@mobily/ts-belt': '<rootDir>/src',
-  }
+  setupFiles: ['./__tests__/jest.setup.js'],
 }
