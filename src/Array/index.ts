@@ -1,7 +1,0 @@
-export { head } from './head'
-export { tail } from './tail'
-export { get } from './get'
-export { drop } from './drop'
-export { take } from './take'
-export { splitAt } from './splitAt'
-export { getBy } from './getBy'
