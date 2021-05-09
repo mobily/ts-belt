@@ -1,5 +1,6 @@
-export { pipe } from './pipe'
-export { Option, Result, Some, None, Ok, Error } from './types'
+export { pipe } from './types'
+export { Option, Some, None } from './Option'
+export { Result, Ok, Error } from './Result'
 
 export * as O from './Option'
 export * as R from './Result'
