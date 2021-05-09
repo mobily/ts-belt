@@ -11,4 +11,11 @@ coverage/
 *.tsbuildinfo
 
 dist/
+lib/
 playground/
+
+.merlin
+.bsb.lock
+
+*.bs.js
+*.gen.tsx
