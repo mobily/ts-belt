@@ -1,35 +1,33 @@
-import { pipe } from '@mobily/ts-belt'
-import { None, Some } from '@mobily/ts-belt/Option'
-import { Error, Ok, flatMap, fromNullable, toOption } from '@mobily/ts-belt/Result'
+import { pipe, R } from '../..'
 
 describe('toOption', () => {
   it('should return None', () => {
-    expect(pipe(fromNullable('this is bad', null), toOption)).toEqual(None)
+    expect(pipe(R.fromNullable('this is bad', null), R.toOption)).toBeNone()
     expect(
       pipe(
-        fromNullable('this is bad', 'value'),
-        flatMap(_ => Error('new error')),
-        toOption,
+        R.fromNullable('this is bad', 'value'),
+        R.flatMap(_ => R.Error('new error')),
+        R.toOption,
       ),
-    ).toEqual(None)
+    ).toBeNone()
     expect(
       pipe(
-        fromNullable('this is bad', null),
-        flatMap(_ => Ok('this is fine')),
-        toOption,
+        R.fromNullable('this is bad', null),
+        R.flatMap(_ => R.Ok('this is fine')),
+        R.toOption,
       ),
-    ).toEqual(None)
+    ).toBeNone()
   })
 
   it('should return Some', () => {
-    expect(pipe(Ok('value'), toOption)).toEqual(Some('value'))
-    expect(pipe(fromNullable('this is bad', 'value'), toOption)).toEqual(Some('value'))
+    expect(pipe(R.Ok('value'), R.toOption)).toBeSome('value')
+    expect(pipe(R.fromNullable('this is bad', 'value'), R.toOption)).toBeSome('value')
     expect(
       pipe(
-        fromNullable('this is bad', 'this is fine'),
-        flatMap(str => Ok(`${str}!`)),
-        toOption,
+        R.fromNullable('this is bad', 'this is fine'),
+        R.flatMap(str => R.Ok(`${str}!`)),
+        R.toOption,
       ),
-    ).toEqual(Some('this is fine!'))
+    ).toBeSome('this is fine!')
   })
 })

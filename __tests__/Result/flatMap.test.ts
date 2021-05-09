@@ -1,36 +1,35 @@
-import { pipe } from '@mobily/ts-belt'
-import { Error, Ok, flatMap, fromNullable } from '@mobily/ts-belt/Result'
+import { pipe, R } from '../..'
 
 describe('flatMap', () => {
   it('should return Error', () => {
     expect(
       pipe(
-        fromNullable('this is bad', 'value'),
-        flatMap(_ => Error('new error')),
+        R.fromNullable('this is bad', 'value'),
+        R.flatMap(_ => R.Error('new error')),
       ),
-    ).toEqual(Error('new error'))
+    ).toBeError('new error')
 
     expect(
       pipe(
-        fromNullable('this is bad', null),
-        flatMap(_ => Error('new error')),
+        R.fromNullable('this is bad', null),
+        R.flatMap(_ => R.Error('new error')),
       ),
-    ).toEqual(Error('this is bad'))
+    ).toBeError('this is bad')
 
     expect(
       pipe(
-        fromNullable('this is bad', null),
-        flatMap(_ => Ok(1)),
+        R.fromNullable('this is bad', null),
+        R.flatMap(_ => R.Ok(1)),
       ),
-    ).toEqual(Error('this is bad'))
+    ).toBeError('this is bad')
   })
 
   it('should return Ok', () => {
     expect(
       pipe(
-        fromNullable('error', 2),
-        flatMap(value => Ok(value ** 2)),
+        R.fromNullable('error', 2),
+        R.flatMap(value => R.Ok(value ** 2)),
       ),
-    ).toEqual(Ok(4))
+    ).toBeOk(4)
   })
 })

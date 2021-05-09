@@ -1,12 +1,11 @@
-import { pipe } from '@mobily/ts-belt'
-import { fromNullable, match } from '@mobily/ts-belt/Option'
+import { pipe, O } from '../..'
 
 describe('match', () => {
   it('should return a result of someFn', () => {
     expect(
       pipe(
-        fromNullable(null),
-        match(
+        O.fromNullable(null),
+        O.match(
           _ => 'this is fine',
           () => 'this is bad',
         ),
@@ -17,8 +16,8 @@ describe('match', () => {
   it('should return a result of noneFn', () => {
     expect(
       pipe(
-        fromNullable('this is fine'),
-        match(
+        O.fromNullable('this is fine'),
+        O.match(
           str => `${str}!`,
           () => 'this is bad',
         ),

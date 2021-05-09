@@ -1,27 +1,26 @@
-import { pipe } from '@mobily/ts-belt'
-import { fromNullable, getExn, map, mapNullable } from '@mobily/ts-belt/Option'
+import { pipe, O } from '../..'
 
 describe('getExn', () => {
   it('should throw an error', () => {
     expect(() => {
-      pipe(fromNullable(null), getExn)
-    }).toThrow(Error('None'))
+      pipe(O.fromNullable(null), O.getExn)
+    }).toThrow(Object)
     expect(() => {
       pipe(
-        fromNullable('value'),
-        mapNullable(_ => null),
-        getExn,
+        O.fromNullable('value'),
+        O.mapNullable(_ => null),
+        O.getExn,
       )
-    }).toThrow(Error)
+    }).toThrow(Object)
   })
 
   it('should return a value', () => {
-    expect(pipe(fromNullable('value'), getExn)).toBe('value')
+    expect(pipe(O.fromNullable('value'), O.getExn)).toBe('value')
     expect(
       pipe(
-        fromNullable('value'),
-        map(_ => 'this is fine'),
-        getExn,
+        O.fromNullable('value'),
+        O.map(_ => 'this is fine'),
+        O.getExn,
       ),
     ).toBe('this is fine')
   })

@@ -1,23 +1,20 @@
-import { splitAt } from '@mobily/ts-belt/Array'
-import { None, Some } from '@mobily/ts-belt/Option'
+import { A } from '../..'
 
 describe('splitAt', () => {
   it('should return None', () => {
-    expect(splitAt(1, [])).toEqual(None)
-    expect(splitAt(-1, [1, 2, 3])).toEqual(None)
-    expect(splitAt(4, [1, 2, 3])).toEqual(None)
+    expect(A.splitAt(1, [])).toBeNone()
+    expect(A.splitAt(-1, [1, 2, 3])).toBeNone()
+    expect(A.splitAt(4, [1, 2, 3])).toBeNone()
   })
 
   it('should return Some', () => {
-    expect(splitAt(0, [])).toEqual(Some([[], []]))
-    expect(splitAt(1, [1])).toEqual(Some([[1], []]))
-    expect(splitAt(1, [1, 2])).toEqual(Some([[1], [2]]))
-    expect(splitAt(2, [true, true, false])).toEqual(Some([[true, true], [false]]))
-    expect(splitAt(2, [[1], [2], [3], [4]])).toEqual(
-      Some([
-        [[1], [2]],
-        [[3], [4]],
-      ]),
-    )
+    expect(A.splitAt(0, [])).toBeSome([[], []])
+    expect(A.splitAt(1, [1])).toBeSome([[1], []])
+    expect(A.splitAt(1, [1, 2])).toBeSome([[1], [2]])
+    expect(A.splitAt(2, [true, true, false])).toBeSome([[true, true], [false]])
+    expect(A.splitAt(2, [[1], [2], [3], [4]])).toBeSome([
+      [[1], [2]],
+      [[3], [4]],
+    ])
   })
 })

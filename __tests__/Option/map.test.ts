@@ -1,22 +1,21 @@
-import { pipe } from '@mobily/ts-belt'
-import { None, Some, fromNullable, map } from '@mobily/ts-belt/Option'
+import { pipe, O } from '../..'
 
 describe('map', () => {
   it('should return None', () => {
     expect(
       pipe(
-        fromNullable(null),
-        map(_ => 'this is fine'),
+        O.fromNullable(null),
+        O.map(_ => 'this is fine'),
       ),
-    ).toEqual(None)
+    ).toBeNone()
   })
 
   it('should return Some', () => {
     expect(
       pipe(
-        fromNullable([1, 2, 3]),
-        map(_ => 'this is fine'),
+        O.fromNullable([1, 2, 3]),
+        O.map(_ => 'this is fine'),
       ),
-    ).toEqual(Some('this is fine'))
+    ).toBeSome('this is fine')
   })
 })

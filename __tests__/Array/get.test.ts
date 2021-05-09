@@ -1,16 +1,15 @@
-import { get } from '@mobily/ts-belt/Array'
-import { None, Some } from '@mobily/ts-belt/Option'
+import { A, O } from '../..'
 
 describe('get', () => {
   it('should return None', () => {
-    expect(get(0, [])).toEqual(None)
-    expect(get(3, [1, 2, 3])).toEqual(None)
+    expect(A.get(0, [])).toBeNone()
+    expect(A.get(3, [1, 2, 3])).toBeNone()
   })
 
   it('should return Some', () => {
-    expect(get(0, [1, 2, 3])).toEqual(Some(1))
-    expect(get(0, [0, 2, 3])).toEqual(Some(0))
-    expect(get(2, [true, true, false])).toEqual(Some(false))
-    expect(get(1, [[1], [2]])).toEqual(Some([2]))
+    expect(A.get(0, [1, 2, 3])).toBeSome(1)
+    expect(A.get(0, [0, 2, 3])).toBeSome(0)
+    expect(A.get(2, [true, true, false])).toBeSome(false)
+    expect(A.get(1, [[1], [2]])).toBeSome([2])
   })
 })

@@ -1,18 +1,18 @@
-import { None, Some, fromFalsy } from '@mobily/ts-belt/Option'
+import { O } from '../..'
 
 describe('fromFalsy', () => {
   it('should return None', () => {
-    expect(fromFalsy(null)).toEqual(None)
-    expect(fromFalsy(undefined)).toEqual(None)
-    expect(fromFalsy(0)).toEqual(None)
-    expect(fromFalsy('')).toEqual(None)
-    expect(fromFalsy(false)).toEqual(None)
+    expect(O.fromFalsy(null)).toBeNone()
+    expect(O.fromFalsy(undefined)).toBeNone()
+    expect(O.fromFalsy(0)).toBeNone()
+    expect(O.fromFalsy('')).toBeNone()
+    expect(O.fromFalsy(false)).toBeNone()
   })
 
   it('should return Some', () => {
-    expect(fromFalsy('value')).toEqual(Some('value'))
-    expect(fromFalsy(1)).toEqual(Some(1))
-    expect(fromFalsy([])).toEqual(Some([]))
-    expect(fromFalsy({})).toEqual(Some({}))
+    expect(O.fromFalsy('value')).toBeSome('value')
+    expect(O.fromFalsy(1)).toBeSome(1)
+    expect(O.fromFalsy([])).toBeSome([])
+    expect(O.fromFalsy({})).toBeSome({})
   })
 })

@@ -1,25 +1,24 @@
-import { pipe } from '@mobily/ts-belt'
-import { Error, Ok, fromNullable, map } from '@mobily/ts-belt/Result'
+import { pipe, R } from '../..'
 
 describe('map', () => {
   it('should return Error', () => {
     expect(
       pipe(
-        fromNullable('this is bad', null),
-        map(_ => 'string'),
+        R.fromNullable('this is bad', null),
+        R.map(_ => 'string'),
       ),
-    ).toEqual(Error('this is bad'))
+    ).toBeError('this is bad')
   })
 
   it('should return Ok', () => {
     expect(
       pipe(
-        fromNullable('this is bad', [1, 2, 3]),
-        map(arr => {
+        R.fromNullable('this is bad', [1, 2, 3]),
+        R.map(arr => {
           const [fst] = arr
           return fst
         }),
       ),
-    ).toEqual(Ok(1))
+    ).toBeOk(1)
   })
 })

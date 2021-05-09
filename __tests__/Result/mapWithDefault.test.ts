@@ -1,25 +1,24 @@
-import { pipe } from '@mobily/ts-belt'
-import { Ok, fromNullable, mapWithDefault } from '@mobily/ts-belt/Result'
+import { pipe, R } from '../..'
 
 describe('mapWithDefault', () => {
   it('should return a default value', () => {
     expect(
       pipe(
-        fromNullable('this is bad', null),
-        mapWithDefault('default value', _ => 'value'),
+        R.fromNullable('this is bad', null),
+        R.mapWithDefault('default value', _ => 'value'),
       ),
-    ).toEqual(Ok('default value'))
+    ).toEqual('default value')
   })
 
   it('should skip a default value', () => {
     expect(
       pipe(
-        fromNullable('this is bad', [1, 2, 3]),
-        mapWithDefault(0, arr => {
+        R.fromNullable('this is bad', [1, 2, 3]),
+        R.mapWithDefault(0, arr => {
           const [fst] = arr
           return fst
         }),
       ),
-    ).toEqual(Ok(1))
+    ).toEqual(1)
   })
 })

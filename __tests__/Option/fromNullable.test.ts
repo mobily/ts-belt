@@ -1,18 +1,18 @@
-import { None, Some, fromNullable } from '@mobily/ts-belt/Option'
+import { O } from '../..'
 
 describe('fromNullable', () => {
   it('should return None', () => {
-    expect(fromNullable(null)).toEqual(None)
-    expect(fromNullable(undefined)).toEqual(None)
+    expect(O.fromNullable(null)).toBeNone()
+    expect(O.fromNullable(undefined)).toBeNone()
   })
 
   it('should return Some', () => {
-    expect(fromNullable('value')).toEqual(Some('value'))
-    expect(fromNullable([])).toEqual(Some([]))
-    expect(fromNullable({})).toEqual(Some({}))
-    expect(fromNullable(0)).toEqual(Some(0))
-    expect(fromNullable(1)).toEqual(Some(1))
-    expect(fromNullable(false)).toEqual(Some(false))
-    expect(fromNullable(true)).toEqual(Some(true))
+    expect(O.fromNullable('value')).toBeSome('value')
+    expect(O.fromNullable([])).toBeSome([])
+    expect(O.fromNullable({})).toBeSome({})
+    expect(O.fromNullable(0)).toBeSome(0)
+    expect(O.fromNullable(1)).toBeSome(1)
+    expect(O.fromNullable(false)).toBeSome(false)
+    expect(O.fromNullable(true)).toBeSome(true)
   })
 })

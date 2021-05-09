@@ -1,19 +1,21 @@
-import { drop } from '@mobily/ts-belt/Array'
-import { None, Some } from '@mobily/ts-belt/Option'
+import { A, O } from '../..'
 
 describe('drop', () => {
-  it('should return None', () => {
-    expect(drop(4, [1, 2, 3])).toEqual(None)
-    expect(drop(-1, [1, 2, 3])).toEqual(None)
+  it('should return the same values as the provided array', () => {
+    expect(A.drop(-1, [1, 2, 3])).toEqual([1, 2, 3])
   })
 
-  it('should return Some', () => {
-    expect(drop(0, [])).toEqual(Some([]))
-    expect(drop(0, [1, 2, 3])).toEqual(Some([1, 2, 3]))
-    expect(drop(1, [1])).toEqual(Some([]))
-    expect(drop(1, [1, 2, 3])).toEqual(Some([2, 3]))
-    expect(drop(1, [[1], [2]])).toEqual(Some([[2]]))
-    expect(drop(2, [true, true, false])).toEqual(Some([false]))
-    expect(drop(3, [1, 2, 3])).toEqual(Some([]))
+  it('should return an empty array', () => {
+    expect(A.drop(4, [1, 2, 3])).toEqual([])
+    expect(A.drop(3, [1, 2, 3])).toEqual([])
+  })
+
+  it('should return a new array that does not contain the first `n` items', () => {
+    expect(A.drop(0, [])).toEqual([])
+    expect(A.drop(0, [1, 2, 3])).toEqual([1, 2, 3])
+    expect(A.drop(1, [1])).toEqual([])
+    expect(A.drop(1, [1, 2, 3])).toEqual([2, 3])
+    expect(A.drop(1, [[1], [2]])).toEqual([[2]])
+    expect(A.drop(2, [true, true, false])).toEqual([false])
   })
 })

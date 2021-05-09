@@ -1,37 +1,36 @@
-import { pipe } from '@mobily/ts-belt'
-import { None, Some, flatMap, fromNullable } from '@mobily/ts-belt/Option'
+import { pipe, O } from '../..'
 
 describe('flatMap', () => {
   it('should return None', () => {
     expect(
       pipe(
-        fromNullable(null),
-        flatMap(_ => Some(1)),
+        O.fromNullable(null),
+        O.flatMap(_ => O.Some(1)),
       ),
-    ).toEqual(None)
+    ).toBeNone()
 
     expect(
       pipe(
-        fromNullable(undefined),
-        flatMap(_ => None),
-        flatMap(_ => Some('value')),
+        O.fromNullable(undefined),
+        O.flatMap(_ => O.None),
+        O.flatMap(_ => O.Some('value')),
       ),
-    ).toEqual(None)
+    ).toBeNone()
 
     expect(
       pipe(
-        fromNullable('value'),
-        flatMap(_ => None),
+        O.fromNullable('value'),
+        O.flatMap(_ => O.None),
       ),
-    ).toEqual(None)
+    ).toBeNone()
   })
 
   it('should return Some', () => {
     expect(
       pipe(
-        fromNullable('value'),
-        flatMap(_ => Some('this is fine')),
+        O.fromNullable('value'),
+        O.flatMap(_ => O.Some('this is fine')),
       ),
-    ).toEqual(Some('this is fine'))
+    ).toBeSome('this is fine')
   })
 })

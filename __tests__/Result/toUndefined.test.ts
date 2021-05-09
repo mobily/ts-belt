@@ -1,33 +1,32 @@
-import { pipe } from '@mobily/ts-belt'
-import { Error, Ok, flatMap, fromNullable, toUndefined } from '@mobily/ts-belt/Result'
+import { pipe, R } from '../..'
 
 describe('toUndefined', () => {
   it('should return null', () => {
-    expect(pipe(Error('this is bad'), toUndefined)).toBe(undefined)
+    expect(pipe(R.Error('this is bad'), R.toUndefined)).toBe(undefined)
     expect(
       pipe(
-        fromNullable('this is bad', 'value'),
-        flatMap(_ => Error('new error')),
-        toUndefined,
+        R.fromNullable('this is bad', 'value'),
+        R.flatMap(_ => R.Error('new error')),
+        R.toUndefined,
       ),
     ).toBe(undefined)
     expect(
       pipe(
-        fromNullable('this is bad', null),
-        flatMap(_ => Ok('this is fine')),
-        toUndefined,
+        R.fromNullable('this is bad', null),
+        R.flatMap(_ => R.Ok('this is fine')),
+        R.toUndefined,
       ),
     ).toBe(undefined)
   })
 
   it('should return a value', () => {
-    expect(pipe(Ok('value'), toUndefined)).toBe('value')
-    expect(pipe(fromNullable('this is bad', 'value'), toUndefined)).toBe('value')
+    expect(pipe(R.Ok('value'), R.toUndefined)).toBe('value')
+    expect(pipe(R.fromNullable('this is bad', 'value'), R.toUndefined)).toBe('value')
     expect(
       pipe(
-        fromNullable('this is bad', 'this is fine'),
-        flatMap(str => Ok(`${str}!`)),
-        toUndefined,
+        R.fromNullable('this is bad', 'this is fine'),
+        R.flatMap(str => R.Ok(`${str}!`)),
+        R.toUndefined,
       ),
     ).toBe('this is fine!')
   })

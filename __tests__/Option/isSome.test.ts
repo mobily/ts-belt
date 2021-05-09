@@ -1,14 +1,13 @@
-import { pipe } from '@mobily/ts-belt'
-import { None, Some, fromNullable, isSome } from '@mobily/ts-belt/Option'
+import { pipe, O } from '../..'
 
 describe('isSome', () => {
   it('should return true', () => {
-    expect(isSome(Some('string'))).toBeTruthy()
-    expect(pipe(fromNullable('value'), isSome)).toBeTruthy()
+    expect(O.isSome(O.Some('string'))).toBeTruthy()
+    expect(pipe(O.fromNullable('value'), O.isSome)).toBeTruthy()
   })
 
   it('should return false', () => {
-    expect(isSome(None)).toBeFalsy()
-    expect(pipe(fromNullable(null), isSome)).toBeFalsy()
+    expect(O.isSome(O.None)).toBeFalsy()
+    expect(pipe(O.fromNullable(null), O.isSome)).toBeFalsy()
   })
 })

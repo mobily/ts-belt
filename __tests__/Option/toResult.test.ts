@@ -1,27 +1,25 @@
-import { pipe } from '@mobily/ts-belt'
-import { fromNullable, mapNullable, toResult } from '@mobily/ts-belt/Option'
-import { Error, Ok } from '@mobily/ts-belt/Result'
+import { pipe, O } from '../..'
 
 describe('toResult', () => {
   it('should return Error', () => {
-    expect(pipe(fromNullable(null), toResult('this is bad'))).toEqual(Error('this is bad'))
+    expect(pipe(O.fromNullable(null), O.toResult('this is bad'))).toBeError('this is bad')
     expect(
       pipe(
-        fromNullable({ prop: null }),
-        mapNullable(obj => obj.prop),
-        toResult('this is bad'),
+        O.fromNullable({ prop: null }),
+        O.mapNullable(obj => obj.prop),
+        O.toResult('this is bad'),
       ),
-    ).toEqual(Error('this is bad'))
+    ).toBeError('this is bad')
   })
 
   it('should return Ok', () => {
-    expect(pipe(fromNullable('value'), toResult('this is bad'))).toEqual(Ok('value'))
+    expect(pipe(O.fromNullable('value'), O.toResult('this is bad'))).toBeOk('value')
     expect(
       pipe(
-        fromNullable({ prop: 'value' }),
-        mapNullable(obj => obj.prop),
-        toResult('this is bad'),
+        O.fromNullable({ prop: 'value' }),
+        O.mapNullable(obj => obj.prop),
+        O.toResult('this is bad'),
       ),
-    ).toEqual(Ok('value'))
+    ).toBeOk('value')
   })
 })

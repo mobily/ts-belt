@@ -1,19 +1,18 @@
-import { Error, Ok, fromNullable } from '@mobily/ts-belt/Result'
+import { R } from '../..'
 
 describe('fromNullable', () => {
   it('should return Error', () => {
-    const error = Error('this is bad')
-    expect(fromNullable('this is bad', null)).toEqual(error)
-    expect(fromNullable('this is bad', undefined)).toEqual(error)
+    expect(R.fromNullable('this is bad', null)).toBeError('this is bad')
+    expect(R.fromNullable('this is bad', undefined)).toBeError('this is bad')
   })
 
   it('should return Ok', () => {
-    expect(fromNullable('this is bad', 'value')).toEqual(Ok('value'))
-    expect(fromNullable('this is bad', [])).toEqual(Ok([]))
-    expect(fromNullable('this is bad', {})).toEqual(Ok({}))
-    expect(fromNullable('this is bad', 0)).toEqual(Ok(0))
-    expect(fromNullable('this is bad', 1)).toEqual(Ok(1))
-    expect(fromNullable('this is bad', false)).toEqual(Ok(false))
-    expect(fromNullable('this is bad', true)).toEqual(Ok(true))
+    expect(R.fromNullable('this is bad', 'value')).toBeOk('value')
+    expect(R.fromNullable('this is bad', [])).toBeOk([])
+    expect(R.fromNullable('this is bad', {})).toBeOk({})
+    expect(R.fromNullable('this is bad', 0)).toBeOk(0)
+    expect(R.fromNullable('this is bad', 1)).toBeOk(1)
+    expect(R.fromNullable('this is bad', false)).toBeOk(false)
+    expect(R.fromNullable('this is bad', true)).toBeOk(true)
   })
 })

@@ -1,25 +1,24 @@
-import { pipe } from '@mobily/ts-belt'
-import { None, Some, fromNullable, mapNullable, toNullable } from '@mobily/ts-belt/Option'
+import { pipe, O } from '../..'
 
 describe('toNullable', () => {
   it('should return null', () => {
-    expect(pipe(None, toNullable)).toBe(null)
+    expect(pipe(O.None, O.toNullable)).toBe(null)
     expect(
       pipe(
-        fromNullable({ prop: null }),
-        mapNullable(obj => obj.prop),
-        toNullable,
+        O.fromNullable({ prop: null }),
+        O.mapNullable(obj => obj.prop),
+        O.toNullable,
       ),
     ).toBe(null)
   })
 
   it('should return a value', () => {
-    expect(pipe(Some('value'), toNullable)).toBe('value')
+    expect(pipe(O.Some('value'), O.toNullable)).toBe('value')
     expect(
       pipe(
-        fromNullable({ prop: 'value' }),
-        mapNullable(obj => obj.prop),
-        toNullable,
+        O.fromNullable({ prop: 'value' }),
+        O.mapNullable(obj => obj.prop),
+        O.toNullable,
       ),
     ).toBe('value')
   })
