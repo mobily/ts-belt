@@ -1,35 +1,26 @@
 {
   "compilerOptions": {
-    "lib": ["es2015"],
     "forceConsistentCasingInFileNames": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "isolatedModules": false,
-    "skipLibCheck": true,
-    "sourceMap": true,
-    "strict": true,
-    "strictNullChecks": true,
-    "target": "es2015",
-    "module": "commonjs",
-    "allowJs": false,
-    "composite": true,
-    "declaration": true,
-    "noImplicitAny": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "removeComments": true,
-    "noEmit": false,
-    "outDir": "dist",
-    "rootDir": ".",
+    "emitDeclarationOnly": true,
+    "rootDir": "./src",
     "baseUrl": ".",
-    "paths": {
-      "@mobily/ts-belt": ["./src"],
-      "@mobily/ts-belt/*": ["./src/*"]
-    }
+    "outDir": "dist/types/src",
+    "lib": ["esnext"],
+    "jsx": "react",
+    "declaration": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "esnext",
+    "strict": true,
+    "noImplicitAny": false,
+    "noUnusedParameters": false,
+    "sourceMap": false,
+    "pretty": true,
+    "skipLibCheck": true
   },
-  "include": [
-    "./src/**/*",
+  "exclude": [
+    "./example/**/*",
     "./__tests__/**/*",
-    "./playground/*"
+    "./playground"
   ]
 }
