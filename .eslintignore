@@ -1,6 +1,0 @@
-node_modules
-scripts
-dist
-docs/*.js
-
-.eslintrc.js
