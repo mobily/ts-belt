@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "lodash": "^4.17.21",
+    "rambda": "^6.7.0",
     "ramda": "^0.27.1",
     "remeda": "^0.0.27"
   }
