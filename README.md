@@ -4,7 +4,7 @@
   <img src="https://raw.githubusercontent.com/mobily/ts-belt/master/assets/ts-belt-logo.svg" width="120" alt="TS Belt" />
 </p>
 
-**TS Belt** is a library for functional programming in TypeScript. It solves the problem of the existence of both `undefined` and `null`. TS Belt is inspired by the [Belt](https://rescript-lang.org/docs/manual/latest/api/belt) module for ReScript/Reason.
+**TS Belt** is a library for functional programming in TypeScript. It implements Result and Option monads and other various helpers. Based on [Belt](https://rescript-lang.org/docs/manual/latest/api/belt) and [Relude](https://github.com/reazen/relude) (ReScript/Reason).
 
 ## Features
 
