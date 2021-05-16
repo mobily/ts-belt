@@ -1,24 +1,28 @@
-import { None, Some, Error, Ok } from './utils.js'
+import { None, Some } from './Option.js'
+import * as Option from './Option.bs.js'
 
-import * as OptionFns from './Option.bs.js'
-import * as ResultFns from './Result.bs.js'
-import * as ArrayFns from './Array.bs.js'
-import * as FunctionFns from './Function.bs.js'
+import { Ok, Error } from './Result.js'
+import * as Result from './Result.bs.js'
 
-export { pipe } from './utils.js'
+import * as array from './Array.bs.js'
+import * as fns from './Function.bs.js'
 
-const Option = {
-  ...OptionFns,
+export { pipe } from './pipe.js'
+
+const option = {
+  ...Option,
   Some,
   None,
 }
-const Result = {
-  ...ResultFns,
+
+const result = {
+  ...Result,
   Ok,
   Error,
 }
 
-export const A = ArrayFns
-export const O = Option
-export const R = Result
-export const F = FunctionFns
+export const F = fns
+export const A = array
+export const R = result
+
+export const O = option

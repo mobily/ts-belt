@@ -1,5 +1,5 @@
 import type { Option } from './Option'
-import type { MapFn, PredicateFn } from './types'
+import type { MapFn, PredicateFn } from './internal/types'
 
 export declare type Ok<T> = {
   readonly TAG: 0

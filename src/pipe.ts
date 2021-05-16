@@ -1,6 +1,3 @@
-export declare type PredicateFn<T extends any[]> = (...args: T) => boolean
-export declare type MapFn<T extends any[], R> = (...args: T) => R
-
 export declare type UnaryFunction<T, R> = (value: T) => R
 
 export declare function pipe<T, R>(value: T, result: UnaryFunction<T, R>): R

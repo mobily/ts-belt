@@ -39,24 +39,3 @@ export const __4 = fn => {
     return fn(arg0, arg1, arg2, arg3)
   }
 }
-
-export const Ok = value => {
-  return {
-    TAG: 0,
-    _0: value,
-  }
-}
-
-export const Error = value => {
-  return {
-    TAG: 1,
-    _0: value,
-  }
-}
-
-export const Some = value => value
-export const None = undefined
-
-export const pipe = (value, ...fns) => {
-  return fns.reduce((prev, fn) => fn(prev), value)
-}

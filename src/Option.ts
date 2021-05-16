@@ -1,5 +1,5 @@
 import type { Result } from './Result'
-import type { PredicateFn, MapFn } from './types'
+import type { PredicateFn, MapFn } from './internal/types'
 
 export declare type Some<T> = NonNullable<T> & { __: 'Some' }
 export declare type None = never
