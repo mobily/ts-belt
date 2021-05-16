@@ -137,6 +137,6 @@ let swapAt = (targetIndex, swapIndex, xs) =>
 let removeAt = (targetIndex, xs) => xs |> filterWithIndex((_, i) => i != targetIndex)
 let uniqBy = (predicateFn, xs) =>
   Belt.Array.reduce(xs, (acc, value) =>
-    Belt.Array.some(acc, el => el == predicateFn(value)) ? acc : append(value, acc)
+    Belt.Array.some(acc, Function.equals(predicateFn(value))) ? acc : append(value, acc)
   )
-let uniq = xs => uniqBy(el => el, xs)
+let uniq = xs => uniqBy(Function.identity, xs)
