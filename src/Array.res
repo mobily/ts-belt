@@ -4,12 +4,9 @@ let isNotEmpty = xs => length(xs) > 0
 let reverse = Belt.Array.reverse
 let prepend = (el, xs) => Belt.Array.concat([el], xs)
 let append = (el, xs) => Belt.Array.concat(xs, [el])
-let get = (i, xs) => xs->Belt.Array.get(i)->Belt.Option.flatMap(Option.fromNullable)
-let getBy = (predicateFn, xs) =>
-  xs->Belt.Array.getBy(predicateFn)->Belt.Option.flatMap(Option.fromNullable)
+let get = (i, xs) => Belt.Array.get(xs, i)
+let getBy = (predicateFn, xs) => Belt.Array.getBy(xs, predicateFn)
 let head = xs => get(0, xs)
-
-let at = (i, xs) => Belt.Array.get(xs, i)
 
 let tail = xs => {
   let l = length(xs)
@@ -132,13 +129,12 @@ let insertAt = (targetIndex, el, xs) =>
 let updateAt = (targetIndex, fn, xs) =>
   xs |> mapWithIndex((x, index) => index == targetIndex ? fn(x) : x)
 let swapAt = (targetIndex, swapIndex, xs) =>
-  switch (at(targetIndex, xs), at(swapIndex, xs)) {
+  switch (get(targetIndex, xs), get(swapIndex, xs)) {
   | (Some(a), Some(b)) =>
     xs |> mapWithIndex((x, k) => targetIndex == k ? b : swapIndex == k ? a : x)
   | _ => xs
   }
 let removeAt = (targetIndex, xs) => xs |> filterWithIndex((_, i) => i != targetIndex)
-
 let uniqBy = (predicateFn, xs) =>
   Belt.Array.reduce(xs, (acc, value) =>
     Belt.Array.some(acc, el => el == predicateFn(value)) ? acc : append(value, acc)

@@ -171,3 +171,8 @@ export declare const removeAt: {
   (targetIndex: number): <T>(xs: Array<T>) => Array<T>
   <T>(targetIndex: number, xs: Array<T>): Array<T>
 }
+export declare const uniqBy: {
+  <T, R>(fn: MapFn<[T], R>): <T>(xs: Array<T>) => Array<T>
+  <T, R>(fn: MapFn<[T], R>, xs: Array<T>): Array<T>
+}
+export declare const uniq: <T>(xs: Array<T>) => Array<T>
