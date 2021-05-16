@@ -1,9 +1,16 @@
-exports.transformRootFunctions = (j, source) => {
+exports.transformRootFunctions = (j, source, path) => {
+  if (path.includes('internal')) {
+    return source
+  }
+
   const root = j(source)
 
   root.find(j.Program).replaceWith(p => {
     return j.program([
-      j.importDeclaration([j.importNamespaceSpecifier(j.identifier('C'))], j.literal('./utils.js')),
+      j.importDeclaration(
+        [j.importNamespaceSpecifier(j.identifier('C'))],
+        j.literal('./internal/utils.js'),
+      ),
       ...p.value.body,
     ])
   })

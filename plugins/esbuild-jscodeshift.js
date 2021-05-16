@@ -6,10 +6,10 @@ exports.jscodeshift = (options = {}) => ({
   name: 'jscodeshift',
   setup(build) {
     const transform = options => {
-      const { plugins, contents } = options
+      const { plugins, contents, path } = options
 
       const result = plugins.reduce((acc, pluginFn) => {
-        return pluginFn(jscodeshift, acc)
+        return pluginFn(jscodeshift, acc, path)
       }, contents)
 
       return {
@@ -22,7 +22,7 @@ exports.jscodeshift = (options = {}) => ({
 
       return options.exclude.some(excludePath => minimatch(args.path, excludePath))
         ? { contents }
-        : transform({ ...options, contents })
+        : transform({ ...options, contents, path: args.path })
     })
   },
 })
