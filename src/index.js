@@ -18,6 +18,6 @@ const Result = {
 }
 const Array = ArrayFns
 
+export const A = Array
 export const O = Option
 export const R = Result
-export const A = Array

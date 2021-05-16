@@ -31,19 +31,21 @@ export declare const fromPredicate: {
   <A, B>(predicateFn: PredicateFn<[A]>, error: NonNullable<B>, value: A): Result<A, B>
 }
 export declare const flatMap: {
-  <A, B, R>(mapFn: MapFn<A, Result<R, B>>): (result: Result<A, B>) => Result<R, B>
-  <A, B, R>(mapFn: MapFn<A, Result<R, B>>, result: Result<A, B>): Result<R, B>
+  <A, B, R>(mapFn: MapFn<[A], Result<R, B>>): (result: Result<A, B>) => Result<R, B>
+  <A, B, R>(mapFn: MapFn<[A], Result<R, B>>, result: Result<A, B>): Result<R, B>
 }
 export declare const map: {
-  <A, B, R>(fn: MapFn<A, NonNullable<R>>): (result: Result<A, B>) => Result<R, B>
-  <A, B, R>(fn: MapFn<A, NonNullable<R>>, result: Result<A, B>): Result<R, B>
+  <A, B, R>(fn: MapFn<[A], NonNullable<R>>): (result: Result<A, B>) => Result<R, B>
+  <A, B, R>(fn: MapFn<[A], NonNullable<R>>, result: Result<A, B>): Result<R, B>
 }
 export declare const mapWithDefault: {
   <A, B, R>(defaultValue: NonNullable<R>): (
-    fn: MapFn<A, NonNullable<R>>,
+    fn: MapFn<[A], NonNullable<R>>,
   ) => (result: Result<A, B>) => R
-  <A, B, R>(defaultValue: NonNullable<R>, fn: MapFn<A, NonNullable<R>>): (result: Result<A, B>) => R
-  <A, B, R>(defaultValue: NonNullable<R>, fn: MapFn<A, NonNullable<R>>, result: Result<A, B>): R
+  <A, B, R>(defaultValue: NonNullable<R>, fn: MapFn<[A], NonNullable<R>>): (
+    result: Result<A, B>,
+  ) => R
+  <A, B, R>(defaultValue: NonNullable<R>, fn: MapFn<[A], NonNullable<R>>, result: Result<A, B>): R
 }
 export declare const getWithDefault: {
   <A>(defaultValue: NonNullable<A>): <B>(result: Result<A, B>) => A

@@ -26,23 +26,23 @@ export declare const filter: {
   <T>(predicate: PredicateFn<[T]>, option: Option<T>): Option<T>
 }
 export declare const map: {
-  <T, R>(mapFn: MapFn<T, R>): (option: Option<T>) => Option<R>
-  <T, R>(mapFn: MapFn<T, R>, option: Option<T>): Option<R>
+  <T, R>(mapFn: MapFn<[T], R>): (option: Option<T>) => Option<R>
+  <T, R>(mapFn: MapFn<[T], R>, option: Option<T>): Option<R>
 }
 export declare const flatMap: {
-  <T, R>(mapFn: MapFn<T, Option<R>>): (option: Option<T>) => Option<R>
-  <T, R>(mapFn: MapFn<T, Option<R>>, option: Option<T>): Option<R>
+  <T, R>(mapFn: MapFn<[T], Option<R>>): (option: Option<T>) => Option<R>
+  <T, R>(mapFn: MapFn<[T], Option<R>>, option: Option<T>): Option<R>
 }
 export declare const mapNullable: {
-  <T>(mapFn: MapFn<T, null | undefined>): (option: Option<T>) => None
-  <T, R>(mapFn: MapFn<T, R>): (option: Option<T>) => Some<R>
-  <T>(mapFn: MapFn<T, null | undefined>, option: Option<T>): None
-  <T, R>(mapFn: MapFn<T, R>, option: Option<T>): Some<R>
+  <T>(mapFn: MapFn<[T], null | undefined>): (option: Option<T>) => None
+  <T, R>(mapFn: MapFn<[T], R>): (option: Option<T>) => Some<R>
+  <T>(mapFn: MapFn<[T], null | undefined>, option: Option<T>): None
+  <T, R>(mapFn: MapFn<[T], R>, option: Option<T>): Some<R>
 }
 export declare const mapWithDefault: {
-  <R>(defaultValue: NonNullable<R>): <T>(mapFn: MapFn<T, R>) => (option: Option<T>) => R
-  <T, R>(defaultValue: NonNullable<R>, mapFn: MapFn<T, R>): (option: Option<T>) => R
-  <T, R>(defaultValue: NonNullable<R>, mapFn: MapFn<T, R>, option: Option<T>): R
+  <R>(defaultValue: NonNullable<R>): <T>(mapFn: MapFn<[T], R>) => (option: Option<T>) => R
+  <T, R>(defaultValue: NonNullable<R>, mapFn: MapFn<[T], R>): (option: Option<T>) => R
+  <T, R>(defaultValue: NonNullable<R>, mapFn: MapFn<[T], R>, option: Option<T>): R
 }
 export declare const match: {
   <T, R>(someFn: (value: T) => R): (noneFn: () => R) => (option: Option<T>) => R
