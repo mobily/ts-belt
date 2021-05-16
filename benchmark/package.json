@@ -1,0 +1,17 @@
+{
+  "name": "@mobily/ts-belt-benchmark",
+  "private": true,
+  "version": "0.1.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "yarn benchr index.js"
+  },
+  "devDependencies": {
+    "benchr": "^4.3.0"
+  },
+  "dependencies": {
+    "ramda": "^0.27.1",
+    "remeda": "^0.0.27"
+  }
+}
