@@ -3,8 +3,6 @@ import { A } from '../..'
 describe('head', () => {
   it('should return None', () => {
     expect(A.head([])).toBeNone()
-    expect(A.head([undefined, 2, 3])).toBeNone()
-    expect(A.head([null, 2, 3])).toBeNone()
   })
 
   it('should return Some', () => {
