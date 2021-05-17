@@ -3,6 +3,7 @@ const esbuild = require('esbuild')
 const { jscodeshift } = require('./plugins/esbuild-jscodeshift')
 const { uncurryFunctions } = require('./plugins/uncurry-functions')
 const { transformRootFunctions } = require('./plugins/transform-root-functions')
+const { replaceIdentifiers } = require('./plugins/replace-identifiers')
 
 const handleError = () => process.exit(1)
 const build = (outfile, options) => {
@@ -15,7 +16,7 @@ const build = (outfile, options) => {
       plugins: [
         jscodeshift({
           exclude: ['**/node_modules/**'],
-          plugins: [uncurryFunctions, transformRootFunctions],
+          plugins: [uncurryFunctions, transformRootFunctions, replaceIdentifiers],
         }),
       ],
       minify: false,
