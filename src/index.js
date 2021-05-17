@@ -6,6 +6,7 @@ import * as Result from './Result.bs.js'
 
 import * as array from './Array.bs.js'
 import * as fns from './Function.bs.js'
+import * as string from './String.bs.js'
 
 export { pipe } from './pipe.js'
 
@@ -26,3 +27,5 @@ export const A = array
 export const R = result
 
 export const O = option
+
+export const S = string
