@@ -1,21 +1,15 @@
 import type { Result } from './Result'
 import type { PredicateFn, MapFn } from './internal/types'
 
-export declare type Some<T> = NonNullable<T> & { __: 'Some' }
-export declare type None = never
-
-export declare const Some: <T>(value: NonNullable<T>) => Some<T>
-export declare const None: None
-
-export declare type Option<T> = Some<T> | None
+export declare type Option<T> = NonNullable<T> & { __: 'Option' }
 
 export declare const fromNullable: {
-  (value: null | undefined): None
-  <T>(value: T): Some<T>
+  (value: null | undefined): Option<never>
+  <T>(value: T): Option<T>
 }
 export declare const fromFalsy: {
-  (value: 0 | '' | false | null | undefined): None
-  <T>(value: T): Some<T>
+  (value: 0 | '' | false | null | undefined): Option<never>
+  <T>(value: T): Option<T>
 }
 export declare const fromPredicate: {
   <T>(predicate: PredicateFn<[T]>): (value: T) => Option<T>
@@ -34,10 +28,10 @@ export declare const flatMap: {
   <T, R>(mapFn: MapFn<[T], Option<R>>, option: Option<T>): Option<R>
 }
 export declare const mapNullable: {
-  <T>(mapFn: MapFn<[T], null | undefined>): (option: Option<T>) => None
-  <T, R>(mapFn: MapFn<[T], R>): (option: Option<T>) => Some<R>
-  <T>(mapFn: MapFn<[T], null | undefined>, option: Option<T>): None
-  <T, R>(mapFn: MapFn<[T], R>, option: Option<T>): Some<R>
+  <T>(mapFn: MapFn<[T], null | undefined>): (option: Option<T>) => Option<never>
+  <T, R>(mapFn: MapFn<[T], R>): (option: Option<T>) => Option<R>
+  <T>(mapFn: MapFn<[T], null | undefined>, option: Option<T>): Option<never>
+  <T, R>(mapFn: MapFn<[T], R>, option: Option<T>): Option<R>
 }
 export declare const mapWithDefault: {
   <R>(defaultValue: NonNullable<R>): <T>(mapFn: MapFn<[T], R>) => (option: Option<T>) => R
@@ -60,5 +54,5 @@ export declare const getWithDefault: {
   <T>(defaultValue: NonNullable<T>): (option: Option<T>) => T
   <T>(defaultValue: NonNullable<T>, option: Option<T>): T
 }
-export declare const isNone: <T>(option: Option<T>) => option is None
-export declare const isSome: <T>(option: Option<T>) => option is Some<T>
+export declare const isNone: <T>(option: Option<T>) => option is Option<never>
+export declare const isSome: <T>(option: Option<T>) => option is Option<T>
