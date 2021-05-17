@@ -17,8 +17,8 @@ export declare const either: {
 }
 export declare const always: <T>(value: T) => () => T
 export declare const defaultTo: {
-  <T>(defaultValue: NonNullable<T>): (value: T) => NonNullable<T>
-  <T>(defaultValue: NonNullable<T>, value: T): NonNullable<T>
+  <T>(defaultValue: NonNullable<T>): (value: T | null | undefined) => NonNullable<T>
+  <T>(defaultValue: NonNullable<T>, value: T | null | undefined): NonNullable<T>
 }
 export declare const falsy: () => false
 export declare const truthy: () => true
