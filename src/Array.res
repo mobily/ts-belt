@@ -140,3 +140,8 @@ let uniqBy = (predicateFn, xs) =>
     Belt.Array.some(acc, Function.equals(predicateFn(value))) ? acc : append(value, acc)
   )
 let uniq = xs => uniqBy(Function.identity, xs)
+
+let forEach = (fn, xs) => Belt.Array.forEach(xs, fn)
+let forEachWithIndex = (fn, xs) => Belt.Array.forEachWithIndex(xs, fn)
+let getIndexBy = (predicateFn, xs) => Belt.Array.getIndexBy(xs, predicateFn)
+let includes = (el, xs) => Belt.Array.some(xs, Function.equals(el))

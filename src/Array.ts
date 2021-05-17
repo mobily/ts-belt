@@ -71,20 +71,20 @@ export declare const mapWithIndex: {
   <T, R>(mapFn: MapFn<[T, number], R>, xs: Array<T>): Array<R>
 }
 export declare const filter: {
-  <T, R>(predicateFn: PredicateFn<[T]>): (xs: Array<T>) => Array<R>
-  <T, R>(predicateFn: PredicateFn<[T]>, xs: Array<T>): Array<R>
+  <T>(predicateFn: PredicateFn<[T]>): (xs: Array<T>) => Array<T>
+  <T>(predicateFn: PredicateFn<[T]>, xs: Array<T>): Array<T>
 }
 export declare const filterWithIndex: {
-  <T, R>(predicateFn: PredicateFn<[T, number]>): (xs: Array<T>) => Array<R>
-  <T, R>(predicateFn: PredicateFn<[T, number]>, xs: Array<T>): Array<R>
+  <T>(predicateFn: PredicateFn<[T, number]>): (xs: Array<T>) => Array<T>
+  <T>(predicateFn: PredicateFn<[T, number]>, xs: Array<T>): Array<T>
 }
 export declare const reject: {
-  <T, R>(predicateFn: PredicateFn<[T]>): (xs: Array<T>) => Array<R>
-  <T, R>(predicateFn: PredicateFn<[T]>, xs: Array<T>): Array<R>
+  <T>(predicateFn: PredicateFn<[T]>): (xs: Array<T>) => Array<T>
+  <T>(predicateFn: PredicateFn<[T]>, xs: Array<T>): Array<T>
 }
 export declare const rejectWithIndex: {
-  <T, R>(predicateFn: PredicateFn<[T, number]>): (xs: Array<T>) => Array<R>
-  <T, R>(predicateFn: PredicateFn<[T, number]>, xs: Array<T>): Array<R>
+  <T>(predicateFn: PredicateFn<[T, number]>): (xs: Array<T>) => Array<T>
+  <T>(predicateFn: PredicateFn<[T, number]>, xs: Array<T>): Array<T>
 }
 export declare const init: <T>(xs: Array<T>) => Option<Array<T>>
 export declare const initOrEmpty: <T>(xs: Array<T>) => Array<T>
@@ -127,14 +127,14 @@ export declare const rangeBy: {
   (start: number, finish: number, step: number): Array<number>
 }
 export declare const reduce: {
-  <T, A>(mapFn: MapFn<[A, T], A>): (acc: A) => (xs: Array<T>) => A
-  <T, A>(mapFn: MapFn<[A, T], A>, acc: A): (xs: Array<T>) => A
-  <T, A>(mapFn: MapFn<[A, T], A>, acc: A, xs: Array<T>): A
+  <T, R>(mapFn: MapFn<[R, T], R>): (acc: R) => (xs: Array<T>) => R
+  <T, R>(mapFn: MapFn<[R, T], R>, acc: R): (xs: Array<T>) => R
+  <T, R>(mapFn: MapFn<[R, T], R>, acc: R, xs: Array<T>): R
 }
 export declare const reduceWithIndex: {
-  <T, A>(mapFn: MapFn<[A, T, number], A>): (acc: A) => (xs: Array<T>) => A
-  <T, A>(mapFn: MapFn<[A, T, number], A>, acc: A): (xs: Array<T>) => A
-  <T, A>(mapFn: MapFn<[A, T, number], A>, acc: A, xs: Array<T>): A
+  <T, R>(mapFn: MapFn<[R, T, number], R>): (acc: R) => (xs: Array<T>) => R
+  <T, R>(mapFn: MapFn<[R, T, number], R>, acc: R): (xs: Array<T>) => R
+  <T, R>(mapFn: MapFn<[R, T, number], R>, acc: R, xs: Array<T>): R
 }
 export declare const copy: <T>(xs: Array<T>) => Array<T>
 export declare const zip: {
@@ -176,3 +176,19 @@ export declare const uniqBy: {
   <T, R>(fn: MapFn<[T], R>, xs: Array<T>): Array<T>
 }
 export declare const uniq: <T>(xs: Array<T>) => Array<T>
+export declare const forEach: {
+  <T>(fn: MapFn<[T], void>): (xs: Array<T>) => void
+  <T>(fn: MapFn<[T], void>, xs: Array<T>): void
+}
+export declare const forEachWithIndex: {
+  <T>(fn: MapFn<[T, number], void>): (xs: Array<T>) => void
+  <T>(fn: MapFn<[T, number], void>, xs: Array<T>): void
+}
+export declare const getIndexBy: {
+  <T>(predicateFn: PredicateFn<[T]>): (xs: Array<T>) => Option<number>
+  <T>(predicateFn: PredicateFn<[T]>, xs: Array<T>): Option<number>
+}
+export declare const includes: {
+  <T>(el: T): (xs: Array<T>) => boolean
+  <T>(el: T, xs: Array<T>): boolean
+}
