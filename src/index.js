@@ -7,6 +7,7 @@ import * as Result from './Result.bs.js'
 import * as array from './Array.bs.js'
 import * as fns from './Function.bs.js'
 import * as string from './String.bs.js'
+import * as guards from './Guards.js'
 
 export { pipe } from './pipe.js'
 
@@ -25,7 +26,7 @@ const result = {
 export const F = fns
 export const A = array
 export const R = result
-
+export const G = guards
 export const O = option
 
 export const S = string
