@@ -192,3 +192,7 @@ export declare const includes: {
   <T>(el: T): (xs: Array<T>) => boolean
   <T>(el: T, xs: Array<T>): boolean
 }
+export declare const join: {
+  (delim: string): <T>(xs: Array<T>) => string
+  <T>(delim: string, xs: Array<T>): string
+}
