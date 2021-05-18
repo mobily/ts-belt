@@ -1,4 +1,4 @@
-import { A, O } from '../..'
+import { A } from '../..'
 
 describe('drop', () => {
   it('should return the same values as the provided array', () => {

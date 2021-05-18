@@ -1,4 +1,4 @@
-import { A, O } from '../..'
+import { A } from '../..'
 
 describe('get', () => {
   it('should return None', () => {
