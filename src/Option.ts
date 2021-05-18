@@ -3,6 +3,9 @@ import type { PredicateFn, MapFn } from './internal/types'
 
 export declare type Option<T> = NonNullable<T> & { __: 'Option' }
 
+export declare const Some: <T>(value: NonNullable<T>) => Option<T>
+export declare const None: Option<never>
+
 export declare const fromNullable: {
   (value: null | undefined): Option<never>
   <T>(value: T): Option<T>
