@@ -1,7 +1,7 @@
 {
   "name": "@mobily/ts-belt",
   "description": "🔧 TS Belt is a library for functional programming in TypeScript. It implements Result and Option monads and other various helpers. Based on Belt and Relude (ReScript/Reason).",
-  "version": "2.0.0-rc.3",
+  "version": "2.0.0-rc.4",
   "main": "./dist/cjs",
   "module": "./dist/esm",
   "types": "./dist/types/src",
