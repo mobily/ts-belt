@@ -1,33 +1,57 @@
 exports.transformRootFunctions = (j, source, path) => {
-  if (path.includes('internal')) {
+  if (/src\/(utils|pipe|index)/.test(path)) {
     return source
   }
 
-  const root = j(source)
+  return j(source)
+    .find(j.Program)
+    .replaceWith(p => {
+      const body = p.value.body.map(p => {
+        if (p.type === 'FunctionDeclaration') {
+          return j.variableDeclaration('const', [
+            j.variableDeclarator(
+              j.identifier(p.id.name),
+              p.params.length > 1
+                ? j.callExpression(
+                    j.memberExpression(j.identifier('C'), j.identifier(`__${p.params.length}`)),
+                    [j.arrowFunctionExpression(p.params, p.body)],
+                  )
+                : j.arrowFunctionExpression(p.params, p.body),
+            ),
+          ])
+        }
 
-  root.find(j.Program).replaceWith(p => {
-    return j.program([
-      j.importDeclaration(
-        [j.importNamespaceSpecifier(j.identifier('C'))],
-        j.literal('./internal/utils.js'),
-      ),
-      ...p.value.body,
-    ])
-  })
+        if (p.type === 'ExportNamedDeclaration' && p.declaration) {
+          const declarations = p.declaration.declarations.map(declaration => {
+            return declaration.init.type === 'ArrowFunctionExpression'
+              ? j.variableDeclarator(
+                  j.identifier(declaration.id.name),
+                  declaration.init.params.length > 1
+                    ? j.callExpression(
+                        j.memberExpression(
+                          j.identifier('C'),
+                          j.identifier(`__${declaration.init.params.length}`),
+                        ),
+                        [j.arrowFunctionExpression(declaration.init.params, declaration.init.body)],
+                      )
+                    : j.arrowFunctionExpression(declaration.init.params, declaration.init.body),
+                )
+              : declaration
+          })
 
-  root.find(j.FunctionDeclaration).replaceWith(p => {
-    return j.variableDeclaration('const', [
-      j.variableDeclarator(
-        j.identifier(p.value.id.name),
-        p.value.params.length > 1
-          ? j.callExpression(
-              j.memberExpression(j.identifier('C'), j.identifier(`__${p.value.params.length}`)),
-              [j.arrowFunctionExpression(p.value.params, p.value.body)],
-            )
-          : j.arrowFunctionExpression(p.value.params, p.value.body),
-      ),
-    ])
-  })
+          return j.exportNamedDeclaration(j.variableDeclaration('const', declarations))
+        }
 
-  return root.toSource()
+        return p
+      })
+
+      return j.program([
+        j.importDeclaration(
+          [j.importNamespaceSpecifier(j.identifier('C'))],
+          j.literal('../utils.js'),
+        ),
+        ...body,
+      ])
+    })
+    .toSource()
 }

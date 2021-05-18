@@ -1,5 +1,5 @@
-import type { Result } from './Result'
-import type { PredicateFn, MapFn } from './internal/types'
+import type { Result } from '../Result'
+import type { PredicateFn, MapFn } from '../types'
 
 export declare type Option<T> = NonNullable<T> & { __: 'Option' }
 

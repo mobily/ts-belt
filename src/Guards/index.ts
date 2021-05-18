@@ -1,4 +1,4 @@
-import { PredicateFn } from './internal/types'
+import { PredicateFn } from '../types'
 
 export declare const isString: <T>(value: T) => value is Extract<T, string>
 export declare const isNumber: <T>(value: T) => value is Extract<T, number>

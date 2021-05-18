@@ -5,14 +5,22 @@ const { uncurryFunctions } = require('./plugins/uncurry-functions')
 const { transformRootFunctions } = require('./plugins/transform-root-functions')
 const { replaceIdentifiers } = require('./plugins/replace-identifiers')
 
+const entryPoints = ['Function', 'Array', 'Result', 'Guards', 'Option', 'String'].map(
+  entryPoint => `src/${entryPoint}/index.js`,
+)
+const rootPoints = ['src/index.js', 'src/pipe.js']
+
 const handleError = () => process.exit(1)
-const build = (outfile, options) => {
+const build = (entryPoints, options = {}) => {
+  const { format = 'cjs' } = options
+
   return esbuild
     .build({
-      entryPoints: ['src/index.js'],
+      entryPoints,
+      splitting: format === 'esm',
       bundle: true,
-      format: 'cjs',
-      outfile: `dist/${outfile}`,
+      format,
+      outdir: `dist/${format}`,
       plugins: [
         jscodeshift({
           exclude: ['**/node_modules/**'],
@@ -27,6 +35,7 @@ const build = (outfile, options) => {
     .catch(handleError)
 }
 
-build('index.js')
-build('index.min.js', { minify: true })
-build('index.mjs', { format: 'esm' })
+build(entryPoints)
+build(entryPoints, { format: 'esm' })
+build(rootPoints, { bundle: false })
+build(rootPoints, { bundle: false, format: 'esm' })

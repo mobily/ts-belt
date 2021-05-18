@@ -1,32 +1,9 @@
-import { None, Some } from './Option.js'
-import * as Option from './Option.bs.js'
-
-import { Ok, Error } from './Result.js'
-import * as Result from './Result.bs.js'
-
-import * as array from './Array.bs.js'
-import * as fns from './Function.bs.js'
-import * as string from './String.bs.js'
-import * as guards from './Guards.js'
-
 export { pipe } from './pipe.js'
 
-const option = {
-  ...Option,
-  Some,
-  None,
-}
+export * as F from './Function'
+export * as A from './Array'
+export * as R from './Result'
+export * as G from './Guards'
+export * as O from './Option'
 
-const result = {
-  ...Result,
-  Ok,
-  Error,
-}
-
-export const F = fns
-export const A = array
-export const R = result
-export const G = guards
-export const O = option
-
-export const S = string
+export * as S from './String'

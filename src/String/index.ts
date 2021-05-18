@@ -1,4 +1,4 @@
-import type { Option } from './Option'
+import type { Option } from '../Option'
 
 export declare const head: (str: string) => Option<string>
 export declare const slice: {

@@ -1,5 +1,5 @@
-import type { Option } from './Option'
-import type { PredicateFn, MapFn } from './internal/types'
+import type { Option } from '../Option'
+import type { PredicateFn, MapFn } from '../types'
 
 declare type Array<T> = readonly T[]
 

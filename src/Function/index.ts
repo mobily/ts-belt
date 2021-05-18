@@ -1,4 +1,4 @@
-import type { PredicateFn, MapFn } from './internal/types'
+import type { PredicateFn, MapFn } from '../types'
 
 export declare const identity: <T>(arg0: T) => T
 export declare const equals: {
