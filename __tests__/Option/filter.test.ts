@@ -1,4 +1,4 @@
-import { pipe, O, Option } from '../..'
+import { pipe, O } from '../..'
 
 describe('filter', () => {
   it('should return None', () => {
