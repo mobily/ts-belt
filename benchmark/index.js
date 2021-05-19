@@ -7,6 +7,14 @@ const Rambda = require('rambda')
 
 const input = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 const input2 = [1, 2, 2, 3, 3, 5, 4, 3, 2, 1]
+const users = [
+  { user: 'fred', age: 48 },
+  { user: 'barney', age: 36 },
+  { user: 'fred', age: 40 },
+  { user: 'barney', age: 34 },
+]
+const defaultSort = (a, b) => a - b
+const usersSort = a => a.user
 
 suite('[1, 2, 3, 4, 5, 6, 7, 8, 9] → map → filter → reduce', () => {
   benchmark('@mobily/ts-belt', () => {
@@ -71,6 +79,50 @@ suite('[1, 2, 2, 3, 3, 5, 4, 3, 2, 1] → uniq → take', () => {
 
   benchmark('rambda', () => {
     return Rambda.pipe(Rambda.uniq, Rambda.take(3))(input2)
+  })
+})
+
+suite('[1, 2, 2, 3, 3, 5, 4, 3, 2, 1] → sort', () => {
+  benchmark('@mobily/ts-belt', () => {
+    return A.sort(defaultSort, input2)
+  })
+
+  benchmark('ramda', () => {
+    return Ramda.sort(defaultSort, input2)
+  })
+
+  benchmark('remeda', () => {
+    return Remeda.sort(input2, defaultSort)
+  })
+
+  benchmark('lodash/fp', () => {
+    return lodash.sortBy(input2)
+  })
+
+  benchmark('rambda', () => {
+    return Rambda.sort(defaultSort, input2)
+  })
+})
+
+suite('array (objects) → sortBy', () => {
+  benchmark('@mobily/ts-belt', () => {
+    return A.sortBy(usersSort, users)
+  })
+
+  benchmark('ramda', () => {
+    return Ramda.sortBy(usersSort, users)
+  })
+
+  benchmark('remeda', () => {
+    return Remeda.sortBy(users, usersSort)
+  })
+
+  benchmark('lodash/fp', () => {
+    return lodash.sortBy(usersSort, users)
+  })
+
+  benchmark('rambda', () => {
+    return Rambda.sortBy(usersSort, users)
   })
 })
 
