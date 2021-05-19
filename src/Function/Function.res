@@ -4,8 +4,8 @@ let both = (fn0, fn1, value) => fn0(value) && fn1(value)
 let either = (fn0, fn1, value) => fn0(value) || fn1(value)
 let always = (value, . ()) => value
 let defaultTo = (defaultValue, value) => Js.Nullable.isNullable(value) ? defaultValue : value
-let falsy = () => false
-let truthy = () => true
+let falsy = always(false)
+let truthy = always(true)
 let ifElse = (predicateFn, trueFn, falseFn, value) =>
   predicateFn(value) ? trueFn(value) : falseFn(value)
 let ignore = () => ()

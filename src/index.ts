@@ -9,3 +9,4 @@ export * as G from './Guards'
 export * as O from './Option'
 
 export * as S from './String'
+export * as D from './Dict'

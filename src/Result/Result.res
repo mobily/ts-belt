@@ -4,10 +4,10 @@ let fromFalsy = (error, value) => !value ? Error(error) : Ok(value)
 let fromPredicate = (predicateFn, error, value) =>
   predicateFn(value) ? fromNullable(error, value) : Error(error)
 
-let map = (mapFn, result) => Belt.Result.map(result, mapFn)
+let map = (mapFn, result) => Belt.Result.mapU(result, mapFn)
 let mapWithDefault = (defaultValue, mapFn, result) =>
-  Belt.Result.mapWithDefault(result, defaultValue, mapFn)
-let flatMap = (mapFn, result) => Belt.Result.flatMap(result, mapFn)
+  Belt.Result.mapWithDefaultU(result, defaultValue, mapFn)
+let flatMap = (mapFn, result) => Belt.Result.flatMapU(result, mapFn)
 
 let getExn = Belt.Result.getExn
 let getWithDefault = (defaultValue, result) => Belt.Result.getWithDefault(result, defaultValue)

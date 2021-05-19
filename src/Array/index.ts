@@ -196,3 +196,12 @@ export declare const join: {
   (delim: string): <T>(xs: Array<T>) => string
   <T>(delim: string, xs: Array<T>): string
 }
+export declare const sort: {
+  <T>(sortFn: MapFn<[T, T], number>): (xs: Array<T>) => Array<T>
+  <T>(sortFn: MapFn<[T, T], number>, xs: Array<T>): Array<T>
+}
+export declare const sortBy: {
+  <T, A>(sortFn: MapFn<[T], A>): (xs: Array<T>) => Array<T>
+  <T, A>(sortFn: MapFn<[T], A>, xs: Array<T>): Array<T>
+}
+export declare const makeEmpty: <T>() => Array<T>
