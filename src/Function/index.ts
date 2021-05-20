@@ -45,3 +45,11 @@ export declare const when: {
   <A, B>(predicateFn: PredicateFn<[A]>, whenFalseFn: MapFn<[A], B>): (value: A) => B
   <A, B>(predicateFn: PredicateFn<[A]>, whenFalseFn: MapFn<[A], B>, value: A): B
 }
+export declare const allPass: {
+  <T>(fns: Array<PredicateFn<[T]>>): (value: T) => boolean
+  <T>(fns: Array<PredicateFn<[T]>>, value: T): boolean
+}
+export declare const anyPass: {
+  <T>(fns: Array<PredicateFn<[T]>>): (value: T) => boolean
+  <T>(fns: Array<PredicateFn<[T]>>, value: T): boolean
+}

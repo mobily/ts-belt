@@ -129,15 +129,13 @@ let swapAt = (targetIndex, swapIndex, xs) =>
 let removeAt = (targetIndex, xs) => xs |> filterWithIndex((. _, i) => i != targetIndex)
 let uniqBy = (predicateFn, xs) =>
   Belt.Array.reduceU(xs, [], (. acc, value) =>
-    Belt.Array.someU(acc, (. x) => Function.equals(x, predicateFn(value)))
-      ? acc
-      : append(value, acc)
+    Belt.Array.someU(acc, (. x) => x == predicateFn(value)) ? acc : append(value, acc)
   )
-let uniq = xs => uniqBy(Function.identity, xs)
+let uniq = xs => uniqBy(el => el, xs)
 let forEach = (fn, xs) => Belt.Array.forEachU(xs, fn)
 let forEachWithIndex = (fn, xs) => Belt.Array.forEachWithIndexU(xs, fn)
 let getIndexBy = (predicateFn, xs) => Belt.Array.getIndexByU(xs, predicateFn)
-let includes = (el, xs) => Belt.Array.someU(xs, (. x) => Function.equals(x, el))
+let includes = (el, xs) => Belt.Array.someU(xs, (. x) => x == el)
 let join = (delim, xs) => Js.Array2.joinWith(xs, delim)
 let sort = (sortFn, xs) => Belt.SortArray.stableSortByU(xs, sortFn)
 let sortBy = (sortFn, xs) => sort((. a, b) => {
