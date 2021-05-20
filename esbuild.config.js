@@ -5,7 +5,7 @@ const { uncurryFunctions } = require('./plugins/uncurry-functions')
 const { transformRootFunctions } = require('./plugins/transform-root-functions')
 const { replaceIdentifiers } = require('./plugins/replace-identifiers')
 
-const entryPoints = ['Function', 'Array', 'Result', 'Guards', 'Option', 'String'].map(
+const entryPoints = ['Function', 'Array', 'Result', 'Guards', 'Option', 'String', 'Dict'].map(
   entryPoint => `src/${entryPoint}/index.js`,
 )
 const rootPoints = ['src/index.js', 'src/pipe.js']
