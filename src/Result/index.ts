@@ -64,6 +64,5 @@ export declare const match: {
 export declare const toNullable: <A, B>(result: Result<A, B>) => A | null
 export declare const toOption: <A, B>(result: Result<A, B>) => Option<A>
 export declare const toUndefined: <A, B>(result: Result<A, B>) => A | undefined
-
 export declare const isOk: <A, B>(result: Result<A, B>) => result is Ok<A>
 export declare const isError: <A, B>(result: Result<A, B>) => result is Error<B>
