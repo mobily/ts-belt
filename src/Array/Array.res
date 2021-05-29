@@ -76,10 +76,10 @@ let repeat = Belt.Array.make
 let makeWithIndex = Belt.Array.makeByU
 let map = (mapFn, xs) => Belt.Array.mapU(xs, mapFn)
 let mapWithIndex = (mapFn, xs) => Belt.Array.mapWithIndexU(xs, (. i, el) => mapFn(el, i))
-let filter = (fn, xs) => Belt.Array.keepU(xs, fn)
-let filterWithIndex = (fn, xs) => Belt.Array.keepWithIndexU(xs, fn)
-let reject = (fn, xs) => filter((. el) => !fn(el), xs)
-let rejectWithIndex = (fn, xs) => filterWithIndex((. el, i) => !fn(el, i), xs)
+let filter = (predicateFn, xs) => Belt.Array.keepU(xs, predicateFn)
+let filterWithIndex = (predicateFn, xs) => Belt.Array.keepWithIndexU(xs, predicateFn)
+let reject = (predicateFn, xs) => filter((. el) => !predicateFn(el), xs)
+let rejectWithIndex = (predicateFn, xs) => filterWithIndex((. el, i) => !predicateFn(el, i), xs)
 let init = xs => {
   let l = length(xs)
   l == 0 ? None : Some(Belt.Array.slice(xs, ~offset=0, ~len=l - 1))
