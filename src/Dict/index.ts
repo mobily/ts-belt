@@ -18,11 +18,29 @@ export declare const map: {
   <T extends EmptyObject, R>(mapFn: MapFn<[T[keyof T]], R>): (dict: T) => Record<keyof T, R>
   <T extends EmptyObject, R>(mapFn: MapFn<[T[keyof T]], R>, dict: T): Record<keyof T, R>
 }
+export declare const mapWithKey: {
+  <T extends EmptyObject, R>(mapFn: MapFn<[T[keyof T], keyof T], R>): (
+    dict: T,
+  ) => Record<keyof T, R>
+  <T extends EmptyObject, R>(mapFn: MapFn<[T[keyof T], keyof T], R>, dict: T): Record<keyof T, R>
+}
 export declare const filter: {
   <T extends EmptyObject, R>(predicateFn: PredicateFn<[T[keyof T]]>): (dict: T) => Partial<T>
   <T extends EmptyObject, R>(predicateFn: PredicateFn<[T[keyof T]]>, dict: T): Partial<T>
 }
+export declare const filterWithKey: {
+  <T extends EmptyObject, R>(predicateFn: PredicateFn<[T[keyof T], keyof T]>): (
+    dict: T,
+  ) => Partial<T>
+  <T extends EmptyObject, R>(predicateFn: PredicateFn<[T[keyof T], keyof T]>, dict: T): Partial<T>
+}
 export declare const reject: {
   <T extends EmptyObject, R>(predicateFn: PredicateFn<[T[keyof T]]>): (dict: T) => Partial<T>
   <T extends EmptyObject, R>(predicateFn: PredicateFn<[T[keyof T]]>, dict: T): Partial<T>
+}
+export declare const rejectWithKey: {
+  <T extends EmptyObject, R>(predicateFn: PredicateFn<[T[keyof T], keyof T]>): (
+    dict: T,
+  ) => Partial<T>
+  <T extends EmptyObject, R>(predicateFn: PredicateFn<[T[keyof T], keyof T]>, dict: T): Partial<T>
 }
