@@ -1,5 +1,16 @@
-export declare const makeEmpty: <T>() => T
+import type { Array } from '../types'
+
+export declare const makeEmpty: {
+  <T>(): T
+  <K extends string, T>(): Record<K, T>
+}
 export declare const prop: {
   <T, K extends keyof T>(key: K): (obj: T) => T[K]
   <T, K extends keyof T>(key: K, obj: T): T[K]
+}
+export declare const values: <T extends string | number, X>(obj: Record<T, X>) => Array<X[]>
+export declare const keys: <T extends Record<string, unknown>>(obj: T) => keyof T
+export declare const merge: {
+  <A, B>(fst: A): (snd: B) => A & B
+  <A, B>(fst: A, snd: B): A & B
 }

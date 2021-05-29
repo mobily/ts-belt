@@ -1,7 +1,5 @@
 import type { Option } from '../Option'
-import type { PredicateFn, MapFn } from '../types'
-
-declare type Array<T> = readonly T[]
+import type { PredicateFn, MapFn, Array } from '../types'
 
 export declare const length: <T>(xs: Array<T>) => number
 export declare const isEmpty: <T>(xs: Array<T>) => boolean
