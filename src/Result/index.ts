@@ -1,5 +1,5 @@
 import type { Option } from '../Option'
-import type { MapFn, PredicateFn } from '../types'
+import type { MapFn, PredicateFn, ExtractValue } from '../types'
 
 export declare type Ok<T> = {
   readonly TAG: 0
@@ -16,19 +16,23 @@ export declare const Ok: <T>(value: NonNullable<T>) => Ok<T>
 export declare const Error: <T>(value: NonNullable<T>) => Error<T>
 
 export declare const fromNullable: {
-  <B>(error: NonNullable<B>): <A>(value: A) => Result<A, B>
-  <A, B>(error: NonNullable<B>, value: A): Result<A, B>
+  <B>(error: NonNullable<B>): <A>(value: A) => Result<ExtractValue<A>, B>
+  <A, B>(error: NonNullable<B>, value: A): Result<ExtractValue<A>, B>
 }
 export declare const fromFalsy: {
   <B>(error: NonNullable<B>): (value: 0 | '' | false | null | undefined) => Error<B>
   <B>(error: NonNullable<B>, value: 0 | '' | false | null | undefined): Error<B>
-  <B>(error: NonNullable<B>): <A>(value: A) => Result<A, B>
-  <A, B>(error: NonNullable<B>, value: A): Result<A, B>
+  <B>(error: NonNullable<B>): <A>(value: A) => Result<ExtractValue<A>, B>
+  <A, B>(error: NonNullable<B>, value: A): Result<ExtractValue<A>, B>
 }
 export declare const fromPredicate: {
-  <A>(predicateFn: PredicateFn<[A]>): <B>(error: NonNullable<B>) => <A>(value: A) => Result<A, B>
-  <A, B>(predicateFn: PredicateFn<[A]>, error: NonNullable<B>): (value: A) => Result<A, B>
-  <A, B>(predicateFn: PredicateFn<[A]>, error: NonNullable<B>, value: A): Result<A, B>
+  <A>(predicateFn: PredicateFn<[A]>): <B>(
+    error: NonNullable<B>,
+  ) => <A>(value: A) => Result<ExtractValue<A>, B>
+  <A, B>(predicateFn: PredicateFn<[A]>, error: NonNullable<B>): (
+    value: A,
+  ) => Result<ExtractValue<A>, B>
+  <A, B>(predicateFn: PredicateFn<[A]>, error: NonNullable<B>, value: A): Result<ExtractValue<A>, B>
 }
 export declare const flatMap: {
   <A, B, R>(mapFn: MapFn<[A], Result<R, B>>): (result: Result<A, B>) => Result<R, B>
