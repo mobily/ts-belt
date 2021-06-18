@@ -53,3 +53,5 @@ export declare const anyPass: {
   <T>(fns: Array<PredicateFn<[T]>>): (value: T) => boolean
   <T>(fns: Array<PredicateFn<[T]>>, value: T): boolean
 }
+export declare const succ: (value: number) => number
+export declare const pred: (value: number) => number

@@ -13,3 +13,5 @@ let unless = (predicateFn, falseFn, value) => !predicateFn(value) ? falseFn(valu
 let when_ = (predicateFn, trueFn, value) => predicateFn(value) ? trueFn(value) : value
 let allPass = (fns, value) => Belt.Array.everyU(fns, (. fn) => fn(value))
 let anyPass = (fns, value) => Belt.Array.someU(fns, (. fn) => fn(value))
+let pred = pred
+let succ = succ
