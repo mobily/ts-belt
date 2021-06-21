@@ -151,7 +151,7 @@ let groupBy = (fn, xs) =>
     let value = Js.Dict.get(acc, fn(el))
     switch value {
     | Some(value) => Js.Dict.set(acc, key, append(el, value))
-    | None => Js.Dict.set(acc, key, [])
+    | None => Js.Dict.set(acc, key, [el])
     }
     acc
   })
