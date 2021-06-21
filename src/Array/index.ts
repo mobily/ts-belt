@@ -204,6 +204,6 @@ export declare const sortBy: {
 }
 export declare const makeEmpty: <T>() => Array<T>
 export declare const groupBy: {
-  <T>(xs: Array<T>, fn: (item: T) => any): Record<string, Array<T>>
-  <T>(xs: Array<T>): (fn: (item: T) => any) => Record<string, Array<T>>
+  <T>(fn: MapFn<[T], any>, xs: Array<T>): Record<string, Array<T>>
+  <T>(fn: MapFn<[T], any>): (xs: Array<T>) => Record<string, Array<T>>
 }
