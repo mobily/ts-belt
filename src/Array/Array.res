@@ -144,3 +144,14 @@ let sortBy = (sortFn, xs) => sort((. a, b) => {
     a === b ? 0 : a < b ? -1 : 1
   }, xs)
 let makeEmpty = () => []
+
+let groupBy = (fn, xs) =>
+  Belt.Array.reduceU(xs, Js.Dict.empty(), (. acc, el) => {
+    let key = fn(el)
+    let value = Js.Dict.get(acc, fn(el))
+    switch value {
+    | Some(value) => Js.Dict.set(acc, key, append(el, value))
+    | None => Js.Dict.set(acc, key, [])
+    }
+    acc
+  })
