@@ -6,7 +6,6 @@
     "baseUrl": ".",
     "outDir": "dist/types/src",
     "lib": ["esnext"],
-    "jsx": "react",
     "declaration": true,
     "module": "commonjs",
     "moduleResolution": "node",
