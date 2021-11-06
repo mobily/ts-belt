@@ -20,8 +20,6 @@ export declare const fromNullable: {
   <A, B>(error: NonNullable<B>, value: A): Result<ExtractValue<A>, B>
 }
 export declare const fromFalsy: {
-  <B>(error: NonNullable<B>): (value: 0 | '' | false | null | undefined) => Error<B>
-  <B>(error: NonNullable<B>, value: 0 | '' | false | null | undefined): Error<B>
   <B>(error: NonNullable<B>): <A>(value: A) => Result<ExtractValue<A>, B>
   <A, B>(error: NonNullable<B>, value: A): Result<ExtractValue<A>, B>
 }

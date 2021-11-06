@@ -7,14 +7,8 @@ export declare abstract class Option<T> {
 
 export declare const Some: <T>(value: NonNullable<T>) => Option<T>
 export declare const None: Option<never>
-export declare const fromNullable: {
-  (value: null | undefined): Option<never>
-  <T>(value: T): Option<ExtractValue<T>>
-}
-export declare const fromFalsy: {
-  (value: 0 | '' | false | null | undefined): Option<never>
-  <T>(value: T): Option<ExtractValue<T>>
-}
+export declare const fromNullable: <T>(value: T) => Option<ExtractValue<T>>;
+export declare const fromFalsy:  <T>(value: T) => Option<ExtractValue<T>>;
 export declare const fromPredicate: {
   <T>(predicate: PredicateFn<[T]>): (value: T) => Option<ExtractValue<T>>
   <T>(predicate: PredicateFn<[T]>, value: T): Option<ExtractValue<T>>

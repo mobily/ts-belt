@@ -4,7 +4,7 @@ let internalFn = (dict, mapFn) => dict |> Js.Dict.keys |> mapFn |> Js.Dict.fromA
 
 let makeEmpty = Js.Dict.empty
 let prop = (key, dict) => Js.Dict.unsafeGet(dict, key)
-let entries = Js.Dict.entries
+let toPairs = Js.Dict.entries
 let values = Js.Dict.values
 let keys = Js.Dict.keys
 let fromPairs = Js.Dict.fromArray
