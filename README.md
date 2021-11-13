@@ -1,10 +1,31 @@
-# 🔧 TS Belt &middot; [![Build Status](https://img.shields.io/travis/com/mobily/ts-belt.svg?style=flat-square&logo=travis)](https://travis-ci.com/mobily/ts-belt) [![Coverage](https://img.shields.io/coveralls/github/mobily/ts-belt.svg?style=flat-square&logo=coveralls)](https://coveralls.io/github/mobily/ts-belt?branch=master) [![npm](https://img.shields.io/npm/v/@mobily/ts-belt.svg?style=flat-square&logo=npm)](https://www.npmjs.com/package/@mobily/ts-belt) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/mobily/ts-belt/blob/master/LICENSE)
-
 <p align="center">
-  <img src="https://raw.githubusercontent.com/mobily/ts-belt/master/assets/ts-belt-logo.svg" width="120" alt="TS Belt" />
+  <img src="https://raw.githubusercontent.com/mobily/rescript-date/master/assets/ts-belt-frame.png" width="480">
 </p>
 
-**TS Belt** is a library for functional programming in TypeScript. It implements Result and Option monads and other various helpers. Based on [Belt](https://rescript-lang.org/docs/manual/latest/api/belt) and [Relude](https://github.com/reazen/relude) (ReScript/Reason).
+<p align="center">
+  <a href="https://travis-ci.com/mobily/ts-belt">
+    <img src="https://img.shields.io/travis/com/mobily/ts-belt.svg?style=flat-square&amp;logo=travis" alt="Build Status">
+  </a>
+  <a href="https://coveralls.io/github/mobily/ts-belt?branch=master">
+    <img src="https://img.shields.io/coveralls/github/mobily/ts-belt.svg?style=flat-square&amp;logo=coveralls" alt="Coverage">
+  </a>
+  <a href="https://www.npmjs.com/package/@mobily/ts-belt">
+    <img src="https://img.shields.io/npm/v/@mobily/ts-belt.svg?style=flat-square&amp;logo=npm" alt="npm">
+  </a>
+  <a href="http://makeapullrequest.com">
+    <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome">
+  </a>
+  <a href="#contributors">
+    <img src="https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square" alt="All Contributors">
+  </a>
+  <a href="https://github.com/mobily/ts-belt/blob/master/LICENSE">
+    <img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="GitHub license">
+  </a>
+</p>
+
+<p align="center">
+  <strong>Belt (`ReScript`) implementation in TypeScript.</strong>
+</p>
 
 ## Features
 
