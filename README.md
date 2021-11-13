@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/mobily/rescript-date/master/assets/ts-belt-frame.png" width="480">
+  <img src="https://raw.githubusercontent.com/mobily/ts-belt/master/assets/ts-belt-frame.png" width="480">
 </p>
 
 <p align="center">
@@ -24,7 +24,7 @@
 </p>
 
 <p align="center">
-  <strong>Belt (`ReScript`) implementation in TypeScript.</strong>
+  <strong>Belt (<code>ReScript</code>) implementation in TypeScript.</strong>
 </p>
 
 ## Features
