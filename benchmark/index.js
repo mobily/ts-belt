@@ -13,8 +13,8 @@ const resolveFiles = (dir, arr) => {
     .map(file => require(`./${dir}/${file}`))
 }
 
-const simple = resolveFiles('simple', ['reduce'])
-const complex = resolveFiles('complex', [])
+const simple = resolveFiles('simple')
+const complex = resolveFiles('complex')
 
 complex.forEach(test => {
   suite(`${test.title} (single function call)`, () => {
