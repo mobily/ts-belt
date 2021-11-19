@@ -1,44 +1,77 @@
 @val
 external assign: (Js.Dict.t<'a>, Js.Dict.t<'a>, Js.Dict.t<'a>) => Js.Dict.t<'a> = "Object.assign"
-let internalFn = (dict, mapFn) => dict |> Js.Dict.keys |> mapFn |> Js.Dict.fromArray
 
+@val
+external entries: Js.Dict.t<'a> => array<(Js.Dict.key, 'a)> = "Object.entries"
+
+@gentype
 let makeEmpty = Js.Dict.empty
+
+@gentype
 let prop = (key, dict) => Js.Dict.unsafeGet(dict, key)
-let toPairs = Js.Dict.entries
-let values = Js.Dict.values
-let keys = Js.Dict.keys
-let fromPairs = Js.Dict.fromArray
+
+@gentype
+let toPairs = dict => entries(dict)
+
+@gentype
+let values = dict => Js.Dict.values(dict)
+
+@gentype
+let keys = dict => Js.Dict.keys(dict)
+
+@gentype
+let fromPairs = dict => Js.Dict.fromArray(dict)
+
+@gentype
 let merge = (fst, snd) => assign(makeEmpty(), fst, snd)
-let map = (mapFn, dict) => {
-  internalFn(
-    dict,
-    Array.map((. key) => {
-      let value = mapFn(prop(key, dict))
-      (key, value)
-    }),
-  )
+
+@gentype
+let map = (dict, mapFn) => {
+  dict
+  ->keys
+  ->Array.map(key => {
+    let value = mapFn(prop(key, dict))
+    (key, value)
+  })
+  ->fromPairs
 }
-let mapWithKey = (mapFn, dict) => {
-  internalFn(
-    dict,
-    Array.map((. key) => {
-      let value = mapFn(prop(key, dict), key)
-      (key, value)
-    }),
-  )
+
+@gentype
+let mapWithKey = (dict, mapFn) => {
+  dict
+  ->keys
+  ->Array.map(key => {
+    let value = mapFn(prop(key, dict), key)
+    (key, value)
+  })
+  ->fromPairs
 }
-let filter = (predicateFn, dict) => {
-  internalFn(dict, Array.reduce((. acc, key) => {
-      let value = prop(key, dict)
-      predicateFn(value) ? Array.append((key, value), acc) : acc
-    }, []))
+
+@gentype
+let filter = (dict, predicateFn) => {
+  dict
+  ->keys
+  ->Array.reduce([], (. acc, key) => {
+    let value = prop(key, dict)
+    predicateFn(value) ? Array.append(acc, (key, value)) : acc
+  })
+  ->fromPairs
 }
-let filterWithKey = (predicateFn, dict) => {
-  internalFn(dict, Array.reduce((. acc, key) => {
-      let value = prop(key, dict)
-      predicateFn(value, key) ? Array.append((key, value), acc) : acc
-    }, []))
+
+@gentype
+let filterWithKey = (dict, predicateFn) => {
+  dict
+  ->keys
+  ->Array.reduce([], (. acc, key) => {
+    let value = prop(key, dict)
+    predicateFn(value, key) ? Array.append(acc, (key, value)) : acc
+  })
+  ->fromPairs
 }
-let reject = (predicateFn, dict) => filter(value => !predicateFn(value), dict)
+
+@gentype
+let reject = (predicateFn, dict) => filter(dict, value => !predicateFn(value))
+
+@gentype
 let rejectWithKey = (predicateFn, dict) =>
-  filterWithKey((value, key) => !predicateFn(value, key), dict)
+  filterWithKey(dict, (value, key) => !predicateFn(value, key))

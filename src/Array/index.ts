@@ -1,209 +1,269 @@
-import type { Option } from '../Option'
-import type { PredicateFn, MapFn, Array } from '../types'
+import { Option } from '../Option'
+import { ExtractNested } from '../types'
 
-export declare const length: <T>(xs: Array<T>) => number
-export declare const isEmpty: <T>(xs: Array<T>) => boolean
-export declare const isNotEmpty: <T>(xs: Array<T>) => boolean
-export declare const reverse: <T>(xs: Array<T>) => Array<T>
-export declare const prepend: {
-  <T>(el: T): (xs: Array<T>) => Array<T>
-  <T>(el: T, xs: Array<T>): Array<T>
-}
-export declare const append: {
-  <T>(el: T): (xs: Array<T>) => Array<T>
-  <T>(el: T, xs: Array<T>): Array<T>
-}
-export declare const get: {
-  (i: number): <T>(xs: Array<T>) => Option<T>
-  <T>(i: number, xs: Array<T>): Option<T>
-}
-export declare const getBy: {
-  <T>(predicateFn: PredicateFn<[T, number]>): (xs: Array<T>) => Option<T>
-  <T>(predicateFn: PredicateFn<[T, number]>, xs: Array<T>): Option<T>
-}
-export declare const head: <T>(xs: Array<T>) => Option<T>
-export declare const tail: <T>(xs: Array<T>) => Option<Array<T>>
-export declare const tailOrEmpty: <T>(xs: Array<T>) => Array<T>
-export declare const take: {
-  (i: number): <T>(xs: Array<T>) => Array<T>
-  <T>(i: number, xs: Array<T>): Array<T>
-}
-export declare const takeExactly: {
-  (i: number): <T>(xs: Array<T>) => Option<Array<T>>
-  <T>(i: number, xs: Array<T>): Option<Array<T>>
-}
-export declare const takeWhile: {
-  <T>(predicateFn: PredicateFn<[T]>): (xs: Array<T>) => Array<T>
-  <T>(predicateFn: PredicateFn<[T]>, xs: Array<T>): Array<T>
-}
-export declare const drop: {
-  (i: number): <T>(xs: Array<T>) => Array<T>
-  <T>(i: number, xs: Array<T>): Array<T>
-}
-export declare const dropExactly: {
-  (i: number): <T>(xs: Array<T>) => Option<Array<T>>
-  <T>(i: number, xs: Array<T>): Option<Array<T>>
-}
-export declare const dropWhile: {
-  <T>(predicateFn: PredicateFn<[T]>): (xs: Array<T>) => Array<T>
-  <T>(predicateFn: PredicateFn<[T]>, xs: Array<T>): Array<T>
-}
-export declare const uncons: <T>(xs: Array<T>) => Option<readonly [T, Array<T>]>
-export declare const splitAt: {
-  (i: number): <T>(xs: Array<T>) => Option<readonly [Array<T>, Array<T>]>
-  <T>(i: number, xs: Array<T>): Option<readonly [Array<T>, Array<T>]>
-}
-export declare const splitEvery: {
-  (i: number): <T>(xs: Array<T>) => Array<Array<T>>
-  <T>(i: number, xs: Array<T>): Array<Array<T>>
-}
-export declare const shuffle: <T>(xs: Array<T>) => Array<T>
-export declare const repeat: <T>(i: number, el: T) => Array<T>
-export declare const makeWithIndex: <T>(i: number, mapFn: MapFn<[number], T>) => Array<T>
-export declare const map: {
-  <T, R>(mapFn: MapFn<[T], R>): (xs: Array<T>) => Array<R>
-  <T, R>(mapFn: MapFn<[T], R>, xs: Array<T>): Array<R>
-}
-export declare const mapWithIndex: {
-  <T, R>(mapFn: MapFn<[T, number], R>): (xs: Array<T>) => Array<R>
-  <T, R>(mapFn: MapFn<[T, number], R>, xs: Array<T>): Array<R>
-}
-export declare const filter: {
-  <T>(predicateFn: PredicateFn<[T]>): (xs: Array<T>) => Array<T>
-  <T>(predicateFn: PredicateFn<[T]>, xs: Array<T>): Array<T>
-}
-export declare const filterWithIndex: {
-  <T>(predicateFn: PredicateFn<[T, number]>): (xs: Array<T>) => Array<T>
-  <T>(predicateFn: PredicateFn<[T, number]>, xs: Array<T>): Array<T>
-}
-export declare const reject: {
-  <T>(predicateFn: PredicateFn<[T]>): (xs: Array<T>) => Array<T>
-  <T>(predicateFn: PredicateFn<[T]>, xs: Array<T>): Array<T>
-}
-export declare const rejectWithIndex: {
-  <T>(predicateFn: PredicateFn<[T, number]>): (xs: Array<T>) => Array<T>
-  <T>(predicateFn: PredicateFn<[T, number]>, xs: Array<T>): Array<T>
-}
-export declare const init: <T>(xs: Array<T>) => Option<Array<T>>
-export declare const initOrEmpty: <T>(xs: Array<T>) => Array<T>
-export declare const last: <T>(xs: Array<T>) => Option<T>
-export declare const partition: {
-  <T>(predicateFn: PredicateFn<[T]>): (xs: Array<T>) => readonly [Array<T>, Array<T>]
-  <T>(predicateFn: PredicateFn<[T]>, xs: Array<T>): readonly [Array<T>, Array<T>]
-}
-export declare const concat: {
-  <T>(xs: Array<T>): <R>(ys: Array<R>) => Array<T & R>
-  <T, R>(xs: Array<T>, ys: Array<R>): Array<T & R>
-}
-export declare const concatMany: <T>(xs: Array<Array<T>>) => Array<T>
-export declare const every: {
-  <T>(predicateFn: PredicateFn<[T]>): (xs: Array<T>) => boolean
-  <T>(predicateFn: PredicateFn<[T]>, xs: Array<T>): boolean
-}
-export declare const some: {
-  <T>(predicateFn: PredicateFn<[T]>): (xs: Array<T>) => boolean
-  <T>(predicateFn: PredicateFn<[T]>, xs: Array<T>): boolean
-}
-export declare const slice: {
-  (offset: number): (len: number) => <T>(xs: Array<T>) => Array<T>
-  (offset: number, len: number): <T>(xs: Array<T>) => Array<T>
-  <T>(offset: number, len: number, xs: Array<T>): Array<T>
-}
-export declare const sliceToEnd: {
-  (offset: number): <T>(xs: Array<T>) => Array<T>
-  <T>(offset: number, xs: Array<T>): Array<T>
-}
-export declare const eq: {
-  <T, R>(predicateFn: PredicateFn<[T, R]>): (xs: Array<T>) => (ys: Array<R>) => boolean
-  <T, R>(predicateFn: PredicateFn<[T, R]>, xs: Array<T>): (ys: Array<R>) => boolean
-  <T, R>(predicateFn: PredicateFn<[T, R]>, xs: Array<T>, ys: Array<R>): boolean
-}
-export declare const range: (start: number, finish: number) => Array<number>
-export declare const rangeBy: {
-  (start: number): (finish: number) => (step: number) => Array<number>
-  (start: number, finish: number): (step: number) => Array<number>
-  (start: number, finish: number, step: number): Array<number>
-}
-export declare const reduce: {
-  <T, R>(mapFn: MapFn<[R, T], R>): (acc: R) => (xs: Array<T>) => R
-  <T, R>(mapFn: MapFn<[R, T], R>, acc: R): (xs: Array<T>) => R
-  <T, R>(mapFn: MapFn<[R, T], R>, acc: R, xs: Array<T>): R
-}
-export declare const reduceWithIndex: {
-  <T, R>(mapFn: MapFn<[R, T, number], R>): (acc: R) => (xs: Array<T>) => R
-  <T, R>(mapFn: MapFn<[R, T, number], R>, acc: R): (xs: Array<T>) => R
-  <T, R>(mapFn: MapFn<[R, T, number], R>, acc: R, xs: Array<T>): R
-}
-export declare const copy: <T>(xs: Array<T>) => Array<T>
-export declare const zip: {
-  <T>(xs: Array<T>): <R>(ys: Array<R>) => Array<readonly [R, T]>
-  <T, R>(xs: Array<T>, ys: Array<R>): Array<readonly [R, T]>
-}
-export declare const zipWith: {
-  <B, A, R>(mapFn: MapFn<[A, B], R>): (ys: Array<B>) => (xs: Array<A>) => Array<R>
-  <B, A, R>(mapFn: MapFn<[A, B], R>, ys: Array<B>): (xs: Array<A>) => Array<R>
-  <B, A, R>(mapFn: MapFn<[A, B], R>, ys: Array<B>, xs: Array<A>): Array<R>
-}
-export declare const unzip: <A, B>(xs: Array<readonly [A, B]>) => readonly [Array<A>, Array<B>]
-export declare const replaceAt: {
-  (targetIndex: number): <T>(el: T) => (xs: Array<T>) => Array<T>
-  <T>(targetIndex: number, el: T): (xs: Array<T>) => Array<T>
-  <T>(targetIndex: number, el: T, xs: Array<T>): Array<T>
-}
-export declare const insertAt: {
-  (targetIndex: number): <T>(el: T) => (xs: Array<T>) => Array<T>
-  <T>(targetIndex: number, el: T): (xs: Array<T>) => Array<T>
-  <T>(targetIndex: number, el: T, xs: Array<T>): Array<T>
-}
-export declare const updateAt: {
-  (targetIndex: number): <T>(mapFn: MapFn<[T], T>) => (xs: Array<T>) => Array<T>
-  <T>(targetIndex: number, mapFn: MapFn<[T], T>): (xs: Array<T>) => Array<T>
-  <T>(targetIndex: number, mapFn: MapFn<[T], T>, xs: Array<T>): Array<T>
-}
-export declare const swapAt: {
-  (targetIndex: number): (swapIndex: number) => <T>(xs: Array<T>) => Array<T>
-  (targetIndex: number, swapIndex: number): <T>(xs: Array<T>) => Array<T>
-  <T>(targetIndex: number, swapIndex: number, xs: Array<T>): Array<T>
-}
-export declare const removeAt: {
-  (targetIndex: number): <T>(xs: Array<T>) => Array<T>
-  <T>(targetIndex: number, xs: Array<T>): Array<T>
-}
-export declare const uniqBy: {
-  <T, R>(fn: MapFn<[T], R>): <T>(xs: Array<T>) => Array<T>
-  <T, R>(fn: MapFn<[T], R>, xs: Array<T>): Array<T>
-}
-export declare const uniq: <T>(xs: Array<T>) => Array<T>
-export declare const forEach: {
-  <T>(fn: MapFn<[T], void>): (xs: Array<T>) => void
-  <T>(fn: MapFn<[T], void>, xs: Array<T>): void
-}
-export declare const forEachWithIndex: {
-  <T>(fn: MapFn<[T, number], void>): (xs: Array<T>) => void
-  <T>(fn: MapFn<[T, number], void>, xs: Array<T>): void
-}
-export declare const getIndexBy: {
-  <T>(predicateFn: PredicateFn<[T]>): (xs: Array<T>) => Option<number>
-  <T>(predicateFn: PredicateFn<[T]>, xs: Array<T>): Option<number>
-}
-export declare const includes: {
-  <T>(el: T): (xs: Array<T>) => boolean
-  <T>(el: T, xs: Array<T>): boolean
-}
-export declare const join: {
-  (delim: string): <T>(xs: Array<T>) => string
-  <T>(delim: string, xs: Array<T>): string
-}
-export declare const sort: {
-  <T>(sortFn: MapFn<[T, T], number>): (xs: Array<T>) => Array<T>
-  <T>(sortFn: MapFn<[T, T], number>, xs: Array<T>): Array<T>
-}
-export declare const sortBy: {
-  <T, A>(sortFn: MapFn<[T], A>): (xs: Array<T>) => Array<T>
-  <T, A>(sortFn: MapFn<[T], A>, xs: Array<T>): Array<T>
-}
-export declare const makeEmpty: <T>() => Array<T>
-export declare const groupBy: {
-  <T>(fn: MapFn<[T], any>, xs: Array<T>): Record<string, Array<T>>
-  <T>(fn: MapFn<[T], any>): (xs: Array<T>) => Record<string, Array<T>>
-}
+export declare function length<A>(xs: ReadonlyArray<A>): number
+export declare function isEmpty<A>(xs: ReadonlyArray<A>): boolean
+export declare function isNotEmpty<A>(xs: ReadonlyArray<A>): boolean
+export declare function reverse<A>(xs: ReadonlyArray<A>): ReadonlyArray<A>
+export declare function prepend<A>(xs: ReadonlyArray<A>, element: A): ReadonlyArray<A>
+export declare function prepend<A>(element: A): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+export declare function append<A>(xs: ReadonlyArray<A>, element: A): ReadonlyArray<A>
+export declare function append<A>(element: A): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+export declare function get<A>(xs: ReadonlyArray<A>, index: number): Option<A>
+export declare function get<A>(index: number): (xs: ReadonlyArray<A>) => Option<A>
+export declare function at<A>(xs: ReadonlyArray<A>, index: number): Option<A>
+export declare function at<A>(index: number): (xs: ReadonlyArray<A>) => Option<A>
+export declare function getBy<A>(xs: ReadonlyArray<A>, predicateFn: (_1: A) => boolean): Option<A>
+export declare function getBy<A>(
+  predicateFn: (_1: A) => boolean,
+): (xs: ReadonlyArray<A>) => Option<A>
+export declare function find<A>(xs: ReadonlyArray<A>, predicateFn: (_1: A) => boolean): Option<A>
+export declare function find<A>(
+  predicateFn: (_1: A) => boolean,
+): (xs: ReadonlyArray<A>) => Option<A>
+export declare function head<A>(xs: ReadonlyArray<A>): Option<A>
+export declare function tail<A>(xs: ReadonlyArray<A>): Option<ReadonlyArray<A>>
+export declare function tailOrEmpty<A>(xs: ReadonlyArray<A>): ReadonlyArray<A>
+export declare function take<A>(xs: ReadonlyArray<A>, offset: number): ReadonlyArray<A>
+export declare function take<A>(offset: number): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+export declare function takeExactly<A>(
+  xs: ReadonlyArray<A>,
+  offset: number,
+): Option<ReadonlyArray<A>>
+export declare function takeExactly<A>(
+  offset: number,
+): (xs: ReadonlyArray<A>) => Option<ReadonlyArray<A>>
+export declare function takeWhile<A>(
+  xs: ReadonlyArray<A>,
+  predicateFn: (_1: A) => boolean,
+): ReadonlyArray<A>
+export declare function takeWhile<A>(
+  predicateFn: (_1: A) => boolean,
+): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+export declare function drop<A>(xs: ReadonlyArray<A>, offset: number): ReadonlyArray<A>
+export declare function drop<A>(offset: number): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+export declare function dropExactly<A>(
+  xs: ReadonlyArray<A>,
+  offset: number,
+): Option<ReadonlyArray<A>>
+export declare function dropExactly<A>(
+  offset: number,
+): (xs: ReadonlyArray<A>) => Option<ReadonlyArray<A>>
+export declare function dropWhile<A>(
+  xs: ReadonlyArray<A>,
+  predicateFn: (_1: A) => boolean,
+): ReadonlyArray<A>
+export declare function dropWhile<A>(
+  predicateFn: (_1: A) => boolean,
+): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+export declare function uncons<A>(xs: ReadonlyArray<A>): Option<[A, ReadonlyArray<A>]>
+export declare function splitAt<A>(
+  xs: ReadonlyArray<A>,
+  offset: number,
+): Option<[ReadonlyArray<A>, ReadonlyArray<A>]>
+export declare function splitAt<A>(
+  offset: number,
+): (xs: ReadonlyArray<A>) => Option<[ReadonlyArray<A>, ReadonlyArray<A>]>
+export declare function splitEvery<A>(xs: ReadonlyArray<A>, offset: number): Array<ReadonlyArray<A>>
+export declare function splitEvery<A>(
+  offset: number,
+): (xs: ReadonlyArray<A>) => Array<ReadonlyArray<A>>
+export declare function shuffle<A>(xs: ReadonlyArray<A>): ReadonlyArray<A>
+export declare function repeat<A>(n: number, element: A): ReadonlyArray<A>
+export declare function repeat<A>(element: A): (n: number) => ReadonlyArray<A>
+export declare function makeWithIndex<A>(n: number, mapFn: (_1: number) => A): ReadonlyArray<A>
+export declare function makeWithIndex<A>(mapFn: (_1: number) => A): (n: number) => ReadonlyArray<A>
+export declare function map<A, B>(xs: ReadonlyArray<A>, mapFn: (_1: A) => B): ReadonlyArray<B>
+export declare function map<A, B>(mapFn: (_1: A) => B): (xs: ReadonlyArray<A>) => ReadonlyArray<B>
+export declare function mapWithIndex<A, B>(
+  xs: ReadonlyArray<A>,
+  mapFn: (_1: A, _2: number) => B,
+): ReadonlyArray<B>
+export declare function mapWithIndex<A, B>(
+  mapFn: (_1: A, _2: number) => B,
+): (xs: ReadonlyArray<A>) => ReadonlyArray<B>
+export declare function filter<A>(
+  xs: ReadonlyArray<A>,
+  predicateFn: (_1: A) => boolean,
+): ReadonlyArray<A>
+export declare function filter<A>(
+  predicateFn: (_1: A) => boolean,
+): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+export declare function filterWithIndex<A>(
+  xs: ReadonlyArray<A>,
+  predicateFn: (_1: A, _2: number) => boolean,
+): ReadonlyArray<A>
+export declare function filterWithIndex<A>(
+  predicateFn: (_1: A, _2: number) => boolean,
+): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+export declare function reject<A>(
+  xs: ReadonlyArray<A>,
+  predicateFn: (_1: A) => boolean,
+): ReadonlyArray<A>
+export declare function reject<A>(
+  predicateFn: (_1: A) => boolean,
+): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+export declare function rejectWithIndex<A>(
+  xs: ReadonlyArray<A>,
+  predicateFn: (_1: A, _2: number) => boolean,
+): ReadonlyArray<A>
+export declare function rejectWithIndex<A>(
+  predicateFn: (_1: A, _2: number) => boolean,
+): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+export declare function initOrEmpty<A>(xs: ReadonlyArray<A>): ReadonlyArray<A>
+export declare function last<A>(xs: ReadonlyArray<A>): Option<A>
+export declare function partition<A>(
+  xs: ReadonlyArray<A>,
+  fn: (_1: A) => boolean,
+): [ReadonlyArray<A>, ReadonlyArray<A>]
+export declare function partition<A>(
+  fn: (_1: A) => boolean,
+): (xs: ReadonlyArray<A>) => [ReadonlyArray<A>, ReadonlyArray<A>]
+export declare function concat<A>(xs0: ReadonlyArray<A>, xs1: ReadonlyArray<A>): ReadonlyArray<A>
+export declare function concat<A>(
+  xs1: ReadonlyArray<A>,
+): (xs0: ReadonlyArray<A>) => ReadonlyArray<A>
+export declare function concatMany<A>(xs: Array<ReadonlyArray<A>>): ReadonlyArray<A>
+export declare function every<A>(xs: ReadonlyArray<A>, fn: (_1: A) => boolean): boolean
+export declare function every<A>(fn: (_1: A) => boolean): (xs: ReadonlyArray<A>) => boolean
+export declare function some<A>(xs: ReadonlyArray<A>, fn: (_1: A) => boolean): boolean
+export declare function some<A>(fn: (_1: A) => boolean): (xs: ReadonlyArray<A>) => boolean
+export declare function slice<A>(
+  xs: ReadonlyArray<A>,
+  offset: number,
+  len: number,
+): ReadonlyArray<A>
+export declare function slice<A>(
+  offset: number,
+  len: number,
+): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+export declare function sliceToEnd<A>(xs: ReadonlyArray<A>, offset: number): ReadonlyArray<A>
+export declare function sliceToEnd<A>(offset: number): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+
+export declare function eq<A>(
+  xs0: ReadonlyArray<A>,
+  xs1: ReadonlyArray<A>,
+  comparatorFn: (_1: A, _2: A) => boolean,
+): boolean
+
+export declare function eq<A>(
+  xs1: ReadonlyArray<A>,
+  comparatorFn: (_1: A, _2: A) => boolean,
+): (xs0: ReadonlyArray<A>) => boolean
+export declare function range(start: number, length: number): number[]
+export declare function range(length: number): (start: number) => number[]
+export declare function rangeBy(start: number, length: number, step: number): number[]
+export declare function rangeBy(length: number, step: number): (start: number) => number[]
+export declare function reduce<A, B>(xs: ReadonlyArray<A>, acc: B, reduceFn: (_1: B, _2: A) => B): B
+export declare function reduce<A, B>(
+  acc: B,
+  reduceFn: (_1: B, _2: A) => B,
+): (xs: ReadonlyArray<A>) => B
+export declare function reduceWithIndex<A, B>(
+  xs: ReadonlyArray<A>,
+  acc: B,
+  reduceFn: (_1: B, _2: A, _3: number) => B,
+): B
+export declare function reduceWithIndex<A, B>(
+  acc: B,
+  reduceFn: (_1: B, _2: A, _3: number) => B,
+): (xs: ReadonlyArray<A>) => B
+export declare function copy<A>(xs: ReadonlyArray<A>): ReadonlyArray<A>
+export declare function zip<A, B>(xs0: ReadonlyArray<A>, xs1: ReadonlyArray<B>): Array<[A, B]>
+export declare function zip<A, B>(xs1: ReadonlyArray<B>): (xs0: ReadonlyArray<A>) => Array<[A, B]>
+export declare function zipWith<A, B, C>(
+  xs0: ReadonlyArray<A>,
+  xs1: ReadonlyArray<B>,
+  zipFn: (_1: A, _2: B) => C,
+): ReadonlyArray<C>
+export declare function zipWith<A, B, C>(
+  xs1: ReadonlyArray<B>,
+  zipFn: (_1: A, _2: B) => C,
+): (xs0: ReadonlyArray<A>) => ReadonlyArray<C>
+export declare function unzip<A, B>(xs: Array<[A, B]>): [ReadonlyArray<A>, ReadonlyArray<B>]
+export declare function replaceAt<A>(
+  xs: ReadonlyArray<A>,
+  targetIndex: number,
+  element: A,
+): ReadonlyArray<A>
+export declare function replaceAt<A>(
+  targetIndex: number,
+  element: A,
+): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+export declare function insertAt<A>(
+  xs: ReadonlyArray<A>,
+  targetIndex: number,
+  element: A,
+): ReadonlyArray<A>
+export declare function insertAt<A>(
+  targetIndex: number,
+  element: A,
+): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+export declare function updateAt<A>(
+  targetIndex: number,
+  fn: (_1: A) => A,
+  xs: ReadonlyArray<A>,
+): ReadonlyArray<A>
+export declare function updateAt<A>(
+  fn: (_1: A) => A,
+  xs: ReadonlyArray<A>,
+): (targetIndex: number) => ReadonlyArray<A>
+export declare function swapAt<A>(
+  xs: ReadonlyArray<A>,
+  targetIndex: number,
+  swapIndex: number,
+): ReadonlyArray<A>
+export declare function swapAt<A>(
+  targetIndex: number,
+  swapIndex: number,
+): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+export declare function removeAt<A>(xs: ReadonlyArray<A>, targetIndex: number): ReadonlyArray<A>
+export declare function removeAt<A>(targetIndex: number): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+export declare function uniqBy<A>(xs: ReadonlyArray<A>, predicateFn: (_1: A) => A): ReadonlyArray<A>
+export declare function uniqBy<A>(
+  predicateFn: (_1: A) => A,
+): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+export declare function uniq<A>(xs: ReadonlyArray<A>): ReadonlyArray<A>
+export declare function forEach<A>(xs: ReadonlyArray<A>, fn: (_1: A) => void): void
+export declare function forEach<A>(fn: (_1: A) => void): (xs: ReadonlyArray<A>) => void
+export declare function forEachWithIndex<A>(
+  xs: ReadonlyArray<A>,
+  fn: (_1: number, _2: A) => void,
+): void
+export declare function forEachWithIndex<A>(
+  fn: (_1: number, _2: A) => void,
+): (xs: ReadonlyArray<A>) => void
+export declare function getIndexBy<A>(
+  xs: ReadonlyArray<A>,
+  predicateFn: (_1: A) => boolean,
+): Option<number>
+export declare function getIndexBy<A>(
+  predicateFn: (_1: A) => boolean,
+): (xs: ReadonlyArray<A>) => Option<number>
+export declare function includes<A>(xs: ReadonlyArray<A>, element: A): boolean
+export declare function includes<A>(element: A): (xs: ReadonlyArray<A>) => boolean
+export declare function join<A>(xs: ReadonlyArray<A>, delimiter: string): string
+export declare function join<A>(delimiter: string): (xs: ReadonlyArray<A>) => string
+export declare function sort<A>(
+  xs: ReadonlyArray<A>,
+  sortFn: (_1: A, _2: A) => number,
+): ReadonlyArray<A>
+export declare function sort<A>(
+  sortFn: (_1: A, _2: A) => number,
+): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+export declare function sortBy<A, B>(xs: ReadonlyArray<A>, sortFn: (_1: A) => B): ReadonlyArray<A>
+export declare function sortBy<A, B>(
+  sortFn: (_1: A) => B,
+): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+export declare function makeEmpty<A>(): ReadonlyArray<A>
+export declare function groupBy<T>(
+  xs: ReadonlyArray<T>,
+  groupFn: (value: T) => any,
+): Record<string, ReadonlyArray<T>>
+export declare function groupBy<T>(
+  groupFn: (value: T) => any,
+): (xs: ReadonlyArray<T>) => Record<string, ReadonlyArray<T>>
+export declare function flat<T>(
+  xs: ReadonlyArray<T>,
+): ReadonlyArray<T extends ReadonlyArray<infer K> ? K : T>
+export declare function deepFlat<T>(xs: ReadonlyArray<T>): ReadonlyArray<ExtractNested<T>>

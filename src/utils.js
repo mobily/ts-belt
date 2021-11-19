@@ -1,41 +1,33 @@
-export const __2 = fn => {
-  return function curry(arg0, arg1) {
-    if (arguments.length === 1) {
-      return arg => curry(arg0, arg)
+export function t(fn, args) {
+  if (fn.length - args.length === 0) {
+    switch (args.length) {
+      case 1:
+        return fn(args[0])
+      case 2:
+        return fn(args[0], args[1])
+      case 3:
+        return fn(args[0], args[1], args[2])
+      default:
+        throw new Error('invalid number of arguments')
     }
-
-    return fn(arg0, arg1)
+  } else if (fn.length - args.length === 1) {
+    switch (args.length) {
+      case 1:
+        return function(data) {
+          return fn(data, args[0])
+        }
+      case 2:
+        return function(data) {
+          return fn(data, args[0], args[1])
+        }
+      case 3:
+        return function(data) {
+          return fn(data, args[0], args[1], args[2])
+        }
+      default:
+        throw new Error('invalid number of arguments')
+    }
   }
-}
 
-export const __3 = fn => {
-  return function curry(arg0, arg1, arg2) {
-    if (arguments.length === 1) {
-      return x => curry(arg0, x)
-    }
-
-    if (arguments.length === 2) {
-      return y => curry(arg0, arg1, y)
-    }
-
-    return fn(arg0, arg1, arg2)
-  }
-}
-
-export const __4 = fn => {
-  return function curry(arg0, arg1, arg2, arg3) {
-    if (arguments.length === 1) {
-      return x => curry(arg0, x)
-    }
-
-    if (arguments.length === 2) {
-      return y => curry(arg0, arg1, y)
-    }
-
-    if (arguments.length === 3) {
-      return z => curry(arg0, arg1, arg2, z)
-    }
-
-    return fn(arg0, arg1, arg2, arg3)
-  }
+  throw new Error('invalid number of arguments')
 }

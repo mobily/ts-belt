@@ -1,9 +1,11 @@
 #!/usr/bin/env sh
 
+yarn clean
 yarn re:clean
 yarn re:build
-yarn clean
+yarn transform:js
+yarn generate:ts
 yarn esbuild
 yarn tsc
-yarn generate:flow
-yarn test
+# yarn generate:flow
+# yarn test

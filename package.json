@@ -1,7 +1,7 @@
 {
   "name": "@mobily/ts-belt",
   "description": "🔧 TS Belt is a library for functional programming in TypeScript. It implements Result and Option monads and other various helpers. Based on Belt and Relude (ReScript/Reason).",
-  "version": "2.0.0-rc.18",
+  "version": "3.0.0",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/types/src",
@@ -28,7 +28,9 @@
     "re:clean": "yarn bsb -clean-world",
     "re:build": "yarn bsb -make-world",
     "re:dev": "yarn bsb -make-world -w",
+    "generate:ts": "bash ./scripts/generate-ts.sh",
     "generate:flow": "node ./scripts/generate-flow-files.js",
+    "transform:js": "bash ./scripts/transform-files.sh",
     "generate:contributors": "yarn all-contributors generate"
   },
   "engines": {
@@ -58,6 +60,7 @@
   },
   "devDependencies": {
     "@types/jest": "^26.0.23",
+    "@types/jscodeshift": "^0.11.2",
     "all-contributors-cli": "^6.20.0",
     "bs-platform": "^9.0.2",
     "coveralls": "^3.1.0",
@@ -69,7 +72,8 @@
     "jest": "^26.6.3",
     "jscodeshift": "^0.12.0",
     "minimatch": "^3.0.4",
-    "prettier": "^2.2.0",
+    "prettier": "^2.4.1",
+    "ts-expect": "^1.3.0",
     "ts-jest": "^26.5.5",
     "tsd": "^0.14.0",
     "typescript": "^4.2.4",
@@ -77,5 +81,6 @@
   },
   "cacheDirectories": [
     "node_modules"
-  ]
+  ],
+  "dependencies": {}
 }

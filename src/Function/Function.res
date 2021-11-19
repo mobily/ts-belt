@@ -1,17 +1,48 @@
+@gentype
 let identity = value => value
-let equals = (x, y) => y == x
-let both = (fn0, fn1, value) => fn0(value) && fn1(value)
-let either = (fn0, fn1, value) => fn0(value) || fn1(value)
+
+@gentype
+let equals = (fst, snd) => fst == snd
+
+@gentype
+let both = (value, fn0, fn1) => fn0(value) && fn1(value)
+
+@gentype
+let either = (value, fn0, fn1) => fn0(value) || fn1(value)
+
+@gentype
 let always = (value, . ()) => value
-let defaultTo = (defaultValue, value) => Js.Nullable.isNullable(value) ? defaultValue : value
+
+@gentype
+let defaultTo = (value, defaultValue) => Js.Nullable.isNullable(value) ? defaultValue : value
+
+@gentype
 let falsy = always(false)
+
+@gentype
 let truthy = always(true)
-let ifElse = (predicateFn, trueFn, falseFn, value) =>
-  predicateFn(value) ? trueFn(value) : falseFn(value)
+
+@gentype
+let ifElse = (value, predicateFn, truthyFn, falsyFn) =>
+  predicateFn(value) ? truthyFn(value) : falsyFn(value)
+
+@gentype
 let ignore = () => ()
-let unless = (predicateFn, falseFn, value) => !predicateFn(value) ? falseFn(value) : value
-let when_ = (predicateFn, trueFn, value) => predicateFn(value) ? trueFn(value) : value
-let allPass = (fns, value) => Belt.Array.everyU(fns, (. fn) => fn(value))
-let anyPass = (fns, value) => Belt.Array.someU(fns, (. fn) => fn(value))
-let pred = pred
-let succ = succ
+
+@gentype
+let unless = (value, predicateFn, falsyFn) => !predicateFn(value) ? falsyFn(value) : value
+
+@gentype
+let when_ = (value, predicateFn, truthyFn) => predicateFn(value) ? truthyFn(value) : value
+
+@gentype
+let allPass = (value, fns) => Belt.Array.everyU(fns, (. fn) => fn(value))
+
+@gentype
+let anyPass = (value, fns) => Belt.Array.someU(fns, (. fn) => fn(value))
+
+@gentype
+let pred = n => pred(n)
+
+@gentype
+let succ = n => succ(n)

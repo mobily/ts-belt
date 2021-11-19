@@ -1,35 +1,18 @@
-import type { Array } from '../types'
-
-export declare const length: (str: string) => number
-export declare const head: (str: string) => string
-export declare const slice: {
-  (from: number): (to: number) => (str: string) => string
-  (from: number, to: number): (str: string) => string
-  (from: number, to: number, str: string): string
-}
-export declare const sliceToEnd: {
-  (from: number): (str: string) => string
-  (from: number, str: string): string
-}
-export declare const toLowerCase: (str: string) => string
-export declare const toUpperCase: (str: string) => string
-export declare const trim: (str: string) => string
-export declare const isEmpty: (str: string) => boolean
-export declare const split: {
-  (delimiter: string): (str: string) => Array<string>
-  (delimiter: string, str: string): Array<string>
-}
-export declare const includes: {
-  (value: string): (str: string) => boolean
-  (value: string, str: string): boolean
-}
-export declare const replace: {
-  (oldValue: string): (newValue: string) => (str: string) => string
-  (oldValue: string, newValue: string): (str: string) => string
-  (oldValue: string, newValue: string, str: string): string
-}
-export declare const replaceByRe: {
-  (regex: RegExp): (value: string) => (str: string) => string
-  (regex: RegExp, value: string): (str: string) => string
-  (regex: RegExp, value: string, str: string): string
-}
+export declare function length(str: string): number
+export declare function head(str: string): string
+export declare function slice(str: string, start: number, end: number): string
+export declare function slice(start: number, end: number): (str: string) => string
+export declare function sliceToEnd(str: string, start: number): string
+export declare function sliceToEnd(start: number): (str: string) => string
+export declare function toLowerCase(str: string): string
+export declare function toUpperCase(str: string): string
+export declare function trim(str: string): string
+export declare function isEmpty(str: string): boolean
+export declare function split(str: string, delimiter: string): string[]
+export declare function split(delimiter: string): (str: string) => string[]
+export declare function includes(str: string, value: string): boolean
+export declare function includes(value: string): (str: string) => boolean
+export declare function replace(str: string, oldValue: string, newValue: string): string
+export declare function replace(oldValue: string, newValue: string): (str: string) => string
+export declare function replaceByRe(str: string, regex: RegExp, value: string): string
+export declare function replaceByRe(regex: RegExp, value: string): (str: string) => string

@@ -19,3 +19,5 @@ playground/
 
 *.bs.js
 *.gen.tsx
+
+./src/**/index.ts

@@ -1,47 +1,51 @@
-import type { Array, MapFn, PredicateFn, EmptyObject } from '../types'
-
-export declare const makeEmpty: {
-  <T>(): T
-  <K extends string, T>(): Record<K, T>
-}
-export declare const prop: {
-  <T, K extends keyof T>(key: K): (obj: T) => T[K]
-  <T, K extends keyof T>(key: K, obj: T): T[K]
-}
-export declare const values: <T extends string | number, X>(obj: Record<T, X>) => Array<X>
-export declare const keys: <T extends Record<string, unknown>>(obj: T) => Array<keyof T>
-export declare const merge: {
-  <A>(fst: A): <B>(snd: B) => A & B
-  <A, B>(fst: A, snd: B): A & B
-}
-export declare const map: {
-  <T extends EmptyObject, R>(mapFn: MapFn<[T[keyof T]], R>): (dict: T) => Record<keyof T, R>
-  <T extends EmptyObject, R>(mapFn: MapFn<[T[keyof T]], R>, dict: T): Record<keyof T, R>
-}
-export declare const mapWithKey: {
-  <T extends EmptyObject, R>(mapFn: MapFn<[T[keyof T], keyof T], R>): (
-    dict: T,
-  ) => Record<keyof T, R>
-  <T extends EmptyObject, R>(mapFn: MapFn<[T[keyof T], keyof T], R>, dict: T): Record<keyof T, R>
-}
-export declare const filter: {
-  <T extends EmptyObject>(predicateFn: PredicateFn<[T[keyof T]]>): (dict: T) => Partial<T>
-  <T extends EmptyObject>(predicateFn: PredicateFn<[T[keyof T]]>, dict: T): Partial<T>
-}
-export declare const filterWithKey: {
-  <T extends EmptyObject>(predicateFn: PredicateFn<[T[keyof T], keyof T]>): (dict: T) => Partial<T>
-  <T extends EmptyObject>(predicateFn: PredicateFn<[T[keyof T], keyof T]>, dict: T): Partial<T>
-}
-export declare const reject: {
-  <T extends EmptyObject>(predicateFn: PredicateFn<[T[keyof T]]>): (dict: T) => Partial<T>
-  <T extends EmptyObject>(predicateFn: PredicateFn<[T[keyof T]]>, dict: T): Partial<T>
-}
-export declare const rejectWithKey: {
-  <T extends EmptyObject>(predicateFn: PredicateFn<[T[keyof T], keyof T]>): (dict: T) => Partial<T>
-  <T extends EmptyObject>(predicateFn: PredicateFn<[T[keyof T], keyof T]>, dict: T): Partial<T>
-}
-export declare const fromPairs: {
-  <T>(xs: Array<readonly [string, T]>): Record<string, T>
-  <T>(xs: Array<readonly [number, T]>): Record<number, T>
-}
-export declare const toPairs: <T>(dict: Record<string, T>) => Array<readonly [string, T]>
+export declare function makeEmpty<T>(): T
+export declare function prop<T, K extends keyof T>(dict: T, key: K): T[K]
+export declare function prop<T, K extends keyof T>(key: K): (dict: T) => T[K]
+export declare function toPairs<T>(dict: Record<string, T>): ReadonlyArray<readonly [string, T]>
+export declare function values<T extends string | number, R>(dict: Record<T, R>): ReadonlyArray<R>
+export declare function keys<T extends Record<string, unknown>>(dict: T): ReadonlyArray<keyof T>
+export declare function fromPairs<T>(xs: ReadonlyArray<readonly [number, T]>): Record<number, T>
+export declare function merge<A, B>(fst: A, snd: B): A & B
+export declare function merge<A, B>(snd: B): (fst: A) => A & B
+export declare function map<T extends Record<string, any>, R>(
+  dict: T,
+  mapFn: (value: T[keyof T]) => R,
+): Record<keyof T, R>
+export declare function map<T extends Record<string, any>, R>(
+  mapFn: (value: T[keyof T]) => R,
+): (dict: T) => Record<keyof T, R>
+export declare function mapWithKey<T extends Record<string, any>, R>(
+  dict: T,
+  mapFn: (value: T[keyof T], key: keyof T) => R,
+): Record<keyof T, R>
+export declare function mapWithKey<T extends Record<string, any>, R>(
+  mapFn: (value: T[keyof T], key: keyof T) => R,
+): (dict: T) => Record<keyof T, R>
+export declare function filter<T extends Record<string, any>>(
+  dict: T,
+  predicateFn: (value: T[keyof T]) => boolean,
+): Partial<T>
+export declare function filter<T extends Record<string, any>>(
+  predicateFn: (value: T[keyof T]) => boolean,
+): (dict: T) => Partial<T>
+export declare function filterWithKey<T extends Record<string, any>>(
+  dict: T,
+  predicateFn: (value: T[keyof T], key: keyof T) => boolean,
+): Partial<T>
+export declare function filterWithKey<T extends Record<string, any>>(
+  predicateFn: (value: T[keyof T], key: keyof T) => boolean,
+): (dict: T) => Partial<T>
+export declare function reject<T extends Record<string, any>>(
+  dict: T,
+  predicateFn: (value: T[keyof T]) => boolean,
+): Partial<T>
+export declare function reject<T extends Record<string, any>>(
+  predicateFn: (value: T[keyof T]) => boolean,
+): (dict: T) => Partial<T>
+export declare function rejectWithKey<T extends Record<string, any>>(
+  dict: T,
+  predicateFn: (value: T[keyof T], key: keyof T) => boolean,
+): Partial<T>
+export declare function rejectWithKey<T extends Record<string, any>>(
+  predicateFn: (value: T[keyof T], key: keyof T) => boolean,
+): (dict: T) => Partial<T>

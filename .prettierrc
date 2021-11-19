@@ -3,6 +3,6 @@
   "semi": false,
   "singleQuote": true,
   "trailingComma": "all",
-  "printWidth": 100,
-  "arrowParens": "avoid"
+  "arrowParens": "avoid",
+  "printWidth": 100
 }

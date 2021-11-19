@@ -29,6 +29,16 @@
 
 ## Features
 
+- better type inference because of the `data-first` implementation
+- built on top of ReScript (interesting combination, isn't it?), which automatically generates most of TS signatures and performant JS code
+
+- benchmark results are various, but in general `ts-belt` always takes either the first or second place (remeda/rambda/ramda/lodash-fp), and especially comparing to `remeda`, which also follows the `data-first` approach, `ts-belt` is much faster, you can find the benchmarks results here
+- `ts-belt` provides `Option` and `Result` implementation instead of `null` and `undefined` (get rid of them in your project!)
+- high tests coverage
+- lightweight, no external dependencies
+- tree-shakeable
+- fully documented
+
 - [lightweight](https://bundlephobia.com/result?p=@mobily/ts-belt), no dependencies
 - type safety, full TypeScript support
 - high tests coverage
@@ -49,7 +59,7 @@ npm install @mobily/ts-belt --save
 
 ## Api Reference
 
-Full documentation is available [here](https://mobily.github.io/ts-belt/).
+Full documentation can be found [here](https://mobily.github.io/ts-belt/).
 
 ## Contributors
 

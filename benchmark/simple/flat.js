@@ -1,0 +1,72 @@
+const {
+  makeBenchmark,
+  addTsBelt,
+  addLodashFp,
+  addRambda,
+  addRamda,
+  addRemeda,
+} = require('../utils')
+
+const input = [[1, 2], 3, [4, 5], [5, [6, [7, 8]]], 9]
+
+module.exports = makeBenchmark(
+  'flat',
+  addTsBelt(tsBelt => {
+    const { A, pipe } = tsBelt
+
+    return [
+      () => {
+        return A.flat(input)
+      },
+      () => {
+        return pipe(input, A.flat)
+      },
+    ]
+  }),
+  addRemeda(remeda => {
+    const { pipe, flatten } = remeda
+
+    return [
+      () => {
+        return flatten(input)
+      },
+      () => {
+        return pipe(input, flatten())
+      },
+    ]
+  }),
+  addRamda(ramda => {
+    const { pipe, flatten } = ramda
+
+    return [
+      () => {
+        return flatten(input)
+      },
+      () => {
+        return pipe(flatten)(input)
+      },
+    ]
+  }),
+  addRambda(rambda => {
+    const { pipe, flatten } = rambda
+
+    return [
+      () => {
+        return flatten(input)
+      },
+      () => {
+        return pipe(flatten)(input)
+      },
+    ]
+  }),
+  addLodashFp(_ => {
+    return [
+      () => {
+        return _.flatten(input)
+      },
+      () => {
+        return _.pipe(_.flatten)(input)
+      },
+    ]
+  }),
+)

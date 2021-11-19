@@ -18,8 +18,8 @@
     "skipLibCheck": true
   },
   "exclude": [
-    "./example/**/*",
-    "./__tests__/**/*",
-    "./playground"
+    "./codemods/**/*",
+    "./src/**/*.gen.tsx",
+    "./__tests__/**/*"
   ]
 }
