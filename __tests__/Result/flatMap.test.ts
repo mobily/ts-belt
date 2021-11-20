@@ -4,21 +4,21 @@ describe('flatMap', () => {
   it('should return Error', () => {
     expect(
       pipe(
-        R.fromNullable('this is bad', 'value'),
+        R.fromNullable('value', 'this is bad'),
         R.flatMap(_ => R.Error('new error')),
       ),
     ).toBeError('new error')
 
     expect(
       pipe(
-        R.fromNullable('this is bad', null),
+        R.fromNullable(null, 'this is bad'),
         R.flatMap(_ => R.Error('new error')),
       ),
     ).toBeError('this is bad')
 
     expect(
       pipe(
-        R.fromNullable('this is bad', null),
+        R.fromNullable(null, 'this is bad'),
         R.flatMap(_ => R.Ok(1)),
       ),
     ).toBeError('this is bad')
@@ -27,7 +27,7 @@ describe('flatMap', () => {
   it('should return Ok', () => {
     expect(
       pipe(
-        R.fromNullable('error', 2),
+        R.fromNullable(2, 'error'),
         R.flatMap(value => R.Ok(value ** 2)),
       ),
     ).toBeOk(4)

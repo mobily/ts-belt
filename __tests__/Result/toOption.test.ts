@@ -2,17 +2,17 @@ import { pipe, R } from '../..'
 
 describe('toOption', () => {
   it('should return None', () => {
-    expect(pipe(R.fromNullable('this is bad', null), R.toOption)).toBeNone()
+    expect(pipe(R.fromNullable(null, 'this is bad'), R.toOption)).toBeNone()
     expect(
       pipe(
-        R.fromNullable('this is bad', 'value'),
+        R.fromNullable('value', 'this is bad'),
         R.flatMap(_ => R.Error('new error')),
         R.toOption,
       ),
     ).toBeNone()
     expect(
       pipe(
-        R.fromNullable('this is bad', null),
+        R.fromNullable(null, 'this is bad'),
         R.flatMap(_ => R.Ok('this is fine')),
         R.toOption,
       ),
@@ -21,10 +21,10 @@ describe('toOption', () => {
 
   it('should return Some', () => {
     expect(pipe(R.Ok('value'), R.toOption)).toBeSome('value')
-    expect(pipe(R.fromNullable('this is bad', 'value'), R.toOption)).toBeSome('value')
+    expect(pipe(R.fromNullable('value', 'this is bad'), R.toOption)).toBeSome('value')
     expect(
       pipe(
-        R.fromNullable('this is bad', 'this is fine'),
+        R.fromNullable('this is fine', 'this is bad'),
         R.flatMap(str => R.Ok(`${str}!`)),
         R.toOption,
       ),

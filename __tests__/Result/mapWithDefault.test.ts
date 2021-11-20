@@ -4,7 +4,7 @@ describe('mapWithDefault', () => {
   it('should return a default value', () => {
     expect(
       pipe(
-        R.fromNullable('this is bad', null),
+        R.fromNullable(null, 'this is bad'),
         R.mapWithDefault('default value', _ => 'value'),
       ),
     ).toEqual('default value')
@@ -13,7 +13,7 @@ describe('mapWithDefault', () => {
   it('should skip a default value', () => {
     expect(
       pipe(
-        R.fromNullable('this is bad', [1, 2, 3]),
+        R.fromNullable([1, 2, 3], 'this is bad'),
         R.mapWithDefault(0, arr => {
           const [fst] = arr
           return fst

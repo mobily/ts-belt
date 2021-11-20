@@ -8,17 +8,16 @@ let fromFalsy = value => value ? Some(value) : None
 let fromPredicate = (value, predicateFn) => predicateFn(value) ? fromNullable(value) : None
 
 @gentype
-let map = (option, mapFn) => Belt.Option.mapU(option, mapFn)
+let map = Belt.Option.mapU
 
 @gentype
-let flatMap = (option, mapFn) => Belt.Option.flatMapU(option, mapFn)
+let flatMap = Belt.Option.flatMapU
 
 @gentype
-let mapWithDefault = (option, defaultValue, mapFn) =>
-  Belt.Option.mapWithDefaultU(option, defaultValue, mapFn)
+let mapWithDefault = Belt.Option.mapWithDefaultU
 
 @gentype
-let mapNullable = (mapFn, option) =>
+let mapNullable = (option, mapFn) =>
   switch option {
   | Some(value) => fromNullable(mapFn(value))
   | None => None
@@ -29,16 +28,16 @@ let filter = (option, predicateFn) =>
   Belt.Option.flatMapU(option, (. value) => predicateFn(value) ? Some(value) : None)
 
 @gentype
-let getWithDefault = (option, defaultValue) => Belt.Option.getWithDefault(option, defaultValue)
+let getWithDefault = Belt.Option.getWithDefault
 
 @gentype
 let getExn = Belt.Option.getExn
 
 @gentype
-let toNullable = option => Belt.Option.getWithDefault(option, Js.null)
+let toNullable = option => getWithDefault(option, Js.null)
 
 @gentype
-let toUndefined = option => Belt.Option.getWithDefault(option, Js.undefined)
+let toUndefined = option => getWithDefault(option, Js.undefined)
 
 @gentype
 let toResult = (option, error) =>
@@ -46,6 +45,7 @@ let toResult = (option, error) =>
   | Some(value) => Belt.Result.Ok(value)
   | None => Belt.Result.Error(error)
   }
+
 @gentype
 let match = (option, someFn, noneFn) =>
   switch option {
@@ -54,7 +54,7 @@ let match = (option, someFn, noneFn) =>
   }
 
 @gentype
-let isNone = option => Belt.Option.isNone(option)
+let isNone = Belt.Option.isNone
 
 @gentype
-let isSome = option => Belt.Option.isSome(option)
+let isSome = Belt.Option.isSome

@@ -2,17 +2,17 @@ import { R } from '../..'
 
 describe('fromNullable', () => {
   it('should return Error', () => {
-    expect(R.fromNullable('this is bad', null)).toBeError('this is bad')
-    expect(R.fromNullable('this is bad', undefined)).toBeError('this is bad')
+    expect(R.fromNullable(null, 'this is bad')).toBeError('this is bad')
+    expect(R.fromNullable(undefined, 'this is bad')).toBeError('this is bad')
   })
 
   it('should return Ok', () => {
-    expect(R.fromNullable('this is bad', 'value')).toBeOk('value')
-    expect(R.fromNullable('this is bad', [])).toBeOk([])
-    expect(R.fromNullable('this is bad', {})).toBeOk({})
-    expect(R.fromNullable('this is bad', 0)).toBeOk(0)
-    expect(R.fromNullable('this is bad', 1)).toBeOk(1)
-    expect(R.fromNullable('this is bad', false)).toBeOk(false)
-    expect(R.fromNullable('this is bad', true)).toBeOk(true)
+    expect(R.fromNullable('value', 'this is bad')).toBeOk('value')
+    expect(R.fromNullable([], 'this is bad')).toBeOk([])
+    expect(R.fromNullable({}, 'this is bad')).toBeOk({})
+    expect(R.fromNullable(0, 'this is bad')).toBeOk(0)
+    expect(R.fromNullable(1, 'this is bad')).toBeOk(1)
+    expect(R.fromNullable(false, 'this is bad')).toBeOk(false)
+    expect(R.fromNullable(true, 'this is bad')).toBeOk(true)
   })
 })

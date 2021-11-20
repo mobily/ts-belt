@@ -154,18 +154,24 @@ export declare function range(start: number, length: number): number[]
 export declare function range(length: number): (start: number) => number[]
 export declare function rangeBy(start: number, length: number, step: number): number[]
 export declare function rangeBy(length: number, step: number): (start: number) => number[]
-export declare function reduce<A, B>(xs: ReadonlyArray<A>, acc: B, reduceFn: (_1: B, _2: A) => B): B
 export declare function reduce<A, B>(
-  acc: B,
+  xs: ReadonlyArray<A>,
+  initialValue: B,
+  reduceFn: (_1: B, _2: A) => B,
+): B
+export declare function reduce<A, B>(
+  initialValue: B,
   reduceFn: (_1: B, _2: A) => B,
 ): (xs: ReadonlyArray<A>) => B
+
 export declare function reduceWithIndex<A, B>(
   xs: ReadonlyArray<A>,
-  acc: B,
+  initialValue: B,
   reduceFn: (_1: B, _2: A, _3: number) => B,
 ): B
+
 export declare function reduceWithIndex<A, B>(
-  acc: B,
+  initialValue: B,
   reduceFn: (_1: B, _2: A, _3: number) => B,
 ): (xs: ReadonlyArray<A>) => B
 export declare function copy<A>(xs: ReadonlyArray<A>): ReadonlyArray<A>

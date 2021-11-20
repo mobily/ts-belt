@@ -3,11 +3,11 @@ import { pipe, R } from '../..'
 describe('getExn', () => {
   it('should throw an error', () => {
     expect(() => {
-      pipe(R.fromNullable('this is bad', null), R.getExn)
+      pipe(R.fromNullable(null, 'this is bad'), R.getExn)
     }).toThrow(Object)
   })
 
   it('should return a value', () => {
-    expect(pipe(R.fromNullable('this is bad', 'value'), R.getExn)).toBe('value')
+    expect(pipe(R.fromNullable('value', 'this is bad'), R.getExn)).toBe('value')
   })
 })

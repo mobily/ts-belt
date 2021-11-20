@@ -1,15 +1,20 @@
-import { O } from '../..'
+import { O, A } from '../..'
 
 describe('fromPredicate', () => {
   it('should return None', () => {
-    expect(O.fromPredicate(str => str.length > 10, 'string')).toBeNone()
-    expect(O.fromPredicate(n => n !== 0, 0)).toBeNone()
-    expect(O.fromPredicate(state => !state, true)).toBeNone()
+    expect(O.fromPredicate('string', str => str.length > 10)).toBeNone()
+    expect(O.fromPredicate(0, n => n !== 0)).toBeNone()
+    expect(O.fromPredicate(true, state => !state)).toBeNone()
   })
 
   it('should return Some', () => {
-    expect(O.fromPredicate(arr => arr.some(x => x === 2), [1, 2, 3])).toBeSome([1, 2, 3])
-    expect(O.fromPredicate(obj => obj.prop === 'this is fine', { prop: 'this is fine' })).toBeSome({
+    expect(
+      O.fromPredicate(
+        [1, 2, 3],
+        A.some(x => x === 2),
+      ),
+    ).toBeSome([1, 2, 3])
+    expect(O.fromPredicate({ prop: 'this is fine' }, obj => obj.prop === 'this is fine')).toBeSome({
       prop: 'this is fine',
     })
   })

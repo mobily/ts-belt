@@ -3,33 +3,32 @@ let fromNullable = (value, error) =>
   Js.Nullable.isNullable(value) ? Belt.Result.Error(error) : Belt.Result.Ok(value)
 
 @gentype
-let fromFalsy = (value, error) => value ? Ok(error) : Error(value)
+let fromFalsy = (value, error) => value ? Ok(value) : Error(error)
 
 @gentype
 let fromPredicate = (value, predicateFn, error) =>
-  predicateFn(value) ? fromNullable(error, value) : Error(error)
+  predicateFn(value) ? fromNullable(value, error) : Error(error)
 
 @gentype
-let map = (result, mapFn) => Belt.Result.mapU(result, mapFn)
+let map = Belt.Result.mapU
 
 @gentype
-let mapWithDefault = (result, defaultValue, mapFn) =>
-  Belt.Result.mapWithDefaultU(result, defaultValue, mapFn)
+let mapWithDefault = Belt.Result.mapWithDefaultU
 
 @gentype
-let flatMap = (result, mapFn) => Belt.Result.flatMapU(result, mapFn)
+let flatMap = Belt.Result.flatMapU
 
 @gentype
-let getExn = result => Belt.Result.getExn(result)
+let getExn = Belt.Result.getExn
 
 @gentype
-let getWithDefault = (result, defaultValue) => Belt.Result.getWithDefault(result, defaultValue)
+let getWithDefault = Belt.Result.getWithDefault
 
 @gentype
-let toUndefined = result => Belt.Result.getWithDefault(result, Js.undefined)
+let toUndefined = result => getWithDefault(result, Js.undefined)
 
 @gentype
-let toNullable = result => Belt.Result.getWithDefault(result, Js.null)
+let toNullable = result => getWithDefault(result, Js.null)
 
 @gentype
 let toOption = result =>
@@ -46,7 +45,7 @@ let match = (result, okFn, errorFn) =>
   }
 
 @gentype
-let isError = result => Belt.Result.isError(result)
+let isError = Belt.Result.isError
 
 @gentype
-let isOk = result => Belt.Result.isOk(result)
+let isOk = Belt.Result.isOk

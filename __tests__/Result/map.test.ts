@@ -4,7 +4,7 @@ describe('map', () => {
   it('should return Error', () => {
     expect(
       pipe(
-        R.fromNullable('this is bad', null),
+        R.fromNullable(null, 'this is bad'),
         R.map(_ => 'string'),
       ),
     ).toBeError('this is bad')
@@ -13,7 +13,7 @@ describe('map', () => {
   it('should return Ok', () => {
     expect(
       pipe(
-        R.fromNullable('this is bad', [1, 2, 3]),
+        R.fromNullable([1, 2, 3], 'this is bad'),
         R.map(arr => {
           const [fst] = arr
           return fst

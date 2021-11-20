@@ -209,10 +209,11 @@ let range = (start, length) => Belt.Array.range(start, length)
 let rangeBy = (start, length, step) => Belt.Array.rangeBy(start, length, ~step)
 
 @gentype
-let reduce = (xs, acc, reduceFn) => Belt.Array.reduceU(xs, acc, reduceFn)
+let reduce = (xs, initialValue, reduceFn) => Belt.Array.reduceU(xs, initialValue, reduceFn)
 
 @gentype
-let reduceWithIndex = (xs, acc, reduceFn) => Belt.Array.reduceWithIndexU(xs, acc, reduceFn)
+let reduceWithIndex = (xs, initialValue, reduceFn) =>
+  Belt.Array.reduceWithIndexU(xs, initialValue, reduceFn)
 
 @gentype
 let copy = xs => Belt.Array.copy(xs)
