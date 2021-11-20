@@ -1,39 +1,14 @@
 const fs = require('fs')
 const path = require('path')
+const Benchr = require('benchr')
 
-const resolveFiles = (dir, arr) => {
-  const files = fs.readdirSync(path.resolve(__dirname, dir), { encoding: 'utf-8' })
-  return files
-    .filter(file => {
-      if (arr) {
-        return arr.some(suite => file.includes(suite))
-      }
-      return true
-    })
-    .map(file => require(`./${dir}/${file}`))
-}
+const files = process.argv.slice(2)
 
-const simple = resolveFiles('simple')
-const complex = resolveFiles('complex')
+const runner = new Benchr(
+  {
+    reporter: 'console',
+  },
+  files,
+)
 
-complex.forEach(test => {
-  suite(`${test.title} (single function call)`, () => {
-    test.arr.forEach(lib => {
-      benchmark(lib.label, lib.rawFn)
-    })
-  })
-})
-
-simple.forEach(test => {
-  suite(`${test.title} (single function call)`, () => {
-    test.arr.forEach(lib => {
-      benchmark(lib.label, lib.rawFn)
-    })
-  })
-
-  suite(`${test.title} (function call within pipe)`, () => {
-    test.arr.forEach(lib => {
-      benchmark(lib.label, lib.pipeFn)
-    })
-  })
-})
+runner.run()

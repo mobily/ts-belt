@@ -7,10 +7,6 @@ const transformer = (file: FileInfo, api: API) => {
   const j = api.jscodeshift
   const root = j(file.source)
   const exportedFunctions = []
-  const isImportNeeded = {
-    current: false,
-  }
-  const dataFirstIdentifier = j.identifier('t')
 
   const readExternalFunction = (
     module: string,
@@ -58,6 +54,66 @@ const transformer = (file: FileInfo, api: API) => {
     }
   }
 
+  const makeDataFirst = (functionDeclaration: FunctionDeclaration, name?: string) => {
+    const n = name ?? functionDeclaration.id.name
+    const id = `_${n}`
+
+    const dataFirst = j.functionDeclaration(
+      j.identifier(n),
+      [],
+      j.blockStatement([
+        j.ifStatement(
+          j.binaryExpression(
+            '===',
+            j.memberExpression(j.identifier('arguments'), j.identifier('length')),
+            j.numericLiteral(functionDeclaration.params.length - 1),
+          ),
+          j.blockStatement([
+            j.variableDeclaration('const', [
+              j.variableDeclarator(j.identifier('args'), j.identifier('arguments')),
+            ]),
+            j.returnStatement(
+              j.functionExpression(
+                j.identifier('fn'),
+                [j.identifier('data')],
+                j.blockStatement([
+                  j.returnStatement(
+                    j.callExpression(j.identifier(id), [
+                      j.identifier('data'),
+                      ...functionDeclaration.params.slice(1).map((_, index) => {
+                        const argument = j.memberExpression(
+                          j.identifier('args'),
+                          j.numericLiteral(index),
+                        )
+                        argument.computed = true
+                        return argument
+                      }),
+                    ]),
+                  ),
+                ]),
+              ),
+            ),
+          ]),
+        ),
+        j.returnStatement(
+          j.callExpression(
+            j.identifier(id),
+            functionDeclaration.params.map((_, index) => {
+              const argument = j.memberExpression(
+                j.identifier('arguments'),
+                j.numericLiteral(index),
+              )
+              argument.computed = true
+              return argument
+            }),
+          ),
+        ),
+      ]),
+    )
+
+    return [id, dataFirst] as const
+  }
+
   root.find(j.ExportNamedDeclaration).forEach(p => {
     p.value.specifiers.forEach(exportSpecifier => {
       exportedFunctions.push(exportSpecifier.local.name)
@@ -71,18 +127,8 @@ const transformer = (file: FileInfo, api: API) => {
     })
     .replaceWith(p => {
       if (p.value.params.length > 1) {
-        const id = `_${p.value.id.name}`
-        const dataFirst = j.functionDeclaration(
-          j.identifier(p.value.id.name),
-          [],
-          j.blockStatement([
-            j.returnStatement(
-              j.callExpression(dataFirstIdentifier, [j.identifier(id), j.identifier('arguments')]),
-            ),
-          ]),
-        )
+        const [id, dataFirst] = makeDataFirst(p.value)
 
-        isImportNeeded.current = true
         p.value.id.name = id
 
         return [p.value, dataFirst]
@@ -123,21 +169,8 @@ const transformer = (file: FileInfo, api: API) => {
         )
 
         if (beltFunction.params.length > 1) {
-          const id = `_${declarator.id.name}`
-          const dataFirst = j.functionDeclaration(
-            j.identifier(declarator.id.name),
-            [],
-            j.blockStatement([
-              j.returnStatement(
-                j.callExpression(dataFirstIdentifier, [
-                  j.identifier(id),
-                  j.identifier('arguments'),
-                ]),
-              ),
-            ]),
-          )
+          const [id, dataFirst] = makeDataFirst(beltFunction, declarator.id.name)
 
-          isImportNeeded.current = true
           declarator.id.name = id
 
           return [p.value, dataFirst]
@@ -145,18 +178,6 @@ const transformer = (file: FileInfo, api: API) => {
       }
 
       return p.value
-    })
-
-  root
-    .find(j.Program)
-    .filter(_p => {
-      return isImportNeeded.current
-    })
-    .forEach(p => {
-      p.value.body = [
-        j.importDeclaration([j.importSpecifier(dataFirstIdentifier)], j.literal('../utils.js')),
-        ...p.value.body,
-      ]
     })
 
   return root.toSource()

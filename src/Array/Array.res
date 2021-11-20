@@ -121,7 +121,17 @@ let repeat = (n, element) => Belt.Array.make(n, element)
 let makeWithIndex = (n, mapFn) => Belt.Array.makeByU(n, mapFn)
 
 @gentype
-let map = (xs, mapFn) => Belt.Array.mapU(xs, (. el) => mapFn(el))
+let map = (xs, mapFn) => {
+  let index = ref(0)
+  let arr = Belt.Array.makeUninitializedUnsafe(length(xs))
+
+  while index.contents < length(xs) {
+    Belt.Array.setUnsafe(arr, index.contents, mapFn(Belt.Array.getUnsafe(xs, index.contents)))
+    index := succ(index.contents)
+  }
+
+  arr
+}
 
 @gentype
 let mapWithIndex = (xs, mapFn) => Belt.Array.mapWithIndexU(xs, (. i, el) => mapFn(el, i))

@@ -5,7 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "yarn benchr index.js --max-time=3 --reporter=json --pretty-print 2>&1 | tee results.json"
+    "start": "bash ./scripts/run.sh"
   },
   "devDependencies": {
     "benchr": "^4.3.0"

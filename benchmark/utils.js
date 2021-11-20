@@ -5,13 +5,20 @@ const remeda = require('remeda')
 const belt = require('..')
 
 exports.makeBenchmark = (title, ...rest) => {
-  return {
-    title,
-    arr: rest.map(makeFn => makeFn(title)),
-  }
+  suite(`${title} (single function call)`, () => {
+    rest.forEach(test => {
+      benchmark(test.label, test.rawFn)
+    })
+  })
+
+  suite(`${title} (function call within pipe)`, () => {
+    rest.forEach(test => {
+      benchmark(test.label, test.pipeFn)
+    })
+  })
 }
 
-const addBenchmarkSuite = (label, module) => mapFn => title => {
+const addBenchmarkSuite = (label, module) => mapFn => {
   const [rawFn, pipeFn] = mapFn(module)
 
   // console.log(label, title)
