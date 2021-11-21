@@ -1,43 +1,33 @@
-@gentype
-let length = xs => Belt.Array.length(xs)
+external unsafe: 'a => 'b = "%identity"
 
-@gentype
-let isEmpty = xs => length(xs) == 0
+export length = xs => Belt.Array.length(xs)
 
-@gentype
-let isNotEmpty = xs => length(xs) > 0
+export isEmpty = xs => length(xs) == 0
 
-@gentype
-let reverse = xs => Belt.Array.reverse(xs)
+export isNotEmpty = xs => length(xs) > 0
 
-@gentype
-let prepend = (xs, element) => Belt.Array.concat([element], xs)
+export reverse = xs => Belt.Array.reverse(xs)
 
-@gentype
-let append = (xs, element) => Belt.Array.concat(xs, [element])
+export prepend = (xs, element) => Belt.Array.concat([element], xs)
 
-@gentype
-let get = (xs, index) => Belt.Array.get(xs, index)
+export append = (xs, element) => Belt.Array.concat(xs, [element])
 
-@gentype
-let at = (xs, index) => get(xs, index)
+export get = (xs, index) => Belt.Array.get(xs, index)
 
-@gentype
-let getBy = (xs, predicateFn) => Belt.Array.getByU(xs, predicateFn)
+export at = (xs, index) => get(xs, index)
 
-@gentype
-let find = (xs, predicateFn) => getBy(xs, predicateFn)
+export getBy = (xs, predicateFn) => Belt.Array.getByU(xs, predicateFn)
 
-@gentype
-let head = xs => get(xs, 0)
+export find = (xs, predicateFn) => getBy(xs, predicateFn)
+
+export head = xs => get(xs, 0)
 
 %%raw(`
 /**
   hello doc!
 */
 `)
-@gentype
-let tail = xs => {
+export tail = xs => {
   switch length(xs) {
   | l if l == 1 => Some([])
   | l if l == 0 => None
@@ -47,213 +37,163 @@ let tail = xs => {
   }
 }
 
-@gentype
-let tailOrEmpty = xs =>
+export tailOrEmpty = xs =>
   switch tail(xs) {
   | Some(xs) => xs
   | None => []
   }
 
-@gentype
-let take = (xs, offset) => {
+export take = (xs, offset) => {
   let l = length(xs)
   let len = offset < 0 ? 0 : l < offset ? l : offset
   Belt.Array.slice(xs, ~offset=0, ~len)
 }
 
-@gentype
-let takeExactly = (xs, offset) =>
+export takeExactly = (xs, offset) =>
   offset < 0 || offset > length(xs) ? None : Some(Belt.Array.slice(xs, ~offset=0, ~len=offset))
 
-@gentype
-let rec takeWhile = (xs, predicateFn) =>
+export rec takeWhile = (xs, predicateFn) =>
   switch head(xs) {
   | Some(el) if predicateFn(el) => prepend(takeWhile(tailOrEmpty(xs), predicateFn), el)
   | _ => []
   }
 
-@gentype
-let drop = (xs, offset) => {
+export drop = (xs, offset) => {
   let l = length(xs)
   let start = offset < 0 ? 0 : l < offset ? l : offset
   Belt.Array.sliceToEnd(xs, start)
 }
 
-@gentype
-let dropExactly = (xs, offset) =>
+export dropExactly = (xs, offset) =>
   offset < 0 || offset > length(xs) ? None : Some(Belt.Array.sliceToEnd(xs, offset))
 
-@gentype
-let rec dropWhile = (xs, predicateFn) =>
+export rec dropWhile = (xs, predicateFn) =>
   switch head(xs) {
   | Some(element) if predicateFn(element) => dropWhile(tailOrEmpty(xs), predicateFn)
   | _ => xs
   }
 
-@gentype
-let uncons = xs =>
+export uncons = xs =>
   switch xs {
   | [] => None
   | _ => Some((Belt.Array.getExn(xs, 0), Belt.Array.sliceToEnd(xs, 1)))
   }
 
-@gentype
-let splitAt = (xs, offset) =>
+export splitAt = (xs, offset) =>
   offset < 0 || offset > length(xs)
     ? None
     : Some((Belt.Array.slice(xs, ~offset=0, ~len=offset), Belt.Array.sliceToEnd(xs, offset)))
 
-@gentype
-let rec splitEvery = (xs, offset) =>
+export rec splitEvery = (xs, offset) =>
   offset < 1
     ? [xs]
     : length(xs) <= offset
     ? [xs]
     : xs->drop(offset)->splitEvery(offset)->Belt.Array.concat([take(xs, offset)], _)
 
-@gentype
-let shuffle = xs => Belt.Array.shuffle(xs)
+export shuffle = xs => Belt.Array.shuffle(xs)
 
-@gentype
-let repeat = (n, element) => Belt.Array.make(n, element)
+export repeat = (n, element) => Belt.Array.make(n, element)
 
-@gentype
-let makeWithIndex = (n, mapFn) => Belt.Array.makeByU(n, mapFn)
+export makeWithIndex = (n, mapFn) => Belt.Array.makeByU(n, mapFn)
 
-@gentype
-let map = (xs, mapFn) => {
-  let index = ref(0)
-  let arr = Belt.Array.makeUninitializedUnsafe(length(xs))
+export map = (xs, mapFn) => Belt.Array.mapU(xs, (. el) => mapFn(el))
 
-  while index.contents < length(xs) {
-    Belt.Array.setUnsafe(arr, index.contents, mapFn(Belt.Array.getUnsafe(xs, index.contents)))
-    index := succ(index.contents)
-  }
+export mapWithIndex = (xs, mapFn) => Belt.Array.mapWithIndexU(xs, (. i, el) => mapFn(el, i))
 
-  arr
-}
-
-@gentype
-let mapWithIndex = (xs, mapFn) => Belt.Array.mapWithIndexU(xs, (. i, el) => mapFn(el, i))
-
-@gentype
-let filter = (xs, predicateFn) => {
-  let index = ref(0)
-  let arr = []
-
-  while index.contents < length(xs) {
-    if predicateFn(Belt.Array.getUnsafe(xs, index.contents)) {
-      Js.Array2.push(arr, Belt.Array.getUnsafe(xs, index.contents))->ignore
+export filter = (xs, predicateFn) =>
+  Belt.Array.reduceU(xs, [], (. acc, value) => {
+    if predicateFn(value) {
+      Js.Array2.push(acc, value)->ignore
     }
 
-    index := succ(index.contents)
-  }
+    acc
+  })
 
-  arr
-}
+export filterWithIndex = (xs, predicateFn) =>
+  Belt.Array.reduceWithIndexU(xs, [], (. acc, value, index) => {
+    if predicateFn(value, index) {
+      Js.Array2.push(acc, value)->ignore
+    }
 
-@gentype
-let filterWithIndex = (xs, predicateFn) => Belt.Array.keepWithIndexU(xs, predicateFn)
+    acc
+  })
 
-@gentype
-let reject = (xs, predicateFn) => filter(xs, el => !predicateFn(el))
+export reject = (xs, predicateFn) => filter(xs, el => !predicateFn(el))
 
-@gentype
-let rejectWithIndex = (xs, predicateFn) => filterWithIndex(xs, (. el, i) => !predicateFn(el, i))
-let init = xs => {
+export rejectWithIndex = (xs, predicateFn) =>
+  filterWithIndex(xs, (el, index) => !predicateFn(el, index))
+
+export init = xs => {
   let l = length(xs)
   l == 0 ? None : Some(Belt.Array.slice(xs, ~offset=0, ~len=l - 1))
 }
 
-@gentype
-let initOrEmpty = xs =>
+export initOrEmpty = xs =>
   switch init(xs) {
   | Some(xs) => xs
   | None => []
   }
 
-@gentype
-let last = xs => {
+export last = xs => {
   let l = length(xs)
   l == 0 ? None : get(xs, l - 1)
 }
 
-@gentype
-let partition = (xs, fn) => Belt.Array.partitionU(xs, fn)
+export partition = (xs, fn) => Belt.Array.partitionU(xs, fn)
 
-@gentype
-let concat = (xs0, xs1) => Belt.Array.concat(xs0, xs1)
+export concat = (xs0, xs1) => Belt.Array.concat(xs0, xs1)
 
-@gentype
-let concatMany = xs => Belt.Array.concatMany(xs)
+export concatMany = xs => Belt.Array.concatMany(xs)
 
-@gentype
-let every = (xs, fn) => Belt.Array.everyU(xs, fn)
+export every = (xs, fn) => Belt.Array.everyU(xs, fn)
 
-@gentype
-let some = (xs, fn) => Belt.Array.someU(xs, fn)
+export some = (xs, fn) => Belt.Array.someU(xs, fn)
 
-@gentype
-let slice = (xs, offset, len) => Belt.Array.slice(xs, ~offset, ~len)
+export slice = (xs, offset, len) => Belt.Array.slice(xs, ~offset, ~len)
 
-@gentype
-let sliceToEnd = (xs, offset) => Belt.Array.sliceToEnd(xs, offset)
+export sliceToEnd = (xs, offset) => Belt.Array.sliceToEnd(xs, offset)
 
-@gentype
-let eq = (xs0, xs1, comparatorFn) => Belt.Array.eqU(xs0, xs1, comparatorFn)
+export eq = (xs0, xs1, comparatorFn) => Belt.Array.eqU(xs0, xs1, comparatorFn)
 
-@gentype
-let range = (start, length) => Belt.Array.range(start, length)
+export range = (start, length) => Belt.Array.range(start, length)
 
-@gentype
-let rangeBy = (start, length, step) => Belt.Array.rangeBy(start, length, ~step)
+export rangeBy = (start, length, step) => Belt.Array.rangeBy(start, length, ~step)
 
-@gentype
-let reduce = (xs, initialValue, reduceFn) => Belt.Array.reduceU(xs, initialValue, reduceFn)
+export reduce = (xs, initialValue, reduceFn) => Belt.Array.reduceU(xs, initialValue, reduceFn)
 
-@gentype
-let reduceWithIndex = (xs, initialValue, reduceFn) =>
+export reduceWithIndex = (xs, initialValue, reduceFn) =>
   Belt.Array.reduceWithIndexU(xs, initialValue, reduceFn)
 
-@gentype
-let copy = xs => Belt.Array.copy(xs)
+export copy = xs => Belt.Array.copy(xs)
 
-@gentype
-let zip = (xs0, xs1) => Belt.Array.zip(xs0, xs1)
+export zip = (xs0, xs1) => Belt.Array.zip(xs0, xs1)
 
-@gentype
-let zipWith = (xs0, xs1, zipFn) => Belt.Array.zipByU(xs0, xs1, zipFn)
+export zipWith = (xs0, xs1, zipFn) => Belt.Array.zipByU(xs0, xs1, zipFn)
 
-@gentype
-let unzip = xs => Belt.Array.unzip(xs)
+export unzip = xs => Belt.Array.unzip(xs)
 
-@gentype
-let replaceAt = (xs, targetIndex, element) =>
+export replaceAt = (xs, targetIndex, element) =>
   mapWithIndex(xs, (current, currentIndex) => currentIndex == targetIndex ? element : current)
 
-@gentype
-let insertAt = (xs, targetIndex, element) =>
+export insertAt = (xs, targetIndex, element) =>
   switch splitAt(xs, targetIndex) {
   | Some((before, after)) => concat(before, concat([element], after))
   | None => xs
   }
 
-@gentype
-let updateAt = (targetIndex, fn, xs) =>
+export updateAt = (targetIndex, fn, xs) =>
   mapWithIndex(xs, (x, index) => index == targetIndex ? fn(x) : x)
 
-@gentype
-let swapAt = (xs, targetIndex, swapIndex) =>
+export swapAt = (xs, targetIndex, swapIndex) =>
   switch (get(xs, targetIndex), get(xs, swapIndex)) {
   | (Some(a), Some(b)) => mapWithIndex(xs, (x, k) => targetIndex == k ? b : swapIndex == k ? a : x)
   | _ => xs
   }
 
-@gentype
-let removeAt = (xs, targetIndex) => filterWithIndex(xs, (. _, i) => i != targetIndex)
+export removeAt = (xs, targetIndex) => filterWithIndex(xs, (_, i) => i != targetIndex)
 
-@gentype
-let uniqBy = (xs, predicateFn) => {
+export uniqBy = (xs, predicateFn) => {
   let index = ref(0)
   let arr = []
 
@@ -271,40 +211,30 @@ let uniqBy = (xs, predicateFn) => {
   arr
 }
 
-@gentype
-let uniq = xs => uniqBy(xs, element => element)
+export uniq = xs => uniqBy(xs, element => element)
 
-@gentype
-let forEach = (xs, fn) => Belt.Array.forEachU(xs, fn)
+export forEach = (xs, fn) => Belt.Array.forEachU(xs, fn)
 
-@gentype
-let forEachWithIndex = (xs, fn) => Belt.Array.forEachWithIndexU(xs, fn)
+export forEachWithIndex = (xs, fn) => Belt.Array.forEachWithIndexU(xs, fn)
 
-@gentype
-let getIndexBy = (xs, predicateFn) => Belt.Array.getIndexByU(xs, predicateFn)
+export getIndexBy = (xs, predicateFn) => Belt.Array.getIndexByU(xs, predicateFn)
 
-@gentype
-let includes = (xs, element) => Belt.Array.someU(xs, (. x) => x == element)
+export includes = (xs, element) => Belt.Array.someU(xs, (. x) => x == element)
 
-@gentype
-let join = (xs, delimiter) => Js.Array2.joinWith(xs, delimiter)
+export join = (xs, delimiter) => Js.Array2.joinWith(xs, delimiter)
 
-@gentype
-let sort = (xs, sortFn) => Belt.SortArray.stableSortByU(xs, sortFn)
+export sort = (xs, sortFn) => Belt.SortArray.stableSortByU(xs, sortFn)
 
-@gentype
-let sortBy = (xs, sortFn) =>
+export sortBy = (xs, sortFn) =>
   sort(xs, (. a, b) => {
     let a = sortFn(a)
     let b = sortFn(b)
     a === b ? 0 : a < b ? -1 : 1
   })
 
-@gentype
-let makeEmpty = () => []
+export makeEmpty = () => []
 
-@gentype
-let groupBy = (xs, groupFn) =>
+export groupBy = (xs, groupFn) =>
   Belt.Array.reduceU(xs, Js.Dict.empty(), (. acc, element) => {
     let key = groupFn(element)
     let value = Js.Dict.get(acc, key)
@@ -317,10 +247,7 @@ let groupBy = (xs, groupFn) =>
     acc
   })
 
-external unsafe: 'a => 'b = "%identity"
-
-@gentype
-let flat = xs => {
+export flat = xs => {
   let arr = ref([])
   let index = ref(0)
 
@@ -336,8 +263,7 @@ let flat = xs => {
   arr.contents
 }
 
-@gentype
-let deepFlat = xs => {
+export deepFlat = xs => {
   let rec flat = (xs, input) => {
     let index = ref(0)
 

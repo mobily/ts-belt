@@ -4,29 +4,21 @@ external assign: (Js.Dict.t<'a>, Js.Dict.t<'a>, Js.Dict.t<'a>) => Js.Dict.t<'a> 
 @val
 external entries: Js.Dict.t<'a> => array<(Js.Dict.key, 'a)> = "Object.entries"
 
-@gentype
-let makeEmpty = Js.Dict.empty
+export makeEmpty = Js.Dict.empty
 
-@gentype
-let prop = (key, dict) => Js.Dict.unsafeGet(dict, key)
+export prop = (key, dict) => Js.Dict.unsafeGet(dict, key)
 
-@gentype
-let toPairs = dict => entries(dict)
+export toPairs = dict => entries(dict)
 
-@gentype
-let values = dict => Js.Dict.values(dict)
+export values = dict => Js.Dict.values(dict)
 
-@gentype
-let keys = dict => Js.Dict.keys(dict)
+export keys = dict => Js.Dict.keys(dict)
 
-@gentype
-let fromPairs = dict => Js.Dict.fromArray(dict)
+export fromPairs = dict => Js.Dict.fromArray(dict)
 
-@gentype
-let merge = (fst, snd) => assign(makeEmpty(), fst, snd)
+export merge = (fst, snd) => assign(makeEmpty(), fst, snd)
 
-@gentype
-let map = (dict, mapFn) => {
+export map = (dict, mapFn) => {
   dict
   ->keys
   ->Array.map(key => {
@@ -36,8 +28,7 @@ let map = (dict, mapFn) => {
   ->fromPairs
 }
 
-@gentype
-let mapWithKey = (dict, mapFn) => {
+export mapWithKey = (dict, mapFn) => {
   dict
   ->keys
   ->Array.map(key => {
@@ -47,8 +38,7 @@ let mapWithKey = (dict, mapFn) => {
   ->fromPairs
 }
 
-@gentype
-let filter = (dict, predicateFn) => {
+export filter = (dict, predicateFn) => {
   dict
   ->keys
   ->Array.reduce([], (. acc, key) => {
@@ -58,8 +48,7 @@ let filter = (dict, predicateFn) => {
   ->fromPairs
 }
 
-@gentype
-let filterWithKey = (dict, predicateFn) => {
+export filterWithKey = (dict, predicateFn) => {
   dict
   ->keys
   ->Array.reduce([], (. acc, key) => {
@@ -69,9 +58,7 @@ let filterWithKey = (dict, predicateFn) => {
   ->fromPairs
 }
 
-@gentype
-let reject = (predicateFn, dict) => filter(dict, value => !predicateFn(value))
+export reject = (predicateFn, dict) => filter(dict, value => !predicateFn(value))
 
-@gentype
-let rejectWithKey = (predicateFn, dict) =>
+export rejectWithKey = (predicateFn, dict) =>
   filterWithKey(dict, (value, key) => !predicateFn(value, key))

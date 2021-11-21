@@ -110,6 +110,7 @@ export declare function rejectWithIndex<A>(
 export declare function rejectWithIndex<A>(
   predicateFn: (_1: A, _2: number) => boolean,
 ): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+export declare function init<A>(xs: ReadonlyArray<A>): Option<ReadonlyArray<A>>
 export declare function initOrEmpty<A>(xs: ReadonlyArray<A>): ReadonlyArray<A>
 export declare function last<A>(xs: ReadonlyArray<A>): Option<A>
 export declare function partition<A>(

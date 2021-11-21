@@ -1,48 +1,32 @@
-@gentype
-let identity = value => value
+export identity = value => value
 
-@gentype
-let equals = (fst, snd) => fst == snd
+export equals = (fst, snd) => fst == snd
 
-@gentype
-let both = (value, fn0, fn1) => fn0(value) && fn1(value)
+export both = (value, fn0, fn1) => fn0(value) && fn1(value)
 
-@gentype
-let either = (value, fn0, fn1) => fn0(value) || fn1(value)
+export either = (value, fn0, fn1) => fn0(value) || fn1(value)
 
-@gentype
-let always = (value, . ()) => value
+export always = (value, . ()) => value
 
-@gentype
-let defaultTo = (value, defaultValue) => Js.Nullable.isNullable(value) ? defaultValue : value
+export defaultTo = (value, defaultValue) => Js.Nullable.isNullable(value) ? defaultValue : value
 
-@gentype
-let falsy = always(false)
+export falsy = always(false)
 
-@gentype
-let truthy = always(true)
+export truthy = always(true)
 
-@gentype
-let ifElse = (value, predicateFn, truthyFn, falsyFn) =>
+export ifElse = (value, predicateFn, truthyFn, falsyFn) =>
   predicateFn(value) ? truthyFn(value) : falsyFn(value)
 
-@gentype
-let ignore = () => ()
+export ignore = () => ()
 
-@gentype
-let unless = (value, predicateFn, falsyFn) => !predicateFn(value) ? falsyFn(value) : value
+export unless = (value, predicateFn, falsyFn) => !predicateFn(value) ? falsyFn(value) : value
 
-@gentype
-let when_ = (value, predicateFn, truthyFn) => predicateFn(value) ? truthyFn(value) : value
+export when_ = (value, predicateFn, truthyFn) => predicateFn(value) ? truthyFn(value) : value
 
-@gentype
-let allPass = (value, fns) => Belt.Array.everyU(fns, (. fn) => fn(value))
+export allPass = (value, fns) => Belt.Array.everyU(fns, (. fn) => fn(value))
 
-@gentype
-let anyPass = (value, fns) => Belt.Array.someU(fns, (. fn) => fn(value))
+export anyPass = (value, fns) => Belt.Array.someU(fns, (. fn) => fn(value))
 
-@gentype
-let pred = n => pred(n)
+export pred = n => pred(n)
 
-@gentype
-let succ = n => succ(n)
+export succ = n => succ(n)

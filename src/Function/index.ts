@@ -1,6 +1,6 @@
 export declare function identity<A>(value: A): A
-export declare function equals<A>(fst: A, snd: A): boolean
-export declare function equals<A>(snd: A): (fst: A) => boolean
+export declare function equals(fst: any, snd: any): boolean
+export declare function equals(snd: any): (fst: any) => boolean
 export declare function both<A>(value: A, fn0: (_1: A) => boolean, fn1: (_1: A) => boolean): boolean
 export declare function both<A>(
   fn0: (_1: A) => boolean,
