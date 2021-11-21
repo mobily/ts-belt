@@ -7,10 +7,9 @@ results_file="./.results/results-$date_now.txt"
 
 rm -f $results_file
 
-complex=()
-while IFS= read -r -d $'\0'; do
-    complex+=("$REPLY")
-done < <(find "./complex" -name "*.js" -print0)
+glob_files=".*\(map\|filter\)"
+
+complex=($(grep -HRl "$glob_files" ./complex))
 
 for i in "${complex[@]}"
 do
@@ -19,10 +18,7 @@ do
   sed -i '' "s/\\[3m//g" $results_file
 done
 
-simple=()
-while IFS= read -r -d $'\0'; do
-    simple+=("$REPLY")
-done < <(find "./simple" -name "*.js" -print0)
+simple=($(grep -HRl "$glob_files" ./simple))
 
 for i in "${simple[@]}"
 do
