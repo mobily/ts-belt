@@ -101,14 +101,19 @@ export map = (xs, mapFn) => Belt.Array.mapU(xs, (. el) => mapFn(el))
 
 export mapWithIndex = (xs, mapFn) => Belt.Array.mapWithIndexU(xs, (. i, el) => mapFn(el, i))
 
-export filter = (xs, predicateFn) =>
-  Belt.Array.reduceU(xs, [], (. acc, value) => {
-    if predicateFn(value) {
-      Js.Array2.push(acc, value)->ignore
-    }
+export filter = (xs, predicateFn) => {
+  let index = ref(0)
+  let arr = []
 
-    acc
-  })
+  while index.contents < length(xs) {
+    if predicateFn(Belt.Array.getUnsafe(xs, index.contents)) {
+      Js.Array2.push(arr, Belt.Array.getUnsafe(xs, index.contents))->ignore
+    }
+    index := succ(index.contents)
+  }
+
+  arr
+}
 
 export filterWithIndex = (xs, predicateFn) =>
   Belt.Array.reduceWithIndexU(xs, [], (. acc, value, index) => {
