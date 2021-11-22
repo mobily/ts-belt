@@ -10,6 +10,9 @@ export reverse = xs => Belt.Array.reverse(xs)
 
 export prepend = (xs, element) => Belt.Array.concat([element], xs)
 
+export prependToAll = (xs, delimiter) =>
+  Belt.Array.reduceU(xs, [], (. acc, value) => Belt.Array.concat([delimiter, value], acc))
+
 export append = (xs, element) => Belt.Array.concat(xs, [element])
 
 export get = (xs, index) => Belt.Array.get(xs, index)
@@ -106,8 +109,9 @@ export filter = (xs, predicateFn) => {
   let arr = []
 
   while index.contents < length(xs) {
-    if predicateFn(Belt.Array.getUnsafe(xs, index.contents)) {
-      Js.Array2.push(arr, Belt.Array.getUnsafe(xs, index.contents))->ignore
+    let value = Belt.Array.getUnsafe(xs, index.contents)
+    if predicateFn(value) {
+      Js.Array2.push(arr, value)->ignore
     }
     index := succ(index.contents)
   }
@@ -115,14 +119,20 @@ export filter = (xs, predicateFn) => {
   arr
 }
 
-export filterWithIndex = (xs, predicateFn) =>
-  Belt.Array.reduceWithIndexU(xs, [], (. acc, value, index) => {
-    if predicateFn(value, index) {
-      Js.Array2.push(acc, value)->ignore
-    }
+export filterWithIndex = (xs, predicateFn) => {
+  let index = ref(0)
+  let arr = []
 
-    acc
-  })
+  while index.contents < length(xs) {
+    let value = Belt.Array.getUnsafe(xs, index.contents)
+    if predicateFn(value, index.contents) {
+      Js.Array2.push(arr, value)->ignore
+    }
+    index := succ(index.contents)
+  }
+
+  arr
+}
 
 export reject = (xs, predicateFn) => filter(xs, el => !predicateFn(el))
 
@@ -252,40 +262,30 @@ export groupBy = (xs, groupFn) =>
     acc
   })
 
-export flat = xs => {
-  let arr = ref([])
-  let index = ref(0)
-
-  while index.contents < length(xs) {
-    let value = Belt.Array.getUnsafe(xs, index.contents)
-    let element = Js.Array2.isArray(value) ? value : [unsafe(value)]
-
-    arr := Belt.Array.concat(arr.contents, element)
-
-    index := succ(index.contents)
-  }
-
-  arr.contents
-}
+export flat = xs =>
+  Belt.Array.reduceU(xs, [], (. acc, value) => {
+    let xs = Js.Array2.isArray(value) ? value : [unsafe(value)]
+    Belt.Array.concat(acc, xs)
+  })
 
 export deepFlat = xs => {
-  let rec flat = (xs, input) => {
-    let index = ref(0)
-
-    while index.contents < length(xs) {
-      let value = Belt.Array.getUnsafe(xs, index.contents)
-
-      if Js.Array2.isArray(value) {
-        flat(unsafe(value), input)->ignore
-      } else {
-        Js.Array2.push(input, value)->ignore
+  let rec flat = (xs, input) =>
+    Belt.Array.reduceU(xs, input, (. acc, value) => {
+      switch value {
+      | x if Js.Array2.isArray(x) => flat(unsafe(value), acc)->ignore
+      | _ => Js.Array2.push(acc, value)->ignore
       }
-
-      index := succ(index.contents)
-    }
-
-    input
-  }
+      acc
+    })
 
   flat(xs, [])
 }
+
+export intersperse = (xs, delimiter) =>
+  Belt.Array.reduceWithIndexU(xs, [], (. acc, value, index) => {
+    switch index {
+    | x if xs->length->pred == x => Js.Array2.push(acc, value)
+    | _ => Js.Array2.pushMany(acc, [value, delimiter])
+    }->ignore
+    acc
+  })

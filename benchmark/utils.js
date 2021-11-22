@@ -11,7 +11,7 @@ exports.makeBenchmark = (title, ...rest) => {
     })
   })
 
-  suite(`${title} (function call within pipe)`, () => {
+  suite(`${title} (function call within a pipeline)`, () => {
     rest.forEach(test => {
       benchmark(test.label, test.pipeFn)
     })

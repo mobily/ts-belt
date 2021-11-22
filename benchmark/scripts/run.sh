@@ -7,7 +7,7 @@ results_file="./.results/results-$date_now.txt"
 
 rm -f $results_file
 
-glob_files=".*\(map\|filter\)"
+glob_files=".*"
 
 complex=($(grep -HRl "$glob_files" ./complex))
 

@@ -7,6 +7,8 @@ export declare function isNotEmpty<A>(xs: ReadonlyArray<A>): boolean
 export declare function reverse<A>(xs: ReadonlyArray<A>): ReadonlyArray<A>
 export declare function prepend<A>(xs: ReadonlyArray<A>, element: A): ReadonlyArray<A>
 export declare function prepend<A>(element: A): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+export declare function prependToAll<A>(xs: ReadonlyArray<A>, delimiter: A): ReadonlyArray<A>
+export declare function prependToAll<A>(delimiter: A): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
 export declare function append<A>(xs: ReadonlyArray<A>, element: A): ReadonlyArray<A>
 export declare function append<A>(element: A): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
 export declare function get<A>(xs: ReadonlyArray<A>, index: number): Option<A>
@@ -274,3 +276,5 @@ export declare function flat<T>(
   xs: ReadonlyArray<T>,
 ): ReadonlyArray<T extends ReadonlyArray<infer K> ? K : T>
 export declare function deepFlat<T>(xs: ReadonlyArray<T>): ReadonlyArray<ExtractNested<T>>
+export declare function intersperse<A>(xs: ReadonlyArray<A>, delimiter: A): ReadonlyArray<A>
+export declare function intersperse<A>(delimiter: A): (xs: ReadonlyArray<A>) => ReadonlyArray<A>

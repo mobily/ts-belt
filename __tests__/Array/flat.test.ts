@@ -2,6 +2,7 @@ import { expectType } from 'ts-expect'
 
 import { A, pipe } from '../..'
 
+// TODO: expectTypes
 describe('flat', () => {
   // it('provides correct types', () => {
   //   expectType<ReadonlyArray<number>>(A.flat([1, 2, 3, 4, 5]))

@@ -21,7 +21,7 @@ export merge = (fst, snd) => assign(makeEmpty(), fst, snd)
 export map = (dict, mapFn) => {
   dict
   ->keys
-  ->Array.map(key => {
+  ->Belt.Array.mapU((. key) => {
     let value = mapFn(prop(key, dict))
     (key, value)
   })
@@ -31,7 +31,7 @@ export map = (dict, mapFn) => {
 export mapWithKey = (dict, mapFn) => {
   dict
   ->keys
-  ->Array.map(key => {
+  ->Belt.Array.mapU((. key) => {
     let value = mapFn(prop(key, dict), key)
     (key, value)
   })
@@ -41,7 +41,7 @@ export mapWithKey = (dict, mapFn) => {
 export filter = (dict, predicateFn) => {
   dict
   ->keys
-  ->Array.reduce([], (. acc, key) => {
+  ->Belt.Array.reduceU([], (. acc, key) => {
     let value = prop(key, dict)
     predicateFn(value) ? Array.append(acc, (key, value)) : acc
   })
@@ -51,7 +51,7 @@ export filter = (dict, predicateFn) => {
 export filterWithKey = (dict, predicateFn) => {
   dict
   ->keys
-  ->Array.reduce([], (. acc, key) => {
+  ->Belt.Array.reduceU([], (. acc, key) => {
     let value = prop(key, dict)
     predicateFn(value, key) ? Array.append(acc, (key, value)) : acc
   })
