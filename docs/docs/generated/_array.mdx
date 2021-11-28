@@ -1,0 +1,680 @@
+### makeEmpty
+
+Creates an empty array.
+
+```ts
+function makeEmpty<A>(): ReadonlyArray<A>
+```
+
+```ts
+A.makeEmpty<number>() // []
+```
+
+### makeWithIndex
+
+Returns a new array of size `n` populated by `mapFn(index)`, or an empty array if `n` is negative.
+
+```ts
+function makeWithIndex<A>(n: number, mapFn: (_1: number) => A): ReadonlyArray<A>
+function makeWithIndex<A>(mapFn: (_1: number) => A): (n: number) => ReadonlyArray<A>
+```
+
+```ts
+A.makeWithIndex(5, index => index * 2) // [0, 2, 4, 6, 8]
+```
+
+### make
+
+Returns a new array of size `n` populated by `element`, or an empty array if `n` is negative.
+
+```ts
+function make<A>(n: number, element: A): ReadonlyArray<A>
+function make<A>(element: A): (n: number) => ReadonlyArray<A>
+```
+
+```ts
+A.make(-1, 'hello') // []
+A.make(3, 1) // [1, 1, 1]
+pipe(2, A.make('hello')) // ['hello', 'hello']
+```
+
+### repeat
+
+Alias for `make`.
+
+```ts
+function repeat<A>(n: number, element: A): ReadonlyArray<A>
+function repeat<A>(element: A): (n: number) => ReadonlyArray<A>
+```
+
+### length
+
+Returns the size of the provided array.
+
+```ts
+function length<A>(xs: ReadonlyArray<A>): number
+```
+
+```ts
+A.length(['hello', 'world']) // 2
+pipe([0, 2, 4], A.length) // 3
+```
+
+### isEmpty
+
+Determines whether the array is empty.
+
+```ts
+function isEmpty<A>(xs: ReadonlyArray<A>): boolean
+```
+
+```ts
+A.isEmpty(['hello', 'world']) // false
+A.isEmpty([]) // true
+pipe([1, 2, 3], A.isEmpty) // false
+```
+
+### isNotEmpty
+
+Determines whether the array is not empty.
+
+```ts
+function isNotEmpty<A>(xs: ReadonlyArray<A>): boolean
+```
+
+```ts
+A.isNotEmpty(['hello', 'world']) // true
+A.isNotEmpty([]) // false
+pipe([1, 2, 3], A.isNotEmpty) // true
+```
+
+### reverse
+
+Returns a new array with the elements of the provided array in reverse order.
+
+```ts
+function reverse<A>(xs: ReadonlyArray<A>): ReadonlyArray<A>
+```
+
+```ts
+A.reverse([1, 2, 3, 4, 5]) // [5, 4, 3, 2, 1]
+pipe(['hello', 'world'], A.reverse) // ['world', 'hello']
+```
+
+### append
+
+Adds a single element to the end of an array.
+
+```ts
+function append<A>(xs: ReadonlyArray<A>, element: A): ReadonlyArray<A>
+function append<A>(element: A): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+```
+
+### prepend
+
+Prepends a single element to the start of the given array.
+
+```ts
+function prepend<A>(xs: ReadonlyArray<A>, element: A): ReadonlyArray<A>
+function prepend<A>(element: A): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+```
+
+### prependToAll
+
+Returns a new array which contains the given delimiter inserted before every element in the provided array.
+
+```ts
+function prependToAll<A>(xs: ReadonlyArray<A>, delimiter: A): ReadonlyArray<A>
+function prependToAll<A>(delimiter: A): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+```
+
+### intersperse
+
+Creates a new array with the separator interposed between elements.
+
+```ts
+function intersperse<A>(xs: ReadonlyArray<A>, delimiter: A): ReadonlyArray<A>
+function intersperse<A>(delimiter: A): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+```
+
+### get
+
+Returns `Some(value)` at the given index, or `None` if the given index is out of range.
+
+```ts
+function get<A>(xs: ReadonlyArray<A>, index: number): Option<A>
+function get<A>(index: number): (xs: ReadonlyArray<A>) => Option<A>
+```
+
+### at
+
+Alias for `get`.
+
+```ts
+function at<A>(xs: ReadonlyArray<A>, index: number): Option<A>
+function at<A>(index: number): (xs: ReadonlyArray<A>) => Option<A>
+```
+
+### getUnsafe
+
+Returns `value` at the given index (use only if you're entirely sure that a value exists at the given index).
+
+```ts
+function getUnsafe<A>(xs: ReadonlyArray<A>, index: number): A
+function getUnsafe<A>(index: number): (xs: ReadonlyArray<A>) => A
+```
+
+### getUndefined
+
+Returns `value` at the given index, or `undefined` if the given index is out of range.
+
+```ts
+function getUndefined<A>(xs: ReadonlyArray<A>, index: number): A | undefined
+function getUndefined<A>(index: number): (xs: ReadonlyArray<A>) => A | undefined
+```
+
+### getBy
+
+Returns `Some(value)` for the first element in the array that satisifies the given predicate function, or `None` if no element satisifies the predicate.
+
+```ts
+function getBy<A>(xs: ReadonlyArray<A>, predicateFn: (_1: A) => boolean): Option<A>
+function getBy<A>(predicateFn: (_1: A) => boolean): (xs: ReadonlyArray<A>) => Option<A>
+```
+
+### find
+
+Alias for `getBy`.
+
+```ts
+function find<A>(xs: ReadonlyArray<A>, predicateFn: (_1: A) => boolean): Option<A>
+function find<A>(predicateFn: (_1: A) => boolean): (xs: ReadonlyArray<A>) => Option<A>
+```
+
+### head
+
+Returns the first element of the array, or `None` if the given array is empty.
+
+```ts
+function head<A>(xs: ReadonlyArray<A>): Option<A>
+```
+
+### last
+
+Returns the last element (`Some(value)`) in the array, or `None` if the given array is empty.
+
+```ts
+function last<A>(xs: ReadonlyArray<A>): Option<A>
+```
+
+### tail
+
+Returns a new array containing all but the the first element of the provided array, or `None` if the given array is empty (has no tail).
+
+```ts
+function tail<A>(xs: ReadonlyArray<A>): Option<ReadonlyArray<A>>
+```
+
+```ts
+A.tail([1, 2, 3]) // Some([2, 3])
+A.tail([1]) // Some([])
+A.tail([]) // None
+pipe([1, 2, 3, 4], A.tail) // Some([2, 3, 4])
+```
+
+### tailOrEmpty
+
+Returns a new array containing all but the first element of the provided array, or an empty array if the given array is empty (has no tail).
+
+```ts
+function tailOrEmpty<A>(xs: ReadonlyArray<A>): ReadonlyArray<A>
+```
+
+### init
+
+Returns a new array (`Some(xs)`) with all elements except the last of the provided array.
+
+```ts
+function init<A>(xs: ReadonlyArray<A>): Option<ReadonlyArray<A>>
+```
+
+### initOrEmpty
+
+Returns a new array with all elements except the last of the provided array, or an empty array if the given array is empty.
+
+```ts
+function initOrEmpty<A>(xs: ReadonlyArray<A>): ReadonlyArray<A>
+```
+
+### take
+
+Returns a new array including the first `n` elements of the provided array, or an empty array if `n` is either negative or greater than the length of the provided array.
+
+```ts
+function take<A>(xs: ReadonlyArray<A>, offset: number): ReadonlyArray<A>
+function take<A>(offset: number): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+```
+
+### takeExactly
+
+Returns a new array (`Some(xs)`) with the first `n` elements of the provided array, or `None` if `n` is either negative or greater than the length of the provided array.
+
+```ts
+function takeExactly<A>(xs: ReadonlyArray<A>, offset: number): Option<ReadonlyArray<A>>
+function takeExactly<A>(offset: number): (xs: ReadonlyArray<A>) => Option<ReadonlyArray<A>>
+```
+
+### takeWhile
+
+Returns a new array, filled with elements from the provided array until an element doesn't pass the provided predicate.
+
+```ts
+function takeWhile<A>(xs: ReadonlyArray<A>, predicateFn: (_1: A) => boolean): ReadonlyArray<A>
+function takeWhile<A>(predicateFn: (_1: A) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+```
+
+### drop
+
+Returns a new array that does not contain the first `n` elements of the provided array, or an empty array if `n` is either less than `0` or greater than the length of the provided array.
+
+```ts
+function drop<A>(xs: ReadonlyArray<A>, offset: number): ReadonlyArray<A>
+function drop<A>(offset: number): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+```
+
+### dropExactly
+
+Returns a new array (`Some(xs)`) that does not contain the first `n` elements of the provided array, or `None` if `n` is either less than `0` or greater than the length of the provided array.
+
+```ts
+function dropExactly<A>(xs: ReadonlyArray<A>, offset: number): Option<ReadonlyArray<A>>
+function dropExactly<A>(offset: number): (xs: ReadonlyArray<A>) => Option<ReadonlyArray<A>>
+```
+
+### dropWhile
+
+Drops elements from the beginning of the array until an element is reached which does not satisfy the given predicate.
+
+```ts
+function dropWhile<A>(xs: ReadonlyArray<A>, predicateFn: (_1: A) => boolean): ReadonlyArray<A>
+function dropWhile<A>(predicateFn: (_1: A) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+```
+
+### uncons
+
+Splits the provided array into head and tail parts (as a tuple), but only if the array is not empty.
+
+```ts
+function uncons<A>(xs: ReadonlyArray<A>): Option<[A, ReadonlyArray<A>]>
+```
+
+### map
+
+Returns a new array by calling `mapFn` for each element of the provided array.
+
+```ts
+function map<A, B>(xs: ReadonlyArray<A>, mapFn: (_1: A) => B): ReadonlyArray<B>
+function map<A, B>(mapFn: (_1: A) => B): (xs: ReadonlyArray<A>) => ReadonlyArray<B>
+```
+
+### mapWithIndex
+
+Returns a new array by calling `mapFn` (which takes two arguments: the element from array and its index) for each element of the provided array.
+
+```ts
+function mapWithIndex<A, B>(xs: ReadonlyArray<A>, mapFn: (_1: A, _2: number) => B): ReadonlyArray<B>
+function mapWithIndex<A, B>(mapFn: (_1: A, _2: number) => B): (xs: ReadonlyArray<A>) => ReadonlyArray<B>
+```
+
+### filter
+
+Returns a new array that keep all elements satisfy the given predicate.
+
+```ts
+function filter<A>(xs: ReadonlyArray<A>, predicateFn: (_1: A) => boolean): ReadonlyArray<A>
+function filter<A>(predicateFn: (_1: A) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+```
+
+### filterWithIndex
+
+Returns a new array that keep all elements satisfy the given predicate (which take two arguments: the element for the array and its index).
+
+```ts
+function filterWithIndex<A>(xs: ReadonlyArray<A>, predicateFn: (_1: A, _2: number) => boolean): ReadonlyArray<A>
+function filterWithIndex<A>(predicateFn: (_1: A, _2: number) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+```
+
+### reject
+
+Returns a new array of elements from the provided array which do not satisfy the given predicate.
+
+```ts
+function reject<A>(xs: ReadonlyArray<A>, predicateFn: (_1: A) => boolean): ReadonlyArray<A>
+function reject<A>(predicateFn: (_1: A) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+```
+
+### rejectWithIndex
+
+Returns a new array of elements from the provided array which do not satisfy the given predicate (which take two arguments: the element for the array and its index).
+
+```ts
+function rejectWithIndex<A>(xs: ReadonlyArray<A>, predicateFn: (_1: A, _2: number) => boolean): ReadonlyArray<A>
+function rejectWithIndex<A>(predicateFn: (_1: A, _2: number) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+```
+
+### reduce
+
+Applies `reduceFn` (which has two parameters: an `accumulator` which starts with a value of `initialValue` and the next value from the array) to each element of the provided array, and eventually it returns the final value of the accumulator.
+
+```ts
+function reduce<A, B>(xs: ReadonlyArray<A>, initialValue: B, reduceFn: (_1: B, _2: A) => B): B
+function reduce<A, B>(initialValue: B, reduceFn: (_1: B, _2: A) => B): (xs: ReadonlyArray<A>) => B
+```
+
+### reduceWithIndex
+
+Applies `reduceFn` (which has three parameters: an `accumulator` which starts with a value of `initialValue`, the next value from the array and its index) to each element of the provided array, and eventually it returns the final value of the accumulator.
+
+```ts
+function reduceWithIndex<A, B>(xs: ReadonlyArray<A>,initialValue: B,reduceFn: (_1: B, _2: A, _3: number) => B): B
+function reduceWithIndex<A, B>(initialValue: B, reduceFn: (_1: B, _2: A, _3: number) => B): (xs: ReadonlyArray<A>) => B
+```
+
+### splitAt
+
+Returns two arrays (`Some([xs, ys])`), with the original array divided at the given index, or `None` if the index is out of range,.
+
+```ts
+function splitAt<A>(xs: ReadonlyArray<A>, offset: number): Option<[ReadonlyArray<A>, ReadonlyArray<A>]>
+function splitAt<A>(offset: number): (xs: ReadonlyArray<A>) => Option<[ReadonlyArray<A>, ReadonlyArray<A>]>
+```
+
+### splitEvery
+
+Returns an array of arrays, where each of the inner arrays has length equal to the provided `size` parameter.
+
+```ts
+function splitEvery<A>(xs: ReadonlyArray<A>, size: number): Array<ReadonlyArray<A>>
+function splitEvery<A>(size: number): (xs: ReadonlyArray<A>) => Array<ReadonlyArray<A>>
+```
+
+### shuffle
+
+Returns a new array with elements in the original array randomly shuffled.
+
+```ts
+function shuffle<A>(xs: ReadonlyArray<A>): ReadonlyArray<A>
+```
+
+### partition
+
+Splits the provided array into two separate arrays - one containing elements which satisfy the predicate, and the other array containing the elements which do not satisfy the predicate.
+
+```ts
+function partition<A>(xs: ReadonlyArray<A>, fn: (_1: A) => boolean): [ReadonlyArray<A>, ReadonlyArray<A>]
+function partition<A>(fn: (_1: A) => boolean): (xs: ReadonlyArray<A>) => [ReadonlyArray<A>, ReadonlyArray<A>]
+```
+
+### concat
+
+Returns a new array containing the concatenation of two provided arrays.
+
+```ts
+function concat<A>(xs0: ReadonlyArray<A>, xs1: ReadonlyArray<A>): ReadonlyArray<A>
+function concat<A>(xs1: ReadonlyArray<A>): (xs0: ReadonlyArray<A>) => ReadonlyArray<A>
+```
+
+### concatMany
+
+Returns a new array as the concatenation of the provided array of arrays.
+
+```ts
+function concatMany<A>(xs: Array<ReadonlyArray<A>>): ReadonlyArray<A>
+```
+
+### every
+
+Returns `true`` if all elements satisfy the given predicate.
+
+```ts
+function every<A>(xs: ReadonlyArray<A>, fn: (_1: A) => boolean): boolean
+function every<A>(fn: (_1: A) => boolean): (xs: ReadonlyArray<A>) => boolean
+```
+
+### some
+
+Returns `true` if at least one of the elements in the given array satifies the predicate.
+
+```ts
+function some<A>(xs: ReadonlyArray<A>, fn: (_1: A) => boolean): boolean
+function some<A>(fn: (_1: A) => boolean): (xs: ReadonlyArray<A>) => boolean
+```
+
+### slice
+
+Returns a new array with the `len` elements of the given array starting at `offset` (offset can be negative).
+
+```ts
+function slice<A>(xs: ReadonlyArray<A>, offset: number, len: number): ReadonlyArray<A>
+function slice<A>(offset: number, len: number): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+```
+
+### sliceToEnd
+
+Returns a new array with the elements of the given array starting at `offset` (offset can be negative).
+
+```ts
+function sliceToEnd<A>(xs: ReadonlyArray<A>, offset: number): ReadonlyArray<A>
+function sliceToEnd<A>(offset: number): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+```
+
+### eq
+
+Returns `false` if length of both arrays is not the same, otherwise compares elements one by one using the comparator.
+
+```ts
+function eq<A>(xs0: ReadonlyArray<A>,xs1: ReadonlyArray<A>,comparatorFn: (_1: A, _2: A) => boolean): boolean
+function eq<A>(xs1: ReadonlyArray<A>, comparatorFn: (_1: A, _2: A) => boolean): (xs0: ReadonlyArray<A>) => boolean
+```
+
+### range
+
+Returns a new array of numbers from `start` (inclusive) to `finish` (exclusive).
+
+```ts
+function range(start: number, finish: number): number[]
+function range(finish: number): (start: number) => number[]
+```
+
+### rangeBy
+
+Returns a new array of numbers from `start` (inclusive) to `finish` (exclusive).
+
+```ts
+function rangeBy(start: number, finish: number, step: number): number[]
+function rangeBy(finish: number, step: number): (start: number) => number[]
+```
+
+### copy
+
+Returns a copy of the provided array.
+
+```ts
+function copy<A>(xs: ReadonlyArray<A>): ReadonlyArray<A>
+```
+
+### zip
+
+Create a new array of pairs from corresponding elements of two provided arrays.
+
+```ts
+function zip<A, B>(xs0: ReadonlyArray<A>, xs1: ReadonlyArray<B>): Array<[A, B]>
+function zip<A, B>(xs1: ReadonlyArray<B>): (xs0: ReadonlyArray<A>) => Array<[A, B]>
+```
+
+### zipWith
+
+Create a new array by applying `zipFn` to corresponding elements of two provided arrays.
+
+```ts
+function zipWith<A, B, C>(xs0: ReadonlyArray<A>, xs1: ReadonlyArray<B>, zipFn: (_1: A, _2: B) => C): ReadonlyArray<C>
+function zipWith<A, B, C>(xs1: ReadonlyArray<B>, zipFn: (_1: A, _2: B) => C): (xs0: ReadonlyArray<A>) => ReadonlyArray<C>
+```
+
+### unzip
+
+Takes an array of pairs and creates a pair of arrays. The first array contains all the first elements of the pairs and the other one contains all the second elements.
+
+```ts
+function unzip<A, B>(xs: Array<[A, B]>): [ReadonlyArray<A>, ReadonlyArray<B>]
+```
+
+### replaceAt
+
+Creates a new array by replacing the value at the given index with the given value (no replacement is made if the index is out of range).
+
+```ts
+function replaceAt<A>(xs: ReadonlyArray<A>, targetIndex: number, element: A): ReadonlyArray<A>
+function replaceAt<A>(targetIndex: number, element: A): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+```
+
+### insertAt
+
+Creates a new array that inserts the given value at the given index (no insertion is made if the index is out of range).
+
+```ts
+function insertAt<A>(xs: ReadonlyArray<A>, targetIndex: number, element: A): ReadonlyArray<A>
+function insertAt<A>(targetIndex: number, element: A): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+```
+
+### updateAt
+
+Creates a new array that replaces the value at the given index with the value returned by the provided function (the original array if the index is out of range).
+
+```ts
+function updateAt<A>(targetIndex: number, fn: (_1: A) => A, xs: ReadonlyArray<A>): ReadonlyArray<A>
+function updateAt<A>(fn: (_1: A) => A, xs: ReadonlyArray<A>): (targetIndex: number) => ReadonlyArray<A>
+```
+
+### swapAt
+
+Creates a new array with the elements at the two given indexes swapped (the original array if the index is out of range).
+
+```ts
+function swapAt<A>(xs: ReadonlyArray<A>, targetIndex: number, swapIndex: number): ReadonlyArray<A>
+function swapAt<A>(targetIndex: number, swapIndex: number): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+```
+
+### removeAt
+
+Creates a new array without the element at the given index (the original array if the index is out of range).
+
+```ts
+function removeAt<A>(xs: ReadonlyArray<A>, targetIndex: number): ReadonlyArray<A>
+function removeAt<A>(targetIndex: number): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+```
+
+### uniqBy
+
+Returns a new array containing only one copy of each element in the provided array, based upon the value returned by applying the function to each element.
+
+```ts
+function uniqBy<A>(xs: ReadonlyArray<A>, uniqFn: (_1: A) => A): ReadonlyArray<A>
+function uniqBy<A>(uniqFn: (_1: A) => A): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+```
+
+### uniq
+
+Returns a new array containing only one copy of each element in the provided array.
+
+```ts
+function uniq<A>(xs: ReadonlyArray<A>): ReadonlyArray<A>
+```
+
+### forEach
+
+Calls `fn` on each element of the provided array.
+
+```ts
+function forEach<A>(xs: ReadonlyArray<A>, fn: (_1: A) => void): void
+function forEach<A>(fn: (_1: A) => void): (xs: ReadonlyArray<A>) => void
+```
+
+### forEachWithIndex
+
+Calls `fn` (which takes two arguments: the element from array and its index) on each element of the provided array.
+
+```ts
+function forEachWithIndex<A>(xs: ReadonlyArray<A>, fn: (_1: number, _2: A) => void): void
+function forEachWithIndex<A>(fn: (_1: number, _2: A) => void): (xs: ReadonlyArray<A>) => void
+```
+
+### getIndexBy
+
+Returns `Some(index)` for the first value in the provided array that satisifies the predicate function.
+
+```ts
+function getIndexBy<A>(xs: ReadonlyArray<A>, predicateFn: (_1: A) => boolean): Option<number>
+function getIndexBy<A>(predicateFn: (_1: A) => boolean): (xs: ReadonlyArray<A>) => Option<number>
+```
+
+### includes
+
+Returns `true` if the provided value is equal to at least one element of the given array.
+
+```ts
+function includes<A>(xs: ReadonlyArray<A>, value: A): boolean
+function includes<A>(value: A): (xs: ReadonlyArray<A>) => boolean
+```
+
+### join
+
+Converts each element of the array to a string and concatenates them, separated by the given string.
+
+```ts
+function join<A>(xs: ReadonlyArray<A>, delimiter: string): string
+function join<A>(delimiter: string): (xs: ReadonlyArray<A>) => string
+```
+
+### sort
+
+Returns a new array, sorted according to the comparator function.
+
+```ts
+function sort<A>(xs: ReadonlyArray<A>, sortFn: (_1: A, _2: A) => number): ReadonlyArray<A>
+function sort<A>(sortFn: (_1: A, _2: A) => number): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+```
+
+### sortBy
+
+Returns a new array, sorted according to the provided function.
+
+```ts
+function sortBy<A, B>(xs: ReadonlyArray<A>, sortFn: (_1: A) => B): ReadonlyArray<A>
+function sortBy<A, B>(sortFn: (_1: A) => B): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+```
+
+### groupBy
+
+Splits the given array into sub-arrays in an object, grouped by the result of running each value through the provided function.
+
+```ts
+function groupBy<T, K extends PropertyKey>(xs: ReadonlyArray<T>, groupFn: (item: T) => K): Partial<Record<K, readonly [T, ...T[]]>>
+function groupBy<T, K extends PropertyKey>(groupFn: (item: T) => K): (xs: ReadonlyArray<T>) => Partial<Record<K, readonly [T, ...T[]]>>
+```
+
+### flat
+
+Creates a new array with all sub-array elements concatenated into it (the single level depth).
+
+```ts
+function flat<T>(xs: ReadonlyArray<T>): ReadonlyArray<T extends ReadonlyArray<infer K> ? K : T>
+```
+
+### deepFlat
+
+Creates a new array with all sub-array elements concatenated into it recursively up to the `Infinite` depth.
+
+```ts
+function deepFlat<T>(xs: ReadonlyArray<T>): ReadonlyArray<ExtractNested<T>>
+```

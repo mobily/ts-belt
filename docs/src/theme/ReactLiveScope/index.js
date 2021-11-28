@@ -1,13 +1,10 @@
-import React from 'react';
-import { O, R, A, pipe } from '../../../../src';
+import React from 'react'
+import * as Belt from '../../../..'
 
 const ReactLiveScope = {
   React,
-  O,
-  R,
-  A,
-  pipe,
+  ...Belt,
   ...React,
-};
+}
 
-export default ReactLiveScope;
+export default ReactLiveScope

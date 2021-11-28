@@ -1,7 +1,7 @@
 import { R, A } from '../..'
 
 describe('fromPredicate', () => {
-  it('should return Error', () => {
+  it('returns Error', () => {
     expect(R.fromPredicate('value', str => str.length > 10, 'this is bad')).toEqual(
       R.Error('this is bad'),
     )
@@ -9,7 +9,7 @@ describe('fromPredicate', () => {
     expect(R.fromPredicate(true, state => !state, 'this is bad')).toBeError('this is bad')
   })
 
-  it('should return Ok', () => {
+  it('returns Ok', () => {
     expect(
       R.fromPredicate(
         [1, 2, 3],

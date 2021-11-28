@@ -1,7 +1,7 @@
 import { pipe, O } from '../..'
 
 describe('toUndefined', () => {
-  it('should return undefined', () => {
+  it('returns undefined', () => {
     expect(pipe(O.None, O.toUndefined)).toBe(undefined)
     expect(
       pipe(
@@ -12,7 +12,7 @@ describe('toUndefined', () => {
     ).toBe(undefined)
   })
 
-  it('should return a value', () => {
+  it('returns a value', () => {
     expect(pipe(O.Some('value'), O.toUndefined)).toBe('value')
     expect(
       pipe(

@@ -1,0 +1,77 @@
+### length
+
+```ts
+function length(str: string): number
+```
+
+### head
+
+```ts
+function head(str: string): string
+```
+
+### slice
+
+```ts
+function slice(str: string, start: number, end: number): string
+function slice(start: number, end: number): (str: string) => string
+```
+
+### sliceToEnd
+
+```ts
+function sliceToEnd(str: string, start: number): string
+function sliceToEnd(start: number): (str: string) => string
+```
+
+### toLowerCase
+
+```ts
+function toLowerCase(str: string): string
+```
+
+### toUpperCase
+
+```ts
+function toUpperCase(str: string): string
+```
+
+### trim
+
+```ts
+function trim(str: string): string
+```
+
+### isEmpty
+
+```ts
+function isEmpty(str: string): boolean
+```
+
+### split
+
+```ts
+function split(str: string, delimiter: string): string[]
+function split(delimiter: string): (str: string) => string[]
+```
+
+### includes
+
+```ts
+function includes(str: string, value: string): boolean
+function includes(value: string): (str: string) => boolean
+```
+
+### replace
+
+```ts
+function replace(str: string, oldValue: string, newValue: string): string
+function replace(oldValue: string, newValue: string): (str: string) => string
+```
+
+### replaceByRe
+
+```ts
+function replaceByRe(str: string, regex: RegExp, value: string): string
+function replaceByRe(regex: RegExp, value: string): (str: string) => string
+```

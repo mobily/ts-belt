@@ -1,7 +1,7 @@
 import { pipe, R } from '../..'
 
 describe('toNullable', () => {
-  it('should return null', () => {
+  it('returns null', () => {
     expect(pipe(R.Error('this is bad'), R.toNullable)).toBe(null)
     expect(
       pipe(
@@ -19,7 +19,7 @@ describe('toNullable', () => {
     ).toBe(null)
   })
 
-  it('should return a value', () => {
+  it('returns a value', () => {
     expect(pipe(R.Ok('value'), R.toNullable)).toBe('value')
     expect(pipe(R.fromNullable('value', 'this is bad'), R.toNullable)).toBe('value')
     expect(

@@ -1,12 +1,12 @@
 import { R } from '../..'
 
 describe('fromNullable', () => {
-  it('should return Error', () => {
+  it('returns Error', () => {
     expect(R.fromNullable(null, 'this is bad')).toBeError('this is bad')
     expect(R.fromNullable(undefined, 'this is bad')).toBeError('this is bad')
   })
 
-  it('should return Ok', () => {
+  it('returns Ok', () => {
     expect(R.fromNullable('value', 'this is bad')).toBeOk('value')
     expect(R.fromNullable([], 'this is bad')).toBeOk([])
     expect(R.fromNullable({}, 'this is bad')).toBeOk({})

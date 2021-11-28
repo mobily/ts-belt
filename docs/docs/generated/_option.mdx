@@ -1,0 +1,104 @@
+### fromNullable
+
+```ts
+function fromNullable<T>(value: T): Option<ExtractValue<T>>
+```
+
+### fromFalsy
+
+```ts
+function fromFalsy<T>(value: T): Option<ExtractValue<T>>
+```
+
+### fromPredicate
+
+```ts
+function fromPredicate<T>(value: T, predicateFn: (value: T) => boolean): Option<ExtractValue<T>>
+function fromPredicate<T>(predicateFn: (value: T) => boolean): (value: T) => Option<ExtractValue<T>>
+```
+
+### map
+
+```ts
+function map<T, R>(option: Option<T>, mapFn: (value: T) => NonNullable<R>): Option<R>
+function map<T, R>(mapFn: (value: T) => NonNullable<R>): (option: Option<T>) => Option<R>
+```
+
+### flatMap
+
+```ts
+function flatMap<T, R>(option: Option<T>, mapFn: (value: T) => Option<R>): Option<R>
+function flatMap<T, R>(mapFn: (value: T) => Option<R>): (option: Option<T>) => Option<R>
+```
+
+### mapWithDefault
+
+```ts
+function mapWithDefault<T, R>(option: Option<T>, defaultValue: NonNullable<R>, mapFn: (value: T) => R): R
+function mapWithDefault<T, R>(defaultValue: NonNullable<R>, mapFn: (value: T) => R): (option: Option<T>) => R
+```
+
+### mapNullable
+
+```ts
+function mapNullable<T, R>(option: Option<T>, mapFn: (value: T) => R | null | undefined): Option<ExtractValue<R>>
+function mapNullable<T, R>(mapFn: (value: T) => R | null | undefined): (option: Option<T>) => Option<ExtractValue<R>>
+```
+
+### filter
+
+```ts
+function filter<T>(option: Option<T>, predicate: (value: T) => boolean): Option<T>
+function filter<T>(predicate: (value: T) => boolean): (option: Option<T>) => Option<T>
+```
+
+### getWithDefault
+
+```ts
+function getWithDefault<T>(option: Option<T>, defaultValue: NonNullable<T>): T
+function getWithDefault<T>(defaultValue: NonNullable<T>): (option: Option<T>) => T
+```
+
+### getExn
+
+```ts
+function getExn<T>(option: Option<T>): T | never
+```
+
+### toNullable
+
+```ts
+function toNullable<T>(option: Option<T>): T | null
+```
+
+### toUndefined
+
+```ts
+function toUndefined<T>(option: Option<T>): T | undefined
+```
+
+### toResult
+
+```ts
+function toResult<A, B>(option: Option<A>, error: NonNullable<B>): Result<A, B>
+function toResult<A, B>(error: NonNullable<B>): (option: Option<A>) => Result<A, B>
+```
+
+### match
+
+```ts
+function match<T, R>(option: Option<T>, someFn: (value: T) => R, noneFn: () => R): R
+function match<T, R>(someFn: (value: T) => R, noneFn: () => R): (option: Option<T>) => R
+```
+
+### isNone
+
+```ts
+function isNone<T>(option: Option<T>): option is Option<never>
+```
+
+### isSome
+
+```ts
+function isSome<T>(option: Option<T>): option is Option<T>
+```

@@ -1,7 +1,7 @@
 import { pipe, R } from '../..'
 
 describe('toOption', () => {
-  it('should return None', () => {
+  it('returns None', () => {
     expect(pipe(R.fromNullable(null, 'this is bad'), R.toOption)).toBeNone()
     expect(
       pipe(
@@ -19,7 +19,7 @@ describe('toOption', () => {
     ).toBeNone()
   })
 
-  it('should return Some', () => {
+  it('returns Some', () => {
     expect(pipe(R.Ok('value'), R.toOption)).toBeSome('value')
     expect(pipe(R.fromNullable('value', 'this is bad'), R.toOption)).toBeSome('value')
     expect(

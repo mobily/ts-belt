@@ -1,6 +1,6 @@
 {
   "name": "@mobily/ts-belt",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "namespace": true,
   "bsc-flags": ["-bs-super-errors", "-bs-no-version-header"],
   "gentypeconfig": {
@@ -20,9 +20,14 @@
     {
       "dir": "src",
       "subdirs": true
+    },
+    {
+      "dir": "tools/rescript-externals"
     }
   ],
   "bs-dependencies": [],
   "bs-dev-dependencies": [],
-  "ppx-flags": []
+  "ppx-flags": [
+    ["./tools/comment-ppx/ppx.exe -as-ppx"]
+  ]
 }

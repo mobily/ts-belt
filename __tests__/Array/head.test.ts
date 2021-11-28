@@ -1,11 +1,11 @@
 import { A } from '../..'
 
 describe('head', () => {
-  it('should return None', () => {
+  it('returns None', () => {
     expect(A.head([])).toBeNone()
   })
 
-  it('should return Some', () => {
+  it('returns Some', () => {
     expect(A.head([1, 2, 3])).toBeSome(1)
     expect(A.head([0, 2, 3])).toBeSome(0)
     expect(A.head([false, true, true])).toBeSome(false)

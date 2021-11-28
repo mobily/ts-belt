@@ -1,7 +1,7 @@
 import { pipe, R } from '../..'
 
 describe('flatMap', () => {
-  it('should return Error', () => {
+  it('returns Error', () => {
     expect(
       pipe(
         R.fromNullable('value', 'this is bad'),
@@ -24,7 +24,7 @@ describe('flatMap', () => {
     ).toBeError('this is bad')
   })
 
-  it('should return Ok', () => {
+  it('returns Ok', () => {
     expect(
       pipe(
         R.fromNullable(2, 'error'),

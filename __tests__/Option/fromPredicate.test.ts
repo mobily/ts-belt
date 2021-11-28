@@ -1,13 +1,13 @@
 import { O, A } from '../..'
 
 describe('fromPredicate', () => {
-  it('should return None', () => {
+  it('returns None', () => {
     expect(O.fromPredicate('string', str => str.length > 10)).toBeNone()
     expect(O.fromPredicate(0, n => n !== 0)).toBeNone()
     expect(O.fromPredicate(true, state => !state)).toBeNone()
   })
 
-  it('should return Some', () => {
+  it('returns Some', () => {
     expect(
       O.fromPredicate(
         [1, 2, 3],

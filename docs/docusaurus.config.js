@@ -1,3 +1,5 @@
+const root = require('../package.json')
+
 module.exports = {
   title: 'ts-belt',
   tagline: 'The tagline of my site',
@@ -10,27 +12,31 @@ module.exports = {
   projectName: 'ts-belt',
   themeConfig: {
     navbar: {
-      title: 'TS Belt',
-       logo: {
+      title: `v${root.version}`,
+      logo: {
         alt: 'TS Belt',
-        src: 'img/ts-belt-logo.svg',
+        src: 'img/ts-belt-logo.png',
       },
       items: [
-        // {
-        //   to: 'docs/',
-        //   activeBasePath: 'docs',
-        //   label: 'Docs',
-        //   position: 'left',
-        // },
+        {
+          href: 'https://www.buymeacoffee.com/utSC0k7',
+          label: 'Sponsor ❤️',
+          position: 'right',
+        },
         {
           href: 'https://github.com/mobily/ts-belt',
-          label: 'GitHub',
+          label: 'Github',
+          position: 'right',
+        },
+        {
+          href: 'https://twitter.com/__marcin_',
+          label: 'Twitter',
           position: 'right',
         },
       ],
     },
     footer: {
-      style: 'dark',
+      style: 'light',
       links: [
         {
           title: 'Github',
@@ -56,13 +62,30 @@ module.exports = {
               label: 'Github',
               href: 'https://github.com/mobily',
             },
+            {
+              label: 'Dev.to',
+              href: 'https://dev.to/mobily',
+            },
           ],
         },
       ],
       copyright: `Built with Docusaurus ❤️`,
     },
+    colorMode: {
+      defaultMode: 'light',
+      disableSwitch: true,
+      respectPrefersColorScheme: false,
+    },
   },
   themes: ['@docusaurus/theme-live-codeblock'],
+  plugins: [
+    [
+      require.resolve('@easyops-cn/docusaurus-search-local'),
+      {
+        hashed: true,
+      },
+    ],
+  ],
   presets: [
     [
       '@docusaurus/preset-classic',
@@ -70,8 +93,7 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/',
+          editUrl: 'https://github.com/facebook/docusaurus/edit/master/website/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -79,4 +101,4 @@ module.exports = {
       },
     ],
   ],
-};
+}

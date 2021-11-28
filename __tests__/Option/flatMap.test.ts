@@ -1,7 +1,7 @@
 import { pipe, O } from '../..'
 
 describe('flatMap', () => {
-  it('should return None', () => {
+  it('returns None', () => {
     expect(
       pipe(
         O.fromNullable(null),
@@ -25,7 +25,7 @@ describe('flatMap', () => {
     ).toBeNone()
   })
 
-  it('should return Some', () => {
+  it('returns Some', () => {
     expect(
       pipe(
         O.fromNullable('value'),

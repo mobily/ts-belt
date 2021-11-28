@@ -1,7 +1,7 @@
 import { pipe, O } from '../..'
 
 describe('getWithDefault', () => {
-  it('should return a default value', () => {
+  it('returns a default value', () => {
     expect(pipe(O.fromNullable(null), O.getWithDefault('default value'))).toBe('default value')
     expect(
       pipe(

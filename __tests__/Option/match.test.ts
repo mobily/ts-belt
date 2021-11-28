@@ -1,7 +1,7 @@
 import { pipe, O } from '../..'
 
 describe('match', () => {
-  it('should return a result of someFn', () => {
+  it('returns a result of someFn', () => {
     expect(
       pipe(
         O.fromNullable(null),
@@ -13,7 +13,7 @@ describe('match', () => {
     ).toEqual('this is bad')
   })
 
-  it('should return a result of noneFn', () => {
+  it('returns a result of noneFn', () => {
     expect(
       pipe(
         O.fromNullable('this is fine'),

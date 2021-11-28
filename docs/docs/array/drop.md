@@ -3,8 +3,6 @@ id: drop
 title: drop
 ---
 
-It returns `None` if an array has fewer than `n` elements, otherwise returns a new array dropping the first `n` elements.
-
 ```ts
 drop<T>(n: number, arr: T[]): Option<T[]>
 ```

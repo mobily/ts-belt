@@ -10,37 +10,16 @@ There are many ways to import `ts-belt` functions into your project:
 #### Compact:
 
 ```typescript
-import { A, O, R, pipe } from '@mobily/ts-belt'
+import { F, A, R, G, O, S, D, pipe } from '@mobily/ts-belt'
 ```
 
-| O      | R      | A     |
-|--------|--------|-------|
-| Option | Result | Array |
+| F        | A     | R      | G      | O      | S      | D             |
+|----------|-------|--------|--------|--------|--------|---------------|
+| Function | Array | Result | Guards | Option | String | Object (Dict) |
 
 #### Explicit:
 
 ```typescript
 import { pipe } from '@mobily/ts-belt'
 import * as Option from '@mobily/ts-belt/Option'
-// or
-import { fromNullable } from '@mobily/ts-belt/Option'
-```
-
-## Currying
-
-Each `ts-belt` function is [curried](https://medium.com/javascript-scene/curry-and-function-composition-2c208d774983).
-
-```jsx live
-function() {
-  const fromEven = O.fromPredicate(value => value % 2 === 0)
-  const mapWithDefaultZero = O.mapWithDefault(0)
-
-  const value = pipe(
-    fromEven(2),
-    mapWithDefaultZero(value => value ** 2),
-    O.getExn,
-  )
-
-  return value
-}
 ```

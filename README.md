@@ -27,6 +27,10 @@
   <strong>Belt (<code>ReScript</code>) implementation in TypeScript.</strong>
 </p>
 
+## Motivation
+
+I pretty much like ReScript, its features, tooling are great developer experience (as well as `Belt` stdlib). I wish it was my main tool on a daily basis work. Unfortunately it isn't, since most of the commercial projects I have been working on recently are built with TypeScript, which at this point is fully understandable from the business perspective.
+
 ## Features
 
 - better type inference because of the `data-first` implementation

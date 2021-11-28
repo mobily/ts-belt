@@ -1,7 +1,7 @@
 import { pipe, O } from '../..'
 
 describe('toResult', () => {
-  it('should return Error', () => {
+  it('returns Error', () => {
     expect(pipe(O.fromNullable(null), O.toResult('this is bad'))).toBeError('this is bad')
     expect(
       pipe(
@@ -12,7 +12,7 @@ describe('toResult', () => {
     ).toBeError('this is bad')
   })
 
-  it('should return Ok', () => {
+  it('returns Ok', () => {
     expect(pipe(O.fromNullable('value'), O.toResult('this is bad'))).toBeOk('value')
     expect(
       pipe(

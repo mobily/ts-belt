@@ -1,0 +1,85 @@
+### makeEmpty
+
+```ts
+function makeEmpty<T>(): T
+```
+
+### prop
+
+```ts
+function prop<T, K extends keyof T>(dict: T, key: K): T[K]
+function prop<T, K extends keyof T>(key: K): (dict: T) => T[K]
+```
+
+### toPairs
+
+```ts
+function toPairs<T>(dict: Record<string, T>): ReadonlyArray<readonly [string, T]>
+```
+
+### values
+
+```ts
+function values<T extends string | number, R>(dict: Record<T, R>): ReadonlyArray<R>
+```
+
+### keys
+
+```ts
+function keys<T extends Record<string, unknown>>(dict: T): ReadonlyArray<keyof T>
+```
+
+### fromPairs
+
+```ts
+function fromPairs<T>(xs: ReadonlyArray<readonly [number, T]>): Record<number, T>
+```
+
+### merge
+
+```ts
+function merge<A, B>(fst: A, snd: B): A & B
+function merge<A, B>(snd: B): (fst: A) => A & B
+```
+
+### map
+
+```ts
+function map<T extends Record<string, any>, R>(dict: T, mapFn: (value: T[keyof T]) => R): Record<keyof T, R>
+function map<T extends Record<string, any>, R>(mapFn: (value: T[keyof T]) => R): (dict: T) => Record<keyof T, R>
+```
+
+### mapWithKey
+
+```ts
+function mapWithKey<T extends Record<string, any>, R>(dict: T, mapFn: (value: T[keyof T], key: keyof T) => R): Record<keyof T, R>
+function mapWithKey<T extends Record<string, any>, R>(mapFn: (value: T[keyof T], key: keyof T) => R): (dict: T) => Record<keyof T, R>
+```
+
+### filter
+
+```ts
+function filter<T extends Record<string, any>>(dict: T, predicateFn: (value: T[keyof T]) => boolean): Partial<T>
+function filter<T extends Record<string, any>>(predicateFn: (value: T[keyof T]) => boolean): (dict: T) => Partial<T>
+```
+
+### filterWithKey
+
+```ts
+function filterWithKey<T extends Record<string, any>>(dict: T, predicateFn: (value: T[keyof T], key: keyof T) => boolean): Partial<T>
+function filterWithKey<T extends Record<string, any>>(predicateFn: (value: T[keyof T], key: keyof T) => boolean): (dict: T) => Partial<T>
+```
+
+### reject
+
+```ts
+function reject<T extends Record<string, any>>(dict: T, predicateFn: (value: T[keyof T]) => boolean): Partial<T>
+function reject<T extends Record<string, any>>(predicateFn: (value: T[keyof T]) => boolean): (dict: T) => Partial<T>
+```
+
+### rejectWithKey
+
+```ts
+function rejectWithKey<T extends Record<string, any>>(dict: T, predicateFn: (value: T[keyof T], key: keyof T) => boolean): Partial<T>
+function rejectWithKey<T extends Record<string, any>>(predicateFn: (value: T[keyof T], key: keyof T) => boolean): (dict: T) => Partial<T>
+```

@@ -14,7 +14,7 @@ describe('getExn', () => {
     }).toThrow(Object)
   })
 
-  it('should return a value', () => {
+  it('returns a value', () => {
     expect(pipe(O.fromNullable('value'), O.getExn)).toBe('value')
     expect(
       pipe(

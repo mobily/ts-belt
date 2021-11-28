@@ -1,7 +1,7 @@
 import { pipe, R } from '../..'
 
 describe('toUndefined', () => {
-  it('should return null', () => {
+  it('returns null', () => {
     expect(pipe(R.Error('this is bad'), R.toUndefined)).toBe(undefined)
     expect(
       pipe(
@@ -19,7 +19,7 @@ describe('toUndefined', () => {
     ).toBe(undefined)
   })
 
-  it('should return a value', () => {
+  it('returns a value', () => {
     expect(pipe(R.Ok('value'), R.toUndefined)).toBe('value')
     expect(pipe(R.fromNullable('value', 'this is bad'), R.toUndefined)).toBe('value')
     expect(

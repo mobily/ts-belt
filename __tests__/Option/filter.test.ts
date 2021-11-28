@@ -1,7 +1,7 @@
 import { pipe, O } from '../..'
 
 describe('filter', () => {
-  it('should return None', () => {
+  it('returns None', () => {
     expect(
       pipe(
         O.fromNullable(null),
@@ -25,7 +25,7 @@ describe('filter', () => {
     ).toBeNone()
   })
 
-  it('should return Some', () => {
+  it('returns Some', () => {
     expect(
       pipe(
         O.fromNullable([1, 2, 3]),

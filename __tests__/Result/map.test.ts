@@ -1,7 +1,7 @@
 import { pipe, R } from '../..'
 
 describe('map', () => {
-  it('should return Error', () => {
+  it('returns Error', () => {
     expect(
       pipe(
         R.fromNullable(null, 'this is bad'),
@@ -10,7 +10,7 @@ describe('map', () => {
     ).toBeError('this is bad')
   })
 
-  it('should return Ok', () => {
+  it('returns Ok', () => {
     expect(
       pipe(
         R.fromNullable([1, 2, 3], 'this is bad'),

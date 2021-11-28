@@ -1,0 +1,31 @@
+---
+id: option
+title: Option
+---
+
+import Option, { toc as optiontoc } from "../generated/_option.mdx"
+
+Belt (ReScript) represents the existence and nonexistence of a value by wrapping it with the `Option` type. TS Belt does the same and provides utility-functions for convenient work with the `Option` type.
+
+```ts
+type Option<T> = Some<T> | None
+```
+
+```jsx live
+function() {
+  // ⬇️ remove all elements in the array below in order to see the default value
+  const xs = ['hello', 'ts', 'belt']
+  const value = pipe(
+    xs,
+    A.get(0),
+    O.map(value => `${value} world!`),
+    O.getWithDefault('default value'),
+  )
+
+  return value
+}
+```
+
+<Option />
+
+export const toc = optiontoc

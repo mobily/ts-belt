@@ -1,0 +1,104 @@
+### identity
+
+```ts
+function identity<A>(value: A): A
+```
+
+### equals
+
+```ts
+function equals(fst: any, snd: any): boolean
+function equals(snd: any): (fst: any) => boolean
+```
+
+### both
+
+```ts
+function both<A>(value: A, fn0: (_1: A) => boolean, fn1: (_1: A) => boolean): boolean
+function both<A>(fn0: (_1: A) => boolean, fn1: (_1: A) => boolean): (value: A) => boolean
+```
+
+### either
+
+```ts
+function either<A>(value: A, fn0: (_1: A) => boolean, fn1: (_1: A) => boolean): boolean
+function either<A>(fn0: (_1: A) => boolean, fn1: (_1: A) => boolean): (value: A) => boolean
+```
+
+### always
+
+```ts
+function always<A>(value: A): () => A
+```
+
+### defaultTo
+
+```ts
+function defaultTo<T>(defaultValue: NonNullable<T>, value: T | null | undefined): NonNullable<T>
+function defaultTo<T>(value: T | null | undefined): (defaultValue: NonNullable<T>) => NonNullable<T>
+```
+
+### falsy
+
+```ts
+function falsy(): boolean
+```
+
+### truthy
+
+```ts
+function truthy(): boolean
+```
+
+### ifElse
+
+```ts
+function ifElse<A, B>(value: A,predicateFn: (_1: A) => boolean,truthyFn: (_1: A) => B,falsyFn: (_1: A) => B): B
+function ifElse<A, B>(predicateFn: (_1: A) => boolean,truthyFn: (_1: A) => B,falsyFn: (_1: A) => B): (value: A) => B
+```
+
+### ignore
+
+```ts
+function ignore(): void
+```
+
+### unless
+
+```ts
+function unless<A>(value: A, predicateFn: (_1: A) => boolean, falsyFn: (_1: A) => A): A
+function unless<A>(predicateFn: (_1: A) => boolean, falsyFn: (_1: A) => A): (value: A) => A
+```
+
+### when
+
+```ts
+function when<A>(value: A, predicateFn: (_1: A) => boolean, truthyFn: (_1: A) => A): A
+function when<A>(predicateFn: (_1: A) => boolean, truthyFn: (_1: A) => A): (value: A) => A
+```
+
+### allPass
+
+```ts
+function allPass<A>(value: A, fns: Array<(_1: A) => boolean>): boolean
+function allPass<A>(fns: Array<(_1: A) => boolean>): (value: A) => boolean
+```
+
+### anyPass
+
+```ts
+function anyPass<A>(value: A, fns: Array<(_1: A) => boolean>): boolean
+function anyPass<A>(fns: Array<(_1: A) => boolean>): (value: A) => boolean
+```
+
+### pred
+
+```ts
+function pred(n: number): number
+```
+
+### succ
+
+```ts
+function succ(n: number): number
+```

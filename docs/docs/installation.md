@@ -15,7 +15,7 @@ npm install @mobily/ts-belt --save
 
 ### TS Config
 
-Update `strictNullChecks` and `strict` in your `tsconfig.json` (optional, recommended):
+Update `strictNullChecks` and `strict` in your `tsconfig.json` (optional but recommended):
 
 ```json
 {

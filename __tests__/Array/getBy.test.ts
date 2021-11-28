@@ -1,7 +1,7 @@
 import { A } from '../..'
 
 describe('getBy', () => {
-  it('should return None', () => {
+  it('returns None', () => {
     expect(A.getBy([1, 2, 3], n => n === 0)).toBeNone()
     expect(A.getBy([false, false, false], state => state)).toBeNone()
     expect(
@@ -9,7 +9,7 @@ describe('getBy', () => {
     ).toBeNone()
   })
 
-  it('should return Some', () => {
+  it('returns Some', () => {
     expect(A.getBy(['a', 'ab', 'bc'], str => str.length === 2)).toBeSome('ab')
     expect(A.getBy([1, 2, 3], value => value === 2)).toBeSome(2)
     expect(

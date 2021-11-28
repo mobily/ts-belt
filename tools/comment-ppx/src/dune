@@ -1,0 +1,7 @@
+(library
+ (name comment_ppx)
+ (wrapped false)
+ (public_name comment-ppx.lib)
+ (kind ppx_rewriter)
+ (libraries ppxlib)
+)

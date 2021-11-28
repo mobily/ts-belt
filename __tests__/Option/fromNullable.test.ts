@@ -1,12 +1,12 @@
 import { O } from '../..'
 
 describe('fromNullable', () => {
-  it('should return None', () => {
+  it('returns None', () => {
     expect(O.fromNullable(null)).toBeNone()
     expect(O.fromNullable(undefined)).toBeNone()
   })
 
-  it('should return Some', () => {
+  it('returns Some', () => {
     expect(O.fromNullable('value')).toBeSome('value')
     expect(O.fromNullable([])).toBeSome([])
     expect(O.fromNullable({})).toBeSome({})

@@ -1,7 +1,7 @@
 import { pipe, O } from '../..'
 
 describe('mapWithDefault', () => {
-  it('should return a default value', () => {
+  it('returns a default value', () => {
     expect(
       pipe(
         O.fromNullable(null),
