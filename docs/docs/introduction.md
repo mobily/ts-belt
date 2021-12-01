@@ -12,7 +12,7 @@ Secondly, I like the functional programming. I follow FP principles in almost ev
 
 :::info
 
-Disclaimer: these are my private opinions and feelings about libraries I used to use on a daily basis work, and obviously, you can disagree with them and I fully understand that! 😊
+Disclaimer: these are my private opinions and feelings about libraries I used to use on a daily basis work, and obviously, you can disagree with them and I fully understand this! 😊
 
 :::
 
@@ -55,7 +55,7 @@ Until I have decided to build `ts-belt`. It combines all of the good things you 
 - 🚀 built with `ReScript`, which generates highly performant JavaScript code (see the benchmarks [here](benchmarks))
 - 👀 provide more readable code, due to the `data-first` approach
 - ✨ support for `TypeScript` and `Flow`
-- 🛡 write more safer code with `Option` and `Result` types
+- 🛡 write safer code with `Option` and `Result` types
 - ✅ high tests coverage
 - 🌲 tree-shakeable
 - 📝 fully documented

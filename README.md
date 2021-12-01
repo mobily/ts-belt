@@ -32,7 +32,7 @@
 - 🚀 built with `ReScript`, which generates highly performant JavaScript code (see the benchmarks [here](benchmarks))
 - 👀 provide more readable code, due to the `data-first` approach
 - ✨ support for `TypeScript` and `Flow`
-- 🛡 write more safer code with `Option` and `Result` types
+- 🛡 write safer code with `Option` and `Result` types
 - ✅ high tests coverage
 - 🌲 tree-shakeable
 - 📝 fully documented
