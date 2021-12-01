@@ -2,9 +2,9 @@ import { O, A } from '../..'
 
 describe('fromPredicate', () => {
   it('returns None', () => {
-    expect(O.fromPredicate('string', str => str.length > 10)).toBeNone()
-    expect(O.fromPredicate(0, n => n !== 0)).toBeNone()
-    expect(O.fromPredicate(true, state => !state)).toBeNone()
+    expect(O.fromPredicate('string', str => str.length > 10)).toEqual(O.None)
+    expect(O.fromPredicate(0, n => n !== 0)).toEqual(O.None)
+    expect(O.fromPredicate(true, state => !state)).toEqual(O.None)
   })
 
   it('returns Some', () => {
@@ -13,9 +13,34 @@ describe('fromPredicate', () => {
         [1, 2, 3],
         A.some(x => x === 2),
       ),
-    ).toBeSome([1, 2, 3])
-    expect(O.fromPredicate({ prop: 'this is fine' }, obj => obj.prop === 'this is fine')).toBeSome({
-      prop: 'this is fine',
-    })
+    ).toEqual(O.Some([1, 2, 3]))
+    expect(
+      O.fromPredicate(
+        { prop: 'this is fine' },
+        obj => obj.prop === 'this is fine',
+      ),
+    ).toEqual(
+      O.Some({
+        prop: 'this is fine',
+      }),
+    )
+  })
+
+  it('*', () => {
+    const { Some, None } = O
+
+    expect(
+      O.fromPredicate(
+        [1, 2, 3],
+        A.some(x => x === 2),
+      ),
+    ).toEqual(Some([1, 2, 3]))
+
+    expect(
+      O.fromPredicate(
+        [1, 2, 3],
+        A.some(x => x === 4),
+      ),
+    ).toEqual(None)
   })
 })

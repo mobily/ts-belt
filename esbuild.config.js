@@ -1,8 +1,16 @@
 const esbuild = require('esbuild')
 
-const entryPoints = ['Function', 'Array', 'Result', 'Guards', 'Option', 'String', 'Dict'].map(
-  entryPoint => `src/${entryPoint}/index.js`,
-)
+const entryPoints = [
+  'Function',
+  'Array',
+  'Bool',
+  'Result',
+  'Guards',
+  'Option',
+  'String',
+  'Dict',
+  'Number',
+].map(entryPoint => `src/${entryPoint}/index.js`)
 const rootPoints = ['src/index.js', 'src/pipe.js']
 
 const handleError = () => process.exit(1)

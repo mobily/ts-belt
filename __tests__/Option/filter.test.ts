@@ -1,4 +1,4 @@
-import { pipe, O } from '../..'
+import { pipe, O, A } from '../..'
 
 describe('filter', () => {
   it('returns None', () => {
@@ -7,13 +7,13 @@ describe('filter', () => {
         O.fromNullable(null),
         O.filter(_ => false),
       ),
-    ).toBeNone()
+    ).toEqual(O.None)
     expect(
       pipe(
         O.fromNullable(null),
         O.filter(_ => true),
       ),
-    ).toBeNone()
+    ).toEqual(O.None)
     expect(
       pipe(
         O.fromNullable([3, 5, 7]),
@@ -22,7 +22,7 @@ describe('filter', () => {
           return fst === 1
         }),
       ),
-    ).toBeNone()
+    ).toEqual(O.None)
   })
 
   it('returns Some', () => {
@@ -34,6 +34,26 @@ describe('filter', () => {
           return fst === 1
         }),
       ),
-    ).toBeSome([1, 2, 3])
+    ).toEqual(O.Some([1, 2, 3]))
+  })
+
+  it('*', () => {
+    const { Some, None } = O
+
+    expect(
+      pipe(
+        O.fromNullable([3, 6, 9]),
+        O.flatMap(A.get(0)),
+        O.filter(value => value === 3),
+      ),
+    ).toEqual(Some(3))
+
+    expect(
+      pipe(
+        O.fromNullable([3, 6, 9]),
+        O.flatMap(A.get(0)),
+        O.filter(value => value === 0),
+      ),
+    ).toEqual(None)
   })
 })

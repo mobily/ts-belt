@@ -3,7 +3,12 @@ import { API, FileInfo, Identifier } from 'jscodeshift'
 const transformer = (file: FileInfo, api: API) => {
   const j = api.jscodeshift
   const root = j(file.source)
-  const literals: [string, string][] = [['when_', 'when']]
+  const literals: [string, string][] = [
+    ['when_', 'when'],
+    ['not_', 'not'],
+    ['or_', 'or'],
+    ['and_', 'and'],
+  ]
   const equalName =
     (p: Identifier) =>
     ([search]: [string, string]) => {

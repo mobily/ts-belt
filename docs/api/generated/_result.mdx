@@ -1,0 +1,135 @@
+### flatMap
+
+Returns the result of `mapFn` (it must have a return type of `Result`) if `result` is `Ok(value)`, otherwise, returns `result` unchanged.
+
+
+```ts
+function flatMap<A, B, R>(result: Result<A, B>, mapFn: (value: A) => Result<R, B>): Result<R, B>
+function flatMap<A, B, R>(mapFn: (value: A) => Result<R, B>): (result: Result<A, B>) => Result<R, B>
+```
+
+### fromFalsy
+
+Returns `Ok(value)` if `value` is not falsy, otherwise, returns `Error(errorValue)`.
+
+
+```ts
+function fromFalsy<A, B>(value: A, errorValue: NonNullable<B>): Result<ExtractValue<A>, B>
+function fromFalsy<A, B>(errorValue: NonNullable<B>): (value: A) => Result<ExtractValue<A>, B>
+```
+
+### fromNullable
+
+Returns `Ok(value)` if `value` is non-nullable, otherwise, returns `Error(errorValue)`.
+
+
+```ts
+function fromNullable<A, B>(value: A, errorValue: NonNullable<B>): Result<ExtractValue<A>, B>
+function fromNullable<A, B>(errorValue: NonNullable<B>): (value: A) => Result<ExtractValue<A>, B>
+```
+
+### fromPredicate
+
+Returns `Ok(value)` if the predicate function returns `true`, otherwise, returns `Error(errorValue)`.
+
+
+```ts
+function fromPredicate<A, B>(value: A, predicateFn: (value: A) => boolean, errorValue: NonNullable<B>): Result<ExtractValue<A>, B>
+function fromPredicate<A, B>(predicateFn: (value: A) => boolean, errorValue: NonNullable<B>): (value: A) => Result<ExtractValue<A>, B>
+```
+
+### getExn
+
+Returns `value` if `result` is `Ok(value)`, otherwise, throws an exception.
+
+
+```ts
+function getExn<A, B>(result: Result<A, B>): A | never
+```
+
+### getWithDefault
+
+
+```ts
+function getWithDefault<A, B>(result: Result<A, B>, defaultValue: NonNullable<A>): A
+function getWithDefault<A, B>(defaultValue: NonNullable<A>): (result: Result<A, B>) => A
+```
+
+### isError
+
+Returns `true` if the provided `result` is `Error(errorValue)`, otherwise, returns `false`.
+
+
+```ts
+function isError<A, B>(result: Result<A, B>): result is Error<B>
+```
+
+### isOk
+
+Returns `true` if the provided `result` is `Ok(value)`, otherwise, returns `false`.
+
+
+```ts
+function isOk<A, B>(result: Result<A, B>): result is Ok<A>
+```
+
+### map
+
+Returns the result of `mapFn` if `result` is `Ok(value)`, otherwise, returns `Error(errorValue)` and `mapFn` is not called.
+
+
+```ts
+function map<A, B, R>(result: Result<A, B>, mapFn: (value: A) => NonNullable<R>): Result<R, B>
+function map<A, B, R>(mapFn: (value: A) => NonNullable<R>): (result: Result<A, B>) => Result<R, B>
+```
+
+### mapWithDefault
+
+Returns the result of `mapFn` if `result` is `Ok(value)`, otherwise returns `Ok(defaultValue)`.
+
+
+```ts
+function mapWithDefault<A, B, R>(
+    result: Result<A, B>,
+    defaultValue: NonNullable<R>,
+    mapFn: (value: A) => NonNullable<R>
+): R
+function mapWithDefault<A, B, R>(defaultValue: NonNullable<R>, mapFn: (value: A) => NonNullable<R>): (result: Result<A, B>) => R
+```
+
+### match
+
+Returns the result of `okFn` if `result` is `Ok(value)`, otherwise, returns the result of `errorFn`.
+
+
+```ts
+function match<A, B, R>(result: Result<A, B>, okFn: (value: A) => R, errorFn: (value: B) => R): R
+function match<A, B, R>(okFn: (value: A) => R, errorFn: (value: B) => R): (result: Result<A, B>) => R
+```
+
+### toNullable
+
+Returns `value` if `result` is `Ok(value)`, otherwise, returns `null`.
+
+
+```ts
+function toNullable<A, B>(result: Result<A, B>): A | null
+```
+
+### toOption
+
+Returns `Some(value)` if `result` is `Ok(value)`, otherwise, returns `None`, both `Some` and `None` come from the `Option` type.
+
+
+```ts
+function toOption<A, B>(result: Result<A, B>): Option<A>
+```
+
+### toUndefined
+
+Returns `value` if `result` is `Ok(value)`, otherwise, returns a default value.
+
+
+```ts
+function toUndefined<A, B>(result: Result<A, B>): A | undefined
+```

@@ -1,0 +1,107 @@
+### and
+
+Combines two boolean using `AND` → `a && b`.
+
+
+```ts
+function and(a: boolean, b: boolean): boolean
+function and(b: boolean): (a: boolean) => boolean
+```
+
+### eq
+
+Determines if two provided booleans are equal.
+
+
+```ts
+function eq(a: boolean, b: boolean): boolean
+function eq(b: boolean): (a: boolean) => boolean
+```
+
+### ifElse
+
+Folds a boolean value into a value of a different type, using a function for the `true` and `false` cases.
+
+
+```ts
+function ifElse<A>(value: boolean, truthyFn: () => A, falsyFn: () => A): A
+function ifElse<A>(truthyFn: () => A, falsyFn: () => A): (value: boolean) => A
+```
+
+### implies
+
+Combines two booleans using an implication (`!a || b`).
+
+
+```ts
+function implies(a: boolean, b: boolean): boolean
+function implies(b: boolean): (a: boolean) => boolean
+```
+
+### inverse
+
+Negates the given boolean.
+
+
+```ts
+function inverse(value: boolean): boolean
+```
+
+### nand
+
+Combines two booleans using `NAND` → `!(a && b)`.
+
+
+```ts
+function nand(a: boolean, b: boolean): boolean
+function nand(b: boolean): (a: boolean) => boolean
+```
+
+### nor
+
+Combines two booleans using `NOR` → `!(a || b)`.
+
+
+```ts
+function nor(a: boolean, b: boolean): boolean
+function nor(b: boolean): (a: boolean) => boolean
+```
+
+### not
+
+Alias for inverse.
+
+
+```ts
+function not(value: boolean): boolean
+```
+
+### or
+
+Combines two boolean using `OR` → `a || b`.
+
+
+```ts
+function or(a: boolean, b: boolean): boolean
+function or(b: boolean): (a: boolean) => boolean
+```
+
+### xnor
+
+Combines two booleans using `XNOR` → `!xor(a, b)`.
+
+
+```ts
+function xnor(a: boolean, b: boolean): boolean
+function xnor(b: boolean): (a: boolean) => boolean
+```
+
+### xor
+
+Combines two booleans using `XOR` → `(!a && b) || (a && !b)`.
+
+
+```ts
+function xor(a: boolean, b: boolean): boolean
+function xor(b: boolean): (a: boolean) => boolean
+```

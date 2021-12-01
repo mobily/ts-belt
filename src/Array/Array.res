@@ -2,7 +2,7 @@ open Externals
 
 let placeholder = () => Js.Undefined.empty
 
-%comment("Creates an empty array.")
+%comment("Creates an empty array. Alternative for `const xs = [] as ReadonlyArray<A>`.")
 export makeEmpty = () => []
 
 %comment(
@@ -127,17 +127,17 @@ export initOrEmpty = xs =>
 %comment(
   "Returns a new array including the first `n` elements of the provided array, or an empty array if `n` is either negative or greater than the length of the provided array."
 )
-export take = (xs, offset) => {
+export take = (xs, n) => {
   let l = length(xs)
-  let len = offset < 0 ? 0 : l < offset ? l : offset
+  let len = n < 0 ? 0 : l < n ? l : n
   Belt.Array.slice(xs, ~offset=0, ~len)
 }
 
 %comment(
   "Returns a new array (`Some(xs)`) with the first `n` elements of the provided array, or `None` if `n` is either negative or greater than the length of the provided array."
 )
-export takeExactly = (xs, offset) =>
-  offset < 0 || offset > length(xs) ? None : Some(Belt.Array.slice(xs, ~offset=0, ~len=offset))
+export takeExactly = (xs, n) =>
+  n < 0 || n > length(xs) ? None : Some(Belt.Array.slice(xs, ~offset=0, ~len=n))
 
 %comment(
   "Returns a new array, filled with elements from the provided array until an element doesn't pass the provided predicate."
@@ -151,17 +151,16 @@ export rec takeWhile = (xs, predicateFn) =>
 %comment(
   "Returns a new array that does not contain the first `n` elements of the provided array, or an empty array if `n` is either less than `0` or greater than the length of the provided array."
 )
-export drop = (xs, offset) => {
+export drop = (xs, n) => {
   let l = length(xs)
-  let start = offset < 0 ? 0 : l < offset ? l : offset
+  let start = n < 0 ? 0 : l < n ? l : n
   Belt.Array.sliceToEnd(xs, start)
 }
 
 %comment(
   "Returns a new array (`Some(xs)`) that does not contain the first `n` elements of the provided array, or `None` if `n` is either less than `0` or greater than the length of the provided array."
 )
-export dropExactly = (xs, offset) =>
-  offset < 0 || offset > length(xs) ? None : Some(Belt.Array.sliceToEnd(xs, offset))
+export dropExactly = (xs, n) => n < 0 || n > length(xs) ? None : Some(Belt.Array.sliceToEnd(xs, n))
 
 %comment(
   "Drops elements from the beginning of the array until an element is reached which does not satisfy the given predicate."
@@ -309,10 +308,12 @@ export rangeBy = (start, finish, step) => Belt.Array.rangeBy(start, finish, ~ste
 %comment("Returns a copy of the provided array.")
 export copy = xs => Belt.Array.copy(xs)
 
-%comment("Create a new array of pairs from corresponding elements of two provided arrays.")
+%comment("Creates a new array of pairs from corresponding elements of two provided arrays.")
 export zip = (xs0, xs1) => Belt.Array.zip(xs0, xs1)
 
-%comment("Create a new array by applying `zipFn` to corresponding elements of two provided arrays.")
+%comment(
+  "Creates a new array by applying `zipFn` to corresponding elements of two provided arrays."
+)
 export zipWith = (xs0, xs1, zipFn) => Belt.Array.zipByU(xs0, xs1, zipFn)
 
 %comment(

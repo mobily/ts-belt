@@ -3,7 +3,7 @@ import { API, FileInfo } from 'jscodeshift'
 import * as path from 'path'
 import * as fs from 'fs'
 
-import { stripIndents } from 'common-tags'
+import { html } from 'common-tags'
 
 type Example = {
   fn: string
@@ -144,32 +144,36 @@ const transformer = (file: FileInfo, api: API) => {
       }
     })
 
-  const content = helpers.map(value => {
-    const main = stripIndents`
-      ### ${value.name}
-      ${value.description ? `\n${value.description}\n` : ''}
-      \`\`\`ts
-      ${value.types
-        .map(type => {
-          return type.replace(/  |\r\n|\n|\r/gm, '')
-        })
-        .join('\n')}
-      \`\`\`
-    `
-    const mainWithExample = stripIndents`
-      ${main}
-
-      \`\`\`ts
-      ${value.examples
+  const content = helpers
+    .slice(0)
+    .sort((a, b) => (a.name > b.name ? 1 : a.name < b.name ? -1 : 0))
+    .map(value => {
+      const types = value.types.join('\n')
+      const examples = value.examples
         .map(example => {
           return `${example.fn} // ${example.result}`
         })
-        .join('\n')}
-      \`\`\`
-    `
+        .join('\n')
+      const description = value.description ? `\n${value.description}\n` : ''
 
-    return value.examples.length ? mainWithExample : main
-  })
+      const main = html`
+        ### ${value.name}
+        ${description}
+
+        \`\`\`ts
+        ${types}
+        \`\`\`
+      `
+      const mainWithExample = html`
+        ${main}
+
+        \`\`\`ts
+        ${examples}
+        \`\`\`
+      `
+
+      return value.examples.length ? mainWithExample : main
+    })
 
   fs.writeFileSync(
     path.resolve(
@@ -177,7 +181,7 @@ const transformer = (file: FileInfo, api: API) => {
       '..',
       '..',
       'docs',
-      'docs',
+      'api',
       'generated',
       `_${dirname.toLowerCase()}.mdx`,
     ),

@@ -2,29 +2,21 @@ module.exports = {
   sidebar: [
     {
       type: 'doc',
-      id: 'getting-started',
+      id: 'introduction',
     },
-    {
-      type: 'doc',
-      id: 'installation',
-    },
-    {
-      type: 'doc',
-      id: 'usage',
-    },
+    // {
+    //   type: 'doc',
+    //   id: 'what-is-data-first',
+    // },
     {
       type: 'category',
-      label: 'API',
+      label: 'Getting started',
       collapsed: false,
-      items: [
-        'api/array',
-        'api/object',
-        'api/function',
-        'api/string',
-        'api/guards',
-        'api/option',
-        'api/result',
-      ],
+      items: ['installation', 'imports'],
+    },
+    {
+      type: 'doc',
+      id: 'changelog',
     },
   ],
 }

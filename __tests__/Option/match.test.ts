@@ -1,4 +1,4 @@
-import { pipe, O } from '../..'
+import { pipe, O, A } from '../..'
 
 describe('match', () => {
   it('returns a result of someFn', () => {
@@ -23,5 +23,31 @@ describe('match', () => {
         ),
       ),
     ).toEqual('this is fine!')
+  })
+
+  it('*', () => {
+    expect(
+      pipe(
+        O.fromNullable(['hello', 'world', 'lorem', 'ipsum']),
+        O.flatMap(A.takeExactly(2)),
+        O.map(A.join(' ')),
+        O.match(
+          str => `${str}!`,
+          () => 'oops!',
+        ),
+      ),
+    ).toEqual('hello world!')
+
+    expect(
+      pipe(
+        O.fromNullable([]),
+        O.flatMap(A.takeExactly(2)),
+        O.map(A.join(' ')),
+        O.match(
+          str => `${str}!`,
+          () => 'oops!',
+        ),
+      ),
+    ).toEqual('oops!')
   })
 })

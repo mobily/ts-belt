@@ -27,27 +27,15 @@
   <strong>Belt (<code>ReScript</code>) implementation in TypeScript.</strong>
 </p>
 
-## Motivation
-
-I pretty much like ReScript, its features, tooling are great developer experience (as well as `Belt` stdlib). I wish it was my main tool on a daily basis work. Unfortunately it isn't, since most of the commercial projects I have been working on recently are built with TypeScript, which at this point is fully understandable from the business perspective.
-
 ## Features
 
-- better type inference because of the `data-first` implementation
-- built on top of ReScript (interesting combination, isn't it?), which automatically generates most of TS signatures and performant JS code
-
-- benchmark results are various, but in general `ts-belt` always takes either the first or second place (remeda/rambda/ramda/lodash-fp), and especially comparing to `remeda`, which also follows the `data-first` approach, `ts-belt` is much faster, you can find the benchmarks results here
-- `ts-belt` provides `Option` and `Result` implementation instead of `null` and `undefined` (get rid of them in your project!)
-- high tests coverage
-- lightweight, no external dependencies
-- tree-shakeable
-- fully documented
-
-- [lightweight](https://bundlephobia.com/result?p=@mobily/ts-belt), no dependencies
-- type safety, full TypeScript support
-- high tests coverage
-- all functions are [curried](https://medium.com/javascript-scene/curry-and-function-composition-2c208d774983)
-- get rid of `undefined` and `null` values in your project in a convenient, functional way (use either `Option` or `Result`)
+- 🚀 built with `ReScript`, which generates highly performant JavaScript code (see the benchmarks [here](benchmarks))
+- 👀 provide more readable code, due to the `data-first` approach
+- ✨ support for `TypeScript` and `Flow`
+- 🛡 write more safer code with `Option` and `Result` types
+- ✅ high tests coverage
+- 🌲 tree-shakeable
+- 📝 fully documented
 
 ## Installation
 

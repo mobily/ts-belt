@@ -88,7 +88,9 @@ const transformer = (file: FileInfo, api: API) => {
       .filter(p => {
         return (
           p.parent.value.type === 'Program' &&
-          (p.value.id.name === id || p.value.id.name === `_${id}`) &&
+          (p.value.id.name === id ||
+            p.value.id.name === `_${id}` ||
+            p.value.id.name === `_${id}_`) &&
           p.value.comments?.length > 0
         )
       })
@@ -120,12 +122,11 @@ const transformer = (file: FileInfo, api: API) => {
   // update T[] to ReadonlyArray<T>
   root.find(j.TSArrayType).replaceWith(p => {
     const elementType = p.value.elementType as TSTypeReference
-    const identifier = elementType.typeName as Identifier
 
-    if (identifier) {
+    if (elementType) {
       return j.tsTypeReference(
         j.identifier('ReadonlyArray'),
-        j.tsTypeParameterInstantiation([j.tsTypeReference(j.identifier(identifier.name))]),
+        j.tsTypeParameterInstantiation([elementType]),
       )
     }
 

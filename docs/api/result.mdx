@@ -1,0 +1,34 @@
+---
+id: result
+title: Result
+---
+
+`Result` type is really useful to describe the result of a certain operation without relying on exceptions.
+
+import Result, { toc as resulttoc } from "./generated/_result.mdx"
+
+```ts
+type Result<A, B> = Ok<A> | Error<B>
+```
+
+```jsx live
+function() {
+  const obj = {
+    // ⬇️ update the value below to either greater than 0 or `null/undefined` in order to see changes
+    value: 0,
+  }
+  const value = pipe(
+    R.fromNullable(obj.value, 'value cannot be nullable!'),
+    R.flatMap(value => {
+      return value === 0 ? R.Error('never divide by zero!') : R.Ok(100 / value)
+    }),
+    R.match(value => `100 / ${obj.value} = ${value}`, err => err),
+  )
+
+  return value
+}
+```
+
+<Result />
+
+export const toc = resulttoc

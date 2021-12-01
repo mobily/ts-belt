@@ -8,8 +8,8 @@ export declare function toLowerCase(str: string): string
 export declare function toUpperCase(str: string): string
 export declare function trim(str: string): string
 export declare function isEmpty(str: string): boolean
-export declare function split(str: string, delimiter: string): string[]
-export declare function split(delimiter: string): (str: string) => string[]
+export declare function split(str: string, delimiter: string): ReadonlyArray<string>
+export declare function split(delimiter: string): (str: string) => ReadonlyArray<string>
 export declare function includes(str: string, value: string): boolean
 export declare function includes(value: string): (str: string) => boolean
 export declare function replace(str: string, oldValue: string, newValue: string): string

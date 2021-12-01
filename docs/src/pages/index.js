@@ -1,10 +1,45 @@
 import React from 'react'
-import { Redirect } from '@docusaurus/router'
-
+import clsx from 'clsx'
+import Layout from '@theme/Layout'
+import Link from '@docusaurus/Link'
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
+import useBaseUrl from '@docusaurus/useBaseUrl'
+import styles from './styles.module.css'
 
 const Home = () => {
+  const context = useDocusaurusContext()
+  const { siteConfig = {} } = context
+
+  React.useEffect(() => {
+    document.querySelector('.navbar__brand').style = 'display: none;'
+  }, [])
+
   return (
-    <Redirect to="/ts-belt/docs/" />
+    <Layout>
+      <header className={clsx('hero', styles.hero)}>
+        <div className={styles.heroBanner}>
+          <img className={styles.titleImage} src="img/hero-logo.png" alt="TS Belt" />
+          <div className={styles.container}>
+            <h1 className={styles.h1}>{siteConfig.title}</h1>
+            <p className={styles.summary}>{siteConfig.tagline}</p>
+            <div className={styles.buttons}>
+              <Link
+                className={clsx('button', styles.button, styles.buttonOutline)}
+                to={useBaseUrl('docs')}
+              >
+                Get started
+              </Link>
+              <Link
+                className={clsx('button', styles.button, styles.buttonFull)}
+                to={useBaseUrl('api/array')}
+              >
+                Go to API
+              </Link>
+            </div>
+          </div>
+        </div>
+      </header>
+    </Layout>
   )
 }
 

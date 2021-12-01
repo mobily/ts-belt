@@ -2,7 +2,7 @@ const root = require('../package.json')
 
 module.exports = {
   title: 'ts-belt',
-  tagline: 'The tagline of my site',
+  tagline: 'Toolset for your next project. Curabitur blandit tempus porttitor. Donec sed odio dui.',
   url: 'https://mobily.github.io',
   baseUrl: '/ts-belt/',
   onBrokenLinks: 'throw',
@@ -11,6 +11,9 @@ module.exports = {
   organizationName: 'mobily',
   projectName: 'ts-belt',
   themeConfig: {
+    prism: {
+      theme: require('prism-react-renderer/themes/github'),
+    },
     navbar: {
       title: `v${root.version}`,
       logo: {
@@ -19,19 +22,26 @@ module.exports = {
       },
       items: [
         {
+          to: 'docs',
+          activeBasePath: 'docs',
+          label: 'Docs',
+          position: 'left',
+        },
+        {
+          to: 'api/array',
+          activeBasePath: 'api',
+          label: 'API',
+          position: 'left',
+        },
+        {
           href: 'https://www.buymeacoffee.com/utSC0k7',
-          label: 'Sponsor ❤️',
+          label: 'Buy me a coffee ❤️',
           position: 'right',
         },
         {
           href: 'https://github.com/mobily/ts-belt',
-          label: 'Github',
           position: 'right',
-        },
-        {
-          href: 'https://twitter.com/__marcin_',
-          label: 'Twitter',
-          position: 'right',
+          className: 'header-github-link',
         },
       ],
     },
@@ -85,6 +95,15 @@ module.exports = {
         hashed: true,
       },
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'api',
+        path: 'api',
+        routeBasePath: 'api',
+        sidebarPath: require.resolve('./sidebars.api.js'),
+      },
+    ],
   ],
   presets: [
     [
@@ -92,8 +111,9 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          editUrl: 'https://github.com/facebook/docusaurus/edit/master/website/',
+          path: 'docs',
+          routeBasePath: 'docs',
+          editUrl: 'https://github.com/mobily/ts-belt/edit/master/docs/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

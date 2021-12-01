@@ -10,3 +10,5 @@ export * as O from './Option'
 
 export * as S from './String'
 export * as D from './Dict'
+export * as B from './Bool'
+export * as N from './Number'

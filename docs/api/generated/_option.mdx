@@ -1,0 +1,310 @@
+### filter
+
+Returns `Some(value)` if `option` is `Some(value)` and the result of `predicateFn` is truthy, otherwise, returns `None`.
+
+
+```ts
+function filter<T>(option: Option<T>, predicateFn: (value: T) => boolean): Option<T>
+function filter<T>(predicateFn: (value: T) => boolean): (option: Option<T>) => Option<T>
+```
+
+```ts
+pipe(
+  O.fromNullable([3, 6, 9]),
+  O.flatMap(A.get(0)),
+  O.filter(value => value === 3),
+) // Some(3)
+pipe(
+  O.fromNullable([3, 6, 9]),
+  O.flatMap(A.get(0)),
+  O.filter(value => value === 0),
+) // None
+```
+
+### flatMap
+
+Returns the result of `mapFn` (it must have a return type of `Option`) if `option` is `Some(value)`, otherwise, returns `None`.
+
+
+```ts
+function flatMap<T, R>(option: Option<T>, mapFn: (value: T) => Option<R>): Option<R>
+function flatMap<T, R>(mapFn: (value: T) => Option<R>): (option: Option<T>) => Option<R>
+```
+
+```ts
+pipe(
+  O.fromNullable('hello'),
+  O.flatMap(value => {
+    return value.endsWith('lo') ? O.Some(`${value} world!`) : O.None
+  }),
+) // Some('hello world!')
+```
+
+### fromFalsy
+
+Returns `Some(value)` if the provided value is not falsy, otherwise, returns `None`.
+
+
+```ts
+function fromFalsy<T>(value: T): Option<ExtractValue<T>>
+```
+
+```ts
+O.fromFalsy(1) // Some(1)
+O.fromFalsy('hello world') // Some('hello world')
+O.fromFalsy([]) // Some([])
+O.fromFalsy(0) // None
+O.fromFalsy('') // None
+```
+
+### fromNullable
+
+Returns `Some(value)` if the provided value is non-nullable, otherwise, returns `None`.
+
+
+```ts
+function fromNullable<T>(value: T): Option<ExtractValue<T>>
+```
+
+```ts
+O.fromNullable(1) // Some(1)
+O.fromNullable('hello world') // Some('hello world')
+O.fromNullable([]) // Some([])
+O.fromNullable(false) // Some(false)
+O.fromNullable(null) // None
+O.fromNullable(undefined) // None
+```
+
+### fromPredicate
+
+Returns `Some(value)` if the given predicate function returns `true`, otherwise, returns `None`.
+
+
+```ts
+function fromPredicate<T>(value: T, predicateFn: (value: T) => boolean): Option<ExtractValue<T>>
+function fromPredicate<T>(predicateFn: (value: T) => boolean): (value: T) => Option<ExtractValue<T>>
+```
+
+```ts
+O.fromPredicate(
+  [1, 2, 3],
+  A.some(x => x === 2),
+) // Some([1, 2, 3])
+O.fromPredicate(
+  [1, 2, 3],
+  A.some(x => x === 4),
+) // None
+```
+
+### getExn
+
+Returns `value` if `option` is `Some(value)`, otherwise, throws an exception.
+
+
+```ts
+function getExn<T>(option: Option<T>): T | never
+```
+
+```ts
+pipe(
+  O.fromNullable('hello'),
+  O.map(value => `${value} world!`),
+  O.getExn,
+) // 'hello world!'
+```
+
+### getWithDefault
+
+Returns `value` if `option` is `Some(value)`, otherwise, returns a default value.
+
+
+```ts
+function getWithDefault<T>(option: Option<T>, defaultValue: NonNullable<T>): T
+function getWithDefault<T>(defaultValue: NonNullable<T>): (option: Option<T>) => T
+```
+
+```ts
+pipe(
+  O.fromNullable('hello'),
+  O.map(value => `${value} world!`),
+  O.getWithDefault('error'),
+) // 'hello world!'
+pipe(
+  O.fromNullable(null),
+  O.map(value => `${value} world!`),
+  O.getWithDefault('error'),
+) // 'error'
+```
+
+### isNone
+
+Returns `true` if the provided `option` is `None`, otherwise, returns `false`.
+
+
+```ts
+function isNone<T>(option: Option<T>): option is Option<never>
+```
+
+```ts
+O.isNone(O.None) // true
+pipe(O.fromNullable(null), O.isNone) // true
+O.isNone(O.Some('hello world!')) // false
+pipe(O.fromNullable('hello world!'), O.isNone) // false
+```
+
+### isSome
+
+Returns `true` if the provided `option` is `Some(value)`, otherwise, returns `false`.
+
+
+```ts
+function isSome<T>(option: Option<T>): option is Option<T>
+```
+
+```ts
+O.isSome(O.Some('hello world!')) // true
+pipe(O.fromNullable('hello world!'), O.isSome) // true
+O.isSome(O.None) // false
+pipe(O.fromNullable(null), O.isSome) // false
+```
+
+### map
+
+Returns the result of `mapFn` if `option` is `Some(value)`, otherwise, returns `None` and `mapFn` is not called.
+
+
+```ts
+function map<T, R>(option: Option<T>, mapFn: (value: T) => NonNullable<R>): Option<R>
+function map<T, R>(mapFn: (value: T) => NonNullable<R>): (option: Option<T>) => Option<R>
+```
+
+```ts
+pipe(
+  O.fromNullable([1, 2, 3]),
+  O.flatMap(A.get(0)),
+  O.map(n => `${n}. hello world!`),
+) // Some('1. hello world!')
+pipe(
+  O.fromNullable([]),
+  O.flatMap(A.get(0)),
+  O.map(n => `${n}. hello world!`),
+) // None
+```
+
+### mapNullable
+
+Returns `Some(value)` if the result of `mapFn` is non-nullable, otherwise, returns `None`.
+
+
+```ts
+function mapNullable<T, R>(option: Option<T>, mapFn: (value: T) => R | null | undefined): Option<ExtractValue<R>>
+function mapNullable<T, R>(mapFn: (value: T) => R | null | undefined): (option: Option<T>) => Option<ExtractValue<R>>
+```
+
+```ts
+pipe(
+  O.fromNullable([1, 2, 3]),
+  O.mapNullable(value => value[0]),
+) // Some(1)
+pipe(
+  O.fromNullable([undefined, 2, 3]),
+  O.mapNullable(value => value[0]),
+) // None
+```
+
+### mapWithDefault
+
+Returns the result of `mapFn` if `option` is `Some(value)`, otherwise, returns `Some(defaultValue)`.
+
+
+```ts
+function mapWithDefault<T, R>(option: Option<T>, defaultValue: NonNullable<R>, mapFn: (value: T) => R): R
+function mapWithDefault<T, R>(defaultValue: NonNullable<R>, mapFn: (value: T) => R): (option: Option<T>) => R
+```
+
+```ts
+pipe(
+  O.fromNullable(['hello']),
+  O.flatMap(A.get(0)),
+  O.mapWithDefault('default value', value => `${value} world!`),
+) // 'hello world!'
+pipe(
+  O.fromNullable([]),
+  O.flatMap(A.get(0)),
+  O.mapWithDefault('default value', value => `${value} world!`),
+) // 'default value'
+```
+
+### match
+
+Returns the result of `someFn` if `option` is `Some(value)`, otherwise, returns the result of `noneFn`.
+
+
+```ts
+function match<T, R>(option: Option<T>, someFn: (value: T) => R, noneFn: () => R): R
+function match<T, R>(someFn: (value: T) => R, noneFn: () => R): (option: Option<T>) => R
+```
+
+```ts
+pipe(
+  O.fromNullable(['hello', 'world', 'lorem', 'ipsum']),
+  O.flatMap(A.takeExactly(2)),
+  O.map(A.join(' ')),
+  O.match(
+    str => `${str}!`,
+    () => 'oops!',
+  ),
+) // 'hello world!'
+pipe(
+  O.fromNullable([]),
+  O.flatMap(A.takeExactly(2)),
+  O.map(A.join(' ')),
+  O.match(
+    str => `${str}!`,
+    () => 'oops!',
+  ),
+) // 'oops!'
+```
+
+### toNullable
+
+Returns `value` if `option` is `Some(value)`, otherwise, returns `null`.
+
+
+```ts
+function toNullable<T>(option: Option<T>): T | null
+```
+
+```ts
+pipe(O.fromNullable(['hello', 'world']), O.flatMap(A.takeExactly(2)), O.toNullable) // ['hello', 'world']
+pipe(O.fromNullable([]), O.flatMap(A.takeExactly(2)), O.toNullable) // null
+```
+
+### toResult
+
+Returns `Ok(value)` if `option` is `Some(value)`, otherwise, returns `Error(errorValue)`, both `Ok` and `Error` come from the `Result` type.
+
+
+```ts
+function toResult<A, B>(option: Option<A>, errorValue: NonNullable<B>): Result<A, B>
+function toResult<A, B>(errorValue: NonNullable<B>): (option: Option<A>) => Result<A, B>
+```
+
+```ts
+pipe(O.fromNullable(['hello', 'world']), O.flatMap(A.takeExactly(2)), O.toResult('oops!')) // R.Ok(['hello', 'world'])
+pipe(O.fromNullable([]), O.flatMap(A.takeExactly(2)), O.toResult('oops!')) // R.Error('oops!')
+```
+
+### toUndefined
+
+Returns `value` if `option` is `Some(value)`, otherwise, returns `undefined`.
+
+
+```ts
+function toUndefined<T>(option: Option<T>): T | undefined
+```
+
+```ts
+pipe(O.fromNullable(['hello', 'world']), O.flatMap(A.takeExactly(2)), O.toUndefined) // ['hello', 'world']
+pipe(O.fromNullable([]), O.flatMap(A.takeExactly(2)), O.toUndefined) // undefined
+```

@@ -1,4 +1,4 @@
-import { pipe, O } from '../..'
+import { pipe, O, A } from '../..'
 
 describe('toNullable', () => {
   it('returns null', () => {
@@ -9,17 +9,30 @@ describe('toNullable', () => {
         O.mapNullable(obj => obj.prop),
         O.toNullable,
       ),
-    ).toBe(null)
+    ).toEqual(null)
   })
 
   it('returns a value', () => {
-    expect(pipe(O.Some('value'), O.toNullable)).toBe('value')
+    expect(pipe(O.Some('value'), O.toNullable)).toEqual('value')
     expect(
       pipe(
         O.fromNullable({ prop: 'value' }),
         O.mapNullable(obj => obj.prop),
         O.toNullable,
       ),
-    ).toBe('value')
+    ).toEqual('value')
+  })
+
+  it('*', () => {
+    expect(
+      pipe(
+        O.fromNullable(['hello', 'world']),
+        O.flatMap(A.takeExactly(2)),
+        O.toNullable,
+      ),
+    ).toEqual(['hello', 'world'])
+    expect(
+      pipe(O.fromNullable([]), O.flatMap(A.takeExactly(2)), O.toNullable),
+    ).toEqual(null)
   })
 })

@@ -15,13 +15,23 @@ describe('getExn', () => {
   })
 
   it('returns a value', () => {
-    expect(pipe(O.fromNullable('value'), O.getExn)).toBe('value')
+    expect(pipe(O.fromNullable('value'), O.getExn)).toEqual('value')
     expect(
       pipe(
         O.fromNullable('value'),
         O.map(_ => 'this is fine'),
         O.getExn,
       ),
-    ).toBe('this is fine')
+    ).toEqual('this is fine')
+  })
+
+  it('*', () => {
+    expect(
+      pipe(
+        O.fromNullable('hello'),
+        O.map(value => `${value} world!`),
+        O.getExn,
+      ),
+    ).toEqual('hello world!')
   })
 })

@@ -1,0 +1,91 @@
+### isArray
+
+
+```ts
+function isArray<T>(value: T): value is Extract<T, any[] | readonly any[]>
+```
+
+### isBoolean
+
+
+```ts
+function isBoolean<T>(value: T): value is Extract<T, boolean>
+```
+
+### isError
+
+
+```ts
+function isError<T>(value: T): value is Extract<T, Error>
+```
+
+### isFunction
+
+
+```ts
+function isFunction<T>(value: T): value is Extract<T, Function>
+```
+
+### isNot
+
+
+```ts
+function isNot<T, S>(value: T, predicateFn: (value: T) => boolean): value is Exclude<T, S>
+function isNot<T, S>(predicateFn: (value: T) => boolean): (value: T) => value is Exclude<T, S>
+```
+
+### isNotNullable
+
+
+```ts
+function isNotNullable<T>(value: T): value is NonNullable<T>
+```
+
+### isNull
+
+
+```ts
+function isNull<T>(value: T | null | undefined): value is null
+```
+
+### isNullable
+
+
+```ts
+function isNullable<T>(value: T): value is Extract<T, null | undefined>
+```
+
+### isNumber
+
+
+```ts
+function isNumber<T>(value: T): value is Extract<T, number>
+```
+
+### isObject
+
+
+```ts
+function isObject<T>(value: T): value is Exclude<Extract<T, object>, any[] | readonly any[] | Function>
+```
+
+### isPromise
+
+
+```ts
+function isPromise<T>(value: T): value is Extract<T, Promise<any>>
+```
+
+### isString
+
+
+```ts
+function isString<T>(value: T): value is Extract<T, string>
+```
+
+### isUndefined
+
+
+```ts
+function isUndefined<T>(value: T | null | undefined): value is undefined
+```

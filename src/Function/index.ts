@@ -62,5 +62,3 @@ export declare function allPass<A>(value: A, fns: Array<(_1: A) => boolean>): bo
 export declare function allPass<A>(fns: Array<(_1: A) => boolean>): (value: A) => boolean
 export declare function anyPass<A>(value: A, fns: Array<(_1: A) => boolean>): boolean
 export declare function anyPass<A>(fns: Array<(_1: A) => boolean>): (value: A) => boolean
-export declare function pred(n: number): number
-export declare function succ(n: number): number

@@ -17,16 +17,16 @@ export declare const Error: <T>(value: NonNullable<T>) => Error<T>
 
 export declare const fromNullable: <A, B>(
   value: A,
-  error: NonNullable<B>,
+  errorValue: NonNullable<B>,
 ) => Result<ExtractValue<A>, B>
 export declare const fromFalsy: <A, B>(
   value: A,
-  error: NonNullable<B>,
+  errorValue: NonNullable<B>,
 ) => Result<ExtractValue<A>, B>
 export declare const fromPredicate: <A, B>(
   value: A,
   predicateFn: (value: A) => boolean,
-  error: NonNullable<B>,
+  errorValue: NonNullable<B>,
 ) => Result<ExtractValue<A>, B>
 export declare const flatMap: <A, B, R>(
   result: Result<A, B>,
@@ -39,7 +39,7 @@ export declare const map: <A, B, R>(
 export declare const mapWithDefault: <A, B, R>(
   result: Result<A, B>,
   defaultValue: NonNullable<R>,
-  fn: (value: A) => NonNullable<R>,
+  mapFn: (value: A) => NonNullable<R>,
 ) => R
 export declare const getWithDefault: <A, B>(result: Result<A, B>, defaultValue: NonNullable<A>) => A
 export declare const getExn: <A, B>(result: Result<A, B>) => A | never

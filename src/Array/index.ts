@@ -1,7 +1,7 @@
 import { Option } from '../Option'
 import { ExtractNested } from '../types'
 
-// Creates an empty array.
+// Creates an empty array. Alternative for `const xs = [] as ReadonlyArray<A>`.
 
 export declare function makeEmpty<A>(): ReadonlyArray<A>
 
@@ -129,19 +129,16 @@ export declare function initOrEmpty<A>(xs: ReadonlyArray<A>): ReadonlyArray<A>
 
 // Returns a new array including the first `n` elements of the provided array, or an empty array if `n` is either negative or greater than the length of the provided array.
 
-export declare function take<A>(xs: ReadonlyArray<A>, offset: number): ReadonlyArray<A>
+export declare function take<A>(xs: ReadonlyArray<A>, n: number): ReadonlyArray<A>
 
-export declare function take<A>(offset: number): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+export declare function take<A>(n: number): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
 
 // Returns a new array (`Some(xs)`) with the first `n` elements of the provided array, or `None` if `n` is either negative or greater than the length of the provided array.
 
-export declare function takeExactly<A>(
-  xs: ReadonlyArray<A>,
-  offset: number,
-): Option<ReadonlyArray<A>>
+export declare function takeExactly<A>(xs: ReadonlyArray<A>, n: number): Option<ReadonlyArray<A>>
 
 export declare function takeExactly<A>(
-  offset: number,
+  n: number,
 ): (xs: ReadonlyArray<A>) => Option<ReadonlyArray<A>>
 
 // Returns a new array, filled with elements from the provided array until an element doesn't pass the provided predicate.
@@ -157,19 +154,16 @@ export declare function takeWhile<A>(
 
 // Returns a new array that does not contain the first `n` elements of the provided array, or an empty array if `n` is either less than `0` or greater than the length of the provided array.
 
-export declare function drop<A>(xs: ReadonlyArray<A>, offset: number): ReadonlyArray<A>
+export declare function drop<A>(xs: ReadonlyArray<A>, n: number): ReadonlyArray<A>
 
-export declare function drop<A>(offset: number): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+export declare function drop<A>(n: number): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
 
 // Returns a new array (`Some(xs)`) that does not contain the first `n` elements of the provided array, or `None` if `n` is either less than `0` or greater than the length of the provided array.
 
-export declare function dropExactly<A>(
-  xs: ReadonlyArray<A>,
-  offset: number,
-): Option<ReadonlyArray<A>>
+export declare function dropExactly<A>(xs: ReadonlyArray<A>, n: number): Option<ReadonlyArray<A>>
 
 export declare function dropExactly<A>(
-  offset: number,
+  n: number,
 ): (xs: ReadonlyArray<A>) => Option<ReadonlyArray<A>>
 
 // Drops elements from the beginning of the array until an element is reached which does not satisfy the given predicate.
@@ -366,27 +360,30 @@ export declare function eq<A>(
 
 // Returns a new array of numbers from `start` (inclusive) to `finish` (exclusive).
 
-export declare function range(start: number, finish: number): number[]
+export declare function range(start: number, finish: number): ReadonlyArray<number>
 
-export declare function range(finish: number): (start: number) => number[]
+export declare function range(finish: number): (start: number) => ReadonlyArray<number>
 
 // Returns a new array of numbers from `start` (inclusive) to `finish` (exclusive).
 
-export declare function rangeBy(start: number, finish: number, step: number): number[]
+export declare function rangeBy(start: number, finish: number, step: number): ReadonlyArray<number>
 
-export declare function rangeBy(finish: number, step: number): (start: number) => number[]
+export declare function rangeBy(
+  finish: number,
+  step: number,
+): (start: number) => ReadonlyArray<number>
 
 // Returns a copy of the provided array.
 
 export declare function copy<A>(xs: ReadonlyArray<A>): ReadonlyArray<A>
 
-// Create a new array of pairs from corresponding elements of two provided arrays.
+// Creates a new array of pairs from corresponding elements of two provided arrays.
 
 export declare function zip<A, B>(xs0: ReadonlyArray<A>, xs1: ReadonlyArray<B>): Array<[A, B]>
 
 export declare function zip<A, B>(xs1: ReadonlyArray<B>): (xs0: ReadonlyArray<A>) => Array<[A, B]>
 
-// Create a new array by applying `zipFn` to corresponding elements of two provided arrays.
+// Creates a new array by applying `zipFn` to corresponding elements of two provided arrays.
 
 export declare function zipWith<A, B, C>(
   xs0: ReadonlyArray<A>,
@@ -532,21 +529,21 @@ export declare function sortBy<A, B>(
 
 // Splits the given array into sub-arrays in an object, grouped by the result of running each value through the provided function.
 
-export declare function groupBy<T, K extends PropertyKey>(
-  xs: ReadonlyArray<T>,
-  groupFn: (item: T) => K,
-): Partial<Record<K, readonly [T, ...T[]]>>
+export declare function groupBy<A, B extends PropertyKey>(
+  xs: ReadonlyArray<A>,
+  groupFn: (item: A) => B,
+): Partial<Record<B, readonly [A, ...A[]]>>
 
-export declare function groupBy<T, K extends PropertyKey>(
-  groupFn: (item: T) => K,
-): (xs: ReadonlyArray<T>) => Partial<Record<K, readonly [T, ...T[]]>>
+export declare function groupBy<A, B extends PropertyKey>(
+  groupFn: (item: A) => B,
+): (xs: ReadonlyArray<A>) => Partial<Record<B, readonly [A, ...A[]]>>
 
 // Creates a new array with all sub-array elements concatenated into it (the single level depth).
 
-export declare function flat<T>(
-  xs: ReadonlyArray<T>,
-): ReadonlyArray<T extends ReadonlyArray<infer K> ? K : T>
+export declare function flat<A>(
+  xs: ReadonlyArray<A>,
+): ReadonlyArray<A extends ReadonlyArray<infer B> ? B : A>
 
 // Creates a new array with all sub-array elements concatenated into it recursively up to the `Infinite` depth.
 
-export declare function deepFlat<T>(xs: ReadonlyArray<T>): ReadonlyArray<ExtractNested<T>>
+export declare function deepFlat<A>(xs: ReadonlyArray<A>): ReadonlyArray<ExtractNested<A>>

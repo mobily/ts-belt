@@ -7,7 +7,7 @@ describe('flatMap', () => {
         O.fromNullable(null),
         O.flatMap(_ => O.Some(1)),
       ),
-    ).toBeNone()
+    ).toEqual(O.None)
 
     expect(
       pipe(
@@ -15,14 +15,14 @@ describe('flatMap', () => {
         O.flatMap(_ => O.None),
         O.flatMap(_ => O.Some('value')),
       ),
-    ).toBeNone()
+    ).toEqual(O.None)
 
     expect(
       pipe(
         O.fromNullable('value'),
         O.flatMap(_ => O.None),
       ),
-    ).toBeNone()
+    ).toEqual(O.None)
   })
 
   it('returns Some', () => {
@@ -31,6 +31,18 @@ describe('flatMap', () => {
         O.fromNullable('value'),
         O.flatMap(_ => O.Some('this is fine')),
       ),
-    ).toBeSome('this is fine')
+    ).toEqual(O.Some('this is fine'))
+  })
+
+  it('*', () => {
+    const { Some } = O
+    expect(
+      pipe(
+        O.fromNullable('hello'),
+        O.flatMap(value => {
+          return value.endsWith('lo') ? O.Some(`${value} world!`) : O.None
+        }),
+      ),
+    ).toEqual(Some('hello world!'))
   })
 })

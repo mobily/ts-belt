@@ -26,7 +26,3 @@ export when_ = (value, predicateFn, truthyFn) => predicateFn(value) ? truthyFn(v
 export allPass = (value, fns) => Belt.Array.everyU(fns, (. fn) => fn(value))
 
 export anyPass = (value, fns) => Belt.Array.someU(fns, (. fn) => fn(value))
-
-export pred = n => pred(n)
-
-export succ = n => succ(n)
