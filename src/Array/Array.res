@@ -74,7 +74,9 @@ export getBy = (xs, predicateFn) => Belt.Array.getByU(xs, predicateFn)
 %comment("Alias for `getBy`.")
 export find = (xs, predicateFn) => getBy(xs, predicateFn)
 
-%comment("Returns the first element of the array, or `None` if the given array is empty.")
+%comment(
+  "Returns `Some(value)` where `value` is the first element of the array, or `None` if the given array is empty."
+)
 export head = xs => get(xs, 0)
 
 %comment(
@@ -245,7 +247,7 @@ export reduceWithIndex = (xs, initialValue, reduceFn) =>
   Belt.Array.reduceWithIndexU(xs, initialValue, reduceFn)
 
 %comment(
-  "Returns two arrays (`Some([xs, ys])`), with the original array divided at the given index, or `None` if the index is out of range,."
+  "Returns two arrays (`Some([xs, ys])`), with the original array divided at the given index, or `None` if the index is out of range."
 )
 export splitAt = (xs, offset) =>
   offset < 0 || offset > length(xs)

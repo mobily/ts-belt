@@ -1,15 +1,11 @@
 ---
-id: imports
-title: How to use imports?
+id: usage
+title: Usage
 ---
 
 There are two ways to import `ts-belt` functions into your project.
 
 ### Compact
-
-```typescript
-import { F, A, R, G, O, S, D, B, N, pipe } from '@mobily/ts-belt'
-```
 
 | Module | Namespace | Description |
 |--|-----------|--|
@@ -25,6 +21,18 @@ import { F, A, R, G, O, S, D, B, N, pipe } from '@mobily/ts-belt'
 
 The full API reference can be found [here](/api/array).
 
+```typescript
+import { A, O, pipe } from '@mobily/ts-belt'
+
+pipe(
+  [1, 2, 3, 4, 5], // → [1, 2, 3, 4, 5]
+  A.dropExactly(2), // → Some([3, 4, 5])
+  O.flatMap(A.head), // → Some(3)
+  O.map(N.multiply(10)), // → Some(30)
+  O.getWithDefault(0), // → 30
+) // → 30
+```
+
 ### Explicit #1
 
 ```typescript
@@ -34,7 +42,7 @@ Belt.pipe(
   [1, 2, 3, 4, 5],
   Belt.A.dropExactly(2),
   Belt.O.flatMap(Belt.A.head),
-  Belt.O.map(value => value * 10),
+  Belt.O.map(Belt.N.multiply(10)),
   Belt.O.getWithDefault(0),
 )
 ```
@@ -42,17 +50,18 @@ Belt.pipe(
 ### Explicit #2
 
 ```typescript
-import { pipe } from '@mobily/ts-belt'
+import pipe from '@mobily/ts-belt/pipe'
 
-import * as Option from '@mobily/ts-belt/Option'
-import * as Array from '@mobily/ts-belt/Array'
+import * as O from '@mobily/ts-belt/Option'
+import * as A from '@mobily/ts-belt/Array'
+import * as N from '@mobily/ts-belt/Number'
 
 pipe(
   [1, 2, 3, 4, 5],
-  Array.dropExactly(2),
-  Option.flatMap(Array.head),
-  Option.map(value => value * 10),
-  Option.getWithDefault(0),
+  A.dropExactly(2),
+  O.flatMap(A.head),
+  O.map(N.multiply(10)),
+  O.getWithDefault(0),
 )
 ```
 

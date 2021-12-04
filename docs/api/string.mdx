@@ -7,6 +7,19 @@ import String, { toc as stringtoc } from "./generated/_string.mdx"
 
 Utility functions for `String`.
 
+```jsx live
+function() {
+  const value = pipe(
+    ['hello', 'world', '+ts', '+belt'],
+    A.filter(S.startsWith('+')),
+    A.join('-'),
+    S.removeAll('+'),
+  )
+
+  return value
+}
+```
+
 <String />
 
 export const toc = stringtoc

@@ -12,7 +12,7 @@ module.exports = {
       type: 'category',
       label: 'Getting started',
       collapsed: false,
-      items: ['installation', 'config', 'imports'],
+      items: ['installation', 'config', 'usage'],
     },
     {
       type: 'doc',

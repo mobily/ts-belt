@@ -34,7 +34,7 @@ Returns a new array as the concatenation of the provided array of arrays.
 
 
 ```ts
-function concatMany<A>(xs: Array<ReadonlyArray<A>>): ReadonlyArray<A>
+function concatMany<A>(xs: ReadonlyArray<ReadonlyArray<A>>): ReadonlyArray<A>
 ```
 
 ### copy
@@ -250,7 +250,7 @@ function groupBy<A, B extends PropertyKey>(groupFn: (item: A) => B): (xs: Readon
 
 ### head
 
-Returns the first element of the array, or `None` if the given array is empty.
+Returns `Some(value)` where `value` is the first element of the array, or `None` if the given array is empty.
 
 
 ```ts
@@ -630,7 +630,7 @@ function sortBy<A, B>(sortFn: (_1: A) => B): (xs: ReadonlyArray<A>) => ReadonlyA
 
 ### splitAt
 
-Returns two arrays (`Some([xs, ys])`), with the original array divided at the given index, or `None` if the index is out of range,.
+Returns two arrays (`Some([xs, ys])`), with the original array divided at the given index, or `None` if the index is out of range.
 
 
 ```ts
@@ -644,8 +644,8 @@ Returns an array of arrays, where each of the inner arrays has length equal to t
 
 
 ```ts
-function splitEvery<A>(xs: ReadonlyArray<A>, size: number): Array<ReadonlyArray<A>>
-function splitEvery<A>(size: number): (xs: ReadonlyArray<A>) => Array<ReadonlyArray<A>>
+function splitEvery<A>(xs: ReadonlyArray<A>, size: number): ReadonlyArray<ReadonlyArray<A>>
+function splitEvery<A>(size: number): (xs: ReadonlyArray<A>) => ReadonlyArray<ReadonlyArray<A>>
 ```
 
 ### swapAt
@@ -756,7 +756,7 @@ Takes an array of pairs and creates a pair of arrays. The first array contains a
 
 
 ```ts
-function unzip<A, B>(xs: Array<[A, B]>): [ReadonlyArray<A>, ReadonlyArray<B>]
+function unzip<A, B>(xs: ReadonlyArray<[A, B]>): [ReadonlyArray<A>, ReadonlyArray<B>]
 ```
 
 ### updateAt
@@ -775,8 +775,8 @@ Creates a new array of pairs from corresponding elements of two provided arrays.
 
 
 ```ts
-function zip<A, B>(xs0: ReadonlyArray<A>, xs1: ReadonlyArray<B>): Array<[A, B]>
-function zip<A, B>(xs1: ReadonlyArray<B>): (xs0: ReadonlyArray<A>) => Array<[A, B]>
+function zip<A, B>(xs0: ReadonlyArray<A>, xs1: ReadonlyArray<B>): ReadonlyArray<[A, B]>
+function zip<A, B>(xs1: ReadonlyArray<B>): (xs0: ReadonlyArray<A>) => ReadonlyArray<[A, B]>
 ```
 
 ### zipWith

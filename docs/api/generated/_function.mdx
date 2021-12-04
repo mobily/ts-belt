@@ -4,8 +4,8 @@ Determines whether all the provided predicates return `true` for the given value
 
 
 ```ts
-function allPass<A>(value: A, fns: Array<(_1: A) => boolean>): boolean
-function allPass<A>(fns: Array<(_1: A) => boolean>): (value: A) => boolean
+function allPass<A>(value: A, fns: ReadonlyArray<(_1: A) => boolean>): boolean
+function allPass<A>(fns: ReadonlyArray<(_1: A) => boolean>): (value: A) => boolean
 ```
 
 ### always
@@ -23,8 +23,8 @@ Determines whether at least one of the provided predicate returns `true` for the
 
 
 ```ts
-function anyPass<A>(value: A, fns: Array<(_1: A) => boolean>): boolean
-function anyPass<A>(fns: Array<(_1: A) => boolean>): (value: A) => boolean
+function anyPass<A>(value: A, fns: ReadonlyArray<(_1: A) => boolean>): boolean
+function anyPass<A>(fns: ReadonlyArray<(_1: A) => boolean>): (value: A) => boolean
 ```
 
 ### both

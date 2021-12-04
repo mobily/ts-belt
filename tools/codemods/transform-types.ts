@@ -133,6 +133,20 @@ const transformer = (file: FileInfo, api: API) => {
     return p.value
   })
 
+  // update Array<T> to ReadonlyArray<T>
+  root
+    .find(j.TSTypeReference, {
+      typeName: {
+        name: 'Array',
+        type: 'Identifier',
+      },
+    })
+    .forEach(p => {
+      if (p.value.typeName.type === 'Identifier') {
+        p.value.typeName.name = 'ReadonlyArray'
+      }
+    })
+
   // rename generics, T1/T2/T3 to A/B/C
   root
     .find(j.Identifier)

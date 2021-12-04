@@ -1,4 +1,46 @@
+### concat
+
+Returns a new string with `append` added after `str`.
+
+
+```ts
+function concat(str: string, append: string): string
+function concat(append: string): (str: string) => string
+```
+
+### endsWith
+
+Returns `true` if the given string ends with `substr`.
+
+
+```ts
+function endsWith(str: string, substr: string): boolean
+function endsWith(substr: string): (str: string) => boolean
+```
+
+### get
+
+Returns `Some(value)`, where `value` is a string consisting of the character at location `n` in the string, or `None` if the `n` is out of range.
+
+
+```ts
+function get(str: string, n: number): Option<string>
+function get(n: number): (str: string) => Option<string>
+```
+
+### getUnsafe
+
+Returns `value`, where `value` is a string consisting of the character at location `n` in the string, or `undefined` if the `n` is out of range.
+
+
+```ts
+function getUnsafe(str: string, n: number): string
+function getUnsafe(n: number): (str: string) => string
+```
+
 ### head
+
+Returns `Some(value)` where `value` is the first character of the string, or `None` if the given string is empty.
 
 
 ```ts
@@ -7,27 +49,113 @@ function head(str: string): string
 
 ### includes
 
+Returns `true` if `searchValue` appears anywhere in the given string.
+
 
 ```ts
-function includes(str: string, value: string): boolean
-function includes(value: string): (str: string) => boolean
+function includes(str: string, searchValue: string): boolean
+function includes(searchValue: string): (str: string) => boolean
+```
+
+### indexOf
+
+Returns `Some(index)`, where `index` is the starting position of the first occurrence of `searchValue` within `str`.
+
+
+```ts
+function indexOf(str: string, searchValue: string): Option<number>
+function indexOf(searchValue: string): (str: string) => Option<number>
 ```
 
 ### isEmpty
+
+Returns `true` if the provided string is empty.
 
 
 ```ts
 function isEmpty(str: string): boolean
 ```
 
+### isNotEmpty
+
+Returns `true` if the provided string is not empty.
+
+
+```ts
+function isNotEmpty(str: string): boolean
+```
+
+### lastIndexOf
+
+Returns `Some(index)`, where `index` is the starting position of the last occurrence of `searchValue` within `str`.
+
+
+```ts
+function lastIndexOf(str: string, searchValue: string): Option<number>
+function lastIndexOf(searchValue: string): (str: string) => Option<number>
+```
+
 ### length
+
+Returns the length of the given string.
 
 
 ```ts
 function length(str: string): number
 ```
 
+### make
+
+Converts the given value to a string.
+
+
+```ts
+function make<A>(value: A): string
+```
+
+### match
+
+Matches the given string against the provided regular expression, ir returns `None` if there is no match.
+
+
+```ts
+function match(str: string, regex: RegExp): Option<ReadonlyArray<string>>
+function match(regex: RegExp): (str: string) => Option<ReadonlyArray<string>>
+```
+
+### remove
+
+Returns a new string with the first occurrence of `value` removed from `str`.
+
+
+```ts
+function remove(str: string, value: string): string
+function remove(value: string): (str: string) => string
+```
+
+### removeAll
+
+Returns a new string with every occurrence of `value` removed from `str`.
+
+
+```ts
+function removeAll(str: string, value: string): string
+function removeAll(value: string): (str: string) => string
+```
+
+### repeat
+
+Returns a string consisting of `n` repetitions of `str`.
+
+
+```ts
+function repeat(str: string, n: number): string
+function repeat(n: number): (str: string) => string
+```
+
 ### replace
+
+Replaces the first occurrence of `oldValue` with `newValue` in the given string and returns a new string.
 
 
 ```ts
@@ -35,7 +163,19 @@ function replace(str: string, oldValue: string, newValue: string): string
 function replace(oldValue: string, newValue: string): (str: string) => string
 ```
 
+### replaceAll
+
+Replaces each occurrence of `oldValue` with `newValue` in the given string and returns a new string.
+
+
+```ts
+function replaceAll(str: string, oldValue: string, newValue: string): string
+function replaceAll(oldValue: string, newValue: string): (str: string) => string
+```
+
 ### replaceByRe
+
+Replaces the matched regular expression with `newValue` in the given string and returns a new string.
 
 
 ```ts
@@ -43,7 +183,19 @@ function replaceByRe(str: string, regex: RegExp, value: string): string
 function replaceByRe(regex: RegExp, value: string): (str: string) => string
 ```
 
+### search
+
+Returns `Some(index)`, where `index` is the starting position of the first match of regular expression in the given string.
+
+
+```ts
+function search(str: string, regex: RegExp): Option<number>
+function search(regex: RegExp): (str: string) => Option<number>
+```
+
 ### slice
+
+Returns the substring of `str` starting at character `start` up to but not including `end`.
 
 
 ```ts
@@ -53,6 +205,8 @@ function slice(start: number, end: number): (str: string) => string
 
 ### sliceToEnd
 
+Returns the substring of `str` starting at character `start` to the end of the string.
+
 
 ```ts
 function sliceToEnd(str: string, start: number): string
@@ -61,13 +215,56 @@ function sliceToEnd(start: number): (str: string) => string
 
 ### split
 
+Splits the given string at every occurrence of `delimiter` and returns an array of the resulting substrings.
+
 
 ```ts
 function split(str: string, delimiter: string): ReadonlyArray<string>
 function split(delimiter: string): (str: string) => ReadonlyArray<string>
 ```
 
+### splitAt
+
+Splits the string at the given index, returning a tuple of the parts.
+
+
+```ts
+function splitAt(str: string, index: number): [string, string]
+function splitAt(index: number): (str: string) => [string, string]
+```
+
+### splitByRe
+
+Splits the given string at every occurrence of `regex` and returns an array of the resulting substrings.
+
+
+```ts
+function splitByRe(str: string, regex: RegExp): ReadonlyArray<Option<string>>
+function splitByRe(regex: RegExp): (str: string) => ReadonlyArray<Option<string>>
+```
+
+### startsWith
+
+Returns `true` if the given string starts with `substr`.
+
+
+```ts
+function startsWith(str: string, substr: string): boolean
+function startsWith(substr: string): (str: string) => boolean
+```
+
+### toArray
+
+Creates an array with one character of `str` per element.
+
+
+```ts
+function toArray(str: string): ReadonlyArray<string>
+```
+
 ### toLowerCase
+
+Converts `str` to lower case.
 
 
 ```ts
@@ -76,12 +273,16 @@ function toLowerCase(str: string): string
 
 ### toUpperCase
 
+Converts `str` to upper case.
+
 
 ```ts
 function toUpperCase(str: string): string
 ```
 
 ### trim
+
+Returns a new string with leading and trailing whitespace removed from `str`.
 
 
 ```ts

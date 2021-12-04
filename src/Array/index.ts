@@ -143,7 +143,7 @@ export declare function find<A>(
   predicateFn: (_1: A) => boolean,
 ): (xs: ReadonlyArray<A>) => Option<A>
 
-/** Returns the first element of the array, or `None` if the given array is empty. */
+/** Returns `Some(value)` where `value` is the first element of the array, or `None` if the given array is empty. */
 
 export declare function head<A>(xs: ReadonlyArray<A>): Option<A>
 
@@ -331,7 +331,7 @@ export declare function reduceWithIndex<A, B>(
   reduceFn: (_1: B, _2: A, _3: number) => B,
 ): (xs: ReadonlyArray<A>) => B
 
-/** Returns two arrays (`Some([xs, ys])`), with the original array divided at the given index, or `None` if the index is out of range,. */
+/** Returns two arrays (`Some([xs, ys])`), with the original array divided at the given index, or `None` if the index is out of range. */
 
 export declare function splitAt<A>(
   xs: ReadonlyArray<A>,
@@ -347,11 +347,11 @@ export declare function splitAt<A>(
 export declare function splitEvery<A>(
   xs: ReadonlyArray<A>,
   size: number,
-): Array<ReadonlyArray<A>>
+): ReadonlyArray<ReadonlyArray<A>>
 
 export declare function splitEvery<A>(
   size: number,
-): (xs: ReadonlyArray<A>) => Array<ReadonlyArray<A>>
+): (xs: ReadonlyArray<A>) => ReadonlyArray<ReadonlyArray<A>>
 
 /** Returns a new array with elements in the original array randomly shuffled. */
 
@@ -382,7 +382,7 @@ export declare function concat<A>(
 /** Returns a new array as the concatenation of the provided array of arrays. */
 
 export declare function concatMany<A>(
-  xs: Array<ReadonlyArray<A>>,
+  xs: ReadonlyArray<ReadonlyArray<A>>,
 ): ReadonlyArray<A>
 
 /** Returns `true`` if all elements satisfy the given predicate. */
@@ -477,11 +477,11 @@ export declare function copy<A>(xs: ReadonlyArray<A>): ReadonlyArray<A>
 export declare function zip<A, B>(
   xs0: ReadonlyArray<A>,
   xs1: ReadonlyArray<B>,
-): Array<[A, B]>
+): ReadonlyArray<[A, B]>
 
 export declare function zip<A, B>(
   xs1: ReadonlyArray<B>,
-): (xs0: ReadonlyArray<A>) => Array<[A, B]>
+): (xs0: ReadonlyArray<A>) => ReadonlyArray<[A, B]>
 
 /** Creates a new array by applying `zipFn` to corresponding elements of two provided arrays. */
 
@@ -499,7 +499,7 @@ export declare function zipWith<A, B, C>(
 /** Takes an array of pairs and creates a pair of arrays. The first array contains all the first elements of the pairs and the other one contains all the second elements. */
 
 export declare function unzip<A, B>(
-  xs: Array<[A, B]>,
+  xs: ReadonlyArray<[A, B]>,
 ): [ReadonlyArray<A>, ReadonlyArray<B>]
 
 /** Creates a new array by replacing the value at the given index with the given value (no replacement is made if the index is out of range). */

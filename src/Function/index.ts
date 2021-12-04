@@ -106,20 +106,20 @@ export declare function when<A>(
 
 export declare function allPass<A>(
   value: A,
-  fns: Array<(_1: A) => boolean>,
+  fns: ReadonlyArray<(_1: A) => boolean>,
 ): boolean
 
 export declare function allPass<A>(
-  fns: Array<(_1: A) => boolean>,
+  fns: ReadonlyArray<(_1: A) => boolean>,
 ): (value: A) => boolean
 
 /** Determines whether at least one of the provided predicate returns `true` for the given value. */
 
 export declare function anyPass<A>(
   value: A,
-  fns: Array<(_1: A) => boolean>,
+  fns: ReadonlyArray<(_1: A) => boolean>,
 ): boolean
 
 export declare function anyPass<A>(
-  fns: Array<(_1: A) => boolean>,
+  fns: ReadonlyArray<(_1: A) => boolean>,
 ): (value: A) => boolean
