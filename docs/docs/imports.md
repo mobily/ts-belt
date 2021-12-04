@@ -69,7 +69,9 @@ Then, add `ts-belt` in your `Babel` config file:
 ```json
 {
   "plugins": [
-    ["ts-belt"]
+    ["ts-belt", {
+      "useESM": true, // or false if you use `commonjs`
+    }]
   ]
 }
 ```
@@ -78,6 +80,6 @@ Last, but not least, update your `TypeScript` config:
 
 ```json
 "paths": {
-  "@mobily/ts-belt/*": ["./node_modules/@mobily/ts-belt/dist/esm/*"]
+  "@mobily/ts-belt/*": ["./node_modules/@mobily/ts-belt/dist/esm/*"] // or `cjs/*` if you use `commonjs`
 }
 ```
