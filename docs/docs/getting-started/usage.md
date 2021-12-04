@@ -33,7 +33,7 @@ pipe(
 ) // → 30
 ```
 
-### Explicit #1
+### Explicit
 
 ```typescript
 import * as Belt from '@mobily/ts-belt'
@@ -45,50 +45,4 @@ Belt.pipe(
   Belt.O.map(Belt.N.multiply(10)),
   Belt.O.getWithDefault(0),
 )
-```
-
-### Explicit #2
-
-```typescript
-import pipe from '@mobily/ts-belt/pipe'
-
-import * as O from '@mobily/ts-belt/Option'
-import * as A from '@mobily/ts-belt/Array'
-import * as N from '@mobily/ts-belt/Number'
-
-pipe(
-  [1, 2, 3, 4, 5],
-  A.dropExactly(2),
-  O.flatMap(A.head),
-  O.map(N.multiply(10)),
-  O.getWithDefault(0),
-)
-```
-
-To enable this method you have to install `babel-plugin-ts-belt`:
-
-```bash
-yarn add babel-plugin-ts-belt --dev
-# or
-npm install babel-plugin-ts-belt --dev
-```
-
-Then, add `ts-belt` in your `Babel` config file:
-
-```json
-{
-  "plugins": [
-    ["ts-belt", {
-      "useESM": true, // or false if you use `commonjs`
-    }]
-  ]
-}
-```
-
-Last, but not least, update your `TypeScript` config:
-
-```json
-"paths": {
-  "@mobily/ts-belt/*": ["./node_modules/@mobily/ts-belt/dist/esm/*"] // or `cjs/*` if you use `commonjs`
-}
 ```

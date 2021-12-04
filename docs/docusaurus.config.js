@@ -2,7 +2,8 @@ const root = require('../package.json')
 
 module.exports = {
   title: 'ts-belt',
-  tagline: 'Toolset for your next project. Curabitur blandit tempus porttitor. Donec sed odio dui.',
+  tagline:
+    'Toolset for your next project. Curabitur blandit tempus porttitor. Donec sed odio dui.',
   url: 'https://mobily.github.io',
   baseUrl: '/ts-belt/',
   onBrokenLinks: 'throw',
@@ -31,6 +32,12 @@ module.exports = {
           to: 'api/array',
           activeBasePath: 'api',
           label: 'API',
+          position: 'left',
+        },
+        {
+          to: 'benchmarks/introduction',
+          activeBasePath: 'benchmarks',
+          label: 'Benchmarks',
           position: 'left',
         },
         {
@@ -102,6 +109,15 @@ module.exports = {
         path: 'api',
         routeBasePath: 'api',
         sidebarPath: require.resolve('./sidebars.api.js'),
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'benchmarks',
+        path: 'benchmarks',
+        routeBasePath: 'benchmarks',
+        sidebarPath: require.resolve('./sidebars.benchmarks.js'),
       },
     ],
   ],

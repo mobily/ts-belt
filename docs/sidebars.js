@@ -4,15 +4,15 @@ module.exports = {
       type: 'doc',
       id: 'introduction',
     },
-    // {
-    //   type: 'doc',
-    //   id: 'what-is-data-first',
-    // },
     {
       type: 'category',
       label: 'Getting started',
       collapsed: false,
-      items: ['installation', 'config', 'usage'],
+      items: [
+        'getting-started/installation',
+        'getting-started/config',
+        'getting-started/usage',
+      ],
     },
     {
       type: 'doc',

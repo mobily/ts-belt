@@ -41,7 +41,7 @@ Pretty much similar problems as you can find in `ramda`.
 It provides the `data-first` approach, which is more natural and developer friendly, `remeda` has a nice documentation and TypeScript support is great as well.
 
 **Cons:**
-According to the benchmark results, `remeda` is the slowest compared to other libraries (benchmarks can be found [here](benchmarks)). Due to the lazy evaluation, it’s also unclear how to use some utility functions within the pipeline.
+According to the benchmark results, `remeda` is the slowest compared to other libraries (benchmarks can be found [here](/benchmarks/introduction)). Due to the lazy evaluation, it’s also unclear how to use some utility functions within the pipeline.
 
 **Comment:**
 It's been my first choice for a long time, until…
@@ -52,7 +52,7 @@ Until I have decided to build `ts-belt`. It combines all of the good things you 
 
 ### Features
 
-- 🚀 built with `ReScript`, which generates highly performant JavaScript code (see the benchmark results [here](benchmarks))
+- 🚀 built with `ReScript`, which generates highly performant JavaScript code (see the benchmark results [here](/benchmarks/introduction))
 - 👀 provide more readable code, due to the `data-first` approach
 - ✨ support for `TypeScript` and `Flow`
 - 🛡 write safer code with `Option` and `Result` types
