@@ -13,12 +13,13 @@ pipe(
   O.fromNullable([3, 6, 9]),
   O.flatMap(A.get(0)),
   O.filter(value => value === 3),
-) // Some(3)
+) // → Some(3)
+
 pipe(
   O.fromNullable([3, 6, 9]),
   O.flatMap(A.get(0)),
   O.filter(value => value === 0),
-) // None
+) // → None
 ```
 
 ### flatMap
@@ -37,7 +38,7 @@ pipe(
   O.flatMap(value => {
     return value.endsWith('lo') ? O.Some(`${value} world!`) : O.None
   }),
-) // Some('hello world!')
+) // → Some('hello world!')
 ```
 
 ### fromFalsy
@@ -50,11 +51,11 @@ function fromFalsy<T>(value: T): Option<ExtractValue<T>>
 ```
 
 ```ts
-O.fromFalsy(1) // Some(1)
-O.fromFalsy('hello world') // Some('hello world')
-O.fromFalsy([]) // Some([])
-O.fromFalsy(0) // None
-O.fromFalsy('') // None
+O.fromFalsy(1) // → Some(1)
+O.fromFalsy('hello world') // → Some('hello world')
+O.fromFalsy([]) // → Some([])
+O.fromFalsy(0) // → None
+O.fromFalsy('') // → None
 ```
 
 ### fromNullable
@@ -67,12 +68,12 @@ function fromNullable<T>(value: T): Option<ExtractValue<T>>
 ```
 
 ```ts
-O.fromNullable(1) // Some(1)
-O.fromNullable('hello world') // Some('hello world')
-O.fromNullable([]) // Some([])
-O.fromNullable(false) // Some(false)
-O.fromNullable(null) // None
-O.fromNullable(undefined) // None
+O.fromNullable(1) // → Some(1)
+O.fromNullable('hello world') // → Some('hello world')
+O.fromNullable([]) // → Some([])
+O.fromNullable(false) // → Some(false)
+O.fromNullable(null) // → None
+O.fromNullable(undefined) // → None
 ```
 
 ### fromPredicate
@@ -89,11 +90,12 @@ function fromPredicate<T>(predicateFn: (value: T) => boolean): (value: T) => Opt
 O.fromPredicate(
   [1, 2, 3],
   A.some(x => x === 2),
-) // Some([1, 2, 3])
+) // → Some([1, 2, 3])
+
 O.fromPredicate(
   [1, 2, 3],
   A.some(x => x === 4),
-) // None
+) // → None
 ```
 
 ### getExn
@@ -110,7 +112,7 @@ pipe(
   O.fromNullable('hello'),
   O.map(value => `${value} world!`),
   O.getExn,
-) // 'hello world!'
+) // → 'hello world!'
 ```
 
 ### getWithDefault
@@ -128,12 +130,13 @@ pipe(
   O.fromNullable('hello'),
   O.map(value => `${value} world!`),
   O.getWithDefault('error'),
-) // 'hello world!'
+) // → 'hello world!'
+
 pipe(
   O.fromNullable(null),
   O.map(value => `${value} world!`),
   O.getWithDefault('error'),
-) // 'error'
+) // → 'error'
 ```
 
 ### isNone
@@ -146,10 +149,10 @@ function isNone<T>(option: Option<T>): option is Option<never>
 ```
 
 ```ts
-O.isNone(O.None) // true
-pipe(O.fromNullable(null), O.isNone) // true
-O.isNone(O.Some('hello world!')) // false
-pipe(O.fromNullable('hello world!'), O.isNone) // false
+O.isNone(O.None) // → true
+pipe(O.fromNullable(null), O.isNone) // → true
+O.isNone(O.Some('hello world!')) // → false
+pipe(O.fromNullable('hello world!'), O.isNone) // → false
 ```
 
 ### isSome
@@ -162,10 +165,10 @@ function isSome<T>(option: Option<T>): option is Option<T>
 ```
 
 ```ts
-O.isSome(O.Some('hello world!')) // true
-pipe(O.fromNullable('hello world!'), O.isSome) // true
-O.isSome(O.None) // false
-pipe(O.fromNullable(null), O.isSome) // false
+O.isSome(O.Some('hello world!')) // → true
+pipe(O.fromNullable('hello world!'), O.isSome) // → true
+O.isSome(O.None) // → false
+pipe(O.fromNullable(null), O.isSome) // → false
 ```
 
 ### map
@@ -183,12 +186,13 @@ pipe(
   O.fromNullable([1, 2, 3]),
   O.flatMap(A.get(0)),
   O.map(n => `${n}. hello world!`),
-) // Some('1. hello world!')
+) // → Some('1. hello world!')
+
 pipe(
   O.fromNullable([]),
   O.flatMap(A.get(0)),
   O.map(n => `${n}. hello world!`),
-) // None
+) // → None
 ```
 
 ### mapNullable
@@ -205,16 +209,17 @@ function mapNullable<T, R>(mapFn: (value: T) => R | null | undefined): (option: 
 pipe(
   O.fromNullable([1, 2, 3]),
   O.mapNullable(value => value[0]),
-) // Some(1)
+) // → Some(1)
+
 pipe(
   O.fromNullable([undefined, 2, 3]),
   O.mapNullable(value => value[0]),
-) // None
+) // → None
 ```
 
 ### mapWithDefault
 
-Returns the result of `mapFn` if `option` is `Some(value)`, otherwise, returns `Some(defaultValue)`.
+Returns the result of `mapFn` if `option` is `Some(value)`, otherwise, returns a default value.
 
 
 ```ts
@@ -227,12 +232,13 @@ pipe(
   O.fromNullable(['hello']),
   O.flatMap(A.get(0)),
   O.mapWithDefault('default value', value => `${value} world!`),
-) // 'hello world!'
+) // → 'hello world!'
+
 pipe(
   O.fromNullable([]),
   O.flatMap(A.get(0)),
   O.mapWithDefault('default value', value => `${value} world!`),
-) // 'default value'
+) // → 'default value'
 ```
 
 ### match
@@ -254,7 +260,8 @@ pipe(
     str => `${str}!`,
     () => 'oops!',
   ),
-) // 'hello world!'
+) // → 'hello world!'
+
 pipe(
   O.fromNullable([]),
   O.flatMap(A.takeExactly(2)),
@@ -263,7 +270,7 @@ pipe(
     str => `${str}!`,
     () => 'oops!',
   ),
-) // 'oops!'
+) // → 'oops!'
 ```
 
 ### toNullable
@@ -276,8 +283,13 @@ function toNullable<T>(option: Option<T>): T | null
 ```
 
 ```ts
-pipe(O.fromNullable(['hello', 'world']), O.flatMap(A.takeExactly(2)), O.toNullable) // ['hello', 'world']
-pipe(O.fromNullable([]), O.flatMap(A.takeExactly(2)), O.toNullable) // null
+pipe(
+  O.fromNullable(['hello', 'world']),
+  O.flatMap(A.takeExactly(2)),
+  O.toNullable,
+) // → ['hello', 'world']
+
+pipe(O.fromNullable([]), O.flatMap(A.takeExactly(2)), O.toNullable) // → null
 ```
 
 ### toResult
@@ -291,8 +303,17 @@ function toResult<A, B>(errorValue: NonNullable<B>): (option: Option<A>) => Resu
 ```
 
 ```ts
-pipe(O.fromNullable(['hello', 'world']), O.flatMap(A.takeExactly(2)), O.toResult('oops!')) // R.Ok(['hello', 'world'])
-pipe(O.fromNullable([]), O.flatMap(A.takeExactly(2)), O.toResult('oops!')) // R.Error('oops!')
+pipe(
+  O.fromNullable(['hello', 'world']),
+  O.flatMap(A.takeExactly(2)),
+  O.toResult('oops!'),
+) // → R.Ok(['hello', 'world'])
+
+pipe(
+  O.fromNullable([]),
+  O.flatMap(A.takeExactly(2)),
+  O.toResult('oops!'),
+) // → R.Error('oops!')
 ```
 
 ### toUndefined
@@ -305,6 +326,11 @@ function toUndefined<T>(option: Option<T>): T | undefined
 ```
 
 ```ts
-pipe(O.fromNullable(['hello', 'world']), O.flatMap(A.takeExactly(2)), O.toUndefined) // ['hello', 'world']
-pipe(O.fromNullable([]), O.flatMap(A.takeExactly(2)), O.toUndefined) // undefined
+pipe(
+  O.fromNullable(['hello', 'world']),
+  O.flatMap(A.takeExactly(2)),
+  O.toUndefined,
+) // → ['hello', 'world']
+
+pipe(O.fromNullable([]), O.flatMap(A.takeExactly(2)), O.toUndefined) // → undefined
 ```

@@ -33,12 +33,3 @@ export xnor = (a, b) => !xor(a, b)
 
 %comment("Combines two booleans using an implication (`!a || b`).")
 export implies = (a, b) => !a || b
-
-%comment("Determines if two provided booleans are equal.")
-export eq = (a, b) =>
-  switch (a, b) {
-  | (true, true) => true
-  | (false, false) => true
-  | (true, false) => false
-  | (false, true) => false
-  }

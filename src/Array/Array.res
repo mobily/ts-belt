@@ -339,7 +339,7 @@ export insertAt = (xs, targetIndex, element) =>
 %comment(
   "Creates a new array that replaces the value at the given index with the value returned by the provided function (the original array if the index is out of range)."
 )
-export updateAt = (targetIndex, fn, xs) =>
+export updateAt = (xs, targetIndex, fn) =>
   mapWithIndex(xs, (x, index) => index == targetIndex ? fn(x) : x)
 
 %comment(
@@ -454,3 +454,6 @@ export deepFlat = xs => {
 
   flat(xs, [])
 }
+
+%comment("Converts the given array to the TypeScript's tuple.")
+export toTuple = arr => arr

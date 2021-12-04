@@ -7,4 +7,9 @@ export declare const groupBy: <A, B extends PropertyKey>(
 export declare const flat: <A>(
   xs: ReadonlyArray<A>,
 ) => ReadonlyArray<A extends ReadonlyArray<infer B> ? B : A>
-export declare const deepFlat: <A>(xs: ReadonlyArray<A>) => ReadonlyArray<ExtractNested<A>>
+export declare const deepFlat: <A>(
+  xs: ReadonlyArray<A>,
+) => ReadonlyArray<ExtractNested<A>>
+export declare const toTuple: <T extends ReadonlyArray<any>>(
+  xs: [...T],
+) => [...T]

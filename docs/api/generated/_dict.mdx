@@ -1,12 +1,27 @@
 ### filter
 
+Removes each property that doesn't satisfy the given predicate function.
+
 
 ```ts
 function filter<T extends Record<string, any>>(dict: T, predicateFn: (value: T[keyof T]) => boolean): Partial<T>
 function filter<T extends Record<string, any>>(predicateFn: (value: T[keyof T]) => boolean): (dict: T) => Partial<T>
 ```
 
+```ts
+D.filter({ name: 'Joe', age: 20 }, value => value === 20) // → { age: 20 }
+pipe(
+  {
+    name: 'Joe',
+    age: 20,
+  },
+  D.filter(value => value === 'Joe'),
+) // → { name: 'Joe' }
+```
+
 ### filterWithKey
+
+Removes each property that doesn't satisfy the given predicate function (which takes two arguments: a property value and key).
 
 
 ```ts
@@ -14,21 +29,69 @@ function filterWithKey<T extends Record<string, any>>(dict: T, predicateFn: (val
 function filterWithKey<T extends Record<string, any>>(predicateFn: (value: T[keyof T], key: keyof T) => boolean): (dict: T) => Partial<T>
 ```
 
+```ts
+D.filterWithKey(
+  { name: 'Joe', age: 20 },
+  (value, key) => value === 30 && key === 'age',
+) // → {}
+
+pipe(
+  {
+    name: 'Joe',
+    age: 20,
+  },
+  D.filterWithKey((_value, key) => key === 'name'),
+) // → { name: 'Joe' }
+```
+
 ### fromPairs
+
+Creates a new object from an array of tuples (`[key, value]`).
 
 
 ```ts
-function fromPairs<T>(xs: ReadonlyArray<readonly [number, T]>): Record<number, T>
+function fromPairs<T, K>(xs: ReadonlyArray<readonly [string, T]>): Record<string, T>
+```
+
+```ts
+D.fromPairs([
+  ['name', 'Joe'],
+  ['location', 'Warsaw'],
+]) // → { name: 'Joe', location: 'Warsaw' }
+
+pipe(
+  [A.toTuple(['name', 'Joe']), A.toTuple(['location', 'Warsaw'])],
+  D.fromPairs,
+) // → { name: 'Joe', location: 'Warsaw' }
 ```
 
 ### keys
+
+Returns a new array that contains all keys of the provided object.
 
 
 ```ts
 function keys<T extends Record<string, unknown>>(dict: T): ReadonlyArray<keyof T>
 ```
 
+```ts
+D.keys({
+  name: 'Joe',
+  age: 20,
+}) // → ['name', 'age']
+
+pipe(
+  {
+    name: 'Joe',
+    age: 20,
+  },
+  D.keys,
+) // → ['name', 'age']
+```
+
 ### makeEmpty
+
+Creates an empty object. Alternative for `const obj = {} as SomeObjectType`.
 
 
 ```ts
@@ -37,13 +100,35 @@ function makeEmpty<T>(): T
 
 ### map
 
+Transforms each value in the object to a new value using the provided function.
+
 
 ```ts
 function map<T extends Record<string, any>, R>(dict: T, mapFn: (value: T[keyof T]) => R): Record<keyof T, R>
 function map<T extends Record<string, any>, R>(mapFn: (value: T[keyof T]) => R): (dict: T) => Record<keyof T, R>
 ```
 
+```ts
+D.map(
+  {
+    name: 'Joe',
+    location: 'Warsaw',
+  },
+  value => value.length,
+) // → { name: 3, location: 6 }
+
+pipe(
+  {
+    name: 'Joe',
+    location: 'Warsaw',
+  },
+  D.map(value => value.length),
+) // → { name: 3, location: 6 }
+```
+
 ### mapWithKey
+
+Transforms each value in the object to a new value using the provided function (which takes two arguments: a property value and key).
 
 
 ```ts
@@ -51,7 +136,27 @@ function mapWithKey<T extends Record<string, any>, R>(dict: T, mapFn: (value: T[
 function mapWithKey<T extends Record<string, any>, R>(mapFn: (value: T[keyof T], key: keyof T) => R): (dict: T) => Record<keyof T, R>
 ```
 
+```ts
+D.mapWithKey(
+  {
+    name: 'Joe',
+    location: 'Warsaw',
+  },
+  (value, key) => `${key}-${value.toLowerCase()}`,
+) // → { name: 'name-joe', location: 'location-warsaw' }
+
+pipe(
+  {
+    name: 'Joe',
+    location: 'Warsaw',
+  },
+  D.mapWithKey((value, key) => `${key}-${value.toLowerCase()}`),
+) // → { name: 'name-joe', location: 'location-warsaw' }
+```
+
 ### merge
+
+Merges two provided objects.
 
 
 ```ts
@@ -59,7 +164,14 @@ function merge<A, B>(fst: A, snd: B): A & B
 function merge<A, B>(snd: B): (fst: A) => A & B
 ```
 
+```ts
+D.merge({ x: 1, y: 2 }, { y: 3, z: 4 }) // → { x: 1, y: 3, z: 4 }
+pipe({ x: 1, y: 2 }, D.merge({ y: 3, z: 4 })) // → { x: 1, y: 3, z: 4 }
+```
+
 ### prop
+
+Returns the value of the given property.
 
 
 ```ts
@@ -67,7 +179,14 @@ function prop<T, K extends keyof T>(dict: T, key: K): T[K]
 function prop<T, K extends keyof T>(key: K): (dict: T) => T[K]
 ```
 
+```ts
+D.prop({ name: 'Joe', location: 'Warsaw' }, 'location') // → 'Warsaw'
+pipe({ name: 'Joe', location: 'Warsaw' }, D.prop('location')) // → 'Warsaw'
+```
+
 ### reject
+
+Removes each property that satisfies the given predicate function.
 
 
 ```ts
@@ -75,7 +194,20 @@ function reject<T extends Record<string, any>>(dict: T, predicateFn: (value: T[k
 function reject<T extends Record<string, any>>(predicateFn: (value: T[keyof T]) => boolean): (dict: T) => Partial<T>
 ```
 
+```ts
+D.reject({ name: 'Joe', age: 20 }, value => value === 20) // → { name: 'Joe' }
+pipe(
+  {
+    name: 'Joe',
+    age: 20,
+  },
+  D.reject(value => value === 'Joe'),
+) // → { age: 20 }
+```
+
 ### rejectWithKey
+
+Removes each property that satisfies the given predicate function (which takes two arguments: a property value and key).
 
 
 ```ts
@@ -83,16 +215,65 @@ function rejectWithKey<T extends Record<string, any>>(dict: T, predicateFn: (val
 function rejectWithKey<T extends Record<string, any>>(predicateFn: (value: T[keyof T], key: keyof T) => boolean): (dict: T) => Partial<T>
 ```
 
+```ts
+D.rejectWithKey(
+  { name: 'Joe', age: 20 },
+  (value, key) => value === 20 && key === 'age',
+) // → { name: 'Joe' }
+
+pipe(
+  {
+    name: 'Joe',
+    age: 20,
+  },
+  D.rejectWithKey((_value, key) => key === 'name'),
+) // → { age: 20 }
+```
+
 ### toPairs
+
+Converts an object into an array of `[key, value]` tuples.
 
 
 ```ts
 function toPairs<T>(dict: Record<string, T>): ReadonlyArray<readonly [string, T]>
 ```
 
+```ts
+D.toPairs({
+  name: 'Joe',
+  age: 20,
+}) // → [['name', 'Joe'], ['age', 20]]
+
+pipe(
+  {
+    name: 'Joe',
+    age: 20,
+  },
+  D.toPairs,
+) // → [['name', 'Joe'], ['age', 20]]
+```
+
 ### values
+
+Returns a new array that contains all values of the provided object.
 
 
 ```ts
 function values<T extends string | number, R>(dict: Record<T, R>): ReadonlyArray<R>
+```
+
+```ts
+D.values({
+  name: 'Joe',
+  age: 20,
+}) // → ['Joe', 20]
+
+pipe(
+  {
+    name: 'Joe',
+    age: 20,
+  },
+  D.values,
+) // → ['Joe', 20]
 ```

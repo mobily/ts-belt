@@ -14,12 +14,12 @@ type Option<A> = Some<A> | None
 ```jsx live
 function() {
   // ⬇️ remove all elements in the array below in order to see the default value
-  const xs = ['hello', 'ts', 'belt']
+  const xs = ['hello', 'world', 'ts', 'belt']
   const value = pipe(
-    xs,
-    A.get(0),
-    O.map(value => `${value} world!`),
-    O.getWithDefault('default value'),
+    O.fromNullable(xs), // → Some(['hello', 'world', 'ts', 'belt'])
+    O.flatMap(A.dropExactly(2)), // → Some(['ts', 'belt'])
+    O.map(A.join('-')), // → Some('ts-belt')
+    O.getWithDefault('default value'), // returns `default value` if `None`
   )
 
   return value

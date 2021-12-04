@@ -122,6 +122,10 @@ svg[class*="ExternalLink"] {
   content: "Utility functions for Number";
 }
 
+.sidebar-api-string > .menu__link:after {
+  content: "Utility functions for String";
+}
+
 .sidebar-api-result > .menu__link:after {
   content: "Describe the result of a certain operation without relying on exceptions";
 }
@@ -164,4 +168,8 @@ div[class^="playgroundHeader"], div[class^="playgroundHeader"]:first-of-type {
 
 table thead tr {
   border-bottom-width: 1px;
+}
+
+div[class^="codeBlockContainer"], div[class^="playgroundContainer"] {
+  box-shadow: none;
 }

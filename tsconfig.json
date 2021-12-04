@@ -4,7 +4,6 @@
     "emitDeclarationOnly": true,
     "rootDir": "./src",
     "baseUrl": ".",
-    "outDir": "dist/types/src",
     "lib": ["esnext"],
     "declaration": true,
     "module": "commonjs",
@@ -17,6 +16,9 @@
     "pretty": true,
     "skipLibCheck": true
   },
+  "include": [
+    "./src/**/index.ts"
+  ],
   "exclude": [
     "./tools/codemods/**/*",
     "./src/**/*.gen.tsx",

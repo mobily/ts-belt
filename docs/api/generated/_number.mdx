@@ -8,6 +8,11 @@ function add(a: number, b: number): number
 function add(b: number): (a: number) => number
 ```
 
+```ts
+N.add(10, 20) // → 30
+pipe(5, N.add(10)) // → 15
+```
+
 ### divide
 
 Divides two numbers.
@@ -16,6 +21,11 @@ Divides two numbers.
 ```ts
 function divide(a: number, b: number): number
 function divide(b: number): (a: number) => number
+```
+
+```ts
+N.divide(20, 5) // → 4
+pipe(40, N.divide(4)) // → 10
 ```
 
 ### divideWithModulo
@@ -28,6 +38,11 @@ function divideWithModulo(a: number, b: number): [number, number]
 function divideWithModulo(b: number): (a: number) => [number, number]
 ```
 
+```ts
+N.divideWithModulo(20, 5) // → [4, 0]
+pipe(30, N.divideWithModulo(4)) // → [7.5, 2]
+```
+
 ### modulo
 
 Returns the remainder of a number division.
@@ -36,6 +51,11 @@ Returns the remainder of a number division.
 ```ts
 function modulo(a: number, b: number): number
 function modulo(b: number): (a: number) => number
+```
+
+```ts
+N.modulo(20, 6) // → 2
+pipe(30, N.modulo(4)) // → 2
 ```
 
 ### multiply
@@ -48,13 +68,23 @@ function multiply(a: number, b: number): number
 function multiply(b: number): (a: number) => number
 ```
 
+```ts
+N.multiply(3, 6) // → 18
+pipe(8, N.multiply(4)) // → 32
+```
+
 ### pred
 
-Adds `1` to the given number.
+Subtracts `1` from the given number.
 
 
 ```ts
 function pred(n: number): number
+```
+
+```ts
+N.pred(6) // → 5
+pipe(5, N.pred) // → 4
 ```
 
 ### subtract
@@ -67,11 +97,22 @@ function subtract(a: number, b: number): number
 function subtract(b: number): (a: number) => number
 ```
 
+```ts
+N.subtract(20, 10) // → 10
+pipe(15, N.subtract(10)) // → 5
+```
+
 ### succ
 
-Subtracts `1` from the given number.
+Adds `1` to the given number.
 
 
 ```ts
 function succ(n: number): number
+```
+
+```ts
+N.succ(0) // → 1
+A.makeWithIndex(4, N.succ) // → [1, 2, 3, 4]
+pipe(5, N.succ) // → 6
 ```

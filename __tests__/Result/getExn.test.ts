@@ -8,6 +8,18 @@ describe('getExn', () => {
   })
 
   it('returns a value', () => {
-    expect(pipe(R.fromNullable('value', 'this is bad'), R.getExn)).toBe('value')
+    expect(pipe(R.fromNullable('value', 'this is bad'), R.getExn)).toEqual(
+      'value',
+    )
+  })
+
+  it('*', () => {
+    expect(
+      pipe(
+        R.fromNullable('hello', 'oops!'),
+        R.map(value => `${value} world!`),
+        R.getExn,
+      ),
+    ).toEqual('hello world!')
   })
 })

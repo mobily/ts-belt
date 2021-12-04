@@ -1,5 +1,7 @@
 ### allPass
 
+Determines whether all the provided predicates return `true` for the given value.
+
 
 ```ts
 function allPass<A>(value: A, fns: Array<(_1: A) => boolean>): boolean
@@ -8,12 +10,16 @@ function allPass<A>(fns: Array<(_1: A) => boolean>): (value: A) => boolean
 
 ### always
 
+Returns a function that always returns the provided value.
+
 
 ```ts
 function always<A>(value: A): () => A
 ```
 
 ### anyPass
+
+Determines whether at least one of the provided predicate returns `true` for the given value.
 
 
 ```ts
@@ -23,6 +29,8 @@ function anyPass<A>(fns: Array<(_1: A) => boolean>): (value: A) => boolean
 
 ### both
 
+Calls the two provided functions and returns `&&` of the results → `fn0(value) && fn1(value)`.
+
 
 ```ts
 function both<A>(value: A, fn0: (_1: A) => boolean, fn1: (_1: A) => boolean): boolean
@@ -30,6 +38,8 @@ function both<A>(fn0: (_1: A) => boolean, fn1: (_1: A) => boolean): (value: A) =
 ```
 
 ### defaultTo
+
+Returns a default value if `value` is nullable.
 
 
 ```ts
@@ -39,6 +49,8 @@ function defaultTo<T>(value: T | null | undefined): (defaultValue: NonNullable<T
 
 ### either
 
+Calls the two provided functions and returns `||` of the results → `fn0(value) || fn1(value)`.
+
 
 ```ts
 function either<A>(value: A, fn0: (_1: A) => boolean, fn1: (_1: A) => boolean): boolean
@@ -46,6 +58,8 @@ function either<A>(fn0: (_1: A) => boolean, fn1: (_1: A) => boolean): (value: A)
 ```
 
 ### equals
+
+Returns `true` if provided values are equal, otherwise, returns `false`.
 
 
 ```ts
@@ -55,6 +69,8 @@ function equals(snd: any): (fst: any) => boolean
 
 ### falsy
 
+Always returns `false`.
+
 
 ```ts
 function falsy(): boolean
@@ -62,12 +78,16 @@ function falsy(): boolean
 
 ### identity
 
+Always returns the provided value, useful as a placeholder function.
+
 
 ```ts
 function identity<A>(value: A): A
 ```
 
 ### ifElse
+
+Tests the given value by passing it to the predicate, if the predicate is satisfied, the function returns the result of `truthyFn`, otherwise, returns the result of `falsyFn`.
 
 
 ```ts
@@ -86,12 +106,16 @@ function ifElse<A, B>(
 
 ### ignore
 
+Always returns `void`, useful as a placeholder function.
+
 
 ```ts
 function ignore(): void
 ```
 
 ### truthy
+
+Always returns `true`.
 
 
 ```ts
@@ -100,6 +124,8 @@ function truthy(): boolean
 
 ### unless
 
+Tests the given value by passing it to the predicate, if the predicate is satisfied, the function returns `value`, otherwise, returns the result of `falsyFn`.
+
 
 ```ts
 function unless<A>(value: A, predicateFn: (_1: A) => boolean, falsyFn: (_1: A) => A): A
@@ -107,6 +133,8 @@ function unless<A>(predicateFn: (_1: A) => boolean, falsyFn: (_1: A) => A): (val
 ```
 
 ### when
+
+Tests the given value by passing it to the predicate, if the predicate is satisfied, the function returns the result of `truthyFn`, otherwise, returns `value`.
 
 
 ```ts

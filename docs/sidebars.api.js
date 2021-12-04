@@ -17,5 +17,6 @@ module.exports = {
     'object',
     'option',
     'result',
+    'string',
   ]),
 }

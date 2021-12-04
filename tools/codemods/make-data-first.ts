@@ -35,9 +35,18 @@ const transformer = (file: FileInfo, api: API) => {
 
     if (beltModule.current) {
       const belt = j(
-        fs.readFileSync(path.resolve(__dirname, '..', '..', 'node_modules', beltModule.current), {
-          encoding: 'utf-8',
-        }),
+        fs.readFileSync(
+          path.resolve(
+            __dirname,
+            '..',
+            '..',
+            'node_modules',
+            beltModule.current,
+          ),
+          {
+            encoding: 'utf-8',
+          },
+        ),
       )
 
       belt
@@ -54,7 +63,10 @@ const transformer = (file: FileInfo, api: API) => {
     }
   }
 
-  const makeDataFirst = (functionDeclaration: FunctionDeclaration, name?: string) => {
+  const makeDataFirst = (
+    functionDeclaration: FunctionDeclaration,
+    name?: string,
+  ) => {
     const n = name ?? functionDeclaration.id.name
     const id = `_${n}`
 
@@ -65,12 +77,18 @@ const transformer = (file: FileInfo, api: API) => {
         j.ifStatement(
           j.binaryExpression(
             '===',
-            j.memberExpression(j.identifier('arguments'), j.identifier('length')),
+            j.memberExpression(
+              j.identifier('arguments'),
+              j.identifier('length'),
+            ),
             j.numericLiteral(functionDeclaration.params.length - 1),
           ),
           j.blockStatement([
             j.variableDeclaration('const', [
-              j.variableDeclarator(j.identifier('args'), j.identifier('arguments')),
+              j.variableDeclarator(
+                j.identifier('args'),
+                j.identifier('arguments'),
+              ),
             ]),
             j.returnStatement(
               j.functionExpression(
@@ -142,7 +160,10 @@ const transformer = (file: FileInfo, api: API) => {
     .filter(p => {
       const declarator = p.value.declarations[0]
 
-      if (declarator.type === 'VariableDeclarator' && declarator.id.type === 'Identifier') {
+      if (
+        declarator.type === 'VariableDeclarator' &&
+        declarator.id.type === 'Identifier'
+      ) {
         return exportedFunctions.includes(declarator.id.name)
       }
 
@@ -169,7 +190,10 @@ const transformer = (file: FileInfo, api: API) => {
         )
 
         if (beltFunction.params.length > 1) {
-          const [id, dataFirst] = makeDataFirst(beltFunction, declarator.id.name)
+          const [id, dataFirst] = makeDataFirst(
+            beltFunction,
+            declarator.id.name,
+          )
 
           declarator.id.name = id
 

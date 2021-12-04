@@ -20,13 +20,14 @@ const build = (entryPoints, options = {}) => {
   return esbuild
     .build({
       entryPoints,
-      splitting: format === 'esm',
       bundle: true,
       format,
       outdir: `dist/${format}`,
+      treeShaking: true,
       minify: false,
       external: [],
       logLevel: 'info',
+      legalComments: 'none',
       ...options,
     })
     .catch(handleError)

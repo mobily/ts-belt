@@ -8,6 +8,35 @@ function flatMap<A, B, R>(result: Result<A, B>, mapFn: (value: A) => Result<R, B
 function flatMap<A, B, R>(mapFn: (value: A) => Result<R, B>): (result: Result<A, B>) => Result<R, B>
 ```
 
+```ts
+pipe(
+  R.fromNullable(4, 'value cannot be nullable'),
+  R.flatMap(value => {
+    return value === 0
+      ? R.Error('never divide by zero')
+      : R.Ok(100 / value)
+  }),
+) // → Ok(25)
+
+pipe(
+  R.fromNullable(null, 'value cannot be nullable'),
+  R.flatMap(value => {
+    return value === 0
+      ? R.Error('never divide by zero')
+      : R.Ok(100 / value)
+  }),
+) // → Error('value cannot be nullable')
+
+pipe(
+  R.fromNullable(0, 'value cannot be nullable'),
+  R.flatMap(value => {
+    return value === 0
+      ? R.Error('never divide by zero')
+      : R.Ok(100 / value)
+  }),
+) // → Error('never divide by zero')
+```
+
 ### fromFalsy
 
 Returns `Ok(value)` if `value` is not falsy, otherwise, returns `Error(errorValue)`.
@@ -16,6 +45,15 @@ Returns `Ok(value)` if `value` is not falsy, otherwise, returns `Error(errorValu
 ```ts
 function fromFalsy<A, B>(value: A, errorValue: NonNullable<B>): Result<ExtractValue<A>, B>
 function fromFalsy<A, B>(errorValue: NonNullable<B>): (value: A) => Result<ExtractValue<A>, B>
+```
+
+```ts
+R.fromFalsy(4, 'falsy') // → Ok(4)
+R.fromFalsy([], 'falsy') // → Ok([])
+R.fromFalsy({}, 'falsy') // → Ok({})
+R.fromFalsy(0, 'falsy') // → Error('falsy')
+R.fromFalsy('', 'falsy') // → Error('falsy')
+R.fromFalsy(false, 'falsy') // → Error('falsy')
 ```
 
 ### fromNullable
@@ -28,6 +66,16 @@ function fromNullable<A, B>(value: A, errorValue: NonNullable<B>): Result<Extrac
 function fromNullable<A, B>(errorValue: NonNullable<B>): (value: A) => Result<ExtractValue<A>, B>
 ```
 
+```ts
+R.fromNullable(null, 'nullable') // → Error('nullable')
+R.fromNullable(undefined, 'nullable') // → Error('nullable')
+R.fromNullable([], 'nullable') // → Ok([])
+R.fromNullable({}, 'nullable') // → Ok({})
+R.fromNullable(0, 'nullable') // → Ok(0)
+R.fromNullable(1, 'nullable') // → Ok(1)
+R.fromNullable(false, 'nullable') // → Ok(false)
+```
+
 ### fromPredicate
 
 Returns `Ok(value)` if the predicate function returns `true`, otherwise, returns `Error(errorValue)`.
@@ -36,6 +84,20 @@ Returns `Ok(value)` if the predicate function returns `true`, otherwise, returns
 ```ts
 function fromPredicate<A, B>(value: A, predicateFn: (value: A) => boolean, errorValue: NonNullable<B>): Result<ExtractValue<A>, B>
 function fromPredicate<A, B>(predicateFn: (value: A) => boolean, errorValue: NonNullable<B>): (value: A) => Result<ExtractValue<A>, B>
+```
+
+```ts
+R.fromPredicate(
+  [1, 2, 3],
+  A.some(x => x === 2),
+  'value not found',
+) // → Ok([1, 2, 3])
+
+R.fromPredicate(
+  [1, 2, 3],
+  A.some(x => x === 4),
+  'value not found',
+) // → Error('value not found')
 ```
 
 ### getExn
@@ -47,12 +109,34 @@ Returns `value` if `result` is `Ok(value)`, otherwise, throws an exception.
 function getExn<A, B>(result: Result<A, B>): A | never
 ```
 
+```ts
+pipe(
+  R.fromNullable('hello', 'oops!'),
+  R.map(value => `${value} world!`),
+  R.getExn,
+) // → 'hello world!'
+```
+
 ### getWithDefault
 
 
 ```ts
 function getWithDefault<A, B>(result: Result<A, B>, defaultValue: NonNullable<A>): A
 function getWithDefault<A, B>(defaultValue: NonNullable<A>): (result: Result<A, B>) => A
+```
+
+```ts
+pipe(
+  R.fromNullable('hello', 'oops!'),
+  R.map(value => `${value} world!`),
+  R.getWithDefault('error'),
+) // → 'hello world!'
+
+pipe(
+  R.fromNullable(null, 'oops!'),
+  R.map(value => `${value} world!`),
+  R.getWithDefault('error'),
+) // → 'error'
 ```
 
 ### isError
@@ -64,6 +148,13 @@ Returns `true` if the provided `result` is `Error(errorValue)`, otherwise, retur
 function isError<A, B>(result: Result<A, B>): result is Error<B>
 ```
 
+```ts
+R.isError(R.Error('bad')) // → true
+pipe(R.fromNullable(null, 'error'), R.isError) // → true
+R.isError(R.Ok('good')) // → false
+pipe(R.fromNullable(4, 'error'), R.isError) // → false
+```
+
 ### isOk
 
 Returns `true` if the provided `result` is `Ok(value)`, otherwise, returns `false`.
@@ -71,6 +162,13 @@ Returns `true` if the provided `result` is `Ok(value)`, otherwise, returns `fals
 
 ```ts
 function isOk<A, B>(result: Result<A, B>): result is Ok<A>
+```
+
+```ts
+R.isOk(R.Ok('good')) // → true
+pipe(R.fromNullable(4, 'error'), R.isOk) // → true
+R.isOk(R.Error('bad')) // → false
+pipe(R.fromNullable(null, 'error'), R.isOk) // → false
 ```
 
 ### map
@@ -83,9 +181,39 @@ function map<A, B, R>(result: Result<A, B>, mapFn: (value: A) => NonNullable<R>)
 function map<A, B, R>(mapFn: (value: A) => NonNullable<R>): (result: Result<A, B>) => Result<R, B>
 ```
 
+```ts
+// type User = { name: string | null, age: number } | null
+pipe(
+  // ⬇️ const obj: User = { name: 'Joe', age: 20 }
+  R.fromNullable(obj, 'cannot be nullable'),
+  R.flatMap(obj => {
+    return G.isNotNullable(obj.name) ? R.Ok(obj) : R.Error('missing name')
+  }),
+  R.map(obj => `${obj.name} is ${obj.age} year old!`),
+) // → Ok('Joe is 20 year old!')
+
+pipe(
+  // ⬇️ const obj: User = { name: null, age: 20 }
+  R.fromNullable(obj, 'cannot be nullable'),
+  R.flatMap(obj => {
+    return G.isNotNullable(obj.name) ? R.Ok(obj) : R.Error('missing name')
+  }),
+  R.map(obj => `${obj.name} is ${obj.age} year old!`),
+) // → Error('missing name')
+
+pipe(
+  // ⬇️ const obj: User = null
+  R.fromNullable(obj, 'cannot be nullable'),
+  R.flatMap(obj => {
+    return G.isNotNullable(obj.name) ? R.Ok(obj) : R.Error('missing name')
+  }),
+  R.map(obj => `${obj.name} is ${obj.age} year old!`),
+) // → Error('cannot be nullable')
+```
+
 ### mapWithDefault
 
-Returns the result of `mapFn` if `result` is `Ok(value)`, otherwise returns `Ok(defaultValue)`.
+Returns the result of `mapFn` if `result` is `Ok(value)`, otherwise returns a default value.
 
 
 ```ts
@@ -95,6 +223,21 @@ function mapWithDefault<A, B, R>(
     mapFn: (value: A) => NonNullable<R>
 ): R
 function mapWithDefault<A, B, R>(defaultValue: NonNullable<R>, mapFn: (value: A) => NonNullable<R>): (result: Result<A, B>) => R
+```
+
+```ts
+// type Name = string | null
+pipe(
+  // ⬇️ const name: Name = 'Joe'
+  R.fromNullable(name, 'cannot be nullable'),
+  R.mapWithDefault('Hello, stranger!', name => `Hello, ${name}!`),
+) // → 'Hello, Joe!'
+
+pipe(
+  // ⬇️ const name: Name = null
+  R.fromNullable(name, 'cannot be nullable'),
+  R.mapWithDefault('Hello, stranger!', name => `Hello, ${name}!`),
+) // → 'Hello, stranger!'
 ```
 
 ### match
@@ -107,6 +250,29 @@ function match<A, B, R>(result: Result<A, B>, okFn: (value: A) => R, errorFn: (v
 function match<A, B, R>(okFn: (value: A) => R, errorFn: (value: B) => R): (result: Result<A, B>) => R
 ```
 
+```ts
+// type Elements = ReadonlyArray<string> | null
+pipe(
+  // ⬇️ const xs: Elements = ['hello', 'world']
+  R.fromNullable(xs, 'cannot be nullable'),
+  R.map(A.join(' ')),
+  R.match(
+    str => `${str}!`,
+    () => 'oops!',
+  ),
+) // → 'hello world!'
+
+pipe(
+  // ⬇️ const xs: Elements = null
+  R.fromNullable(xs, 'cannot be nullable'),
+  R.map(A.join(' ')),
+  R.match(
+    str => `${str}!`,
+    error => `${error}!`,
+  ),
+) // → 'cannot be nullable!'
+```
+
 ### toNullable
 
 Returns `value` if `result` is `Ok(value)`, otherwise, returns `null`.
@@ -114,6 +280,26 @@ Returns `value` if `result` is `Ok(value)`, otherwise, returns `null`.
 
 ```ts
 function toNullable<A, B>(result: Result<A, B>): A | null
+```
+
+```ts
+pipe(
+  R.fromNullable(['hello', 'world', 'ts', 'belt'], 'cannot be nullable'),
+  R.flatMap(xs => {
+    return pipe(xs, A.dropExactly(2), O.toResult('array is empty'))
+  }),
+  R.map(A.join('-')),
+  R.toNullable,
+) // → 'ts-belt'
+
+pipe(
+  R.fromNullable([], 'cannot be nullable'),
+  R.flatMap(xs => {
+    return pipe(xs, A.dropExactly(2), O.toResult('array is empty'))
+  }),
+  R.map(A.join('-')),
+  R.toNullable,
+) // → null
 ```
 
 ### toOption
@@ -125,6 +311,31 @@ Returns `Some(value)` if `result` is `Ok(value)`, otherwise, returns `None`, bot
 function toOption<A, B>(result: Result<A, B>): Option<A>
 ```
 
+```ts
+// type Data = { names: string } | null
+pipe(
+  // ⬇️ const obj: Data = { names: 'hello,world,ts,belt' }
+  R.fromNullable(obj, 'cannot be nullable'), // → Ok({ names: 'hello,world,ts,belt' })
+  R.map(D.prop('names')), // → Ok('hello,world,ts,belt')
+  R.map(S.split(',')), // → Ok(['hello', 'world', 'ts', 'belt'])
+  R.toOption, // → Some(['hello', 'world', 'ts', 'belt'])
+  O.flatMap(A.dropExactly(2)), // → Some(['ts', 'belt'])
+  O.map(A.join('-')), // → Some('ts-belt')
+  O.getWithDefault('nothing found'), // → ts-belt
+) // → 'ts-belt'
+
+pipe(
+  // ⬇️ const obj: Data = null
+  R.fromNullable(obj, 'cannot be nullable'), // → Error('cannot be nullable')
+  R.map(D.prop('names')), // → Error('cannot be nullable')
+  R.map(S.split(',')), // → Error('cannot be nullable')
+  R.toOption, // → None
+  O.flatMap(A.dropExactly(2)), // → None
+  O.map(A.join('-')), // → None
+  O.getWithDefault('nothing found'), // → nothing found
+) // → 'nothing found'
+```
+
 ### toUndefined
 
 Returns `value` if `result` is `Ok(value)`, otherwise, returns a default value.
@@ -132,4 +343,24 @@ Returns `value` if `result` is `Ok(value)`, otherwise, returns a default value.
 
 ```ts
 function toUndefined<A, B>(result: Result<A, B>): A | undefined
+```
+
+```ts
+pipe(
+  R.fromNullable(['hello', 'world', 'ts', 'belt'], 'cannot be nullable'),
+  R.flatMap(xs => {
+    return pipe(xs, A.dropExactly(2), O.toResult('array is empty'))
+  }),
+  R.map(A.join('-')),
+  R.toUndefined,
+) // → 'ts-belt'
+
+pipe(
+  R.fromNullable([], 'cannot be nullable'),
+  R.flatMap(xs => {
+    return pipe(xs, A.dropExactly(2), O.toResult('array is empty'))
+  }),
+  R.map(A.join('-')),
+  R.toUndefined,
+) // → undefined
 ```

@@ -1,4 +1,4 @@
-import { pipe, R } from '../..'
+import { pipe, R, A, O } from '../..'
 
 describe('toNullable', () => {
   it('returns null', () => {
@@ -9,25 +9,50 @@ describe('toNullable', () => {
         R.flatMap(_ => R.Error('new error')),
         R.toNullable,
       ),
-    ).toBe(null)
+    ).toEqual(null)
     expect(
       pipe(
         R.fromNullable(null, 'this is bad'),
         R.flatMap(_ => R.Ok('this is fine')),
         R.toNullable,
       ),
-    ).toBe(null)
+    ).toEqual(null)
   })
 
   it('returns a value', () => {
-    expect(pipe(R.Ok('value'), R.toNullable)).toBe('value')
-    expect(pipe(R.fromNullable('value', 'this is bad'), R.toNullable)).toBe('value')
+    expect(pipe(R.Ok('value'), R.toNullable)).toEqual('value')
+    expect(pipe(R.fromNullable('value', 'this is bad'), R.toNullable)).toEqual(
+      'value',
+    )
     expect(
       pipe(
         R.fromNullable('this is fine', 'this is bad'),
         R.flatMap(str => R.Ok(`${str}!`)),
         R.toNullable,
       ),
-    ).toBe('this is fine!')
+    ).toEqual('this is fine!')
+  })
+
+  it('*', () => {
+    expect(
+      pipe(
+        R.fromNullable(['hello', 'world', 'ts', 'belt'], 'cannot be nullable'),
+        R.flatMap(xs => {
+          return pipe(xs, A.dropExactly(2), O.toResult('array is empty'))
+        }),
+        R.map(A.join('-')),
+        R.toNullable,
+      ),
+    ).toEqual('ts-belt')
+    expect(
+      pipe(
+        R.fromNullable([], 'cannot be nullable'),
+        R.flatMap(xs => {
+          return pipe(xs, A.dropExactly(2), O.toResult('array is empty'))
+        }),
+        R.map(A.join('-')),
+        R.toNullable,
+      ),
+    ).toEqual(null)
   })
 })

@@ -8,5 +8,4 @@ module.exports = {
   moduleFileExtensions: ['ts', 'js'],
   collectCoverage: true,
   rootDir: __dirname,
-  setupFiles: ['./__tests__/jest.setup.js'],
 }

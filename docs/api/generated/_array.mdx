@@ -66,10 +66,10 @@ function drop<A>(n: number): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
 ```
 
 ```ts
-A.drop([1], 1) // []
-A.drop([1, 2, 3], 4) // []
-A.drop([1, 2, 3], 2) // [3]
-pipe([1, 2, 3, 4], A.drop(2)) // [3, 4]
+A.drop([1], 1) // → []
+A.drop([1, 2, 3], 4) // → []
+A.drop([1, 2, 3], 2) // → [3]
+pipe([1, 2, 3, 4], A.drop(2)) // → [3, 4]
 ```
 
 ### dropExactly
@@ -127,15 +127,16 @@ function filter<A>(predicateFn: (_1: A) => boolean): (xs: ReadonlyArray<A>) => R
 ```
 
 ```ts
-A.filter([1, 2, 3, 4], value => value % 2 === 0) // [2, 4]
+A.filter([1, 2, 3, 4], value => value % 2 === 0) // → [2, 4]
 pipe(
   [1, 2, 3, 4, 5, 6, 7, 8, 9],
   A.filter(value => value % 2 === 0),
-) // [2, 4, 6, 8]
+) // → [2, 4, 6, 8]
+
 pipe(
   ['hello', 'wo', 'rld'],
   A.filter(value => value.length < 4),
-) // ['wo', 'rld']
+) // → ['wo', 'rld']
 ```
 
 ### filterWithIndex
@@ -314,9 +315,9 @@ function isEmpty<A>(xs: ReadonlyArray<A>): boolean
 ```
 
 ```ts
-A.isEmpty(['hello', 'world']) // false
-A.isEmpty([]) // true
-pipe([1, 2, 3], A.isEmpty) // false
+A.isEmpty(['hello', 'world']) // → false
+A.isEmpty([]) // → true
+pipe([1, 2, 3], A.isEmpty) // → false
 ```
 
 ### isNotEmpty
@@ -329,9 +330,9 @@ function isNotEmpty<A>(xs: ReadonlyArray<A>): boolean
 ```
 
 ```ts
-A.isNotEmpty(['hello', 'world']) // true
-A.isNotEmpty([]) // false
-pipe([1, 2, 3], A.isNotEmpty) // true
+A.isNotEmpty(['hello', 'world']) // → true
+A.isNotEmpty([]) // → false
+pipe([1, 2, 3], A.isNotEmpty) // → true
 ```
 
 ### join
@@ -363,8 +364,8 @@ function length<A>(xs: ReadonlyArray<A>): number
 ```
 
 ```ts
-A.length(['hello', 'world']) // 2
-pipe([0, 2, 4], A.length) // 3
+A.length(['hello', 'world']) // → 2
+pipe([0, 2, 4], A.length) // → 3
 ```
 
 ### make
@@ -378,9 +379,9 @@ function make<A>(element: A): (n: number) => ReadonlyArray<A>
 ```
 
 ```ts
-A.make(-1, 'hello') // []
-A.make(3, 1) // [1, 1, 1]
-pipe(2, A.make('hello')) // ['hello', 'hello']
+A.make(-1, 'hello') // → []
+A.make(3, 1) // → [1, 1, 1]
+pipe(2, A.make('hello')) // → ['hello', 'hello']
 ```
 
 ### makeEmpty
@@ -393,7 +394,7 @@ function makeEmpty<A>(): ReadonlyArray<A>
 ```
 
 ```ts
-A.makeEmpty<number>() // []
+A.makeEmpty<number>() // → []
 ```
 
 ### makeWithIndex
@@ -407,7 +408,7 @@ function makeWithIndex<A>(mapFn: (_1: number) => A): (n: number) => ReadonlyArra
 ```
 
 ```ts
-A.makeWithIndex(5, index => index * 2) // [0, 2, 4, 6, 8]
+A.makeWithIndex(5, index => index * 2) // → [0, 2, 4, 6, 8]
 ```
 
 ### map
@@ -564,8 +565,8 @@ function reverse<A>(xs: ReadonlyArray<A>): ReadonlyArray<A>
 ```
 
 ```ts
-A.reverse([1, 2, 3, 4, 5]) // [5, 4, 3, 2, 1]
-pipe(['hello', 'world'], A.reverse) // ['world', 'hello']
+A.reverse([1, 2, 3, 4, 5]) // → [5, 4, 3, 2, 1]
+pipe(['hello', 'world'], A.reverse) // → ['world', 'hello']
 ```
 
 ### shuffle
@@ -667,10 +668,10 @@ function tail<A>(xs: ReadonlyArray<A>): Option<ReadonlyArray<A>>
 ```
 
 ```ts
-A.tail([1, 2, 3]) // Some([2, 3])
-A.tail([1]) // Some([])
-A.tail([]) // None
-pipe([1, 2, 3, 4], A.tail) // Some([2, 3, 4])
+A.tail([1, 2, 3]) // → Some([2, 3])
+A.tail([1]) // → Some([])
+A.tail([]) // → None
+pipe([1, 2, 3, 4], A.tail) // → Some([2, 3, 4])
 ```
 
 ### tailOrEmpty
@@ -710,6 +711,15 @@ Returns a new array, filled with elements from the provided array until an eleme
 ```ts
 function takeWhile<A>(xs: ReadonlyArray<A>, predicateFn: (_1: A) => boolean): ReadonlyArray<A>
 function takeWhile<A>(predicateFn: (_1: A) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+```
+
+### toTuple
+
+Converts the given array to the TypeScript's tuple.
+
+
+```ts
+function toTuple<T extends ReadonlyArray<any>>(xs: [...T]): [...T]
 ```
 
 ### uncons
@@ -755,8 +765,8 @@ Creates a new array that replaces the value at the given index with the value re
 
 
 ```ts
-function updateAt<A>(targetIndex: number, fn: (_1: A) => A, xs: ReadonlyArray<A>): ReadonlyArray<A>
-function updateAt<A>(fn: (_1: A) => A, xs: ReadonlyArray<A>): (targetIndex: number) => ReadonlyArray<A>
+function updateAt<A>(xs: ReadonlyArray<A>, targetIndex: number, fn: (_1: A) => A): ReadonlyArray<A>
+function updateAt<A>(targetIndex: number, fn: (_1: A) => A): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
 ```
 
 ### zip

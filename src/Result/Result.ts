@@ -41,7 +41,10 @@ export declare const mapWithDefault: <A, B, R>(
   defaultValue: NonNullable<R>,
   mapFn: (value: A) => NonNullable<R>,
 ) => R
-export declare const getWithDefault: <A, B>(result: Result<A, B>, defaultValue: NonNullable<A>) => A
+export declare const getWithDefault: <A, B>(
+  result: Result<A, B>,
+  defaultValue: NonNullable<A>,
+) => A
 export declare const getExn: <A, B>(result: Result<A, B>) => A | never
 export declare const match: <A, B, R>(
   result: Result<A, B>,

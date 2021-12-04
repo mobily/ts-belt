@@ -4,12 +4,10 @@
   "version": "3.0.0",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
-  "types": "./dist/types/src",
   "exports": {
     ".": {
       "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js",
-      "types": "./dist/types/src"
+      "require": "./dist/cjs/index.js"
     },
     "./package.json": "./package.json"
   },
@@ -83,6 +81,5 @@
   },
   "cacheDirectories": [
     "node_modules"
-  ],
-  "dependencies": {}
+  ]
 }

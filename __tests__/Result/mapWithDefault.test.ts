@@ -1,4 +1,4 @@
-import { pipe, R } from '../..'
+import { pipe, R, G } from '../..'
 
 describe('mapWithDefault', () => {
   it('returns a default value', () => {
@@ -20,5 +20,28 @@ describe('mapWithDefault', () => {
         }),
       ),
     ).toEqual(1)
+  })
+
+  it('*', () => {
+    let name: string | null = 'Joe'
+
+    expect(
+      // type Name = string | null
+      pipe(
+        // ⬇️ const name: Name = 'Joe'
+        R.fromNullable(name, 'cannot be nullable'),
+        R.mapWithDefault('Hello, stranger!', name => `Hello, ${name}!`),
+      ),
+    ).toEqual('Hello, Joe!')
+
+    name = null as unknown as string | null
+
+    expect(
+      pipe(
+        // ⬇️ const name: Name = null
+        R.fromNullable(name, 'cannot be nullable'),
+        R.mapWithDefault('Hello, stranger!', name => `Hello, ${name}!`),
+      ),
+    ).toEqual('Hello, stranger!')
   })
 })

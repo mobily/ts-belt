@@ -8,14 +8,9 @@ function and(a: boolean, b: boolean): boolean
 function and(b: boolean): (a: boolean) => boolean
 ```
 
-### eq
-
-Determines if two provided booleans are equal.
-
-
 ```ts
-function eq(a: boolean, b: boolean): boolean
-function eq(b: boolean): (a: boolean) => boolean
+B.and(true, true) // → true
+pipe(true, B.and(false)) // → false
 ```
 
 ### ifElse
@@ -28,6 +23,11 @@ function ifElse<A>(value: boolean, truthyFn: () => A, falsyFn: () => A): A
 function ifElse<A>(truthyFn: () => A, falsyFn: () => A): (value: boolean) => A
 ```
 
+```ts
+B.ifElse(true, F.always('ts'), F.always('belt')) // → 'ts'
+pipe(false, B.ifElse(F.always('ts'), F.always('belt'))) // → 'belt'
+```
+
 ### implies
 
 Combines two booleans using an implication (`!a || b`).
@@ -38,6 +38,11 @@ function implies(a: boolean, b: boolean): boolean
 function implies(b: boolean): (a: boolean) => boolean
 ```
 
+```ts
+B.implies(false, true) // → true
+pipe(true, B.implies(false)) // → false
+```
+
 ### inverse
 
 Negates the given boolean.
@@ -45,6 +50,11 @@ Negates the given boolean.
 
 ```ts
 function inverse(value: boolean): boolean
+```
+
+```ts
+B.inverse(false) // → true
+pipe(true, B.inverse) // → false
 ```
 
 ### nand
@@ -57,6 +67,11 @@ function nand(a: boolean, b: boolean): boolean
 function nand(b: boolean): (a: boolean) => boolean
 ```
 
+```ts
+B.nand(true, false) // → true
+pipe(false, B.nand(false)) // → true
+```
+
 ### nor
 
 Combines two booleans using `NOR` → `!(a || b)`.
@@ -65,6 +80,11 @@ Combines two booleans using `NOR` → `!(a || b)`.
 ```ts
 function nor(a: boolean, b: boolean): boolean
 function nor(b: boolean): (a: boolean) => boolean
+```
+
+```ts
+B.nor(true, false) // → false
+pipe(false, B.nor(false)) // → true
 ```
 
 ### not
@@ -86,6 +106,11 @@ function or(a: boolean, b: boolean): boolean
 function or(b: boolean): (a: boolean) => boolean
 ```
 
+```ts
+B.or(true, false) // → true
+pipe(false, B.or(false)) // → false
+```
+
 ### xnor
 
 Combines two booleans using `XNOR` → `!xor(a, b)`.
@@ -96,6 +121,11 @@ function xnor(a: boolean, b: boolean): boolean
 function xnor(b: boolean): (a: boolean) => boolean
 ```
 
+```ts
+B.xnor(true, false) // → false
+pipe(false, B.xnor(false)) // → true
+```
+
 ### xor
 
 Combines two booleans using `XOR` → `(!a && b) || (a && !b)`.
@@ -104,4 +134,9 @@ Combines two booleans using `XOR` → `(!a && b) || (a && !b)`.
 ```ts
 function xor(a: boolean, b: boolean): boolean
 function xor(b: boolean): (a: boolean) => boolean
+```
+
+```ts
+B.xor(true, false) // → true
+pipe(false, B.xor(false)) // → false
 ```

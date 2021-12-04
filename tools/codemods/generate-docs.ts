@@ -27,7 +27,10 @@ const transformer = (file: FileInfo, api: API) => {
   root
     .find(j.ExportNamedDeclaration)
     .filter(p => {
-      return p.parent.value.type === 'Program' && p.value.declaration?.type === 'TSDeclareFunction'
+      return (
+        p.parent.value.type === 'Program' &&
+        p.value.declaration?.type === 'TSDeclareFunction'
+      )
     })
     .forEach(p => {
       if (
@@ -56,7 +59,10 @@ const transformer = (file: FileInfo, api: API) => {
   root
     .find(j.ExportNamedDeclaration)
     .filter(p => {
-      return p.parent.value.type === 'Program' && p.value.declaration?.type === 'TSDeclareFunction'
+      return (
+        p.parent.value.type === 'Program' &&
+        p.value.declaration?.type === 'TSDeclareFunction'
+      )
     })
     .forEach(p => {
       const helperIndex = helpers.findIndex(
@@ -65,15 +71,23 @@ const transformer = (file: FileInfo, api: API) => {
           value.name === p.value.declaration.id.name,
       )
 
-      if (p.value.declaration?.type === 'TSDeclareFunction' && helperIndex > -1) {
-        helpers[helperIndex].types.push(j(p.value.declaration).toSource().replace('declare ', ''))
+      if (
+        p.value.declaration?.type === 'TSDeclareFunction' &&
+        helperIndex > -1
+      ) {
+        helpers[helperIndex].types.push(
+          j(p.value.declaration).toSource().replace('declare ', ''),
+        )
       }
     })
 
   root
     .find(j.ExportNamedDeclaration)
     .filter(p => {
-      return p.parent.value.type === 'Program' && p.value.declaration?.type === 'TSDeclareFunction'
+      return (
+        p.parent.value.type === 'Program' &&
+        p.value.declaration?.type === 'TSDeclareFunction'
+      )
     })
     .forEach(p => {
       const helperIndex = helpers.findIndex(
@@ -105,7 +119,9 @@ const transformer = (file: FileInfo, api: API) => {
         )
 
         if (fs.existsSync(testFilePath)) {
-          const testRoot = j(fs.readFileSync(testFilePath, { encoding: 'utf-8' }))
+          const testRoot = j(
+            fs.readFileSync(testFilePath, { encoding: 'utf-8' }),
+          )
 
           testRoot
             .find(j.CallExpression)
@@ -150,12 +166,19 @@ const transformer = (file: FileInfo, api: API) => {
     .map(value => {
       const types = value.types.join('\n')
       const examples = value.examples
-        .map(example => {
-          return `${example.fn} // ${example.result}`
+        .map((example, index) => {
+          const lines = example.fn.split(/\r\n|\r|\n/).length
+          return `${example.fn} // → ${example.result.replace(
+            '// prettier-ignore\n',
+            '',
+          )}${lines > 1 && index !== value.examples.length - 1 ? '\n' : ''}`
         })
         .join('\n')
-      const description = value.description ? `\n${value.description}\n` : ''
+      const description = value.description
+        ? `\n${value.description.replace(/^\*\s/, '')}\n`
+        : ''
 
+      // prettier-ignore
       const main = html`
         ### ${value.name}
         ${description}
@@ -164,6 +187,8 @@ const transformer = (file: FileInfo, api: API) => {
         ${types}
         \`\`\`
       `
+
+      // prettier-ignore
       const mainWithExample = html`
         ${main}
 

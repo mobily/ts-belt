@@ -164,7 +164,8 @@ const transformer = (file: FileInfo, api: API) => {
     })
     .replaceWith(p => {
       const typeReference = p.value.types.find(
-        value => value.type !== 'TSUndefinedKeyword' && value.type !== 'TSNullKeyword',
+        value =>
+          value.type !== 'TSUndefinedKeyword' && value.type !== 'TSNullKeyword',
       )
 
       if (typeReference) {
@@ -216,15 +217,26 @@ const transformer = (file: FileInfo, api: API) => {
 
     const typeAnnotation =
       tsTypeAnnotation.current ??
-      (identifier.typeAnnotation?.typeAnnotation as TSTypeAnnotation | undefined)
+      (identifier.typeAnnotation?.typeAnnotation as
+        | TSTypeAnnotation
+        | undefined)
 
     if (typeAnnotation) {
       const signatures = []
-      const { typeParameters, parameters = [], typeAnnotation: returnType } = typeAnnotation
+      const {
+        typeParameters,
+        parameters = [],
+        typeAnnotation: returnType,
+      } = typeAnnotation
       const comments = findComments(identifier.name)
 
       const original = j.exportNamedDeclaration(
-        makeDeclareFunction(identifier.name, parameters, typeParameters, returnType.typeAnnotation),
+        makeDeclareFunction(
+          identifier.name,
+          parameters,
+          typeParameters,
+          returnType.typeAnnotation,
+        ),
       )
 
       if (comments) {
@@ -240,14 +252,14 @@ const transformer = (file: FileInfo, api: API) => {
 
         returnFunction.typeAnnotation = returnType
 
-        const curried = makeDeclareFunction(
+        const dataLast = makeDeclareFunction(
           identifier.name,
           otherParams,
           typeParameters,
           returnFunction,
         )
 
-        signatures.push(j.exportNamedDeclaration(curried))
+        signatures.push(j.exportNamedDeclaration(dataLast))
       }
 
       return signatures

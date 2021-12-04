@@ -14,7 +14,7 @@ let string_payload =
 );
 
 let expander = (~loc, ~path as _, payload, _label, _) => {
-  let str = "// " ++ payload.txt
+  let str = "/** " ++ payload.txt ++ " */"
   let ident = Helper.Exp.ident(~loc, {txt: Lident("raw_comment"), loc});
 
   Helper.Exp.apply(
