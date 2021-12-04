@@ -246,20 +246,55 @@ const transformer = (file: FileInfo, api: API) => {
       signatures.push(original)
 
       if (parameters.length > 1) {
-        const firstParam = parameters.slice(0, 1)
-        const otherParams = parameters.slice(1)
-        const returnFunction = j.tsFunctionType(firstParam)
+        const dataLastAnnotation = {
+          current: undefined,
+        }
 
-        returnFunction.typeAnnotation = returnType
+        tsRoot.current
+          ?.find(j.VariableDeclarator, {
+            id: {
+              name: `${identifier.name}_data_last`,
+            },
+          })
+          .forEach(p => {
+            dataLastAnnotation.current =
+              // @ts-expect-error
+              p.value.id.typeAnnotation?.typeAnnotation
+          })
 
-        const dataLast = makeDeclareFunction(
-          identifier.name,
-          otherParams,
-          typeParameters,
-          returnFunction,
-        )
+        if (dataLastAnnotation.current) {
+          const {
+            typeParameters,
+            parameters = [],
+            typeAnnotation: returnType,
+          } = dataLastAnnotation.current
 
-        signatures.push(j.exportNamedDeclaration(dataLast))
+          signatures.push(
+            j.exportNamedDeclaration(
+              makeDeclareFunction(
+                identifier.name,
+                parameters,
+                typeParameters,
+                returnType.typeAnnotation,
+              ),
+            ),
+          )
+        } else {
+          const firstParam = parameters.slice(0, 1)
+          const otherParams = parameters.slice(1)
+          const returnFunction = j.tsFunctionType(firstParam)
+
+          returnFunction.typeAnnotation = returnType
+
+          const dataLast = makeDeclareFunction(
+            identifier.name,
+            otherParams,
+            typeParameters,
+            returnFunction,
+          )
+
+          signatures.push(j.exportNamedDeclaration(dataLast))
+        }
       }
 
       return signatures
@@ -324,6 +359,10 @@ const transformer = (file: FileInfo, api: API) => {
             addImport('Result'),
             addImport('ExtractValue', '../types'),
             addImport('ExtractNested', '../types'),
+            addImport('GuardValue', '../types'),
+            addImport('GuardObject', '../types'),
+            addImport('GuardPromise', '../types'),
+            addImport('GuardArray', '../types'),
             ...currentExports,
           ].filter(Boolean),
         )

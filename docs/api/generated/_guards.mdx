@@ -2,36 +2,75 @@
 
 
 ```ts
-function isArray<T>(value: T): value is Extract<T, any[] | readonly any[]>
+function isArray<T>(value: T | ReadonlyArray<unknown>): value is GuardArray<T>
+```
+
+```ts
+G.isArray([1, 2, 3]) // → true
+pipe(['hello', 'world'], G.isArray) // → true
 ```
 
 ### isBoolean
 
 
 ```ts
-function isBoolean<T>(value: T): value is Extract<T, boolean>
+function isBoolean<T>(value: T | boolean): value is GuardValue<T, boolean>
+```
+
+```ts
+G.isBoolean(false) // → true
+pipe(true, G.isBoolean) // → true
+```
+
+### isDate
+
+
+```ts
+function isDate<T>(value: T): value is Extract<T, Date>
+```
+
+```ts
+G.isDate(new Date()) // → true
+pipe(new Date(), G.isDate) // → true
 ```
 
 ### isError
 
 
 ```ts
-function isError<T>(value: T): value is Extract<T, Error>
+function isError<T>(value: T | Error): value is GuardValue<T, Error>
+```
+
+```ts
+G.isError(new Error('oops!')) // → true
+pipe(new Error('oops!'), G.isError) // → true
 ```
 
 ### isFunction
 
 
 ```ts
-function isFunction<T>(value: T): value is Extract<T, Function>
+function isFunction<T>(value: T | Function): value is GuardValue<T, Function>
+```
+
+```ts
+G.isFunction(F.ignore) // → true
+pipe(F.ignore, G.isFunction) // → true
 ```
 
 ### isNot
 
 
 ```ts
-function isNot<T, S>(value: T, predicateFn: (value: T) => boolean): value is Exclude<T, S>
-function isNot<T, S>(predicateFn: (value: T) => boolean): (value: T) => value is Exclude<T, S>
+function isNot<T>(value: T, predicateFn: (value: T) => boolean): boolean
+function isNot<T>(predicateFn: (value: T) => boolean): (value: T) => boolean
+```
+
+```ts
+// ⬇️ const isNotString = <T>(value: T): value is Exclude<T, string> => G.isNot(value, G.isString)
+isNotString(0) // → true
+
+pipe('ts-belt', G.isNot(G.isString)) // → false
 ```
 
 ### isNotNullable
@@ -41,11 +80,23 @@ function isNot<T, S>(predicateFn: (value: T) => boolean): (value: T) => value is
 function isNotNullable<T>(value: T): value is NonNullable<T>
 ```
 
+```ts
+G.isNotNullable('ts-belt') // → true
+G.isNotNullable(null) // → false
+pipe(0, G.isNotNullable) // → true
+pipe(undefined, G.isNotNullable) // → false
+```
+
 ### isNull
 
 
 ```ts
 function isNull<T>(value: T | null | undefined): value is null
+```
+
+```ts
+G.isNull(null) // → true
+pipe(null, G.isNull) // → true
 ```
 
 ### isNullable
@@ -55,32 +106,57 @@ function isNull<T>(value: T | null | undefined): value is null
 function isNullable<T>(value: T): value is Extract<T, null | undefined>
 ```
 
+```ts
+G.isNullable(null) // → true
+pipe(undefined, G.isNullable) // → true
+```
+
 ### isNumber
 
 
 ```ts
-function isNumber<T>(value: T): value is Extract<T, number>
+function isNumber<T>(value: T | number): value is GuardValue<T, number>
+```
+
+```ts
+G.isNumber(3) // → true
+pipe(3, G.isNumber) // → true
 ```
 
 ### isObject
 
 
 ```ts
-function isObject<T>(value: T): value is Exclude<Extract<T, object>, any[] | readonly any[] | Function>
+function isObject<T>(value: T | object): value is GuardObject<T>
+```
+
+```ts
+G.isObject({}) // → true
+pipe({}, G.isObject) // → true
 ```
 
 ### isPromise
 
 
 ```ts
-function isPromise<T>(value: T): value is Extract<T, Promise<any>>
+function isPromise<T>(value: T | Promise<unknown>): value is GuardPromise<T>
+```
+
+```ts
+G.isPromise(Promise.resolve(1)) // → true
+pipe(Promise.resolve(1), G.isPromise) // → true
 ```
 
 ### isString
 
 
 ```ts
-function isString<T>(value: T): value is Extract<T, string>
+function isString<T>(value: T | string): value is GuardValue<T, string>
+```
+
+```ts
+G.isString('ts') // → true
+pipe('belt', G.isString) // → true
 ```
 
 ### isUndefined
@@ -88,4 +164,9 @@ function isString<T>(value: T): value is Extract<T, string>
 
 ```ts
 function isUndefined<T>(value: T | null | undefined): value is undefined
+```
+
+```ts
+G.isUndefined(undefined) // → true
+pipe(undefined, G.isUndefined) // → true
 ```
