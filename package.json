@@ -15,7 +15,8 @@
   "files": [
     "dist",
     "*.md",
-    "package.json"
+    "package.json",
+    "index.js.flow"
   ],
   "scripts": {
     "build": "bash ./scripts/build.sh",
