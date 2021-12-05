@@ -8,4 +8,6 @@ module.exports = {
   moduleFileExtensions: ['ts', 'js'],
   collectCoverage: true,
   rootDir: __dirname,
+  maxWorkers: 2,
+  testTimeout: 30000,
 }
