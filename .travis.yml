@@ -12,7 +12,10 @@ notifications:
     on_failure: always
 cache: yarn
 script:
+  - bash -c "sh <(curl -fsSL https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh)"
+  - opam init --auto-setup
   - npm install -g esy
   - cd ./tools/comment-ppx && bash ./scripts/install.sh
+  - cd ../..
   - yarn build
   - cat coverage/lcov.info | node_modules/.bin/coveralls || echo "Coveralls upload failed"
