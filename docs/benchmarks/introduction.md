@@ -45,6 +45,6 @@ yarn generate # in order to generate a markdown file
 
 :::info
 
-All results are saved to file in the `benchmarks/.result` directory. Don't hesitate to send the results file to me! 😊 (DM me on [Twitter](https://twitter.com/__marcin_))
+All results are saved to file in the `benchmarks/.results` directory. Don't hesitate to send the results file to me! 😊 (DM me on [Twitter](https://twitter.com/__marcin_) to get more details)
 
 :::
