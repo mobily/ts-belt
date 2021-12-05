@@ -29,7 +29,7 @@
 
 ## Features
 
-- 🚀 built with `ReScript`, which generates highly performant JavaScript code (see the benchmark results [here](benchmarks))
+- 🚀 built with `ReScript`, which generates highly performant JavaScript code (see the benchmark results [here](https://mobily.github.io/ts-belt/benchmarks/introduction))
 - 👀 provide more readable code, due to the `data-first` approach
 - ✨ support for `TypeScript` and `Flow`
 - 🛡 write safer code with `Option` and `Result` types
