@@ -36,14 +36,14 @@ module.exports = makeBenchmark(
     ]
   }),
   addRamda(ramda => {
-    const { pipe, flatten } = ramda
+    const { pipe, unnest } = ramda
 
     return [
       () => {
-        return flatten(input)
+        return unnest(input)
       },
       () => {
-        return pipe(flatten)(input)
+        return pipe(unnest)(input)
       },
     ]
   }),

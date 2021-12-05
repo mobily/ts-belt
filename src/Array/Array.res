@@ -144,11 +144,13 @@ export takeExactly = (xs, n) =>
 %comment(
   "Returns a new array, filled with elements from the provided array until an element doesn't pass the provided predicate."
 )
-export rec takeWhile = (xs, predicateFn) =>
-  switch head(xs) {
-  | Some(el) if predicateFn(el) => prepend(takeWhile(tailOrEmpty(xs), predicateFn), el)
-  | _ => []
-  }
+export takeWhile = (xs, predicateFn) =>
+  Belt.Array.reduceU(xs, [], (. acc, element) => {
+    if predicateFn(element) {
+      Js.Array2.push(acc, element)->ignore
+    }
+    acc
+  })
 
 %comment(
   "Returns a new array that does not contain the first `n` elements of the provided array, or an empty array if `n` is either less than `0` or greater than the length of the provided array."
@@ -167,11 +169,13 @@ export dropExactly = (xs, n) => n < 0 || n > length(xs) ? None : Some(Belt.Array
 %comment(
   "Drops elements from the beginning of the array until an element is reached which does not satisfy the given predicate."
 )
-export rec dropWhile = (xs, predicateFn) =>
-  switch head(xs) {
-  | Some(element) if predicateFn(element) => dropWhile(tailOrEmpty(xs), predicateFn)
-  | _ => xs
-  }
+export dropWhile = (xs, predicateFn) =>
+  Belt.Array.reduceU(xs, [], (. acc, element) => {
+    if !predicateFn(element) {
+      Js.Array2.push(acc, element)->ignore
+    }
+    acc
+  })
 
 %comment(
   "Splits the provided array into head and tail parts (as a tuple), but only if the array is not empty."
@@ -257,12 +261,22 @@ export splitAt = (xs, offset) =>
 %comment(
   "Returns an array of arrays, where each of the inner arrays has length equal to the provided `size` parameter."
 )
-export rec splitEvery = (xs, size) =>
-  size < 1
-    ? [xs]
-    : length(xs) <= size
-    ? [xs]
-    : xs->drop(size)->splitEvery(size)->Belt.Array.concat([take(xs, size)], _)
+export splitEvery = (xs, size) => {
+  if size < 1 || length(xs) <= size {
+    [xs]
+  } else {
+    let offset = ref(0)
+    let arr = []
+
+    while offset.contents < length(xs) {
+      let len = offset.contents + size
+      Js.Array2.push(arr, Belt.Array.slice(xs, ~offset=offset.contents, ~len=size))->ignore
+      offset := len
+    }
+
+    arr
+  }
+}
 
 %comment("Returns a new array with elements in the original array randomly shuffled.")
 export shuffle = xs => Belt.Array.shuffle(xs)
@@ -437,25 +451,34 @@ export groupBy = (xs, groupFn) =>
 )
 export flat = xs =>
   Belt.Array.reduceU(xs, [], (. acc, value) => {
-    let xs = Js.Array2.isArray(value) ? value : [unsafe(value)]
-    Belt.Array.concat(acc, xs)
+    if Js.Array2.isArray(value) {
+      Belt.Array.forEachU(value, (. element) => Js.Array2.push(acc, element)->ignore)
+    } else {
+      Js.Array2.push(acc, unsafe(value))->ignore
+    }
+    acc
   })
+
+let rec flatten = (xs, arr) => {
+  let index = ref(0)
+
+  while index.contents < length(xs) {
+    let value = Belt.Array.getUnsafe(xs, index.contents)
+    if Js.Array2.isArray(value) {
+      flatten(unsafe(value), arr)->ignore
+    } else {
+      Js.Array2.push(arr, value)->ignore
+    }
+    index := succ(index.contents)
+  }
+
+  arr
+}
 
 %comment(
   "Creates a new array with all sub-array elements concatenated into it recursively up to the `Infinite` depth."
 )
-export deepFlat = xs => {
-  let rec flat = (xs, input) =>
-    Belt.Array.reduceU(xs, input, (. acc, value) => {
-      switch value {
-      | x if Js.Array2.isArray(x) => flat(unsafe(value), acc)->ignore
-      | _ => Js.Array2.push(acc, value)->ignore
-      }
-      acc
-    })
-
-  flat(xs, [])
-}
+export deepFlat = xs => flatten(xs, [])
 
 %comment("Converts the given array to the TypeScript's tuple.")
 export toTuple = arr => arr

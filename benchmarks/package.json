@@ -5,7 +5,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "bash ./scripts/run.sh"
+    "start": "bash ./scripts/run.sh",
+    "generate": "bash ./scripts/generate.sh"
   },
   "devDependencies": {
     "benchr": "^4.3.0"
@@ -14,6 +15,6 @@
     "lodash": "^4.17.21",
     "rambda": "^6.9.0",
     "ramda": "^0.27.1",
-    "remeda": "^0.0.30"
+    "remeda": "^0.0.32"
   }
 }

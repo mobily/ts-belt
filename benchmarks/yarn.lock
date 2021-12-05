@@ -115,10 +115,10 @@ ramda@^0.27.1:
   resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.27.1.tgz#66fc2df3ef873874ffc2da6aa8984658abacf5c9"
   integrity sha512-PgIdVpn5y5Yns8vqb8FzBUEYn98V3xcPgawAkkgj0YJ0qDsnHCiNmZYfOGMgOvoB0eWFLpYbhxUR3mxfDIMvpw==
 
-remeda@^0.0.30:
-  version "0.0.30"
-  resolved "https://registry.yarnpkg.com/remeda/-/remeda-0.0.30.tgz#34a80efdab9053df2d59ed10cac20c4ca5bb1270"
-  integrity sha512-ygbf/pXioUbbNOYSRFu6oUEa72HiIcsiS6CFuhWEwoIByoyNzzofm/cVgHEnfQVeSkwTGHceuDOEHo5hHFv9Uw==
+remeda@^0.0.32:
+  version "0.0.32"
+  resolved "https://registry.yarnpkg.com/remeda/-/remeda-0.0.32.tgz#668e5d3b8a5c9edb1a19f33d5df805dd1e7d299c"
+  integrity sha512-FEdl8ONpqY7AvvMHG5WYdomc0mGf2khHPUDu6QvNkOq4Wjkw5BvzWM4QyksAQ/US1sFIIRG8TVBn6iJx6HbRrA==
 
 require-all@^2.2.0:
   version "2.2.0"

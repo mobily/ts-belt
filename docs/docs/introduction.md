@@ -6,9 +6,9 @@ slug: /
 
 ### Motivation
 
-Firstly, I have to say this, I like [ReScript](https://rescript-lang.org/), its features and tooling provide a great developer experience. I wish it was my main tool on a daily basis work, however… it isn't, since most of the commercial projects I have been working on recently are built with TypeScript, which at this point is fully understandable from the business perspective (basically you can find more devs who are familiar with TypeScript ¯\\\_(ツ)\_/¯).
+I have to say this, I like [ReScript](https://rescript-lang.org/), its features and tooling provide a great developer experience. I wish it was my main tool on a daily basis work, however… it isn't, since most of the commercial projects I have been working on recently are built with TypeScript, which at this point is fully understandable from the business perspective (basically you can find more devs who are familiar with TypeScript ¯\\\_(ツ)\_/¯).
 
-Secondly, I like the functional programming. I follow FP principles in almost every project. Therefore, in the past few years I was able to test and use some JavaScript/TypeScript libraries that follow those principles.
+I like the functional programming. I follow FP principles in almost every project. Therefore, in the past few years I was able to test and use some JavaScript/TypeScript libraries that follow those principles.
 
 :::info
 
@@ -19,7 +19,7 @@ Disclaimer: these are my private opinions and feelings about libraries I used to
 #### Ramda ⬇️
 
 **Pros:**
-The mature project, tons of utility functions, and great, much detailed documentation.
+`Ramda` is a mature project, it contains tons of utility functions, and great, much detailed documentation.
 
 **Cons:**
 Using the `pipe` function feels unnatural (for example: `pipe(fn1, fn2)(value)`), TypeScript support is neglected (the type inference simply doesn’t work well) and the `data-last` approach makes code less readable.
@@ -30,7 +30,7 @@ Since Ramda doesn't play well with TypeScript, I found it useful only in JavaScr
 #### Rambda ⬇️
 
 **Pros:**
-It's super fast and I really mean it, it’s difficult (but not impossible) to beat `rambda` in terms of the overall performance!
+`Rambda` is super fast and I really mean it, it’s difficult (but not impossible) to beat `rambda` in terms of the overall performance!
 
 **Cons:**
 Pretty much similar problems as you can find in `ramda`.
@@ -38,7 +38,7 @@ Pretty much similar problems as you can find in `ramda`.
 #### Remeda ⬇️
 
 **Pros:**
-It provides the `data-first` approach, which is more natural and developer friendly, `remeda` has a nice documentation and TypeScript support is great as well.
+`Remeda` provides the `data-first` approach, which is more natural and developer friendly, `remeda` has a nice documentation and TypeScript support is great as well.
 
 **Cons:**
 According to the benchmark results, `remeda` is the slowest compared to other libraries (benchmarks can be found [here](/benchmarks/introduction)). Due to the lazy evaluation, it’s also unclear how to use some utility functions within the pipeline.

@@ -5,13 +5,16 @@ const remeda = require('remeda')
 const belt = require('..')
 
 exports.makeBenchmark = (title, ...rest) => {
-  suite(`${title} (single function call)`, () => {
-    rest.forEach(test => {
-      benchmark(test.label, test.rawFn)
-    })
-  })
+  suite(
+    `${title} ${title.includes('→') ? '' : '(single function call)'}`,
+    () => {
+      rest.forEach(test => {
+        benchmark(test.label, test.rawFn)
+      })
+    },
+  )
 
-  suite(`${title} (function call within a pipeline)`, () => {
+  suite(`${title} (function call inside \`pipe\`)`, () => {
     rest.forEach(test => {
       benchmark(test.label, test.pipeFn)
     })

@@ -24,7 +24,7 @@
 </p>
 
 <p align="center">
-  <strong>Belt (<code>ReScript</code>) implementation in TypeScript.</strong>
+  <strong>Fast, modern and practical utility library for FP in TypeScript.</strong>
 </p>
 
 ## Features
