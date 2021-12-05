@@ -1,0 +1,58 @@
+version: 2.1
+
+aliases:
+  - &save_yarn_cache
+    name: Save yarn into the cache
+    key: yarn-cache-{{ checksum "yarn.lock" }}-{{ arch }}
+    paths:
+      - ~/.cache/yarn
+  - &restore_yarn_cache
+    name: Restore yarn from the cache
+    key: yarn-cache-{{ checksum "yarn.lock" }}-{{ arch }}
+  - &restore_dependencies
+    name: Restore node_modules from the cache
+    key: node-cache-{{ checksum "yarn.lock" }}-{{ arch }}
+  - &install_dependencies
+    name: Install dependencies
+    command: yarn --frozen-lockfile --cache-folder ~/.cache/yarn
+  - &save_dependencies
+    name: Save node_modules into the cache
+    key: node-cache-{{ checksum "yarn.lock" }}-{{ arch }}
+    paths:
+      - ./node_modules
+
+jobs:
+  build:
+    docker:
+      - image: cimg/node:16.10
+    steps:
+      - checkout
+      - run:
+          name: Install Opam and Esy
+          command: |
+            sudo add-apt-repository ppa:avsm/ppa -y
+            sudo apt update
+            sudo apt install opam -y
+            opam init --auto-setup
+            npm install -g esy
+      - run:
+          name: Build comment-ppx
+          command: |
+            cd ./tools/comment-ppx
+            bash ./scripts/install.sh
+            cd ../..
+      - restore_cache: *restore_yarn_cache
+      - restore_cache: *restore_dependencies
+      - run: *install_dependencies
+      - save_cache: *save_dependencies
+      - save_cache: *save_yarn_cache
+      - run:
+          name: Build & test
+          command: yarn build
+      - run:
+          name: Update tests coverage
+          command: cat coverage/lcov.info | node_modules/.bin/coveralls || echo "Coveralls upload failed"
+workflows:
+  build-workflow:
+    jobs:
+      - build
