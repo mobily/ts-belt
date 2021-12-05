@@ -9,6 +9,5 @@ yarn generate:docs
 yarn esbuild
 yarn tsc --outDir ./dist/cjs
 yarn tsc --outDir ./dist/esm
-
-# yarn generate:flow
-# yarn test
+yarn generate:flow
+yarn test

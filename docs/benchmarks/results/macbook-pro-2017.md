@@ -1,11 +1,11 @@
 ---
 id: macbook-pro-2017
-title: MacBook Pro (15-inch, 2017)
+title: MacBook Pro (2017)
 ---
 
 | Processor | Memory | Node | Author |
 |-----------|--------|------|-------|
-| 2,9 GHz Quad-Core Intel Core i7 | 16 GB 2133 MHz LPDDR3 | v16.10.0 | [Marcin Dziewulski](https://github.com/mobily)
+| 2,9 GHz Quad-Core Intel Core i7 | 16 GB 2133 MHz LPDDR3 | v16.10.0 | [@mobily](https://github.com/mobily) |
 
 ### map-filter-reduce
 

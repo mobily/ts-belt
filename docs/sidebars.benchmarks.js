@@ -8,7 +8,12 @@ module.exports = {
       type: 'category',
       label: 'Results',
       collapsed: false,
-      items: ['results/macbook-pro-2017'],
+      items: [
+        'results/macbook-pro-2017',
+        'results/macbook-pro-2019',
+        'results/macbook-air-2020',
+        'results/macbook-pro-2021',
+      ],
     },
   ],
 }

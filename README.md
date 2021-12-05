@@ -34,7 +34,6 @@
 - ✨ support for `TypeScript` and `Flow`
 - 🛡 write safer code with `Option` and `Result` types
 - 🎯 all functions return immutable data (no side-effects)
-- ✅ high tests coverage
 - 🌲 tree-shakeable
 - 📝 fully documented
 
@@ -57,8 +56,19 @@ Full documentation can be found [here](https://mobily.github.io/ts-belt/).
 ## Contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore -->
-<table><tr><td align="center"><a href="https://twitter.com/__marcin_"><img src="https://avatars1.githubusercontent.com/u/1467712?v=4" width="100px;" alt="Marcin Dziewulski"/><br /><sub><b>Marcin Dziewulski</b></sub></a><br /><a href="https://github.com/mobily/ts-belt/commits?author=mobily" title="Code">💻</a> <a href="https://github.com/mobily/ts-belt/commits?author=mobily" title="Documentation">📖</a></td></tr></table>
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://twitter.com/__marcin_"><img src="https://avatars1.githubusercontent.com/u/1467712?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Marcin Dziewulski</b></sub></a><br /><a href="https://github.com/mobily/ts-belt/commits?author=mobily" title="Code">💻</a> <a href="https://github.com/mobily/ts-belt/commits?author=mobily" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://github.com/foull"><img src="https://avatars.githubusercontent.com/u/902819?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Krzysztof Lenda</b></sub></a><br /><a href="https://github.com/mobily/ts-belt/commits?author=foull" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/panr"><img src="https://avatars.githubusercontent.com/u/1303365?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Radek Kozieł</b></sub></a><br /><a href="https://github.com/mobily/ts-belt/commits?author=panr" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/Fortidude"><img src="https://avatars.githubusercontent.com/u/8781462?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Artur</b></sub></a><br /><a href="https://github.com/mobily/ts-belt/commits?author=Fortidude" title="Documentation">📖</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 

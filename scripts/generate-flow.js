@@ -29,7 +29,7 @@ pipe(
     )
   }),
   switchMap(_ => {
-    return fromPromise(globby('dist/types/**/*.d.ts'))
+    return fromPromise(globby('dist/esm/**/*.d.ts'))
   }),
   switchMap(input => {
     console.log(`Compiling ${input.length} TS definitions to Flow…`)

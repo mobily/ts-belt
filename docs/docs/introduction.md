@@ -48,7 +48,7 @@ It's been my first choice for a long time, until…
 
 #### TS Belt ⬇️
 
-Until I have decided to build `ts-belt`. It combines all of the good things you can find in other similar libraries: the developer friendly `data-first` approach, good looking and detailed documentation, great TypeScript support, and last but not least, it's as fast as `rambda`. Under the hood it uses ReScript and `Belt` stdlib. The ReScript compiler generates highly performant JS code, and with [`genType`](https://rescript-lang.org/docs/gentype/latest/introduction) it automatically generates TypeScript signatures. **TS Belt** is also easily extendable because most of the build process is done automatically.
+Until I have decided to build `ts-belt`. It combines all of the good things you can find in other similar libraries: the developer friendly `data-first` approach, good looking and detailed documentation, great TypeScript support, and last but not least, it's as fast as `rambda` (actually, it's even faster 🙊). Under the hood it uses ReScript and `Belt` stdlib. The ReScript compiler generates highly performant JS code, and with [`genType`](https://rescript-lang.org/docs/gentype/latest/introduction) it automatically generates TypeScript signatures. **TS Belt** is also easily extendable because most of the build process is done automatically.
 
 ### Features
 
@@ -57,6 +57,5 @@ Until I have decided to build `ts-belt`. It combines all of the good things you 
 - ✨ support for `TypeScript` and `Flow`
 - 🛡 write safer code with `Option` and `Result` types
 - 🎯 all functions return immutable data (no side-effects)
-- ✅ high tests coverage
 - 🌲 tree-shakeable
 - 📝 fully documented
