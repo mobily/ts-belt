@@ -26,6 +26,9 @@ aliases:
     name: Restore esy dependencies from the cache
     key: esy-cache-{{ checksum "tools/comment-ppx/ppx.exe" }}-{{ arch }}
 
+orbs:
+  coveralls: coveralls/coveralls@1.0.6
+
 jobs:
   build:
     docker:
@@ -54,9 +57,7 @@ jobs:
       - run:
           name: Build & test
           command: yarn build
-      - run:
-          name: Update tests coverage
-          command: cat coverage/lcov.info | node_modules/.bin/coveralls || echo "Coveralls upload failed"
+      - coveralls/upload
 workflows:
   build-workflow:
     jobs:
