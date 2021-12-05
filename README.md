@@ -3,8 +3,8 @@
 </p>
 
 <p align="center">
-  <a href="https://app.travis-ci.com/github/mobily/ts-belt">
-    <img src="https://img.shields.io/travis/com/mobily/ts-belt.svg?style=flat-square&amp;logo=travis" alt="Build Status">
+  <a href="https://app.circleci.com/pipelines/github/mobily/ts-belt">
+    <img src="https://img.shields.io/circleci/build/github/mobily/ts-belt.svg?style=flat-square&amp;logo=circleci" alt="Build Status">
   </a>
   <a href="https://coveralls.io/github/mobily/ts-belt?branch=master">
     <img src="https://img.shields.io/coveralls/github/mobily/ts-belt.svg?style=flat-square&amp;logo=coveralls" alt="Coverage">
