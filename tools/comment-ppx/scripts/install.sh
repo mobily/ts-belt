@@ -4,5 +4,5 @@ set -e
 set -x
 esy install
 esy build
-cp ./_build/default/ppx.exe ./ppx.exe
+find ./_build/default -name '*.exe' -exec cp "{}" ./ \;
 exit 0
