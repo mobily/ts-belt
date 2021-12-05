@@ -28,12 +28,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install Opam and Esy
+          name: Install Esy
           command: |
-            sudo add-apt-repository ppa:avsm/ppa -y
-            sudo apt update
-            sudo apt install opam -y
-            opam init --auto-setup
             npm install -g esy
       - run:
           name: Build comment-ppx
