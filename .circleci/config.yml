@@ -12,14 +12,19 @@ aliases:
   - &restore_dependencies
     name: Restore node_modules from the cache
     key: node-cache-{{ checksum "yarn.lock" }}-{{ arch }}
-  - &install_dependencies
-    name: Install dependencies
-    command: yarn --frozen-lockfile --cache-folder ~/.cache/yarn
   - &save_dependencies
     name: Save node_modules into the cache
     key: node-cache-{{ checksum "yarn.lock" }}-{{ arch }}
     paths:
       - ./node_modules
+  - &save_esy_dependencies
+    name: Save esy dependencies into the cache
+    key: esy-cache-{{ checksum "tools/comment-ppx/ppx.exe" }}-{{ arch }}
+    paths:
+      - ./tools/comment-ppx/_esy
+  - &restore_esy_dependencies
+    name: Restore esy dependencies from the cache
+    key: esy-cache-{{ checksum "tools/comment-ppx/ppx.exe" }}-{{ arch }}
 
 jobs:
   build:
@@ -31,15 +36,19 @@ jobs:
           name: Install Esy
           command: |
             npm install --prefix=$HOME/.local --global esy
+      - restore_cache: *restore_esy_dependencies
       - run:
           name: Build comment-ppx
           command: |
             cd ./tools/comment-ppx
             bash ./scripts/install.sh
             cd ../..
+      - save_cache: *save_esy_dependencies
       - restore_cache: *restore_yarn_cache
       - restore_cache: *restore_dependencies
-      - run: *install_dependencies
+      - run:
+          name: Install dependencies
+          command: yarn --frozen-lockfile --cache-folder ~/.cache/yarn
       - save_cache: *save_dependencies
       - save_cache: *save_yarn_cache
       - run:
