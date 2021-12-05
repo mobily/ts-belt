@@ -58,6 +58,7 @@ jobs:
           name: Build & test
           command: yarn build
       - coveralls/upload
+
 workflows:
   build-workflow:
     jobs:
