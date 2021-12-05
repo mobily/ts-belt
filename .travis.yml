@@ -11,10 +11,11 @@ notifications:
     on_success: change
     on_failure: always
 cache: yarn
-script:
+before_install:
   - sudo add-apt-repository ppa:avsm/ppa -y
   - sudo apt update
   - sudo apt install opam -y
+script:
   - opam init --auto-setup
   - npm install -g esy
   - cd ./tools/comment-ppx && bash ./scripts/install.sh
