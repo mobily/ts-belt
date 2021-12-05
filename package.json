@@ -1,6 +1,6 @@
 {
   "name": "@mobily/ts-belt",
-  "description": "🔧 Fast, modern and practical utility library for FP in TypeScript.",
+  "description": "🔧 Fast, modern, and practical utility library for FP in TypeScript.",
   "version": "3.0.0",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",

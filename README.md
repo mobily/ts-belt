@@ -24,7 +24,7 @@
 </p>
 
 <p align="center">
-  <strong>Fast, modern and practical utility library for FP in TypeScript.</strong>
+  <strong>Fast, modern, and practical utility library for FP in TypeScript.</strong>
 </p>
 
 ## Features

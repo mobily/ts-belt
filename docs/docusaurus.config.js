@@ -2,7 +2,7 @@ const root = require('../package.json')
 
 module.exports = {
   title: 'ts-belt',
-  tagline: 'Fast, modern and practical utility library for FP in TypeScript.',
+  tagline: 'Fast, modern, and practical utility library for FP in TypeScript.',
   url: 'https://mobily.github.io',
   baseUrl: '/ts-belt/',
   onBrokenLinks: 'throw',
