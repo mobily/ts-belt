@@ -10,7 +10,14 @@ module.exports = {
   favicon: 'img/favicon.ico',
   organizationName: 'mobily',
   projectName: 'ts-belt',
+  scripts: [
+    {
+      src: 'https://cdn.splitbee.io/sb.js',
+      async: true,
+    },
+  ],
   themeConfig: {
+    image: 'img/hero-logo.png',
     prism: {
       theme: require('prism-react-renderer/themes/github'),
     },
@@ -99,6 +106,8 @@ module.exports = {
       require.resolve('@easyops-cn/docusaurus-search-local'),
       {
         hashed: true,
+        docsRouteBasePath: ['/docs', '/api', '/benchmarks'],
+        docsDir: ['docs', 'api', 'benchmarks'],
       },
     ],
     [

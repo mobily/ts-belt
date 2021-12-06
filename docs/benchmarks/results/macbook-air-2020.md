@@ -12,11 +12,11 @@ title: MacBook Air (M1, 2020)
 _map → filter → reduce_
 
 ```bash
-✔  @mobily/ts-belt  155,152.01  ops/sec  ±0.11%  (100 runs)  fastest
-✔  remeda            15,485.42  ops/sec  ±2.08%  (89 runs)   -90.02%
-✔  ramda             79,884.68  ops/sec  ±0.75%  (101 runs)  -48.51%
-✔  rambda           151,184.76  ops/sec  ±0.58%  (97 runs)   -2.56%
-✔  lodash/fp         39,991.04  ops/sec  ±2.70%  (98 runs)   -74.22%
+✔  @mobily/ts-belt  249,953.41  ops/sec  ±0.13%  (101 runs)  fastest
+✔  remeda            25,063.45  ops/sec  ±1.79%  (91 runs)   -89.97%
+✔  ramda            128,775.82  ops/sec  ±0.31%  (99 runs)   -48.48%
+✔  rambda           245,417.43  ops/sec  ±0.36%  (100 runs)  -1.81%
+✔  lodash/fp         66,199.93  ops/sec  ±0.57%  (99 runs)   -73.52%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -26,11 +26,11 @@ _map → filter → reduce_
 _deepFlat → uniq → groupBy_
 
 ```bash
-✔  @mobily/ts-belt  1,336,209.26  ops/sec  ±0.24%  (99 runs)  fastest
-✔  remeda             296,546.46  ops/sec  ±2.66%  (94 runs)  -77.81%
-✔  ramda              161,513.54  ops/sec  ±1.08%  (92 runs)  -87.91%
-✔  rambda             981,944.48  ops/sec  ±1.20%  (91 runs)  -26.51%
-✔  lodash/fp          326,745.75  ops/sec  ±0.55%  (95 runs)  -75.55%
+✔  @mobily/ts-belt  2,232,731.32  ops/sec  ±0.12%  (101 runs)  fastest
+✔  remeda             491,977.09  ops/sec  ±2.20%  (97 runs)   -77.97%
+✔  ramda              267,914.93  ops/sec  ±0.86%  (97 runs)   -88.00%
+✔  rambda           1,713,610.43  ops/sec  ±1.02%  (97 runs)   -23.25%
+✔  lodash/fp          521,001.69  ops/sec  ±1.24%  (97 runs)   -76.67%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -40,11 +40,11 @@ _deepFlat → uniq → groupBy_
 _sort (single function call)_
 
 ```bash
-✔  @mobily/ts-belt  3,132,916.12  ops/sec  ±0.30%  (97 runs)  fastest
-✔  remeda             898,190.91  ops/sec  ±0.92%  (98 runs)  -71.33%
-✔  ramda            1,545,964.61  ops/sec  ±1.65%  (89 runs)  -50.65%
-✔  rambda           1,669,391.27  ops/sec  ±0.47%  (97 runs)  -46.71%
-✔  lodash/fp          926,179.99  ops/sec  ±1.98%  (98 runs)  -70.44%
+✔  @mobily/ts-belt  5,159,518.62  ops/sec  ±0.15%  (101 runs)  fastest
+✔  remeda           1,482,448.61  ops/sec  ±0.79%  (98 runs)   -71.27%
+✔  ramda            2,638,349.13  ops/sec  ±0.47%  (92 runs)   -48.86%
+✔  rambda           2,749,188.82  ops/sec  ±0.52%  (96 runs)   -46.72%
+✔  lodash/fp        1,477,230.63  ops/sec  ±2.06%  (97 runs)   -71.37%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -52,11 +52,11 @@ _sort (single function call)_
 _sort (function call inside `pipe`)_
 
 ```bash
-✔  @mobily/ts-belt  3,722,454.27  ops/sec  ±0.49%  (100 runs)  fastest
-✔  remeda             815,977.59  ops/sec  ±0.61%  (94 runs)   -78.08%
-✔  ramda              727,087.77  ops/sec  ±0.42%  (99 runs)   -80.47%
-✔  rambda           1,490,130.13  ops/sec  ±0.48%  (98 runs)   -59.97%
-✔  lodash/fp          409,380.64  ops/sec  ±1.59%  (94 runs)   -89.00%
+✔  @mobily/ts-belt  4,667,074.10  ops/sec  ±0.50%  (96 runs)  fastest
+✔  remeda           1,380,525.81  ops/sec  ±1.35%  (91 runs)  -70.42%
+✔  ramda            1,216,090.51  ops/sec  ±0.57%  (95 runs)  -73.94%
+✔  rambda           2,467,299.26  ops/sec  ±0.57%  (99 runs)  -47.13%
+✔  lodash/fp          654,875.57  ops/sec  ±1.71%  (97 runs)  -85.97%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -66,8 +66,8 @@ _sort (function call inside `pipe`)_
 _unzip (single function call)_
 
 ```bash
-✔  @mobily/ts-belt  29,124,992.73  ops/sec  ±0.39%  (92 runs)  fastest
-✔  lodash/fp         1,232,114.38  ops/sec  ±1.27%  (98 runs)  -95.77%
+✔  @mobily/ts-belt  45,331,676.08  ops/sec  ±2.52%  (95 runs)  fastest
+✔  lodash/fp         2,100,106.38  ops/sec  ±1.45%  (95 runs)  -95.37%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -75,8 +75,8 @@ _unzip (single function call)_
 _unzip (function call inside `pipe`)_
 
 ```bash
-✔  @mobily/ts-belt  20,816,975.88  ops/sec  ±0.88%  (91 runs)  fastest
-✔  lodash/fp         1,047,443.62  ops/sec  ±0.95%  (98 runs)  -94.97%
+✔  @mobily/ts-belt  33,902,510.34  ops/sec  ±1.26%  (88 runs)  fastest
+✔  lodash/fp         1,825,703.55  ops/sec  ±0.54%  (96 runs)  -94.61%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -86,11 +86,11 @@ _unzip (function call inside `pipe`)_
 _flat (single function call)_
 
 ```bash
-✔  @mobily/ts-belt  17,896,513.25  ops/sec  ±0.20%  (95 runs)  fastest
-✔  remeda            1,818,290.04  ops/sec  ±2.65%  (90 runs)  -89.84%
-✔  ramda             1,000,183.62  ops/sec  ±0.62%  (89 runs)  -94.41%
-✔  rambda            8,739,731.21  ops/sec  ±1.18%  (95 runs)  -51.17%
-✔  lodash/fp         9,622,900.69  ops/sec  ±0.92%  (97 runs)  -46.23%
+✔  @mobily/ts-belt  29,534,944.35  ops/sec  ±0.42%  (98 runs)   fastest
+✔  remeda            3,103,334.61  ops/sec  ±1.34%  (97 runs)   -89.49%
+✔  ramda             1,667,771.72  ops/sec  ±0.79%  (92 runs)   -94.35%
+✔  rambda           14,680,254.24  ops/sec  ±0.70%  (100 runs)  -50.30%
+✔  lodash/fp        15,699,411.53  ops/sec  ±1.11%  (97 runs)   -46.84%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -98,11 +98,11 @@ _flat (single function call)_
 _flat (function call inside `pipe`)_
 
 ```bash
-✔  @mobily/ts-belt  16,709,922.19  ops/sec  ±0.63%  (99 runs)  fastest
-✔  remeda            1,630,136.09  ops/sec  ±0.42%  (96 runs)  -90.24%
-✔  ramda               598,410.61  ops/sec  ±0.66%  (99 runs)  -96.42%
-✔  rambda            7,012,200.79  ops/sec  ±1.20%  (97 runs)  -58.04%
-✔  lodash/fp         3,669,144.05  ops/sec  ±0.95%  (99 runs)  -78.04%
+✔  @mobily/ts-belt  27,858,327.05  ops/sec  ±1.38%  (99 runs)  fastest
+✔  remeda            2,651,171.90  ops/sec  ±1.11%  (97 runs)  -90.48%
+✔  ramda             1,009,620.84  ops/sec  ±0.60%  (99 runs)  -96.38%
+✔  rambda           11,817,225.86  ops/sec  ±0.59%  (96 runs)  -57.58%
+✔  lodash/fp         6,207,174.40  ops/sec  ±1.24%  (96 runs)  -77.72%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -112,10 +112,10 @@ _flat (function call inside `pipe`)_
 _dropWhile (single function call)_
 
 ```bash
-✔  @mobily/ts-belt  26,639,660.50  ops/sec  ±0.44%  (96 runs)  fastest
-✔  ramda             8,995,201.39  ops/sec  ±1.23%  (95 runs)  -66.23%
-✔  rambda           23,488,421.62  ops/sec  ±1.35%  (94 runs)  -11.83%
-✔  lodash/fp         7,014,920.04  ops/sec  ±1.18%  (94 runs)  -73.67%
+✔  @mobily/ts-belt  42,957,887.24  ops/sec  ±0.56%  (101 runs)  fastest
+✔  ramda            15,269,941.76  ops/sec  ±0.26%  (101 runs)  -64.45%
+✔  rambda           39,177,484.94  ops/sec  ±1.10%  (98 runs)   -8.80%
+✔  lodash/fp        12,422,270.83  ops/sec  ±0.68%  (101 runs)  -71.08%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -123,10 +123,10 @@ _dropWhile (single function call)_
 _dropWhile (function call inside `pipe`)_
 
 ```bash
-✔  @mobily/ts-belt  20,065,004.18  ops/sec  ±1.34%  (94 runs)  fastest
-✔  ramda             1,257,354.89  ops/sec  ±0.43%  (97 runs)  -93.73%
-✔  rambda           14,164,228.73  ops/sec  ±0.83%  (95 runs)  -29.41%
-✔  lodash/fp           615,553.15  ops/sec  ±1.38%  (98 runs)  -96.93%
+✔  @mobily/ts-belt  31,759,831.19  ops/sec  ±1.48%  (95 runs)  fastest
+✔  ramda             1,993,047.66  ops/sec  ±0.47%  (97 runs)  -93.72%
+✔  rambda           22,042,138.42  ops/sec  ±1.00%  (96 runs)  -30.60%
+✔  lodash/fp           977,831.48  ops/sec  ±1.57%  (95 runs)  -96.92%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -136,11 +136,11 @@ _dropWhile (function call inside `pipe`)_
 _takeWhile (single function call)_
 
 ```bash
-✔  @mobily/ts-belt  31,740,176.18  ops/sec  ±0.87%  (97 runs)  fastest
-✔  remeda            2,016,434.72  ops/sec  ±0.88%  (97 runs)  -93.65%
-✔  ramda             9,355,097.24  ops/sec  ±1.17%  (90 runs)  -70.53%
-✔  rambda           28,318,959.09  ops/sec  ±1.82%  (91 runs)  -10.78%
-✔  lodash/fp         8,513,473.91  ops/sec  ±1.05%  (97 runs)  -73.18%
+✔  @mobily/ts-belt  51,091,352.21  ops/sec  ±0.71%  (99 runs)   fastest
+✔  remeda            3,298,014.67  ops/sec  ±0.81%  (99 runs)   -93.54%
+✔  ramda            15,583,472.56  ops/sec  ±0.48%  (94 runs)   -69.50%
+✔  rambda           46,032,144.39  ops/sec  ±1.81%  (91 runs)   -9.90%
+✔  lodash/fp        13,551,195.71  ops/sec  ±0.85%  (101 runs)  -73.48%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -148,11 +148,11 @@ _takeWhile (single function call)_
 _takeWhile (function call inside `pipe`)_
 
 ```bash
-✔  @mobily/ts-belt  20,736,453.04  ops/sec  ±1.42%  (92 runs)  fastest
-✔  remeda            1,855,651.74  ops/sec  ±1.14%  (97 runs)  -91.05%
-✔  ramda             1,248,229.22  ops/sec  ±0.86%  (94 runs)  -93.98%
-✔  rambda           14,114,954.84  ops/sec  ±1.32%  (93 runs)  -31.93%
-✔  lodash/fp           503,813.16  ops/sec  ±4.21%  (89 runs)  -97.57%
+✔  @mobily/ts-belt  34,174,457.96  ops/sec  ±0.96%  (100 runs)  fastest
+✔  remeda            3,216,097.80  ops/sec  ±0.89%  (100 runs)  -90.59%
+✔  ramda             2,044,004.20  ops/sec  ±0.38%  (102 runs)  -94.02%
+✔  rambda           23,157,339.24  ops/sec  ±0.91%  (96 runs)   -32.24%
+✔  lodash/fp           891,834.62  ops/sec  ±1.21%  (101 runs)  -97.39%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -162,11 +162,11 @@ _takeWhile (function call inside `pipe`)_
 _deepFlat (single function call)_
 
 ```bash
-✔  @mobily/ts-belt  10,246,783.82  ops/sec  ±0.78%  (97 runs)   fastest
-✔  remeda              869,860.64  ops/sec  ±1.79%  (96 runs)   -91.51%
-✔  ramda               438,419.34  ops/sec  ±0.97%  (92 runs)   -95.72%
-✔  rambda            8,944,535.30  ops/sec  ±1.20%  (100 runs)  -12.71%
-✔  lodash/fp         4,309,899.70  ops/sec  ±0.50%  (97 runs)   -57.94%
+✔  @mobily/ts-belt  16,538,319.46  ops/sec  ±0.54%  (99 runs)  fastest
+✔  remeda            1,416,540.10  ops/sec  ±1.77%  (94 runs)  -91.43%
+✔  ramda               701,492.07  ops/sec  ±0.53%  (97 runs)  -95.76%
+✔  rambda           14,731,465.99  ops/sec  ±0.78%  (99 runs)  -10.93%
+✔  lodash/fp         7,094,316.19  ops/sec  ±0.59%  (99 runs)  -57.10%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -174,11 +174,11 @@ _deepFlat (single function call)_
 _deepFlat (function call inside `pipe`)_
 
 ```bash
-✔  @mobily/ts-belt  10,255,988.56  ops/sec  ±0.72%  (95 runs)  fastest
-✔  remeda              769,727.10  ops/sec  ±1.19%  (92 runs)  -92.49%
-✔  ramda               352,683.57  ops/sec  ±0.26%  (97 runs)  -96.56%
-✔  rambda            6,554,589.53  ops/sec  ±5.19%  (93 runs)  -36.09%
-✔  lodash/fp         2,798,186.70  ops/sec  ±0.18%  (95 runs)  -72.72%
+✔  @mobily/ts-belt  16,213,364.27  ops/sec  ±0.58%  (97 runs)  fastest
+✔  remeda            1,215,004.37  ops/sec  ±1.01%  (98 runs)  -92.51%
+✔  ramda               533,115.00  ops/sec  ±0.61%  (98 runs)  -96.71%
+✔  rambda           11,473,907.92  ops/sec  ±1.21%  (91 runs)  -29.23%
+✔  lodash/fp         4,440,750.16  ops/sec  ±0.77%  (94 runs)  -72.61%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -188,11 +188,11 @@ _deepFlat (function call inside `pipe`)_
 _reduce (single function call)_
 
 ```bash
-✔  @mobily/ts-belt  26,510,467.53  ops/sec  ±0.36%  (99 runs)  fastest
-✔  remeda            1,594,628.29  ops/sec  ±0.96%  (99 runs)  -93.98%
-✔  ramda             5,953,137.53  ops/sec  ±0.76%  (91 runs)  -77.54%
-✔  rambda            9,211,148.91  ops/sec  ±1.49%  (92 runs)  -65.25%
-✔  lodash/fp         5,517,952.12  ops/sec  ±1.24%  (95 runs)  -79.19%
+✔  @mobily/ts-belt  42,793,420.73  ops/sec  ±0.44%  (96 runs)   fastest
+✔  remeda            2,608,239.95  ops/sec  ±0.85%  (100 runs)  -93.91%
+✔  ramda             9,523,701.00  ops/sec  ±0.99%  (93 runs)   -77.74%
+✔  rambda           14,925,277.68  ops/sec  ±1.79%  (95 runs)   -65.12%
+✔  lodash/fp         9,468,034.48  ops/sec  ±1.09%  (96 runs)   -77.88%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -200,11 +200,11 @@ _reduce (single function call)_
 _reduce (function call inside `pipe`)_
 
 ```bash
-✔  @mobily/ts-belt  16,442,514.25  ops/sec  ±2.37%  (88 runs)   fastest
-✔  remeda            1,447,294.91  ops/sec  ±1.13%  (96 runs)   -91.20%
-✔  ramda             1,056,195.39  ops/sec  ±0.82%  (100 runs)  -93.58%
-✔  rambda            4,332,922.57  ops/sec  ±1.47%  (99 runs)   -73.65%
-✔  lodash/fp           600,139.06  ops/sec  ±1.38%  (100 runs)  -96.35%
+✔  @mobily/ts-belt  27,487,868.43  ops/sec  ±1.45%  (100 runs)  fastest
+✔  remeda            2,524,317.83  ops/sec  ±0.74%  (97 runs)   -90.82%
+✔  ramda             1,721,551.22  ops/sec  ±0.84%  (90 runs)   -93.74%
+✔  rambda            7,283,236.59  ops/sec  ±1.11%  (95 runs)   -73.50%
+✔  lodash/fp           967,717.39  ops/sec  ±1.32%  (94 runs)   -96.48%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -214,23 +214,23 @@ _reduce (function call inside `pipe`)_
 _reject (single function call)_
 
 ```bash
-✔  @mobily/ts-belt  25,556,967.43  ops/sec  ±0.72%  (100 runs)  fastest
-✔  remeda            1,597,375.60  ops/sec  ±1.12%  (96 runs)   -93.75%
-✔  ramda             9,122,781.37  ops/sec  ±1.28%  (93 runs)   -64.30%
-✔  rambda           25,096,982.81  ops/sec  ±2.38%  (86 runs)   -1.80%
-✔  lodash/fp         3,884,877.52  ops/sec  ±0.68%  (97 runs)   -84.80%
+✔  @mobily/ts-belt  41,254,015.97  ops/sec  ±0.27%  (100 runs)  -3.05%
+✔  remeda            2,611,932.18  ops/sec  ±1.03%  (99 runs)   -93.86%
+✔  ramda            15,271,065.84  ops/sec  ±1.33%  (93 runs)   -64.11%
+✔  rambda           42,553,228.84  ops/sec  ±1.01%  (97 runs)   fastest
+✔  lodash/fp         7,033,601.60  ops/sec  ±0.62%  (100 runs)  -83.47%
 ```
 
-→ Fastest is **@mobily/ts-belt**
+→ Fastest is **rambda**
 
 _reject (function call inside `pipe`)_
 
 ```bash
-✔  @mobily/ts-belt  17,420,857.46  ops/sec  ±0.53%  (97 runs)  fastest
-✔  remeda            1,449,367.24  ops/sec  ±1.22%  (98 runs)  -91.68%
-✔  ramda             1,206,573.81  ops/sec  ±2.59%  (94 runs)  -93.07%
-✔  rambda           12,783,644.74  ops/sec  ±1.11%  (92 runs)  -26.62%
-✔  lodash/fp           549,327.80  ops/sec  ±1.47%  (97 runs)  -96.85%
+✔  @mobily/ts-belt  28,064,113.91  ops/sec  ±1.25%  (99 runs)   fastest
+✔  remeda            2,365,427.75  ops/sec  ±0.81%  (99 runs)   -91.57%
+✔  ramda             2,063,416.35  ops/sec  ±0.47%  (102 runs)  -92.65%
+✔  rambda           20,783,366.09  ops/sec  ±0.72%  (98 runs)   -25.94%
+✔  lodash/fp           899,425.40  ops/sec  ±1.17%  (99 runs)   -96.80%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -240,19 +240,19 @@ _reject (function call inside `pipe`)_
 _intersperse (single function call)_
 
 ```bash
-✔  @mobily/ts-belt  24,418,465.47  ops/sec  ±1.02%  (97 runs)  -0.52%
-✔  ramda            23,787,171.16  ops/sec  ±0.95%  (99 runs)  -3.10%
-✔  rambda           24,546,930.34  ops/sec  ±1.27%  (99 runs)  fastest
+✔  @mobily/ts-belt  40,230,899.34  ops/sec  ±0.43%  (99 runs)   fastest
+✔  ramda            39,253,339.46  ops/sec  ±0.30%  (101 runs)  -2.43%
+✔  rambda           39,763,893.81  ops/sec  ±1.06%  (100 runs)  -1.16%
 ```
 
-→ Fastest is **rambda**
+→ Fastest is **@mobily/ts-belt**
 
 _intersperse (function call inside `pipe`)_
 
 ```bash
-✔  @mobily/ts-belt  16,920,730.20  ops/sec  ±1.28%  (95 runs)  fastest
-✔  ramda             1,440,822.75  ops/sec  ±0.71%  (95 runs)  -91.48%
-✔  rambda           12,872,133.44  ops/sec  ±0.91%  (97 runs)  -23.93%
+✔  @mobily/ts-belt  27,771,243.00  ops/sec  ±0.95%  (99 runs)  fastest
+✔  ramda             2,318,968.59  ops/sec  ±0.31%  (95 runs)  -91.65%
+✔  rambda           20,888,631.52  ops/sec  ±0.80%  (96 runs)  -24.78%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -262,11 +262,11 @@ _intersperse (function call inside `pipe`)_
 _fromPairs (single function call)_
 
 ```bash
-✔  @mobily/ts-belt  11,589,600.01  ops/sec  ±0.68%  (100 runs)  fastest
-✔  remeda           10,651,157.00  ops/sec  ±2.04%  (92 runs)   -8.10%
-✔  ramda             5,039,548.73  ops/sec  ±1.34%  (95 runs)   -56.52%
-✔  rambda           10,089,150.68  ops/sec  ±2.58%  (94 runs)   -12.95%
-✔  lodash/fp         8,237,016.20  ops/sec  ±1.70%  (87 runs)   -28.93%
+✔  @mobily/ts-belt  19,553,087.09  ops/sec  ±0.07%  (101 runs)  fastest
+✔  remeda           17,659,061.64  ops/sec  ±1.79%  (98 runs)   -9.69%
+✔  ramda             8,440,932.06  ops/sec  ±1.11%  (96 runs)   -56.83%
+✔  rambda           16,986,649.62  ops/sec  ±2.27%  (91 runs)   -13.13%
+✔  lodash/fp        14,162,403.18  ops/sec  ±1.33%  (99 runs)   -27.57%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -274,11 +274,11 @@ _fromPairs (single function call)_
 _fromPairs (function call inside `pipe`)_
 
 ```bash
-✔  @mobily/ts-belt  11,176,754.04  ops/sec  ±2.33%  (96 runs)   fastest
-✔  remeda            7,525,723.06  ops/sec  ±1.55%  (100 runs)  -32.67%
-✔  ramda             1,321,266.10  ops/sec  ±1.40%  (96 runs)   -88.18%
-✔  rambda            7,832,241.42  ops/sec  ±0.54%  (95 runs)   -29.92%
-✔  lodash/fp         1,702,954.65  ops/sec  ±0.83%  (95 runs)   -84.76%
+✔  @mobily/ts-belt  18,783,500.95  ops/sec  ±1.84%  (97 runs)   fastest
+✔  remeda           12,832,733.95  ops/sec  ±1.32%  (98 runs)   -31.68%
+✔  ramda             2,245,365.09  ops/sec  ±0.77%  (102 runs)  -88.05%
+✔  rambda           13,151,419.60  ops/sec  ±1.24%  (98 runs)   -29.98%
+✔  lodash/fp         2,744,777.90  ops/sec  ±1.17%  (99 runs)   -85.39%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -288,11 +288,11 @@ _fromPairs (function call inside `pipe`)_
 _groupBy (single function call)_
 
 ```bash
-✔  @mobily/ts-belt  3,571,986.26  ops/sec  ±0.14%  (97 runs)  fastest
-✔  remeda           1,056,347.71  ops/sec  ±1.21%  (97 runs)  -70.43%
-✔  ramda              952,416.30  ops/sec  ±1.74%  (95 runs)  -73.34%
-✔  rambda           3,432,453.10  ops/sec  ±1.30%  (94 runs)  -3.91%
-✔  lodash/fp        1,597,894.20  ops/sec  ±3.96%  (85 runs)  -55.27%
+✔  @mobily/ts-belt  5,943,587.16  ops/sec  ±0.48%  (101 runs)  fastest
+✔  remeda           1,726,555.66  ops/sec  ±1.10%  (99 runs)   -70.95%
+✔  ramda            1,575,724.31  ops/sec  ±1.16%  (95 runs)   -73.49%
+✔  rambda           5,727,436.28  ops/sec  ±0.99%  (102 runs)  -3.64%
+✔  lodash/fp        2,947,405.55  ops/sec  ±0.88%  (99 runs)   -50.41%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -300,11 +300,11 @@ _groupBy (single function call)_
 _groupBy (function call inside `pipe`)_
 
 ```bash
-✔  @mobily/ts-belt  3,146,454.47  ops/sec  ±1.23%  (96 runs)   fastest
-✔  remeda             976,016.45  ops/sec  ±0.90%  (101 runs)  -68.98%
-✔  ramda              522,801.33  ops/sec  ±0.81%  (99 runs)   -83.38%
-✔  rambda           2,847,114.95  ops/sec  ±0.67%  (96 runs)   -9.51%
-✔  lodash/fp          482,244.34  ops/sec  ±1.60%  (98 runs)   -84.67%
+✔  @mobily/ts-belt  5,322,262.23  ops/sec  ±1.03%  (96 runs)   fastest
+✔  remeda           1,678,468.40  ops/sec  ±1.15%  (96 runs)   -68.46%
+✔  ramda              876,948.72  ops/sec  ±0.63%  (100 runs)  -83.52%
+✔  rambda           4,809,030.78  ops/sec  ±1.03%  (97 runs)   -9.64%
+✔  lodash/fp          802,093.00  ops/sec  ±1.14%  (100 runs)  -84.93%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -314,11 +314,11 @@ _groupBy (function call inside `pipe`)_
 _zip (single function call)_
 
 ```bash
-✔  @mobily/ts-belt  15,623,371.03  ops/sec  ±0.14%  (96 runs)  fastest
-✔  remeda            1,750,982.61  ops/sec  ±2.40%  (89 runs)  -88.79%
-✔  ramda            11,690,932.72  ops/sec  ±2.32%  (91 runs)  -25.17%
-✔  rambda           12,838,790.36  ops/sec  ±3.19%  (97 runs)  -17.82%
-✔  lodash/fp         2,592,188.19  ops/sec  ±1.34%  (94 runs)  -83.41%
+✔  @mobily/ts-belt  24,127,179.52  ops/sec  ±0.22%  (99 runs)   fastest
+✔  remeda            2,885,822.39  ops/sec  ±2.02%  (98 runs)   -88.04%
+✔  ramda            19,727,813.62  ops/sec  ±2.48%  (93 runs)   -18.23%
+✔  rambda           20,945,627.40  ops/sec  ±1.69%  (101 runs)  -13.19%
+✔  lodash/fp         4,242,255.90  ops/sec  ±1.07%  (100 runs)  -82.42%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -326,11 +326,11 @@ _zip (single function call)_
 _zip (function call inside `pipe`)_
 
 ```bash
-✔  @mobily/ts-belt  10,126,865.26  ops/sec  ±1.70%  (98 runs)  fastest
-✔  remeda            1,665,098.26  ops/sec  ±1.49%  (96 runs)  -83.56%
-✔  ramda             1,282,877.91  ops/sec  ±1.14%  (98 runs)  -87.33%
-✔  rambda            7,844,380.07  ops/sec  ±2.50%  (94 runs)  -22.54%
-✔  lodash/fp           589,350.31  ops/sec  ±0.86%  (97 runs)  -94.18%
+✔  @mobily/ts-belt  16,159,603.13  ops/sec  ±1.54%  (99 runs)   fastest
+✔  remeda            2,876,166.73  ops/sec  ±1.60%  (95 runs)   -82.20%
+✔  ramda             2,160,280.47  ops/sec  ±0.86%  (101 runs)  -86.63%
+✔  rambda           12,679,141.86  ops/sec  ±1.50%  (97 runs)   -21.54%
+✔  lodash/fp           950,831.57  ops/sec  ±1.21%  (100 runs)  -94.12%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -340,23 +340,23 @@ _zip (function call inside `pipe`)_
 _forEach (single function call)_
 
 ```bash
-✔  @mobily/ts-belt  93,369,509.94  ops/sec  ±0.22%  (98 runs)  -0.35%
-✔  remeda            1,797,182.95  ops/sec  ±1.54%  (97 runs)  -98.08%
-✔  ramda            91,578,349.56  ops/sec  ±0.08%  (98 runs)  -2.26%
-✔  rambda           93,697,283.34  ops/sec  ±0.05%  (97 runs)  fastest
-✔  lodash/fp         4,457,378.68  ops/sec  ±0.73%  (99 runs)  -95.24%
+✔  @mobily/ts-belt  152,863,389.35  ops/sec  ±0.08%  (98 runs)  fastest
+✔  remeda             2,940,815.32  ops/sec  ±1.38%  (94 runs)  -98.08%
+✔  ramda            150,864,709.36  ops/sec  ±0.07%  (99 runs)  -1.31%
+✔  rambda           150,632,414.59  ops/sec  ±0.58%  (94 runs)  -1.46%
+✔  lodash/fp          7,214,910.48  ops/sec  ±0.56%  (96 runs)  -95.28%
 ```
 
-→ Fastest is **rambda**
+→ Fastest is **@mobily/ts-belt,rambda**
 
 _forEach (function call inside `pipe`)_
 
 ```bash
-✔  @mobily/ts-belt  50,696,063.88  ops/sec  ±0.42%  (99 runs)  fastest
-✔  remeda            1,503,054.82  ops/sec  ±0.99%  (98 runs)  -97.04%
-✔  ramda             1,425,797.36  ops/sec  ±0.53%  (96 runs)  -97.19%
-✔  rambda           24,360,615.39  ops/sec  ±0.36%  (99 runs)  -51.95%
-✔  lodash/fp           589,670.78  ops/sec  ±1.41%  (96 runs)  -98.84%
+✔  @mobily/ts-belt  81,748,533.56  ops/sec  ±0.33%  (101 runs)  fastest
+✔  remeda            2,370,102.28  ops/sec  ±3.93%  (96 runs)   -97.10%
+✔  ramda             2,367,952.05  ops/sec  ±0.57%  (96 runs)   -97.10%
+✔  rambda           39,021,711.06  ops/sec  ±0.62%  (94 runs)   -52.27%
+✔  lodash/fp           933,931.82  ops/sec  ±1.41%  (98 runs)   -98.86%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -366,11 +366,11 @@ _forEach (function call inside `pipe`)_
 _uniq (single function call)_
 
 ```bash
-✔  @mobily/ts-belt  12,241,381.87  ops/sec  ±1.21%  (95 runs)  -13.99%
-✔  remeda            1,282,815.56  ops/sec  ±1.80%  (97 runs)  -90.99%
-✔  ramda               577,555.97  ops/sec  ±0.50%  (97 runs)  -95.94%
-✔  rambda            2,674,347.71  ops/sec  ±0.83%  (94 runs)  -81.21%
-✔  lodash/fp        14,231,710.61  ops/sec  ±0.99%  (96 runs)  fastest
+✔  @mobily/ts-belt  20,023,385.40  ops/sec  ±0.91%  (100 runs)  -12.63%
+✔  remeda            2,081,381.00  ops/sec  ±1.46%  (97 runs)   -90.92%
+✔  ramda               933,365.34  ops/sec  ±0.86%  (100 runs)  -95.93%
+✔  rambda            4,425,561.09  ops/sec  ±0.61%  (100 runs)  -80.69%
+✔  lodash/fp        22,917,540.75  ops/sec  ±1.18%  (97 runs)   fastest
 ```
 
 → Fastest is **lodash/fp**
@@ -378,11 +378,11 @@ _uniq (single function call)_
 _uniq (function call inside `pipe`)_
 
 ```bash
-✔  @mobily/ts-belt  11,527,390.75  ops/sec  ±1.72%  (94 runs)   fastest
-✔  remeda            1,359,744.10  ops/sec  ±1.03%  (101 runs)  -88.20%
-✔  ramda               416,090.06  ops/sec  ±0.51%  (94 runs)   -96.39%
-✔  rambda            2,217,348.48  ops/sec  ±0.67%  (100 runs)  -80.76%
-✔  lodash/fp         4,793,612.52  ops/sec  ±2.08%  (99 runs)   -58.42%
+✔  @mobily/ts-belt  18,861,273.98  ops/sec  ±0.93%  (99 runs)   fastest
+✔  remeda            2,159,491.96  ops/sec  ±1.17%  (101 runs)  -88.55%
+✔  ramda               683,794.59  ops/sec  ±0.36%  (100 runs)  -96.37%
+✔  rambda            3,674,797.72  ops/sec  ±0.56%  (98 runs)   -80.52%
+✔  lodash/fp         7,779,187.07  ops/sec  ±0.98%  (100 runs)  -58.76%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -392,11 +392,11 @@ _uniq (function call inside `pipe`)_
 _toPairs (single function call)_
 
 ```bash
-✔  @mobily/ts-belt  24,507,031.00  ops/sec  ±0.16%  (97 runs)  fastest
-✔  remeda           20,481,271.39  ops/sec  ±4.50%  (85 runs)  -16.43%
-✔  ramda             6,114,291.88  ops/sec  ±0.96%  (94 runs)  -75.05%
-✔  rambda           23,543,170.30  ops/sec  ±2.05%  (86 runs)  -3.93%
-✔  lodash/fp         6,890,139.57  ops/sec  ±1.22%  (99 runs)  -71.89%
+✔  @mobily/ts-belt  38,260,372.07  ops/sec  ±0.11%  (102 runs)  fastest
+✔  remeda           32,640,871.61  ops/sec  ±4.36%  (86 runs)   -14.69%
+✔  ramda            10,057,632.51  ops/sec  ±1.22%  (91 runs)   -73.71%
+✔  rambda           37,627,166.35  ops/sec  ±2.44%  (93 runs)   -1.65%
+✔  lodash/fp        11,846,171.02  ops/sec  ±1.09%  (99 runs)   -69.04%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -404,11 +404,11 @@ _toPairs (single function call)_
 _toPairs (function call inside `pipe`)_
 
 ```bash
-✔  @mobily/ts-belt  23,955,924.34  ops/sec  ±1.77%  (96 runs)   fastest
-✔  remeda           13,739,575.84  ops/sec  ±1.57%  (98 runs)   -42.65%
-✔  ramda             1,428,897.08  ops/sec  ±0.69%  (99 runs)   -94.04%
-✔  rambda           14,575,882.12  ops/sec  ±1.49%  (99 runs)   -39.16%
-✔  lodash/fp         3,537,194.03  ops/sec  ±1.20%  (101 runs)  -85.23%
+✔  @mobily/ts-belt  37,246,282.44  ops/sec  ±1.59%  (101 runs)  fastest
+✔  remeda           21,731,180.76  ops/sec  ±1.43%  (101 runs)  -41.66%
+✔  ramda             2,362,700.45  ops/sec  ±0.59%  (102 runs)  -93.66%
+✔  rambda           22,920,781.90  ops/sec  ±1.37%  (96 runs)   -38.46%
+✔  lodash/fp         5,593,701.34  ops/sec  ±1.06%  (100 runs)  -84.98%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -418,23 +418,23 @@ _toPairs (function call inside `pipe`)_
 _map (single function call)_
 
 ```bash
-✔  @mobily/ts-belt  49,472,521.72  ops/sec  ±0.80%  (97 runs)  fastest
-✔  remeda            1,785,889.21  ops/sec  ±1.58%  (94 runs)  -96.39%
-✔  ramda            11,429,248.08  ops/sec  ±2.40%  (89 runs)  -76.90%
-✔  rambda           47,191,593.01  ops/sec  ±3.30%  (88 runs)  -4.61%
-✔  lodash/fp         7,787,941.68  ops/sec  ±1.01%  (94 runs)  -84.26%
+✔  @mobily/ts-belt  79,746,688.90  ops/sec  ±0.80%  (101 runs)  -1.04%
+✔  remeda            2,935,744.73  ops/sec  ±1.39%  (94 runs)   -96.36%
+✔  ramda            19,366,034.11  ops/sec  ±0.57%  (94 runs)   -75.97%
+✔  rambda           80,583,169.45  ops/sec  ±0.51%  (96 runs)   fastest
+✔  lodash/fp        12,519,745.90  ops/sec  ±0.50%  (101 runs)  -84.46%
 ```
 
-→ Fastest is **@mobily/ts-belt**
+→ Fastest is **rambda**
 
 _map (function call inside `pipe`)_
 
 ```bash
-✔  @mobily/ts-belt  28,976,688.79  ops/sec  ±0.89%  (92 runs)  fastest
-✔  remeda            1,456,629.08  ops/sec  ±1.98%  (96 runs)  -94.97%
-✔  ramda             1,334,297.65  ops/sec  ±0.54%  (98 runs)  -95.40%
-✔  rambda           18,722,579.14  ops/sec  ±1.39%  (92 runs)  -35.39%
-✔  lodash/fp           578,604.91  ops/sec  ±1.61%  (99 runs)  -98.00%
+✔  @mobily/ts-belt  46,367,495.33  ops/sec  ±0.55%  (100 runs)  fastest
+✔  remeda            2,387,337.87  ops/sec  ±0.91%  (102 runs)  -94.85%
+✔  ramda             2,195,618.76  ops/sec  ±0.38%  (100 runs)  -95.26%
+✔  rambda           30,847,626.47  ops/sec  ±0.34%  (100 runs)  -33.47%
+✔  lodash/fp           791,577.78  ops/sec  ±4.31%  (88 runs)   -98.29%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -444,11 +444,11 @@ _map (function call inside `pipe`)_
 _filter (single function call)_
 
 ```bash
-✔  @mobily/ts-belt  28,022,854.88  ops/sec  ±2.54%  (88 runs)  fastest
-✔  remeda            1,536,086.48  ops/sec  ±1.67%  (94 runs)  -94.52%
-✔  ramda             9,714,008.25  ops/sec  ±1.03%  (87 runs)  -65.34%
-✔  rambda           27,361,281.41  ops/sec  ±1.90%  (94 runs)  -2.36%
-✔  lodash/fp         4,237,844.75  ops/sec  ±0.77%  (96 runs)  -84.88%
+✔  @mobily/ts-belt  46,693,913.43  ops/sec  ±0.27%  (95 runs)   fastest
+✔  remeda            2,528,479.01  ops/sec  ±1.45%  (96 runs)   -94.58%
+✔  ramda            16,084,895.72  ops/sec  ±0.97%  (97 runs)   -65.55%
+✔  rambda           45,755,473.67  ops/sec  ±1.17%  (100 runs)  -2.01%
+✔  lodash/fp         5,811,868.44  ops/sec  ±6.80%  (85 runs)   -87.55%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -456,11 +456,11 @@ _filter (single function call)_
 _filter (function call inside `pipe`)_
 
 ```bash
-✔  @mobily/ts-belt  21,144,971.87  ops/sec  ±1.20%  (94 runs)  fastest
-✔  remeda            1,454,257.43  ops/sec  ±1.02%  (98 runs)  -93.12%
-✔  ramda             1,309,151.15  ops/sec  ±0.89%  (95 runs)  -93.81%
-✔  rambda           14,498,423.26  ops/sec  ±1.71%  (92 runs)  -31.43%
-✔  lodash/fp           542,158.53  ops/sec  ±1.53%  (92 runs)  -97.44%
+✔  @mobily/ts-belt  33,157,852.10  ops/sec  ±1.16%  (97 runs)  fastest
+✔  remeda            2,299,836.17  ops/sec  ±1.15%  (99 runs)  -93.06%
+✔  ramda             2,102,516.80  ops/sec  ±0.56%  (99 runs)  -93.66%
+✔  rambda           23,604,244.02  ops/sec  ±0.87%  (95 runs)  -28.81%
+✔  lodash/fp           836,501.85  ops/sec  ±1.39%  (95 runs)  -97.48%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -470,11 +470,11 @@ _filter (function call inside `pipe`)_
 _find (single function call)_
 
 ```bash
-✔  @mobily/ts-belt  87,630,267.44  ops/sec  ±1.22%  (99 runs)  -5.78%
-✔  remeda            2,024,225.75  ops/sec  ±0.88%  (97 runs)  -97.82%
-✔  ramda            17,342,711.94  ops/sec  ±0.76%  (93 runs)  -81.35%
-✔  rambda           93,006,359.94  ops/sec  ±0.56%  (98 runs)  fastest
-✔  lodash/fp         5,054,493.46  ops/sec  ±0.69%  (97 runs)  -94.57%
+✔  @mobily/ts-belt  144,909,013.55  ops/sec  ±0.13%  (101 runs)  -5.06%
+✔  remeda             3,324,461.60  ops/sec  ±0.74%  (100 runs)  -97.82%
+✔  ramda             27,978,353.39  ops/sec  ±0.63%  (94 runs)   -81.67%
+✔  rambda           152,626,652.74  ops/sec  ±0.06%  (100 runs)  fastest
+✔  lodash/fp          8,703,622.86  ops/sec  ±0.46%  (99 runs)   -94.30%
 ```
 
 → Fastest is **rambda**
@@ -482,11 +482,11 @@ _find (single function call)_
 _find (function call inside `pipe`)_
 
 ```bash
-✔  @mobily/ts-belt  46,978,412.84  ops/sec  ±0.63%  (96 runs)   fastest
-✔  remeda            1,679,014.52  ops/sec  ±0.99%  (99 runs)   -96.43%
-✔  ramda             1,407,100.53  ops/sec  ±0.48%  (95 runs)   -97.00%
-✔  rambda           23,477,747.08  ops/sec  ±0.42%  (95 runs)   -50.02%
-✔  lodash/fp           565,895.65  ops/sec  ±1.32%  (100 runs)  -98.80%
+✔  @mobily/ts-belt  73,480,238.33  ops/sec  ±0.45%  (99 runs)   fastest
+✔  remeda            2,677,178.59  ops/sec  ±0.91%  (98 runs)   -96.36%
+✔  ramda             2,230,298.28  ops/sec  ±0.39%  (98 runs)   -96.96%
+✔  rambda           36,874,771.67  ops/sec  ±0.26%  (100 runs)  -49.82%
+✔  lodash/fp           852,282.62  ops/sec  ±1.22%  (97 runs)   -98.84%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -496,11 +496,11 @@ _find (function call inside `pipe`)_
 _splitEvery/chunk (single function call)_
 
 ```bash
-✔  @mobily/ts-belt  15,786,764.21  ops/sec  ±0.29%  (95 runs)  fastest
-✔  remeda            1,644,836.92  ops/sec  ±2.14%  (90 runs)  -89.58%
-✔  ramda             5,703,199.14  ops/sec  ±1.37%  (93 runs)  -63.87%
-✔  rambda            9,032,295.12  ops/sec  ±1.29%  (99 runs)  -42.79%
-✔  lodash/fp         6,164,497.70  ops/sec  ±1.94%  (93 runs)  -60.95%
+✔  @mobily/ts-belt  25,186,180.15  ops/sec  ±0.20%  (99 runs)   fastest
+✔  remeda            2,736,963.68  ops/sec  ±1.80%  (98 runs)   -89.13%
+✔  ramda             9,324,199.54  ops/sec  ±1.62%  (93 runs)   -62.98%
+✔  rambda           14,639,715.58  ops/sec  ±1.12%  (100 runs)  -41.87%
+✔  lodash/fp        10,917,677.01  ops/sec  ±1.02%  (98 runs)   -56.65%
 ```
 
 → Fastest is **@mobily/ts-belt**
@@ -508,11 +508,11 @@ _splitEvery/chunk (single function call)_
 _splitEvery/chunk (function call inside `pipe`)_
 
 ```bash
-✔  @mobily/ts-belt  12,262,008.53  ops/sec  ±1.40%  (99 runs)  fastest
-✔  remeda            2,020,125.60  ops/sec  ±1.06%  (97 runs)  -83.53%
-✔  ramda             1,009,669.48  ops/sec  ±0.98%  (97 runs)  -91.77%
-✔  rambda            6,579,261.03  ops/sec  ±1.20%  (93 runs)  -46.34%
-✔  lodash/fp           610,185.31  ops/sec  ±1.40%  (96 runs)  -95.02%
+✔  @mobily/ts-belt  19,613,497.21  ops/sec  ±0.47%  (99 runs)   fastest
+✔  remeda            3,438,733.67  ops/sec  ±0.94%  (97 runs)   -82.47%
+✔  ramda             1,682,901.94  ops/sec  ±0.76%  (101 runs)  -91.42%
+✔  rambda           10,770,461.47  ops/sec  ±1.04%  (96 runs)   -45.09%
+✔  lodash/fp           977,539.42  ops/sec  ±1.26%  (97 runs)   -95.02%
 ```
 
 → Fastest is **@mobily/ts-belt**
