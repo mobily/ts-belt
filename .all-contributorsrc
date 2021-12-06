@@ -17,7 +17,8 @@
       "contributions": [
         "code",
         "doc",
-        "test"
+        "test",
+        "design"
       ]
     },
     {
@@ -43,6 +44,15 @@
       "name": "Artur",
       "avatar_url": "https://avatars.githubusercontent.com/u/8781462?v=4",
       "profile": "https://github.com/Fortidude",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "domeknn",
+      "name": "Dominik Łopaciński",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9402280?v=4",
+      "profile": "https://github.com/domeknn",
       "contributions": [
         "doc"
       ]
