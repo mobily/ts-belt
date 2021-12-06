@@ -25,6 +25,18 @@
   color: var(--ifm-color-gray-900);
 }
 
+@media screen and (max-width: 992px) {
+  .h1 {
+    font-size: 4rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .h1 {
+    font-size: 3rem;
+  }
+}
+
 .underscore {
   color: var(--ifm-color-primary);
   letter-spacing: -20px;
@@ -37,6 +49,20 @@
   font-size: 2.2rem;
   line-height: 3rem;
   margin-bottom: 40px;
+}
+
+@media screen and (max-width: 992px) {
+  .summary {
+    font-size: 1.6rem;
+    line-height: 2rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .summary {
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+  }
 }
 
 @media screen and (max-width: 966px) {
@@ -81,6 +107,13 @@
   margin-left: 20px;
 }
 
+@media screen and (max-width: 992px) {
+  .buttonFull {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+}
+
 .buttonFull:hover  {
   background-color: var(--ifm-color-primary);
 }
@@ -89,7 +122,25 @@
   display: flex;
 }
 
+@media screen and (max-width: 992px) {
+  .buttons {
+    flex-direction: column;
+  }
+}
+
 .titleImage {
   height: 120px;
   margin-right: 20px;
+}
+
+@media screen and (max-width: 992px) {
+  .titleImage {
+    height: 80px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .titleImage {
+    height: 60px;
+  }
 }
