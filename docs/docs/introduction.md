@@ -52,7 +52,7 @@ Until I have decided to build `ts-belt`. It combines all of the good things you 
 
 ### Features
 
-- 🚀 built with `ReScript`, which generates highly performant JavaScript code (see the benchmark results [here](/benchmarks/introduction))
+- 🚀 built in `ReScript`, which generates highly performant JavaScript code (see the benchmark results [here](/benchmarks/introduction))
 - 👀 provide more readable code, due to the `data-first` approach
 - ✨ support for `TypeScript` and `Flow`
 - 🛡 write safer code with `Option` and `Result` types
