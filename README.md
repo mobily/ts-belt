@@ -16,7 +16,7 @@
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome">
   </a>
   <a href="#contributors">
-    <img src="https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square" alt="All Contributors">
+    <img src="https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square" alt="All Contributors">
   </a>
   <a href="https://github.com/mobily/ts-belt/blob/master/LICENSE">
     <img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="GitHub license">
@@ -65,6 +65,7 @@ Full documentation can be found [here](https://mobily.github.io/ts-belt/).
     <td align="center"><a href="https://github.com/panr"><img src="https://avatars.githubusercontent.com/u/1303365?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Radek Kozieł</b></sub></a><br /><a href="https://github.com/mobily/ts-belt/commits?author=panr" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/Fortidude"><img src="https://avatars.githubusercontent.com/u/8781462?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Artur</b></sub></a><br /><a href="https://github.com/mobily/ts-belt/commits?author=Fortidude" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/domeknn"><img src="https://avatars.githubusercontent.com/u/9402280?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Dominik Łopaciński</b></sub></a><br /><a href="https://github.com/mobily/ts-belt/commits?author=domeknn" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/Eghizio"><img src="https://avatars.githubusercontent.com/u/32049761?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jakub Wąsik</b></sub></a><br /><a href="https://github.com/mobily/ts-belt/commits?author=Eghizio" title="Documentation">📖</a></td>
   </tr>
 </table>
 

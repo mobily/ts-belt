@@ -56,6 +56,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "Eghizio",
+      "name": "Jakub Wąsik",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32049761?v=4",
+      "profile": "https://github.com/Eghizio",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "commitConvention": "none"
