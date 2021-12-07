@@ -22,7 +22,7 @@ There are two ways to import `ts-belt` functions into your project.
 The full API reference can be found [here](/api/array).
 
 ```typescript
-import { A, O, pipe } from '@mobily/ts-belt'
+import { A, O, N, pipe } from '@mobily/ts-belt'
 
 pipe(
   [1, 2, 3, 4, 5], // → [1, 2, 3, 4, 5]
