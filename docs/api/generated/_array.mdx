@@ -746,8 +746,21 @@ Returns a new array containing only one copy of each element in the provided arr
 
 
 ```ts
-function uniqBy<A>(xs: ReadonlyArray<A>, uniqFn: (_1: A) => A): ReadonlyArray<A>
-function uniqBy<A>(uniqFn: (_1: A) => A): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function uniqBy<A, B>(xs: ReadonlyArray<A>, uniqFn: (_1: A) => B): ReadonlyArray<A>
+function uniqBy<A, B>(uniqFn: (_1: A) => B): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+```
+
+```ts
+A.uniqBy([1, 2, 2, 3, 4, 4, 5, 6], F.identity) // → [1, 2, 3, 4, 5, 6,]
+A.uniqBy(
+  [
+    { name: 'Joe', age: 20 },
+    { name: 'John', age: 20 },
+  ],
+  user => user.age,
+) // → [{ name: 'Joe', age: 20 }]
+
+pipe([1, 2, 2, 3, 4, 4, 5, 6], A.uniqBy(F.identity)) // → [1, 2, 3, 4, 5, 6,]
 ```
 
 ### unzip

@@ -567,13 +567,13 @@ export declare function removeAt<A>(
 
 /** Returns a new array containing only one copy of each element in the provided array, based upon the value returned by applying the function to each element. */
 
-export declare function uniqBy<A>(
+export declare function uniqBy<A, B>(
   xs: ReadonlyArray<A>,
-  uniqFn: (_1: A) => A,
+  uniqFn: (_1: A) => B,
 ): ReadonlyArray<A>
 
-export declare function uniqBy<A>(
-  uniqFn: (_1: A) => A,
+export declare function uniqBy<A, B>(
+  uniqFn: (_1: A) => B,
 ): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
 
 /** Returns a new array containing only one copy of each element in the provided array. */

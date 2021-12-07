@@ -381,7 +381,7 @@ export uniqBy = (xs, uniqFn) => {
 
   while index.contents < length(xs) {
     let value = Belt.Array.getUnsafe(xs, index.contents)
-    let alreadyAdded = some(arr, (. x) => x == uniqFn(value))
+    let alreadyAdded = some(arr, (. x) => uniqFn(unsafe(x)) == uniqFn(value))
 
     if !alreadyAdded {
       Js.Array2.push(arr, value)->ignore
