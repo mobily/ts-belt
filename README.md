@@ -16,7 +16,7 @@
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome">
   </a>
   <a href="#contributors">
-    <img src="https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square" alt="All Contributors">
+    <img src="https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square" alt="All Contributors">
   </a>
   <a href="https://github.com/mobily/ts-belt/blob/master/LICENSE">
     <img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="GitHub license">
