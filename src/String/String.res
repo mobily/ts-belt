@@ -14,7 +14,10 @@ export concat = (str, append) => Js.String2.concat(str, append)
 %comment(
   "Returns `Some(value)` where `value` is the first character of the string, or `None` if the given string is empty."
 )
-export head = str => Js.String2.slice(str, ~from=0, ~to_=1)
+export head = str => {
+  let firstChar = Js.String2.slice(str, ~from=0, ~to_=1)
+  firstChar == "" ? None : Some(firstChar)
+}
 
 %comment(
   "Returns the substring of `str` starting at character `start` up to but not including `end`."
