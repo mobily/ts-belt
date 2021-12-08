@@ -45,6 +45,14 @@ export declare function toUpperCase(str: string): string
 
 export declare function trim(str: string): string
 
+/** Returns a new string with leading whitespace removed from `str`. */
+
+export declare function trimStart(str: string): string
+
+/** Returns a new string with trailing whitespace removed from `str`. */
+
+export declare function trimEnd(str: string): string
+
 /** Returns `true` if the provided string is empty. */
 
 export declare function isEmpty(str: string): boolean
