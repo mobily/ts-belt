@@ -65,6 +65,17 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "Dilven",
+      "name": "Krystian Mateusiak",
+      "avatar_url": "https://avatars.githubusercontent.com/u/26671751?v=4",
+      "profile": "https://github.com/Dilven",
+      "contributions": [
+        "code",
+        "doc",
+        "test"
+      ]
     }
   ],
   "commitConvention": "none"
