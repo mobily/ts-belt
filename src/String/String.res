@@ -28,6 +28,12 @@ export toUpperCase = str => Js.String2.toUpperCase(str)
 %comment("Returns a new string with leading and trailing whitespace removed from `str`.")
 export trim = str => Js.String2.trim(str)
 
+%comment("Returns a new string with leading whitespace removed from `str`.")
+export trimStart = str => Externals.trimStart(str)
+
+%comment("Returns a new string with trailing whitespace removed from `str`.")
+export trimEnd = str => Externals.trimEnd(str)
+
 %comment("Returns `true` if the provided string is empty.")
 export isEmpty = str => length(str) === 0
 

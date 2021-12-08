@@ -6,3 +6,9 @@ external assign: (Js.Dict.t<'a>, Js.Dict.t<'a>, Js.Dict.t<'a>) => Js.Dict.t<'a> 
 
 @val
 external entries: Js.Dict.t<'a> => array<(Js.Dict.key, 'a)> = "Object.entries"
+
+@send
+external trimEnd: string => string = "trimEnd"
+
+@send
+external trimStart: string => string = "trimStart"
