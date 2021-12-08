@@ -17,6 +17,14 @@ export concat = (str, append) => Js.String2.concat(str, append)
 export head = str => Js.String2.slice(str, ~from=0, ~to_=1)
 
 %comment(
+  "Returns `Some(value)` where `value` is the last character of the string, or `None` if the given string is empty."
+)
+export last = str => {
+  let lastChar = Js.String2.sliceToEnd(str, ~from=length(str) - 1)
+  lastChar == "" ? None : Some(lastChar)
+}
+
+%comment(
   "Returns the substring of `str` starting at character `start` up to but not including `end`."
 )
 export slice = (str, start, end) => Js.String2.slice(str, ~from=start, ~to_=end)

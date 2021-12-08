@@ -85,6 +85,15 @@ Returns `true` if the provided string is not empty.
 function isNotEmpty(str: string): boolean
 ```
 
+### last
+
+Returns `Some(value)` where `value` is the last character of the string, or `None` if the given string is empty.
+
+
+```ts
+function last(str: string): Option<string>
+```
+
 ### lastIndexOf
 
 Returns `Some(index)`, where `index` is the starting position of the last occurrence of `searchValue` within `str`.
