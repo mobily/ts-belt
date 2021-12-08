@@ -14,12 +14,6 @@ export declare function concat(str: string, append: string): string
 
 export declare function concat(append: string): (str: string) => string
 
-/** Returns `Some(value)` where `value` is the first character of the string, or `None` if the given string is empty. */
-
-export declare function head(str: string): string
-
-/** Returns `Some(value)` where `value` is the last character of the string, or `None` if the given string is empty. */
-
 /** Returns the substring of `str` starting at character `start` up to but not including `end`. */
 
 export declare function slice(str: string, start: number, end: number): string
@@ -214,5 +208,11 @@ export declare function get(n: number): (str: string) => Option<string>
 /** Creates an array with one character of `str` per element. */
 
 export declare function toArray(str: string): ReadonlyArray<string>
+
+/** Returns `Some(value)` where `value` is the first character of the string, or `None` if the given string is empty. */
+
+export declare function head(str: string): Option<string>
+
+/** Returns `Some(value)` where `value` is the last character of the string, or `None` if the given string is empty. */
 
 export declare function last(str: string): Option<string>

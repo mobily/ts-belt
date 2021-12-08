@@ -44,7 +44,11 @@ Returns `Some(value)` where `value` is the first character of the string, or `No
 
 
 ```ts
-function head(str: string): string
+function head(str: string): Option<string>
+```
+
+```ts
+S.head('random-text') // → O.Some('r')
 ```
 
 ### includes
@@ -86,6 +90,8 @@ function isNotEmpty(str: string): boolean
 ```
 
 ### last
+
+Returns `Some(value)` where `value` is the last character of the string, or `None` if the given string is empty.
 
 
 ```ts
@@ -206,7 +212,7 @@ function search(regex: RegExp): (str: string) => Option<number>
 
 ### slice
 
-Returns `Some(value)` where `value` is the last character of the string, or `None` if the given string is empty.
+Returns the substring of `str` starting at character `start` up to but not including `end`.
 
 
 ```ts
@@ -298,4 +304,8 @@ Returns a new string with leading and trailing whitespace removed from `str`.
 
 ```ts
 function trim(str: string): string
+```
+
+```ts
+S.trim('  text') // → 'text'
 ```
