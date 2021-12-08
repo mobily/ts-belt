@@ -7,7 +7,7 @@ describe('trim', () => {
     expectType<string>(S.trim('text'))
   })
 
-  it('returns a new string with leading and trailing whitespace removed from str', () => {
+  it('returns a new string with leading and trailing whitespace removed from string', () => {
     expect(S.trim('  text')).toEqual('text')
   })
 })
