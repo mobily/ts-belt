@@ -135,3 +135,8 @@ export toArray = str => Belt.Array.makeByU(length(str), (. index) => getUnsafe(s
   "Returns `Some(value)` where `value` is the first character of the string, or `None` if the given string is empty."
 )
 export head = str => get(str, 0)
+
+%comment(
+  "Returns `Some(value)` where `value` is the last character of the string, or `None` if the given string is empty."
+)
+export last = str => get(str, length(str) - 1)

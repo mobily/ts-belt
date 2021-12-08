@@ -212,3 +212,7 @@ export declare function toArray(str: string): ReadonlyArray<string>
 /** Returns `Some(value)` where `value` is the first character of the string, or `None` if the given string is empty. */
 
 export declare function head(str: string): Option<string>
+
+/** Returns `Some(value)` where `value` is the last character of the string, or `None` if the given string is empty. */
+
+export declare function last(str: string): Option<string>
