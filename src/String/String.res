@@ -12,11 +12,6 @@ export length = str => Js.String2.length(str)
 export concat = (str, append) => Js.String2.concat(str, append)
 
 %comment(
-  "Returns `Some(value)` where `value` is the first character of the string, or `None` if the given string is empty."
-)
-export head = str => Js.String2.slice(str, ~from=0, ~to_=1)
-
-%comment(
   "Returns the substring of `str` starting at character `start` up to but not including `end`."
 )
 export slice = (str, start, end) => Js.String2.slice(str, ~from=start, ~to_=end)
@@ -141,3 +136,8 @@ export get = (str, n) => {
 
 %comment("Creates an array with one character of `str` per element.")
 export toArray = str => Belt.Array.makeByU(length(str), (. index) => getUnsafe(str, index))
+
+%comment(
+  "Returns `Some(value)` where `value` is the first character of the string, or `None` if the given string is empty."
+)
+export head = str => get(str, 0)

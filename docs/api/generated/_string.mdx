@@ -44,7 +44,11 @@ Returns `Some(value)` where `value` is the first character of the string, or `No
 
 
 ```ts
-function head(str: string): string
+function head(str: string): Option<string>
+```
+
+```ts
+S.head('random-text') // → O.Some('r')
 ```
 
 ### includes
@@ -287,6 +291,10 @@ Returns a new string with leading and trailing whitespace removed from `str`.
 
 ```ts
 function trim(str: string): string
+```
+
+```ts
+S.trim('  text') // → 'text'
 ```
 
 ### trimEnd
