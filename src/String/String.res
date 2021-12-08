@@ -19,10 +19,6 @@ export head = str => Js.String2.slice(str, ~from=0, ~to_=1)
 %comment(
   "Returns `Some(value)` where `value` is the last character of the string, or `None` if the given string is empty."
 )
-export last = str => {
-  let lastChar = Js.String2.sliceToEnd(str, ~from=length(str) - 1)
-  lastChar == "" ? None : Some(lastChar)
-}
 
 %comment(
   "Returns the substring of `str` starting at character `start` up to but not including `end`."
@@ -143,3 +139,5 @@ export get = (str, n) => {
 
 %comment("Creates an array with one character of `str` per element.")
 export toArray = str => Belt.Array.makeByU(length(str), (. index) => getUnsafe(str, index))
+
+export last = str => get(str, length(str) - 1)
