@@ -44,7 +44,11 @@ Returns `Some(value)` where `value` is the first character of the string, or `No
 
 
 ```ts
-function head(str: string): string
+function head(str: string): Option<string>
+```
+
+```ts
+S.head('random-text') // → O.Some('r')
 ```
 
 ### includes
