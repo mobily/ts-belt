@@ -9,7 +9,7 @@ export makeEmpty = Js.Dict.empty
 export prop = (dict, key) => Js.Dict.unsafeGet(dict, key)
 
 %comment("Converts an object into an array of `[key, value]` tuples.")
-export toPairs = dict => entries(dict)
+export toPairs = dict => Externals.entries(dict)
 
 %comment("Returns a new array that contains all values of the provided object.")
 export values = dict => Js.Dict.values(dict)
@@ -41,7 +41,7 @@ export mapWithKey = (dict, mapFn) => {
   dict
   ->keys
   ->Belt.Array.mapU((. key) => {
-    let value = mapFn(Js.Dict.unsafeGet(dict, key), key)
+    let value = mapFn(key, Js.Dict.unsafeGet(dict, key))
     (key, value)
   })
   ->fromPairs
@@ -66,7 +66,7 @@ export filterWithKey = (dict, predicateFn) => {
   ->keys
   ->Belt.Array.reduceU([], (. acc, key) => {
     let value = Js.Dict.unsafeGet(dict, key)
-    predicateFn(value, key) ? Array.append(acc, (key, value)) : acc
+    predicateFn(key, value) ? Array.append(acc, (key, value)) : acc
   })
   ->fromPairs
 }
@@ -78,4 +78,4 @@ export reject = (dict, predicateFn) => filter(dict, value => !predicateFn(value)
   "Removes each property that satisfies the given predicate function (which takes two arguments: a property value and key)."
 )
 export rejectWithKey = (dict, predicateFn) =>
-  filterWithKey(dict, (value, key) => !predicateFn(value, key))
+  filterWithKey(dict, (key, value) => !predicateFn(key, value))

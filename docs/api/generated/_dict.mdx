@@ -25,14 +25,14 @@ Removes each property that doesn't satisfy the given predicate function (which t
 
 
 ```ts
-function filterWithKey<T extends Record<string, any>>(dict: T, predicateFn: (value: T[keyof T], key: keyof T) => boolean): Partial<T>
-function filterWithKey<T extends Record<string, any>>(predicateFn: (value: T[keyof T], key: keyof T) => boolean): (dict: T) => Partial<T>
+function filterWithKey<T extends Record<string, any>>(dict: T, predicateFn: (key: keyof T, value: T[keyof T]) => boolean): Partial<T>
+function filterWithKey<T extends Record<string, any>>(predicateFn: (key: keyof T, value: T[keyof T]) => boolean): (dict: T) => Partial<T>
 ```
 
 ```ts
 D.filterWithKey(
   { name: 'Joe', age: 20 },
-  (value, key) => value === 30 && key === 'age',
+  (key, value) => value === 30 && key === 'age',
 ) // → {}
 
 pipe(
@@ -40,7 +40,7 @@ pipe(
     name: 'Joe',
     age: 20,
   },
-  D.filterWithKey((_value, key) => key === 'name'),
+  D.filterWithKey((key, _) => key === 'name'),
 ) // → { name: 'Joe' }
 ```
 
@@ -50,7 +50,7 @@ Creates a new object from an array of tuples (`[key, value]`).
 
 
 ```ts
-function fromPairs<T, K>(xs: ReadonlyArray<readonly [string, T]>): Record<string, T>
+function fromPairs<T, K extends keyof any>(xs: ReadonlyArray<readonly [K, T]>): Record<K, T>
 ```
 
 ```ts
@@ -132,8 +132,8 @@ Transforms each value in the object to a new value using the provided function (
 
 
 ```ts
-function mapWithKey<T extends Record<string, any>, R>(dict: T, mapFn: (value: T[keyof T], key: keyof T) => R): Record<keyof T, R>
-function mapWithKey<T extends Record<string, any>, R>(mapFn: (value: T[keyof T], key: keyof T) => R): (dict: T) => Record<keyof T, R>
+function mapWithKey<T extends Record<string, any>, R>(dict: T, mapFn: (key: keyof T, value: T[keyof T]) => R): Record<keyof T, R>
+function mapWithKey<T extends Record<string, any>, R>(mapFn: (key: keyof T, value: T[keyof T]) => R): (dict: T) => Record<keyof T, R>
 ```
 
 ```ts
@@ -142,7 +142,7 @@ D.mapWithKey(
     name: 'Joe',
     location: 'Warsaw',
   },
-  (value, key) => `${key}-${value.toLowerCase()}`,
+  (key, value) => `${key}-${value.toLowerCase()}`,
 ) // → { name: 'name-joe', location: 'location-warsaw' }
 
 pipe(
@@ -150,7 +150,7 @@ pipe(
     name: 'Joe',
     location: 'Warsaw',
   },
-  D.mapWithKey((value, key) => `${key}-${value.toLowerCase()}`),
+  D.mapWithKey((key, value) => `${key}-${value.toLowerCase()}`),
 ) // → { name: 'name-joe', location: 'location-warsaw' }
 ```
 
@@ -211,14 +211,14 @@ Removes each property that satisfies the given predicate function (which takes t
 
 
 ```ts
-function rejectWithKey<T extends Record<string, any>>(dict: T, predicateFn: (value: T[keyof T], key: keyof T) => boolean): Partial<T>
-function rejectWithKey<T extends Record<string, any>>(predicateFn: (value: T[keyof T], key: keyof T) => boolean): (dict: T) => Partial<T>
+function rejectWithKey<T extends Record<string, any>>(dict: T, predicateFn: (key: keyof T, value: T[keyof T]) => boolean): Partial<T>
+function rejectWithKey<T extends Record<string, any>>(predicateFn: (key: keyof T, value: T[keyof T]) => boolean): (dict: T) => Partial<T>
 ```
 
 ```ts
 D.rejectWithKey(
   { name: 'Joe', age: 20 },
-  (value, key) => value === 20 && key === 'age',
+  (key, value) => value === 20 && key === 'age',
 ) // → { name: 'Joe' }
 
 pipe(
@@ -226,7 +226,7 @@ pipe(
     name: 'Joe',
     age: 20,
   },
-  D.rejectWithKey((_value, key) => key === 'name'),
+  D.rejectWithKey((key, _) => key === 'name'),
 ) // → { age: 20 }
 ```
 
@@ -236,7 +236,7 @@ Converts an object into an array of `[key, value]` tuples.
 
 
 ```ts
-function toPairs<T>(dict: Record<string, T>): ReadonlyArray<readonly [string, T]>
+function toPairs<T, K extends keyof any>(dict: Record<K, T>): ReadonlyArray<readonly [K, T]>
 ```
 
 ```ts

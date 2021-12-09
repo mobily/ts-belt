@@ -14,9 +14,9 @@ const user: T = {
 
 describe('filterWithKey', () => {
   it('provides correct types', () => {
-    expectType<Partial<T>>(D.filterWithKey(user, value => value === 20))
+    expectType<Partial<T>>(D.filterWithKey(user, (_key, value) => value === 20))
 
-    D.filterWithKey(user, (value, key) => {
+    D.filterWithKey(user, (key, value) => {
       expectType<string | number>(value)
       expectType<'name' | 'age'>(key)
 
@@ -25,11 +25,11 @@ describe('filterWithKey', () => {
   })
 
   it('removes each property that doesn not satisfy the given predicate function', () => {
-    expect(D.filterWithKey(user, (_value, key) => key === 'age')).toEqual({
+    expect(D.filterWithKey(user, (key, _value) => key === 'age')).toEqual({
       age: 20,
     })
     expect(
-      D.filterWithKey(user, (value, key) => value === 30 && key === 'age'),
+      D.filterWithKey(user, (key, value) => value === 30 && key === 'age'),
     ).toEqual({})
   })
 
@@ -37,7 +37,7 @@ describe('filterWithKey', () => {
     expect(
       D.filterWithKey(
         { name: 'Joe', age: 20 },
-        (value, key) => value === 30 && key === 'age',
+        (key, value) => value === 30 && key === 'age',
       ),
     ).toEqual({})
   })
@@ -48,13 +48,13 @@ describe('filterWithKey (pipe)', () => {
     expectType<Partial<T>>(
       pipe(
         user,
-        D.filterWithKey(value => value === 20),
+        D.filterWithKey((_key, value) => value === 20),
       ),
     )
 
     pipe(
       user,
-      D.filterWithKey((value, key) => {
+      D.filterWithKey((key, value) => {
         expectType<string | number>(value)
         expectType<'name' | 'age'>(key)
         return value === 20
@@ -66,14 +66,14 @@ describe('filterWithKey (pipe)', () => {
     expect(
       pipe(
         user,
-        D.filterWithKey((_value, key) => key === 'age'),
+        D.filterWithKey((key, _value) => key === 'age'),
       ),
     ).toEqual({ age: 20 })
 
     expect(
       pipe(
         user,
-        D.filterWithKey((value, key) => value === 30 && key === 'age'),
+        D.filterWithKey((key, value) => value === 30 && key === 'age'),
       ),
     ).toEqual({})
   })
@@ -85,7 +85,7 @@ describe('filterWithKey (pipe)', () => {
           name: 'Joe',
           age: 20,
         },
-        D.filterWithKey((_value, key) => key === 'name'),
+        D.filterWithKey((key, _) => key === 'name'),
       ),
     ).toEqual({ name: 'Joe' })
   })

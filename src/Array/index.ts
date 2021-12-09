@@ -254,11 +254,11 @@ export declare function map<A, B>(
 
 export declare function mapWithIndex<A, B>(
   xs: ReadonlyArray<A>,
-  mapFn: (_1: A, _2: number) => B,
+  mapFn: (_1: number, _2: A) => B,
 ): ReadonlyArray<B>
 
 export declare function mapWithIndex<A, B>(
-  mapFn: (_1: A, _2: number) => B,
+  mapFn: (_1: number, _2: A) => B,
 ): (xs: ReadonlyArray<A>) => ReadonlyArray<B>
 
 /** Returns a new array that keep all elements satisfy the given predicate. */
@@ -276,11 +276,11 @@ export declare function filter<A>(
 
 export declare function filterWithIndex<A>(
   xs: ReadonlyArray<A>,
-  predicateFn: (_1: A, _2: number) => boolean,
+  predicateFn: (_1: number, _2: A) => boolean,
 ): ReadonlyArray<A>
 
 export declare function filterWithIndex<A>(
-  predicateFn: (_1: A, _2: number) => boolean,
+  predicateFn: (_1: number, _2: A) => boolean,
 ): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
 
 /** Returns a new array of elements from the provided array which do not satisfy the given predicate. */
@@ -298,11 +298,11 @@ export declare function reject<A>(
 
 export declare function rejectWithIndex<A>(
   xs: ReadonlyArray<A>,
-  predicateFn: (_1: A, _2: number) => boolean,
+  predicateFn: (_1: number, _2: A) => boolean,
 ): ReadonlyArray<A>
 
 export declare function rejectWithIndex<A>(
-  predicateFn: (_1: A, _2: number) => boolean,
+  predicateFn: (_1: number, _2: A) => boolean,
 ): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
 
 /** Applies `reduceFn` (which has two parameters: an `accumulator` which starts with a value of `initialValue` and the next value from the array) to each element of the provided array, and eventually it returns the final value of the accumulator. */

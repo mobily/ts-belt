@@ -145,8 +145,8 @@ Returns a new array that keep all elements satisfy the given predicate (which ta
 
 
 ```ts
-function filterWithIndex<A>(xs: ReadonlyArray<A>, predicateFn: (_1: A, _2: number) => boolean): ReadonlyArray<A>
-function filterWithIndex<A>(predicateFn: (_1: A, _2: number) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function filterWithIndex<A>(xs: ReadonlyArray<A>, predicateFn: (_1: number, _2: A) => boolean): ReadonlyArray<A>
+function filterWithIndex<A>(predicateFn: (_1: number, _2: A) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
 ```
 
 ### find
@@ -427,8 +427,8 @@ Returns a new array by calling `mapFn` (which takes two arguments: the element f
 
 
 ```ts
-function mapWithIndex<A, B>(xs: ReadonlyArray<A>, mapFn: (_1: A, _2: number) => B): ReadonlyArray<B>
-function mapWithIndex<A, B>(mapFn: (_1: A, _2: number) => B): (xs: ReadonlyArray<A>) => ReadonlyArray<B>
+function mapWithIndex<A, B>(xs: ReadonlyArray<A>, mapFn: (_1: number, _2: A) => B): ReadonlyArray<B>
+function mapWithIndex<A, B>(mapFn: (_1: number, _2: A) => B): (xs: ReadonlyArray<A>) => ReadonlyArray<B>
 ```
 
 ### partition
@@ -521,8 +521,8 @@ Returns a new array of elements from the provided array which do not satisfy the
 
 
 ```ts
-function rejectWithIndex<A>(xs: ReadonlyArray<A>, predicateFn: (_1: A, _2: number) => boolean): ReadonlyArray<A>
-function rejectWithIndex<A>(predicateFn: (_1: A, _2: number) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function rejectWithIndex<A>(xs: ReadonlyArray<A>, predicateFn: (_1: number, _2: A) => boolean): ReadonlyArray<A>
+function rejectWithIndex<A>(predicateFn: (_1: number, _2: A) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
 ```
 
 ### removeAt

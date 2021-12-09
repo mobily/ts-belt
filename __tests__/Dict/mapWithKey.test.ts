@@ -15,10 +15,10 @@ const user: T = {
 describe('mapWithKey', () => {
   it('provides correct types', () => {
     expectType<Record<keyof T, number>>(
-      D.mapWithKey(user, value => value.length),
+      D.mapWithKey(user, (_key, value) => value.length),
     )
 
-    D.mapWithKey(user, value => {
+    D.mapWithKey(user, (_key, value) => {
       expectType<string>(value)
       return value.length
     })
@@ -26,7 +26,7 @@ describe('mapWithKey', () => {
 
   it('transforms each value in the object to a new value using the provided function', () => {
     expect(
-      D.mapWithKey(user, (value, key) => value.length + key.length),
+      D.mapWithKey(user, (key, value) => value.length + key.length),
     ).toEqual({ name: 7, location: 14 })
   })
 
@@ -37,7 +37,7 @@ describe('mapWithKey', () => {
           name: 'Joe',
           location: 'Warsaw',
         },
-        (value, key) => `${key}-${value.toLowerCase()}`,
+        (key, value) => `${key}-${value.toLowerCase()}`,
       ),
     ).toEqual({ name: 'name-joe', location: 'location-warsaw' })
   })
@@ -65,7 +65,7 @@ describe('mapWithKey (pipe)', () => {
     expect(
       pipe(
         user,
-        D.mapWithKey((value, key) => value.length + key.length),
+        D.mapWithKey((key, value) => value.length + key.length),
       ),
     ).toEqual({ name: 7, location: 14 })
   })
@@ -77,7 +77,7 @@ describe('mapWithKey (pipe)', () => {
           name: 'Joe',
           location: 'Warsaw',
         },
-        D.mapWithKey((value, key) => `${key}-${value.toLowerCase()}`),
+        D.mapWithKey((key, value) => `${key}-${value.toLowerCase()}`),
       ),
     ).toEqual({ name: 'name-joe', location: 'location-warsaw' })
   })

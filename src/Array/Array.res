@@ -192,7 +192,7 @@ export map = (xs, mapFn) => Belt.Array.mapU(xs, (. el) => mapFn(el))
 %comment(
   "Returns a new array by calling `mapFn` (which takes two arguments: the element from array and its index) for each element of the provided array."
 )
-export mapWithIndex = (xs, mapFn) => Belt.Array.mapWithIndexU(xs, (. i, el) => mapFn(el, i))
+export mapWithIndex = (xs, mapFn) => Belt.Array.mapWithIndexU(xs, mapFn)
 
 %comment("Returns a new array that keep all elements satisfy the given predicate.")
 export filter = (xs, predicateFn) => {
@@ -219,7 +219,7 @@ export filterWithIndex = (xs, predicateFn) => {
 
   while index.contents < length(xs) {
     let value = Belt.Array.getUnsafe(xs, index.contents)
-    if predicateFn(value, index.contents) {
+    if predicateFn(index.contents, value) {
       Js.Array2.push(arr, value)->ignore
     }
     index := succ(index.contents)
@@ -237,7 +237,7 @@ export reject = (xs, predicateFn) => filter(xs, el => !predicateFn(el))
   "Returns a new array of elements from the provided array which do not satisfy the given predicate (which take two arguments: the element for the array and its index)."
 )
 export rejectWithIndex = (xs, predicateFn) =>
-  filterWithIndex(xs, (el, index) => !predicateFn(el, index))
+  filterWithIndex(xs, (index, el) => !predicateFn(index, el))
 
 %comment(
   "Applies `reduceFn` (which has two parameters: an `accumulator` which starts with a value of `initialValue` and the next value from the array) to each element of the provided array, and eventually it returns the final value of the accumulator."
@@ -341,7 +341,7 @@ export unzip = xs => Belt.Array.unzip(xs)
   "Creates a new array by replacing the value at the given index with the given value (no replacement is made if the index is out of range)."
 )
 export replaceAt = (xs, targetIndex, element) =>
-  mapWithIndex(xs, (current, currentIndex) => currentIndex == targetIndex ? element : current)
+  mapWithIndex(xs, (. currentIndex, current) => currentIndex == targetIndex ? element : current)
 
 %comment(
   "Creates a new array that inserts the given value at the given index (no insertion is made if the index is out of range)."
@@ -356,21 +356,22 @@ export insertAt = (xs, targetIndex, element) =>
   "Creates a new array that replaces the value at the given index with the value returned by the provided function (the original array if the index is out of range)."
 )
 export updateAt = (xs, targetIndex, fn) =>
-  mapWithIndex(xs, (x, index) => index == targetIndex ? fn(x) : x)
+  mapWithIndex(xs, (. index, el) => index == targetIndex ? fn(el) : el)
 
 %comment(
   "Creates a new array with the elements at the two given indexes swapped (the original array if the index is out of range)."
 )
 export swapAt = (xs, targetIndex, swapIndex) =>
   switch (get(xs, targetIndex), get(xs, swapIndex)) {
-  | (Some(a), Some(b)) => mapWithIndex(xs, (x, k) => targetIndex == k ? b : swapIndex == k ? a : x)
+  | (Some(a), Some(b)) =>
+    mapWithIndex(xs, (. k, x) => targetIndex == k ? b : swapIndex == k ? a : x)
   | _ => xs
   }
 
 %comment(
   "Creates a new array without the element at the given index (the original array if the index is out of range)."
 )
-export removeAt = (xs, targetIndex) => filterWithIndex(xs, (_, i) => i != targetIndex)
+export removeAt = (xs, targetIndex) => filterWithIndex(xs, (index, _) => index != targetIndex)
 
 %comment(
   "Returns a new array containing only one copy of each element in the provided array, based upon the value returned by applying the function to each element."
