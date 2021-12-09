@@ -60,4 +60,7 @@ jobs:
 workflows:
   build-workflow:
     jobs:
-      - build
+      - build:
+          branches:
+            ignore:
+              - gh-pages
