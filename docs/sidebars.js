@@ -18,5 +18,11 @@ module.exports = {
       type: 'doc',
       id: 'changelog',
     },
+    {
+      type: 'link',
+      label: 'Go to API',
+      href: '/api/array',
+      className: 'sidebar-api-button',
+    },
   ],
 }
