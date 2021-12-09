@@ -3,6 +3,10 @@ id: changelog
 title: Changelog
 ---
 
+### `v3.1.1`
+
+- 🐛 fixed arguments order of `A.*WithIndex` → `(index, value)` and `D.*WithKey` → `(key, value)`  functions
+
 ### `v3.1.0`
 
 - 🐛 fixed `S.head` return type
