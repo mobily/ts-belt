@@ -57,10 +57,12 @@ jobs:
       - run:
           name: Update tests coverage
           command: cat coverage/lcov.info | node_modules/.bin/coveralls || echo "Coveralls upload failed"
+
 workflows:
   build-workflow:
     jobs:
       - build:
-          branches:
-            ignore:
-              - gh-pages
+          filters:
+            branches:
+              ignore:
+                - branch-to-ignore
