@@ -243,6 +243,9 @@ const transformer = (file: FileInfo, api: API) => {
         typeAnnotation: returnType,
       } = typeAnnotation
       const comments = findComments(identifier.name)
+      const hasSameParamsType = {
+        current: false,
+      }
 
       const original = j.exportNamedDeclaration(
         makeDeclareFunction(
@@ -253,62 +256,49 @@ const transformer = (file: FileInfo, api: API) => {
         ),
       )
 
-      if (comments) {
-        original.comments = comments
-      }
-
       signatures.push(original)
 
       if (parameters.length > 1) {
-        const dataLastAnnotation = {
-          current: undefined,
-        }
+        const firstParam = parameters.slice(0, 1)
+        const otherParams = parameters.slice(1)
+        const returnFunction = j.tsFunctionType(firstParam)
 
-        tsRoot.current
-          ?.find(j.VariableDeclarator, {
-            id: {
-              name: `${identifier.name}_data_last`,
-            },
-          })
-          .forEach(p => {
-            dataLastAnnotation.current =
-              // @ts-expect-error
-              p.value.id.typeAnnotation?.typeAnnotation
-          })
+        returnFunction.typeAnnotation = returnType
 
-        if (dataLastAnnotation.current) {
-          const {
-            typeParameters,
-            parameters = [],
-            typeAnnotation: returnType,
-          } = dataLastAnnotation.current
-
-          signatures.push(
-            j.exportNamedDeclaration(
-              makeDeclareFunction(
-                identifier.name,
-                parameters,
-                typeParameters,
-                returnType.typeAnnotation,
-              ),
-            ),
-          )
-        } else {
-          const firstParam = parameters.slice(0, 1)
-          const otherParams = parameters.slice(1)
-          const returnFunction = j.tsFunctionType(firstParam)
-
-          returnFunction.typeAnnotation = returnType
-
-          const dataLast = makeDeclareFunction(
+        const dataLastAnnotation = j.exportNamedDeclaration(
+          makeDeclareFunction(
             identifier.name,
             otherParams,
             typeParameters,
             returnFunction,
-          )
+          ),
+        )
 
-          signatures.push(j.exportNamedDeclaration(dataLast))
-        }
+        hasSameParamsType.current = parameters.every(param => {
+          const fst = parameters[0]?.typeAnnotation?.typeAnnotation
+          const annotation = param?.typeAnnotation?.typeAnnotation
+
+          if (
+            fst?.type === 'TSTypeReference' &&
+            annotation?.type === 'TSTypeReference'
+          ) {
+            return fst.typeName.name === annotation.typeName.name
+          }
+
+          return fst?.type === annotation?.type
+        })
+
+        signatures.push(dataLastAnnotation)
+      }
+
+      if (hasSameParamsType.current) {
+        const [fst, snd] = signatures
+        signatures.length = 0
+        signatures.push(snd, fst)
+      }
+
+      if (comments) {
+        signatures[0].comments = comments
       }
 
       return signatures
