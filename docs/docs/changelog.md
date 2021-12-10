@@ -3,6 +3,20 @@ id: changelog
 title: Changelog
 ---
 
+### `v3.2.0`
+
+This version provides much better support for the point-free style. For instance, the following should not throw an error in TypeScript:
+
+```typescript
+A.reduce([1, 2, 3], 0, N.add)
+A.reduce(['hello', 'world'], '', S.concat)
+A.filter(['hello', 'world'], S.startsWith('h'))
+```
+
+- ✨ added `O.tap`
+- ✨ added `R.tap`
+- ✨ added `A.tap`
+
 ### `v3.1.1`
 
 - 🐛 fixed arguments order of `A.*WithIndex` → `(index, value)` and `D.*WithKey` → `(key, value)`  functions
