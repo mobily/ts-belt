@@ -678,7 +678,7 @@ export declare function toTuple<T extends ReadonlyArray<any>>(
   xs: [...T],
 ): [...T]
 
-/** Applies a side-effect on each element of the provided array. */
+/** Applies a side-effect function on each element of the provided array. */
 
 export declare function tap<A>(
   xs: ReadonlyArray<A>,

@@ -484,7 +484,7 @@ export deepFlat = xs => flatten(xs, [])
 %comment("Converts the given array to the TypeScript's tuple.")
 export toTuple = xs => xs
 
-%comment("Applies a side-effect on each element of the provided array.")
+%comment("Applies a side-effect function on each element of the provided array.")
 export tap = (xs, fn) => {
   Belt.Array.forEachU(xs, fn)
   xs
