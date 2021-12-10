@@ -68,6 +68,9 @@ Full documentation can be found [here](https://mobily.github.io/ts-belt/).
     <td align="center"><a href="https://github.com/Eghizio"><img src="https://avatars.githubusercontent.com/u/32049761?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jakub Wąsik</b></sub></a><br /><a href="https://github.com/mobily/ts-belt/commits?author=Eghizio" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/Dilven"><img src="https://avatars.githubusercontent.com/u/26671751?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Krystian Mateusiak</b></sub></a><br /><a href="https://github.com/mobily/ts-belt/commits?author=Dilven" title="Code">💻</a> <a href="https://github.com/mobily/ts-belt/commits?author=Dilven" title="Documentation">📖</a> <a href="https://github.com/mobily/ts-belt/commits?author=Dilven" title="Tests">⚠️</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://typeofweb.com/"><img src="https://avatars.githubusercontent.com/u/1338731?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Michał Miszczyszyn</b></sub></a><br /><a href="#ideas-mmiszy" title="Ideas, Planning, & Feedback">🤔</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-restore -->

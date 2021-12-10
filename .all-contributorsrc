@@ -76,6 +76,15 @@
         "doc",
         "test"
       ]
+    },
+    {
+      "login": "mmiszy",
+      "name": "Michał Miszczyszyn",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1338731?v=4",
+      "profile": "https://typeofweb.com/",
+      "contributions": [
+        "ideas"
+      ]
     }
   ],
   "commitConvention": "none"
