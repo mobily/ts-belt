@@ -53,3 +53,7 @@ export declare const getWithDefault: <T>(
 ) => T
 export declare const isNone: <T>(option: Option<T>) => option is Option<never>
 export declare const isSome: <T>(option: Option<T>) => option is Option<T>
+export declare const tap: <T>(
+  option: Option<T>,
+  someFn: (value: T) => void,
+) => Option<T>

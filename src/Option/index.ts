@@ -138,3 +138,14 @@ export declare function isNone<T>(option: Option<T>): option is Option<never>
 /** Returns `true` if the provided `option` is `Some(value)`, otherwise, returns `false`. */
 
 export declare function isSome<T>(option: Option<T>): option is Option<T>
+
+/** Applies a side-effect function to the value in `Some`, and returns the original `option`. */
+
+export declare function tap<T>(
+  option: Option<T>,
+  someFn: (value: T) => void,
+): Option<T>
+
+export declare function tap<T>(
+  someFn: (value: T) => void,
+): (option: Option<T>) => Option<T>

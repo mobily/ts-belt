@@ -713,6 +713,16 @@ function takeWhile<A>(xs: ReadonlyArray<A>, predicateFn: (_1: A) => boolean): Re
 function takeWhile<A>(predicateFn: (_1: A) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
 ```
 
+### tap
+
+Applies a side-effect on each element of the provided array.
+
+
+```ts
+function tap<A>(xs: ReadonlyArray<A>, fn: (_1: A) => void): ReadonlyArray<A>
+function tap<A>(fn: (_1: A) => void): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+```
+
 ### toTuple
 
 Converts the given array to the TypeScript's tuple.

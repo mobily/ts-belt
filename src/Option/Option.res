@@ -79,3 +79,14 @@ export isNone = option => Belt.Option.isNone(option)
 
 %comment("Returns `true` if the provided `option` is `Some(value)`, otherwise, returns `false`.")
 export isSome = option => Belt.Option.isSome(option)
+
+%comment(
+  "Applies a side-effect function to the value in `Some`, and returns the original `option`."
+)
+export tap = (option, someFn) =>
+  switch option {
+  | Some(value) =>
+    someFn(value)
+    option
+  | None => option
+  }

@@ -68,3 +68,12 @@ export isError = result => Belt.Result.isError(result)
 
 %comment("Returns `true` if the provided `result` is `Ok(value)`, otherwise, returns `false`.")
 export isOk = result => Belt.Result.isOk(result)
+
+%comment("Applies a side-effect function to the value in `Ok`, and returns the original `result`.")
+export tap = (result, okFn) =>
+  switch result {
+  | Ok(value) =>
+    okFn(value)
+    result
+  | Error(_) => result
+  }

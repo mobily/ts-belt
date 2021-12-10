@@ -273,6 +273,27 @@ pipe(
 ) // → 'cannot be nullable!'
 ```
 
+### tap
+
+Applies a side-effect function to the value in `Ok`, and returns the original `result`.
+
+
+```ts
+function tap<A, B>(result: Result<A, B>, okFn: (value: A) => void): Result<A, B>
+function tap<A, B>(okFn: (value: A) => void): (result: Result<A, B>) => Result<A, B>
+```
+
+```ts
+pipe(
+  R.fromNullable('hello', 'value cannot be nullable'),
+  R.map(S.isEmpty),
+  R.tap(isEmpty => {
+    console.log(isEmpty) // ⬅️ false
+  }),
+  R.getWithDefault(false),
+) // → false
+```
+
 ### toNullable
 
 Returns `value` if `result` is `Ok(value)`, otherwise, returns `null`.

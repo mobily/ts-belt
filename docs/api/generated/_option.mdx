@@ -273,6 +273,27 @@ pipe(
 ) // → 'oops!'
 ```
 
+### tap
+
+Applies a side-effect function to the value in `Some`, and returns the original `option`.
+
+
+```ts
+function tap<T>(option: Option<T>, someFn: (value: T) => void): Option<T>
+function tap<T>(someFn: (value: T) => void): (option: Option<T>) => Option<T>
+```
+
+```ts
+pipe(
+  O.fromNullable(['hello', 'world']),
+  O.flatMap(A.get(1)),
+  O.tap(str => {
+    console.log(str) // ⬅️ 'world'
+  }),
+  O.getWithDefault(''),
+) // → 'world'
+```
+
 ### toNullable
 
 Returns `value` if `option` is `Some(value)`, otherwise, returns `null`.

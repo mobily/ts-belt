@@ -677,3 +677,14 @@ export declare function deepFlat<A>(
 export declare function toTuple<T extends ReadonlyArray<any>>(
   xs: [...T],
 ): [...T]
+
+/** Applies a side-effect on each element of the provided array. */
+
+export declare function tap<A>(
+  xs: ReadonlyArray<A>,
+  fn: (_1: A) => void,
+): ReadonlyArray<A>
+
+export declare function tap<A>(
+  fn: (_1: A) => void,
+): (xs: ReadonlyArray<A>) => ReadonlyArray<A>

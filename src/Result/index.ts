@@ -131,3 +131,14 @@ export declare function isError<A, B>(result: Result<A, B>): result is Error<B>
 /** Returns `true` if the provided `result` is `Ok(value)`, otherwise, returns `false`. */
 
 export declare function isOk<A, B>(result: Result<A, B>): result is Ok<A>
+
+/** Applies a side-effect function to the value in `Ok`, and returns the original `result`. */
+
+export declare function tap<A, B>(
+  result: Result<A, B>,
+  okFn: (value: A) => void,
+): Result<A, B>
+
+export declare function tap<A, B>(
+  okFn: (value: A) => void,
+): (result: Result<A, B>) => Result<A, B>

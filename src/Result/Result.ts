@@ -56,3 +56,7 @@ export declare const toOption: <A, B>(result: Result<A, B>) => Option<A>
 export declare const toUndefined: <A, B>(result: Result<A, B>) => A | undefined
 export declare const isOk: <A, B>(result: Result<A, B>) => result is Ok<A>
 export declare const isError: <A, B>(result: Result<A, B>) => result is Error<B>
+export declare const tap: <A, B>(
+  result: Result<A, B>,
+  okFn: (value: A) => void,
+) => Result<A, B>
