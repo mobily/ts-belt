@@ -24,8 +24,8 @@ Returns a new array containing the concatenation of two provided arrays.
 
 
 ```ts
-function concat<A>(xs0: ReadonlyArray<A>, xs1: ReadonlyArray<A>): ReadonlyArray<A>
 function concat<A>(xs1: ReadonlyArray<A>): (xs0: ReadonlyArray<A>) => ReadonlyArray<A>
+function concat<A>(xs0: ReadonlyArray<A>, xs1: ReadonlyArray<A>): ReadonlyArray<A>
 ```
 
 ### concatMany
@@ -467,8 +467,8 @@ Returns a new array of numbers from `start` (inclusive) to `finish` (exclusive).
 
 
 ```ts
-function range(start: number, finish: number): ReadonlyArray<number>
 function range(finish: number): (start: number) => ReadonlyArray<number>
+function range(start: number, finish: number): ReadonlyArray<number>
 ```
 
 ### rangeBy
@@ -477,8 +477,8 @@ Returns a new array of numbers from `start` (inclusive) to `finish` (exclusive).
 
 
 ```ts
-function rangeBy(start: number, finish: number, step: number): ReadonlyArray<number>
 function rangeBy(finish: number, step: number): (start: number) => ReadonlyArray<number>
+function rangeBy(start: number, finish: number, step: number): ReadonlyArray<number>
 ```
 
 ### reduce
@@ -788,8 +788,8 @@ Creates a new array of pairs from corresponding elements of two provided arrays.
 
 
 ```ts
-function zip<A, B>(xs0: ReadonlyArray<A>, xs1: ReadonlyArray<B>): ReadonlyArray<[A, B]>
 function zip<A, B>(xs1: ReadonlyArray<B>): (xs0: ReadonlyArray<A>) => ReadonlyArray<[A, B]>
+function zip<A, B>(xs0: ReadonlyArray<A>, xs1: ReadonlyArray<B>): ReadonlyArray<[A, B]>
 ```
 
 ### zipWith

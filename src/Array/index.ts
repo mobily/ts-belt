@@ -371,13 +371,13 @@ export declare function partition<A>(
 /** Returns a new array containing the concatenation of two provided arrays. */
 
 export declare function concat<A>(
+  xs1: ReadonlyArray<A>,
+): (xs0: ReadonlyArray<A>) => ReadonlyArray<A>
+
+export declare function concat<A>(
   xs0: ReadonlyArray<A>,
   xs1: ReadonlyArray<A>,
 ): ReadonlyArray<A>
-
-export declare function concat<A>(
-  xs1: ReadonlyArray<A>,
-): (xs0: ReadonlyArray<A>) => ReadonlyArray<A>
 
 /** Returns a new array as the concatenation of the provided array of arrays. */
 
@@ -447,26 +447,26 @@ export declare function eq<A>(
 /** Returns a new array of numbers from `start` (inclusive) to `finish` (exclusive). */
 
 export declare function range(
+  finish: number,
+): (start: number) => ReadonlyArray<number>
+
+export declare function range(
   start: number,
   finish: number,
 ): ReadonlyArray<number>
-
-export declare function range(
-  finish: number,
-): (start: number) => ReadonlyArray<number>
 
 /** Returns a new array of numbers from `start` (inclusive) to `finish` (exclusive). */
 
 export declare function rangeBy(
+  finish: number,
+  step: number,
+): (start: number) => ReadonlyArray<number>
+
+export declare function rangeBy(
   start: number,
   finish: number,
   step: number,
 ): ReadonlyArray<number>
-
-export declare function rangeBy(
-  finish: number,
-  step: number,
-): (start: number) => ReadonlyArray<number>
 
 /** Returns a copy of the provided array. */
 
@@ -475,13 +475,13 @@ export declare function copy<A>(xs: ReadonlyArray<A>): ReadonlyArray<A>
 /** Creates a new array of pairs from corresponding elements of two provided arrays. */
 
 export declare function zip<A, B>(
+  xs1: ReadonlyArray<B>,
+): (xs0: ReadonlyArray<A>) => ReadonlyArray<[A, B]>
+
+export declare function zip<A, B>(
   xs0: ReadonlyArray<A>,
   xs1: ReadonlyArray<B>,
 ): ReadonlyArray<[A, B]>
-
-export declare function zip<A, B>(
-  xs1: ReadonlyArray<B>,
-): (xs0: ReadonlyArray<A>) => ReadonlyArray<[A, B]>
 
 /** Creates a new array by applying `zipFn` to corresponding elements of two provided arrays. */
 

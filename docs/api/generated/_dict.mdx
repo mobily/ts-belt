@@ -182,6 +182,7 @@ function prop<T, K extends keyof T>(key: K): (dict: T) => T[K]
 ```ts
 D.prop({ name: 'Joe', location: 'Warsaw' }, 'location') // → 'Warsaw'
 pipe({ name: 'Joe', location: 'Warsaw' }, D.prop('location')) // → 'Warsaw'
+pipe([{ name: 'Joe' }, { name: 'Lisa' }], A.map(D.prop('name'))) // → ['Joe', 'Lisa']
 ```
 
 ### reject

@@ -4,8 +4,8 @@ Returns a new string with `append` added after `str`.
 
 
 ```ts
-function concat(str: string, append: string): string
 function concat(append: string): (str: string) => string
+function concat(str: string, append: string): string
 ```
 
 ### endsWith
@@ -14,8 +14,8 @@ Returns `true` if the given string ends with `substr`.
 
 
 ```ts
-function endsWith(str: string, substr: string): boolean
 function endsWith(substr: string): (str: string) => boolean
+function endsWith(str: string, substr: string): boolean
 ```
 
 ### get
@@ -57,8 +57,8 @@ Returns `true` if `searchValue` appears anywhere in the given string.
 
 
 ```ts
-function includes(str: string, searchValue: string): boolean
 function includes(searchValue: string): (str: string) => boolean
+function includes(str: string, searchValue: string): boolean
 ```
 
 ### indexOf
@@ -67,8 +67,8 @@ Returns `Some(index)`, where `index` is the starting position of the first occur
 
 
 ```ts
-function indexOf(str: string, searchValue: string): Option<number>
 function indexOf(searchValue: string): (str: string) => Option<number>
+function indexOf(str: string, searchValue: string): Option<number>
 ```
 
 ### isEmpty
@@ -108,8 +108,8 @@ Returns `Some(index)`, where `index` is the starting position of the last occurr
 
 
 ```ts
-function lastIndexOf(str: string, searchValue: string): Option<number>
 function lastIndexOf(searchValue: string): (str: string) => Option<number>
+function lastIndexOf(str: string, searchValue: string): Option<number>
 ```
 
 ### length
@@ -146,8 +146,8 @@ Returns a new string with the first occurrence of `value` removed from `str`.
 
 
 ```ts
-function remove(str: string, value: string): string
 function remove(value: string): (str: string) => string
+function remove(str: string, value: string): string
 ```
 
 ### removeAll
@@ -156,8 +156,8 @@ Returns a new string with every occurrence of `value` removed from `str`.
 
 
 ```ts
-function removeAll(str: string, value: string): string
 function removeAll(value: string): (str: string) => string
+function removeAll(str: string, value: string): string
 ```
 
 ### repeat
@@ -176,8 +176,8 @@ Replaces the first occurrence of `oldValue` with `newValue` in the given string 
 
 
 ```ts
-function replace(str: string, oldValue: string, newValue: string): string
 function replace(oldValue: string, newValue: string): (str: string) => string
+function replace(str: string, oldValue: string, newValue: string): string
 ```
 
 ### replaceAll
@@ -186,8 +186,8 @@ Replaces each occurrence of `oldValue` with `newValue` in the given string and r
 
 
 ```ts
-function replaceAll(str: string, oldValue: string, newValue: string): string
 function replaceAll(oldValue: string, newValue: string): (str: string) => string
+function replaceAll(str: string, oldValue: string, newValue: string): string
 ```
 
 ### replaceByRe
@@ -236,8 +236,8 @@ Splits the given string at every occurrence of `delimiter` and returns an array 
 
 
 ```ts
-function split(str: string, delimiter: string): ReadonlyArray<string>
 function split(delimiter: string): (str: string) => ReadonlyArray<string>
+function split(str: string, delimiter: string): ReadonlyArray<string>
 ```
 
 ### splitAt
@@ -266,8 +266,8 @@ Returns `true` if the given string starts with `substr`.
 
 
 ```ts
-function startsWith(str: string, substr: string): boolean
 function startsWith(substr: string): (str: string) => boolean
+function startsWith(str: string, substr: string): boolean
 ```
 
 ### toArray

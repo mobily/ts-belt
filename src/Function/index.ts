@@ -4,9 +4,9 @@ export declare function identity<A>(value: A): A
 
 /** Returns `true` if provided values are equal, otherwise, returns `false`. */
 
-export declare function equals(fst: any, snd: any): boolean
-
 export declare function equals(snd: any): (fst: any) => boolean
+
+export declare function equals(fst: any, snd: any): boolean
 
 /** Calls the two provided functions and returns `&&` of the results → `fn0(value) && fn1(value)`. */
 

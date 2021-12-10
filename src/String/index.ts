@@ -10,9 +10,9 @@ export declare function length(str: string): number
 
 /** Returns a new string with `append` added after `str`. */
 
-export declare function concat(str: string, append: string): string
-
 export declare function concat(append: string): (str: string) => string
+
+export declare function concat(str: string, append: string): string
 
 /** Returns the substring of `str` starting at character `start` up to but not including `end`. */
 
@@ -60,13 +60,13 @@ export declare function isNotEmpty(str: string): boolean
 /** Splits the given string at every occurrence of `delimiter` and returns an array of the resulting substrings. */
 
 export declare function split(
+  delimiter: string,
+): (str: string) => ReadonlyArray<string>
+
+export declare function split(
   str: string,
   delimiter: string,
 ): ReadonlyArray<string>
-
-export declare function split(
-  delimiter: string,
-): (str: string) => ReadonlyArray<string>
 
 /** Splits the given string at every occurrence of `regex` and returns an array of the resulting substrings. */
 
@@ -89,35 +89,35 @@ export declare function splitAt(
 
 /** Returns `true` if `searchValue` appears anywhere in the given string. */
 
-export declare function includes(str: string, searchValue: string): boolean
-
 export declare function includes(searchValue: string): (str: string) => boolean
+
+export declare function includes(str: string, searchValue: string): boolean
 
 /** Replaces the first occurrence of `oldValue` with `newValue` in the given string and returns a new string. */
 
 export declare function replace(
+  oldValue: string,
+  newValue: string,
+): (str: string) => string
+
+export declare function replace(
   str: string,
   oldValue: string,
   newValue: string,
 ): string
-
-export declare function replace(
-  oldValue: string,
-  newValue: string,
-): (str: string) => string
 
 /** Replaces each occurrence of `oldValue` with `newValue` in the given string and returns a new string. */
 
 export declare function replaceAll(
+  oldValue: string,
+  newValue: string,
+): (str: string) => string
+
+export declare function replaceAll(
   str: string,
   oldValue: string,
   newValue: string,
 ): string
-
-export declare function replaceAll(
-  oldValue: string,
-  newValue: string,
-): (str: string) => string
 
 /** Replaces the matched regular expression with `newValue` in the given string and returns a new string. */
 
@@ -134,15 +134,15 @@ export declare function replaceByRe(
 
 /** Returns a new string with the first occurrence of `value` removed from `str`. */
 
-export declare function remove(str: string, value: string): string
-
 export declare function remove(value: string): (str: string) => string
+
+export declare function remove(str: string, value: string): string
 
 /** Returns a new string with every occurrence of `value` removed from `str`. */
 
-export declare function removeAll(str: string, value: string): string
-
 export declare function removeAll(value: string): (str: string) => string
+
+export declare function removeAll(str: string, value: string): string
 
 /** Returns `Some(index)`, where `index` is the starting position of the first match of regular expression in the given string. */
 
@@ -170,36 +170,36 @@ export declare function repeat(n: number): (str: string) => string
 /** Returns `Some(index)`, where `index` is the starting position of the first occurrence of `searchValue` within `str`. */
 
 export declare function indexOf(
+  searchValue: string,
+): (str: string) => Option<number>
+
+export declare function indexOf(
   str: string,
   searchValue: string,
 ): Option<number>
-
-export declare function indexOf(
-  searchValue: string,
-): (str: string) => Option<number>
 
 /** Returns `Some(index)`, where `index` is the starting position of the last occurrence of `searchValue` within `str`. */
 
 export declare function lastIndexOf(
+  searchValue: string,
+): (str: string) => Option<number>
+
+export declare function lastIndexOf(
   str: string,
   searchValue: string,
 ): Option<number>
 
-export declare function lastIndexOf(
-  searchValue: string,
-): (str: string) => Option<number>
-
 /** Returns `true` if the given string ends with `substr`. */
-
-export declare function endsWith(str: string, substr: string): boolean
 
 export declare function endsWith(substr: string): (str: string) => boolean
 
+export declare function endsWith(str: string, substr: string): boolean
+
 /** Returns `true` if the given string starts with `substr`. */
 
-export declare function startsWith(str: string, substr: string): boolean
-
 export declare function startsWith(substr: string): (str: string) => boolean
+
+export declare function startsWith(str: string, substr: string): boolean
 
 /** Returns `value`, where `value` is a string consisting of the character at location `n` in the string, or `undefined` if the `n` is out of range. */
 
