@@ -7,7 +7,7 @@ describe('last', () => {
     expectType<O.Option<string>>(S.last('text'))
   })
 
-  it('returns None if the given string is empty.', () => {
+  it('returns None if the given string is empty', () => {
     expect(S.last('')).toEqual(O.None)
   })
 

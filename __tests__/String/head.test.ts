@@ -7,7 +7,7 @@ describe('head', () => {
     expectType<O.Option<string>>(S.head('text'))
   })
 
-  it('returns None if the given string is empty.', () => {
+  it('returns None if the given string is empty', () => {
     expect(S.head('')).toEqual(O.None)
   })
 

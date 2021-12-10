@@ -1,11 +1,17 @@
 import { expectType } from 'ts-expect'
 
-import { A, pipe } from '../..'
+import { A, S, pipe } from '../..'
 
 const xs = [1, 2, 3, 4, 5, 6, 7]
 
 // TODO: expectType
 describe('dropWhile', () => {
+  it('provides correct types', () => {
+    expectType<ReadonlyArray<string>>(
+      A.dropWhile(['hello', 'world'], S.endsWith('o')),
+    )
+  })
+
   it('drops elements from the beginning of the array until an element is reached which does not satisfy the given predicate', () => {
     const result = A.dropWhile(xs, x => x < 4)
     expect(result).toEqual([4, 5, 6, 7])

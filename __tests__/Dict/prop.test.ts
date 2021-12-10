@@ -1,6 +1,6 @@
 import { expectType } from 'ts-expect'
 
-import { D, pipe } from '../..'
+import { D, A, pipe } from '../..'
 
 const obj = {
   x: 1,
@@ -12,6 +12,7 @@ describe('prop', () => {
   it('provides correct types', () => {
     expectType<number>(D.prop(obj, 'x'))
     expectType<string>(D.prop(obj, 'z'))
+    expectType<ReadonlyArray<string>>(A.map([obj, obj], D.prop('z')))
   })
 
   it('returns the value of the given property', () => {
@@ -39,5 +40,8 @@ describe('prop (pipe)', () => {
     expect(
       pipe({ name: 'Joe', location: 'Warsaw' }, D.prop('location')),
     ).toEqual('Warsaw')
+    expect(
+      pipe([{ name: 'Joe' }, { name: 'Lisa' }], A.map(D.prop('name'))),
+    ).toEqual(['Joe', 'Lisa'])
   })
 })
