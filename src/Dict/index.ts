@@ -38,6 +38,19 @@ export declare function merge<A, B>(fst: A, snd: B): A & B
 
 export declare function merge<A, B>(snd: B): (fst: A) => A & B
 
+/** Adds a property. Equivalent to merging with `{key: value}` */
+
+export declare function assoc<T, K extends string, V>(
+  dict: T,
+  key: K,
+  value: V,
+): T & { [key in K]: V }
+
+export declare function assoc<T, K extends string, V>(
+  key: K,
+  value: V,
+): (dict: T) => T & { [key in K]: V }
+
 /** Transforms each value in the object to a new value using the provided function. */
 
 export declare function map<T extends Record<string, any>, R>(

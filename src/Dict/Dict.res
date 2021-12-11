@@ -23,6 +23,13 @@ export fromPairs = dict => Js.Dict.fromArray(dict)
 %comment("Merges two provided objects.")
 export merge = (fst, snd) => assign(makeEmpty(), fst, snd)
 
+%comment("Adds a property. Equivalent to merging with `{key: value}`")
+export assoc = (dict, key, value) => {
+  let pairs = toPairs(dict)
+  let appended = Array.append(pairs, (key, value))
+  fromPairs(appended)
+}
+
 %comment("Transforms each value in the object to a new value using the provided function.")
 export map = (dict, mapFn) => {
   dict

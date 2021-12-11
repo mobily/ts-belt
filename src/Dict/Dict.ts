@@ -7,6 +7,11 @@ export declare const keys: <T extends Record<string, unknown>>(
   dict: T,
 ) => ReadonlyArray<keyof T>
 export declare const merge: <A, B>(fst: A, snd: B) => A & B
+export declare const assoc: <T, K extends string, V>(
+  dict: T,
+  key: K,
+  value: V,
+) => T & { [key in K]: V }
 export declare const map: <T extends Record<string, any>, R>(
   dict: T,
   mapFn: (value: T[keyof T]) => R,
