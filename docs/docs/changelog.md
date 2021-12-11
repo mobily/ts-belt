@@ -3,6 +3,12 @@ id: changelog
 title: Changelog
 ---
 
+### `v3.3.0`
+
+- ♻️ all tuples are now `readonly`
+- 🗑 `D.prop` has been deprecated (please use either `D.get` or `D.getUnsafe`)
+- ✨ added `A.flip`
+
 ### `v3.2.0`
 
 This version provides much better support for the point-free style. For instance, the following should not throw an error in TypeScript:
