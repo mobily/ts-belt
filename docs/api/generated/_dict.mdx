@@ -8,6 +8,11 @@ function assoc<T, K extends string, V>(dict: T, key: K, value: V): T & { [key in
 function assoc<T, K extends string, V>(key: K, value: V): (dict: T) => T & { [key in K]: V }
 ```
 
+```ts
+D.assoc({ name: 'Joe', location: 'Warsaw' }, 'location', 'Gdańsk') // → { name: 'Joe', location: 'Gdańsk' }
+pipe({ name: 'Joe', location: 'Warsaw' }, D.assoc('location', 'Gdańsk')) // → { name: 'Joe', location: 'Gdańsk' }
+```
+
 ### filter
 
 Removes each property that doesn't satisfy the given predicate function.

@@ -1,6 +1,6 @@
 import { expectType } from 'ts-expect'
 
-import { D, A, pipe } from '../..'
+import { D, pipe } from '../..'
 
 const obj = {
   x: 1,
@@ -14,8 +14,9 @@ describe('assoc', () => {
     expectType<Omit<typeof obj, 'y'> & { y: number }>(D.assoc(obj, 'y', 123))
   })
 
-  it('returns the value of the given property', () => {
+  it('adds a new property or updates an existing one.', () => {
     expect(D.assoc(obj, 'z', true)).toEqual({ ...obj, z: true })
+    expect(D.assoc(obj, 'x', 2)).toEqual({ ...obj, x: 2 })
   })
 
   it('*', () => {
@@ -25,7 +26,7 @@ describe('assoc', () => {
   })
 })
 
-describe('prop (pipe)', () => {
+describe('assoc (pipe)', () => {
   it('provides correct types', () => {
     expectType<typeof obj & { z: boolean }>(pipe(obj, D.assoc('z', true)))
     expectType<typeof obj>(pipe(obj, D.assoc('y', 'def')))
@@ -34,8 +35,9 @@ describe('prop (pipe)', () => {
     )
   })
 
-  it('returns the value of the given property', () => {
+  it('adds a new property or updates an existing one.', () => {
     expect(pipe(obj, D.assoc('z', true))).toEqual({ ...obj, z: true })
+    expect(pipe(obj, D.assoc('x', 2))).toEqual({ ...obj, x: 2 })
   })
 
   it('*', () => {
