@@ -64,7 +64,8 @@ export throttle = (fn, delay) => {
     Belt.Option.mapWithDefaultU(timer.contents, (), (. timer) => Js.Global.clearTimeout(timer))
     timer := None
   }
-  let make = () =>
+
+  (. ()) =>
     if !isThrottled.contents {
       cancel()
       isThrottled := true
@@ -75,17 +76,16 @@ export throttle = (fn, delay) => {
       }, delay)
       timer := Some(timeout)
     }
-
-  make
 }
 
-let debounce = (fn, delay) => {
+export debounce = (fn, delay) => {
   let timer = ref(None)
   let cancel = () => {
     Belt.Option.mapWithDefaultU(timer.contents, (), (. timer) => Js.Global.clearTimeout(timer))
     timer := None
   }
-  let make = () => {
+
+  (. ()) => {
     cancel()
     let timeout = Js.Global.setTimeout(() => {
       fn()
@@ -93,6 +93,4 @@ let debounce = (fn, delay) => {
     }, delay)
     timer := Some(timeout)
   }
-
-  make
 }
