@@ -9,6 +9,7 @@ import {
   TSTypeReference,
   ASTPath,
   ExportNamedDeclaration,
+  TSTypeOperator,
 } from 'jscodeshift'
 
 import * as path from 'path'
@@ -118,6 +119,21 @@ const transformer = (file: FileInfo, api: API) => {
 
     return comments.current
   }
+
+  // update [A, B] to readonly [A, B]
+  root.find(j.TSTupleType).replaceWith(p => {
+    if (p.parent && p.parent.value.operator !== 'readonly') {
+      const operator = {
+        typeAnnotation: p.value,
+        type: 'TSTypeOperator',
+        operator: 'readonly',
+      }
+
+      return operator
+    }
+
+    return p.value
+  })
 
   // update T[] to ReadonlyArray<T>
   root.find(j.TSArrayType).replaceWith(p => {

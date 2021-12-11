@@ -237,7 +237,7 @@ export declare function dropWhile<A>(
 
 export declare function uncons<A>(
   xs: ReadonlyArray<A>,
-): Option<[A, ReadonlyArray<A>]>
+): Option<readonly [A, ReadonlyArray<A>]>
 
 /** Returns a new array by calling `mapFn` for each element of the provided array. */
 
@@ -336,11 +336,13 @@ export declare function reduceWithIndex<A, B>(
 export declare function splitAt<A>(
   xs: ReadonlyArray<A>,
   offset: number,
-): Option<[ReadonlyArray<A>, ReadonlyArray<A>]>
+): Option<readonly [ReadonlyArray<A>, ReadonlyArray<A>]>
 
 export declare function splitAt<A>(
   offset: number,
-): (xs: ReadonlyArray<A>) => Option<[ReadonlyArray<A>, ReadonlyArray<A>]>
+): (
+  xs: ReadonlyArray<A>,
+) => Option<readonly [ReadonlyArray<A>, ReadonlyArray<A>]>
 
 /** Returns an array of arrays, where each of the inner arrays has length equal to the provided `size` parameter. */
 
@@ -362,11 +364,11 @@ export declare function shuffle<A>(xs: ReadonlyArray<A>): ReadonlyArray<A>
 export declare function partition<A>(
   xs: ReadonlyArray<A>,
   fn: (_1: A) => boolean,
-): [ReadonlyArray<A>, ReadonlyArray<A>]
+): readonly [ReadonlyArray<A>, ReadonlyArray<A>]
 
 export declare function partition<A>(
   fn: (_1: A) => boolean,
-): (xs: ReadonlyArray<A>) => [ReadonlyArray<A>, ReadonlyArray<A>]
+): (xs: ReadonlyArray<A>) => readonly [ReadonlyArray<A>, ReadonlyArray<A>]
 
 /** Returns a new array containing the concatenation of two provided arrays. */
 
@@ -476,12 +478,12 @@ export declare function copy<A>(xs: ReadonlyArray<A>): ReadonlyArray<A>
 
 export declare function zip<A, B>(
   xs1: ReadonlyArray<B>,
-): (xs0: ReadonlyArray<A>) => ReadonlyArray<[A, B]>
+): (xs0: ReadonlyArray<A>) => ReadonlyArray<readonly [A, B]>
 
 export declare function zip<A, B>(
   xs0: ReadonlyArray<A>,
   xs1: ReadonlyArray<B>,
-): ReadonlyArray<[A, B]>
+): ReadonlyArray<readonly [A, B]>
 
 /** Creates a new array by applying `zipFn` to corresponding elements of two provided arrays. */
 
@@ -499,8 +501,8 @@ export declare function zipWith<A, B, C>(
 /** Takes an array of pairs and creates a pair of arrays. The first array contains all the first elements of the pairs and the other one contains all the second elements. */
 
 export declare function unzip<A, B>(
-  xs: ReadonlyArray<[A, B]>,
-): [ReadonlyArray<A>, ReadonlyArray<B>]
+  xs: ReadonlyArray<readonly [A, B]>,
+): readonly [ReadonlyArray<A>, ReadonlyArray<B>]
 
 /** Creates a new array by replacing the value at the given index with the given value (no replacement is made if the index is out of range). */
 
@@ -675,8 +677,8 @@ export declare function deepFlat<A>(
 /** Converts the given array to the TypeScript's tuple. */
 
 export declare function toTuple<T extends ReadonlyArray<any>>(
-  xs: [...T],
-): [...T]
+  xs: readonly [...T],
+): readonly [...T]
 
 /** Applies a side-effect function on each element of the provided array. */
 
@@ -688,3 +690,7 @@ export declare function tap<A>(
 export declare function tap<A>(
   fn: (_1: A) => void,
 ): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+
+/** Returns a new tuple with the reverse order of the elements. */
+
+export declare function flip<A, B>(xs: readonly [A, B]): readonly [B, A]

@@ -489,3 +489,9 @@ export tap = (xs, fn) => {
   Belt.Array.forEachU(xs, fn)
   xs
 }
+
+%comment("Returns a new tuple with the reverse order of the elements.")
+export flip = xs => {
+  let (fst, snd) = xs
+  (snd, fst)
+}

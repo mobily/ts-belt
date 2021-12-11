@@ -40,6 +40,9 @@ export declare function modulo(a: number, b: number): number
 
 export declare function divideWithModulo(
   b: number,
-): (a: number) => [number, number]
+): (a: number) => readonly [number, number]
 
-export declare function divideWithModulo(a: number, b: number): [number, number]
+export declare function divideWithModulo(
+  a: number,
+  b: number,
+): readonly [number, number]

@@ -4,7 +4,7 @@ import { N, pipe } from '../..'
 
 describe('divideWithModulo', () => {
   it('provides correct types', () => {
-    expectType<[number, number]>(N.divideWithModulo(4, 2))
+    expectType<readonly [number, number]>(N.divideWithModulo(4, 2))
   })
 
   it('returns the quotient and remainder of a number division', () => {
@@ -18,7 +18,7 @@ describe('divideWithModulo', () => {
 
 describe('divideWithModulo (pipe)', () => {
   it('provides correct types', () => {
-    expectType<[number, number]>(pipe(4, N.divideWithModulo(2)))
+    expectType<readonly [number, number]>(pipe(4, N.divideWithModulo(2)))
   })
 
   it('returns the quotient and remainder of a number division', () => {

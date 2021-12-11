@@ -9,8 +9,13 @@ const xs = [
   A.toTuple([7, 8]),
 ]
 
-// TODO: expectType
 describe('unzip', () => {
+  it('provides correct types', () => {
+    expectType<readonly [ReadonlyArray<number>, ReadonlyArray<number>]>(
+      A.unzip(xs),
+    )
+  })
+
   it('returns a pair of arrays', () => {
     const result = A.unzip(xs)
     expect(result).toEqual([
@@ -21,6 +26,12 @@ describe('unzip', () => {
 })
 
 describe('unzip (pipe)', () => {
+  it('provides correct types', () => {
+    expectType<readonly [ReadonlyArray<number>, ReadonlyArray<number>]>(
+      pipe(xs, A.unzip),
+    )
+  })
+
   it('returns a pair of arrays', () => {
     const result = pipe(xs, A.unzip)
     expect(result).toEqual([

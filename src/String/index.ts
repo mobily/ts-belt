@@ -81,11 +81,14 @@ export declare function splitByRe(
 
 /** Splits the string at the given index, returning a tuple of the parts. */
 
-export declare function splitAt(str: string, index: number): [string, string]
+export declare function splitAt(
+  str: string,
+  index: number,
+): readonly [string, string]
 
 export declare function splitAt(
   index: number,
-): (str: string) => [string, string]
+): (str: string) => readonly [string, string]
 
 /** Returns `true` if `searchValue` appears anywhere in the given string. */
 

@@ -261,8 +261,8 @@ Splits the string at the given index, returning a tuple of the parts.
 
 
 ```ts
-function splitAt(str: string, index: number): [string, string]
-function splitAt(index: number): (str: string) => [string, string]
+function splitAt(str: string, index: number): readonly [string, string]
+function splitAt(index: number): (str: string) => readonly [string, string]
 ```
 
 ### splitByRe

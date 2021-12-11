@@ -11,5 +11,5 @@ export declare const deepFlat: <A>(
   xs: ReadonlyArray<A>,
 ) => ReadonlyArray<ExtractNested<A>>
 export declare const toTuple: <T extends ReadonlyArray<any>>(
-  xs: [...T],
-) => [...T]
+  xs: readonly [...T],
+) => readonly [...T]
