@@ -1,8 +1,26 @@
+import { Option } from '../Option'
+
 /** Creates an empty object. Alternative for `const obj = {} as SomeObjectType`. */
 
 export declare function makeEmpty<T>(): T
 
-/** Returns the value of the given property. */
+/** Returns the value if the given key exists, otherwise returns `undefined`. */
+
+export declare function getUnsafe<T, K extends keyof T>(dict: T, key: K): T[K]
+
+export declare function getUnsafe<T, K extends keyof T>(
+  key: K,
+): (dict: T) => T[K]
+
+/** Returns `Some(value)` if the given key exists, otherwise returns `None`. */
+
+export declare function get<T, K extends keyof T>(dict: T, key: K): Option<T[K]>
+
+export declare function get<T, K extends keyof T>(
+  key: K,
+): (dict: T) => Option<T[K]>
+
+/** @deprecated Use either D.get or D.getUnsafe instead. */
 
 export declare function prop<T, K extends keyof T>(dict: T, key: K): T[K]
 

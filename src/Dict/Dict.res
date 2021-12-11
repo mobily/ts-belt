@@ -5,7 +5,13 @@ let placeholder = () => Js.Undefined.empty
 %comment("Creates an empty object. Alternative for `const obj = {} as SomeObjectType`.")
 export makeEmpty = Js.Dict.empty
 
-%comment("Returns the value of the given property.")
+%comment("Returns the value if the given key exists, otherwise returns `undefined`.")
+export getUnsafe = (dict, key) => Js.Dict.unsafeGet(dict, key)
+
+%comment("Returns `Some(value)` if the given key exists, otherwise returns `None`.")
+export get = (dict, key) => Js.Dict.get(dict, key)
+
+%comment("@deprecated Use either D.get or D.getUnsafe instead.")
 export prop = (dict, key) => Js.Dict.unsafeGet(dict, key)
 
 %comment("Converts an object into an array of `[key, value]` tuples.")
@@ -21,7 +27,7 @@ export keys = dict => Js.Dict.keys(dict)
 export fromPairs = dict => Js.Dict.fromArray(dict)
 
 %comment("Merges two provided objects.")
-export merge = (fst, snd) => assign(makeEmpty(), fst, snd)
+export merge = (fst, snd) => assign2(makeEmpty(), fst, snd)
 
 %comment("Transforms each value in the object to a new value using the provided function.")
 export map = (dict, mapFn) => {

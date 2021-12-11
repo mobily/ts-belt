@@ -65,6 +65,41 @@ pipe(
 ) // → { name: 'Joe', location: 'Warsaw' }
 ```
 
+### get
+
+Returns `Some(value)` if the given key exists, otherwise returns `None`.
+
+
+```ts
+function get<T, K extends keyof T>(dict: T, key: K): Option<T[K]>
+function get<T, K extends keyof T>(key: K): (dict: T) => Option<T[K]>
+```
+
+```ts
+D.get({ name: 'Joe', location: 'Warsaw' }, 'location') // → Some('Warsaw')
+pipe({ name: 'Joe', location: 'Warsaw' }, D.get('location')) // → Some('Warsaw')
+pipe([{ name: 'Joe' }, { location: 'Warsaw' }], A.map(D.get('name'))) // → [Some('Joe'), None]
+```
+
+### getUnsafe
+
+Returns the value if the given key exists, otherwise returns `undefined`.
+
+
+```ts
+function getUnsafe<T, K extends keyof T>(dict: T, key: K): T[K]
+function getUnsafe<T, K extends keyof T>(key: K): (dict: T) => T[K]
+```
+
+```ts
+D.getUnsafe({ name: 'Joe', location: 'Warsaw' }, 'location') // → 'Warsaw'
+pipe({ name: 'Joe', location: 'Warsaw' }, D.getUnsafe('location')) // → 'Warsaw'
+pipe(
+  [{ name: 'Joe' }, { location: 'Warsaw' }],
+  A.map(D.getUnsafe('name')),
+) // → ['Joe', undefined]
+```
+
 ### keys
 
 Returns a new array that contains all keys of the provided object.
@@ -171,18 +206,12 @@ pipe({ x: 1, y: 2 }, D.merge({ y: 3, z: 4 })) // → { x: 1, y: 3, z: 4 }
 
 ### prop
 
-Returns the value of the given property.
+@deprecated Use either D.get or D.getUnsafe instead.
 
 
 ```ts
 function prop<T, K extends keyof T>(dict: T, key: K): T[K]
 function prop<T, K extends keyof T>(key: K): (dict: T) => T[K]
-```
-
-```ts
-D.prop({ name: 'Joe', location: 'Warsaw' }, 'location') // → 'Warsaw'
-pipe({ name: 'Joe', location: 'Warsaw' }, D.prop('location')) // → 'Warsaw'
-pipe([{ name: 'Joe' }, { name: 'Lisa' }], A.map(D.prop('name'))) // → ['Joe', 'Lisa']
 ```
 
 ### reject

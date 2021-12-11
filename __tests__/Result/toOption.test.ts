@@ -45,7 +45,7 @@ describe('toOption', () => {
       pipe(
         // ⬇️ const obj: Data = { names: 'hello,world,ts,belt' }
         R.fromNullable(obj, 'cannot be nullable'), // → Ok({ names: 'hello,world,ts,belt' })
-        R.map(D.prop('names')), // → Ok('hello,world,ts,belt')
+        R.map(D.getUnsafe('names')), // → Ok('hello,world,ts,belt')
         R.map(S.split(',')), // → Ok(['hello', 'world', 'ts', 'belt'])
         R.toOption, // → Some(['hello', 'world', 'ts', 'belt'])
         O.flatMap(A.dropExactly(2)), // → Some(['ts', 'belt'])
@@ -60,7 +60,7 @@ describe('toOption', () => {
       pipe(
         // ⬇️ const obj: Data = null
         R.fromNullable(obj, 'cannot be nullable'), // → Error('cannot be nullable')
-        R.map(D.prop('names')), // → Error('cannot be nullable')
+        R.map(D.getUnsafe('names')), // → Error('cannot be nullable')
         R.map(S.split(',')), // → Error('cannot be nullable')
         R.toOption, // → None
         O.flatMap(A.dropExactly(2)), // → None

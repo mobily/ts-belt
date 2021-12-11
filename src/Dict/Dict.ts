@@ -1,4 +1,11 @@
+import { Option } from '../Option'
+
 export declare const makeEmpty: <T>() => T
+export declare const get: <T, K extends keyof T>(
+  dict: T,
+  key: K,
+) => Option<T[K]>
+export declare const getUnsafe: <T, K extends keyof T>(dict: T, key: K) => T[K]
 export declare const prop: <T, K extends keyof T>(dict: T, key: K) => T[K]
 export declare const values: <T extends string | number, R>(
   dict: Record<T, R>,
