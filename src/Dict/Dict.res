@@ -11,7 +11,7 @@ export getUnsafe = (dict, key) => Js.Dict.unsafeGet(dict, key)
 %comment("Returns `Some(value)` if the given key exists, otherwise returns `None`.")
 export get = (dict, key) => Js.Dict.get(dict, key)
 
-%comment("@deprecated Use either D.get or D.getUnsafe instead.")
+%comment("@deprecated Use either `D.get` or `D.getUnsafe` instead.")
 export prop = (dict, key) => Js.Dict.unsafeGet(dict, key)
 
 %comment("Converts an object into an array of `[key, value]` tuples.")

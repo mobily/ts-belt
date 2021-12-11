@@ -20,7 +20,7 @@ export declare function get<T, K extends keyof T>(
   key: K,
 ): (dict: T) => Option<T[K]>
 
-/** @deprecated Use either D.get or D.getUnsafe instead. */
+/** @deprecated Use either `D.get` or `D.getUnsafe` instead. */
 
 export declare function prop<T, K extends keyof T>(dict: T, key: K): T[K]
 
