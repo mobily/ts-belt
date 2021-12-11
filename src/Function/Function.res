@@ -56,3 +56,43 @@ export allPass = (value, fns) => Belt.Array.everyU(fns, (. fn) => fn(value))
   "Determines whether at least one of the provided predicate returns `true` for the given value."
 )
 export anyPass = (value, fns) => Belt.Array.someU(fns, (. fn) => fn(value))
+
+export throttle = (fn, delay) => {
+  let isThrottled = ref(false)
+  let timer = ref(None)
+  let cancel = () => {
+    Belt.Option.mapWithDefaultU(timer.contents, (), (. timer) => Js.Global.clearTimeout(timer))
+    timer := None
+  }
+  let make = () =>
+    if !isThrottled.contents {
+      cancel()
+      isThrottled := true
+      fn()
+      let timeout = Js.Global.setTimeout(() => {
+        isThrottled := false
+        timer := None
+      }, delay)
+      timer := Some(timeout)
+    }
+
+  make
+}
+
+let debounce = (fn, delay) => {
+  let timer = ref(None)
+  let cancel = () => {
+    Belt.Option.mapWithDefaultU(timer.contents, (), (. timer) => Js.Global.clearTimeout(timer))
+    timer := None
+  }
+  let make = () => {
+    cancel()
+    let timeout = Js.Global.setTimeout(() => {
+      fn()
+      timer := None
+    }, delay)
+    timer := Some(timeout)
+  }
+
+  make
+}
