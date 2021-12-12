@@ -37,6 +37,16 @@ function both<A>(value: A, fn0: (_1: A) => boolean, fn1: (_1: A) => boolean): bo
 function both<A>(fn0: (_1: A) => boolean, fn1: (_1: A) => boolean): (value: A) => boolean
 ```
 
+### debounce
+
+Takes a function, and returns a new function (no control values) which when called, will only invoke the given input function after a period of inactivity.
+
+
+```ts
+function debounce<A extends any[]>(fn: (...args: A) => void, delay: number): (...args: A) => void
+function debounce<A extends any[]>(delay: number): (fn: (...args: A) => void) => (...args: A) => void
+```
+
 ### defaultTo
 
 Returns a default value if `value` is nullable.
@@ -111,6 +121,54 @@ Always returns `void`, useful as a placeholder function.
 
 ```ts
 function ignore(): void
+```
+
+### makeControlledDebounce
+
+Takes a function, and returns a new function (and other control values) which when called, will only invoke the given input function after a period of inactivity. If `leading` is set to `true`, the function will be invoked immediately.
+
+
+```ts
+function makeControlledDebounce<A extends any[]>(fn: (...args: A) => void, options: Options): Controlled<A>
+function makeControlledDebounce<A extends any[]>(options: Options): (fn: (...args: A) => void) => Controlled<A>
+```
+
+### makeControlledThrottle
+
+Takes a function and returns a new function (and other control values) which when used, suppresses calls to the given function to only once within the given `delay`. If `leading` is set to `true`, the function will be allowed to run on the first call before the throttling starts.
+
+
+```ts
+function makeControlledThrottle<A extends any[]>(fn: (...args: A) => void, options: Options): Controlled<A>
+function makeControlledThrottle<A extends any[]>(options: Options): (fn: (...args: A) => void) => Controlled<A>
+```
+
+### tap
+
+Applies a side-effect function on the given value and returns the original value.
+
+
+```ts
+function tap<A>(value: A, fn: (_1: A) => void): A
+function tap<A>(fn: (_1: A) => void): (value: A) => A
+```
+
+```ts
+pipe(
+  A.makeWithIndex(3, N.succ),
+  F.tap(xs => console.log(xs)),
+  A.map(value => value * 2),
+) // → [2, 4, 6]
+```
+
+### throttle
+
+Takes a function and returns a new function (no control values) which when used, suppresses calls to the given function to only once within the given `delay`.
+
+
+```ts
+function throttle<A extends any[]>(fn: (...args: A) => void, delay: number): (...args: A) => void
+function throttle<A extends any[]>(delay: number): (fn: (...args: A) => void) => (...args: A) => void
 ```
 
 ### truthy

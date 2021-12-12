@@ -1,3 +1,14 @@
+export declare type Controlled<A extends any[]> = {
+  readonly cancel: () => void
+  readonly invoke: (...args: A) => void
+  readonly isScheduled: () => boolean
+  readonly schedule: (...args: A) => void
+}
+export declare type Options = {
+  readonly delay: number
+  readonly leading: boolean
+}
+
 /** Always returns the provided value, useful as a placeholder function. */
 
 export declare function identity<A>(value: A): A
@@ -123,3 +134,53 @@ export declare function anyPass<A>(
 export declare function anyPass<A>(
   fns: ReadonlyArray<(_1: A) => boolean>,
 ): (value: A) => boolean
+
+/** Applies a side-effect function on the given value and returns the original value. */
+
+export declare function tap<A>(value: A, fn: (_1: A) => void): A
+
+export declare function tap<A>(fn: (_1: A) => void): (value: A) => A
+
+/** Takes a function and returns a new function (and other control values) which when used, suppresses calls to the given function to only once within the given `delay`. If `leading` is set to `true`, the function will be allowed to run on the first call before the throttling starts. */
+
+export declare function makeControlledThrottle<A extends any[]>(
+  fn: (...args: A) => void,
+  options: Options,
+): Controlled<A>
+
+export declare function makeControlledThrottle<A extends any[]>(
+  options: Options,
+): (fn: (...args: A) => void) => Controlled<A>
+
+/** Takes a function and returns a new function (no control values) which when used, suppresses calls to the given function to only once within the given `delay`. */
+
+export declare function throttle<A extends any[]>(
+  fn: (...args: A) => void,
+  delay: number,
+): (...args: A) => void
+
+export declare function throttle<A extends any[]>(
+  delay: number,
+): (fn: (...args: A) => void) => (...args: A) => void
+
+/** Takes a function, and returns a new function (and other control values) which when called, will only invoke the given input function after a period of inactivity. If `leading` is set to `true`, the function will be invoked immediately. */
+
+export declare function makeControlledDebounce<A extends any[]>(
+  fn: (...args: A) => void,
+  options: Options,
+): Controlled<A>
+
+export declare function makeControlledDebounce<A extends any[]>(
+  options: Options,
+): (fn: (...args: A) => void) => Controlled<A>
+
+/** Takes a function, and returns a new function (no control values) which when called, will only invoke the given input function after a period of inactivity. */
+
+export declare function debounce<A extends any[]>(
+  fn: (...args: A) => void,
+  delay: number,
+): (...args: A) => void
+
+export declare function debounce<A extends any[]>(
+  delay: number,
+): (fn: (...args: A) => void) => (...args: A) => void

@@ -57,40 +57,105 @@ export allPass = (value, fns) => Belt.Array.everyU(fns, (. fn) => fn(value))
 )
 export anyPass = (value, fns) => Belt.Array.someU(fns, (. fn) => fn(value))
 
-export throttle = (fn, delay) => {
+%comment("Applies a side-effect function on the given value and returns the original value.")
+export tap = (value, fn) => {
+  fn(value)
+  value
+}
+
+type controlled<'a> = {
+  cancel: unit => unit,
+  invoke: 'a => unit,
+  isScheduled: unit => bool,
+  schedule: 'a => unit,
+}
+
+type options = {
+  delay: int,
+  leading: bool,
+}
+
+%comment(
+  "Takes a function and returns a new function (and other control values) which when used, suppresses calls to the given function to only once within the given `delay`. If `leading` is set to `true`, the function will be allowed to run on the first call before the throttling starts."
+)
+export makeControlledThrottle = (fn, options) => {
   let isThrottled = ref(false)
   let timer = ref(None)
   let cancel = () => {
     Belt.Option.mapWithDefaultU(timer.contents, (), (. timer) => Js.Global.clearTimeout(timer))
     timer := None
   }
-
-  (. ()) =>
+  let schedule = args => {
     if !isThrottled.contents {
       cancel()
       isThrottled := true
-      fn()
+      fn(args)
       let timeout = Js.Global.setTimeout(() => {
         isThrottled := false
         timer := None
-      }, delay)
+      }, options.delay)
       timer := Some(timeout)
     }
+  }
+  let invoke = args => {
+    cancel()
+    fn(args)
+  }
+  let isScheduled = () => isThrottled.contents
+  let isLeading = ref(options.leading)
+
+  let make = restArgs =>
+    if isLeading.contents {
+      isLeading := false
+      fn(restArgs)
+    } else {
+      schedule(restArgs)
+    }
+
+  {schedule: make, invoke: invoke, cancel: cancel, isScheduled: isScheduled}
 }
 
-export debounce = (fn, delay) => {
+%comment(
+  "Takes a function and returns a new function (no control values) which when used, suppresses calls to the given function to only once within the given `delay`."
+)
+export throttle = (fn, delay) => makeControlledThrottle(fn, {delay: delay, leading: false}).schedule
+
+%comment(
+  "Takes a function, and returns a new function (and other control values) which when called, will only invoke the given input function after a period of inactivity. If `leading` is set to `true`, the function will be invoked immediately."
+)
+export makeControlledDebounce = (fn, options) => {
   let timer = ref(None)
   let cancel = () => {
     Belt.Option.mapWithDefaultU(timer.contents, (), (. timer) => Js.Global.clearTimeout(timer))
     timer := None
   }
-
-  (. ()) => {
+  let schedule = args => {
     cancel()
     let timeout = Js.Global.setTimeout(() => {
-      fn()
+      fn(args)
       timer := None
-    }, delay)
+    }, options.delay)
     timer := Some(timeout)
   }
+  let invoke = args => {
+    cancel()
+    fn(args)
+  }
+  let isScheduled = () => Belt.Option.isSome(timer.contents)
+  let isLeading = ref(options.leading)
+
+  let make = restArgs =>
+    if isLeading.contents {
+      isLeading := false
+      fn(restArgs)
+    } else {
+      schedule(restArgs)
+    }
+
+  {schedule: make, invoke: invoke, cancel: cancel, isScheduled: isScheduled}
 }
+
+%comment(
+  "Takes a function, and returns a new function (no control values) which when called, will only invoke the given input function after a period of inactivity."
+)
+export debounce = (fn, delay) => makeControlledDebounce(fn, {delay: delay, leading: false}).schedule
