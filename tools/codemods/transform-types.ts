@@ -9,7 +9,6 @@ import {
   TSTypeReference,
   ASTPath,
   ExportNamedDeclaration,
-  TSTypeOperator,
 } from 'jscodeshift'
 
 import * as path from 'path'
