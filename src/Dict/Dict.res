@@ -24,7 +24,7 @@ export fromPairs = dict => Js.Dict.fromArray(dict)
 export merge = (fst, snd) => assign(makeEmpty(), fst, snd)
 
 %comment("Adds a property. Equivalent to merging with `{key: value}`")
-export assoc = (dict, key, value) => {
+export set = (dict, key, value) => {
   let pairs = toPairs(dict)
   let appended = Array.append(pairs, (key, value))
   fromPairs(appended)

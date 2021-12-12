@@ -7,7 +7,7 @@ export declare const keys: <T extends Record<string, unknown>>(
   dict: T,
 ) => ReadonlyArray<keyof T>
 export declare const merge: <A, B>(fst: A, snd: B) => A & B
-export declare const assoc: <T, K extends string, V>(
+export declare const set: <T, K extends string, V>(
   dict: T,
   key: K,
   value: V,
