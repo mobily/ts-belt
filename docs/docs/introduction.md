@@ -54,7 +54,7 @@ Until…I decided to build `ts-belt`. `ts-belt` combines all of the good things 
 
 - 🚀 built in ReScript, which generates highly performant JavaScript code (see [benchmark results](/benchmarks/introduction))
 - 👀 provides more readable code, due to the `data-first` approach
-- ✨ supports TypeScript and Flow
+- ✨ supports `TypeScript` and `Flow`
 - 🛡 helps you write safer code with `Option` and `Result` types
 - 🎯 all functions return immutable data (no side-effects)
 - 🌲 tree-shakeable

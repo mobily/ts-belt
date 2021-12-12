@@ -8,6 +8,11 @@ title: Changelog
 - ♻️ all tuples are now `readonly`
 - 🗑 `D.prop` has been deprecated (please use either `D.get` or `D.getUnsafe`)
 - ✨ added `A.flip`
+- ✨ added `F.tap`
+- ✨ added `F.debounce`
+- ✨ added `F.makeControlledDebounce`
+- ✨ added `F.throttle`
+- ✨ added `F.makeControlledThrottle`
 
 ### `v3.2.0`
 
