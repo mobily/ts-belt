@@ -226,102 +226,108 @@ const transformer = (file: FileInfo, api: API) => {
       return p.value
     })
 
-  root.find(j.ExportNamedDeclaration).replaceWith(p => {
-    const identifier = takeExportIdentifier(p)
+  root
+    .find(j.ExportNamedDeclaration, {
+      declaration: {
+        type: 'VariableDeclaration',
+      },
+    })
+    .replaceWith(p => {
+      const identifier = takeExportIdentifier(p)
 
-    const tsTypeAnnotation = {
-      current: undefined,
-    }
-
-    tsRoot.current
-      ?.find(j.VariableDeclarator, {
-        id: {
-          name: identifier.name,
-        },
-      })
-      .forEach(p => {
-        alreadyAddedExports.push(identifier.name)
-        // @ts-expect-error
-        tsTypeAnnotation.current = p.value.id.typeAnnotation?.typeAnnotation
-      })
-
-    const typeAnnotation =
-      tsTypeAnnotation.current ??
-      (identifier.typeAnnotation?.typeAnnotation as
-        | TSTypeAnnotation
-        | undefined)
-
-    if (typeAnnotation) {
-      const signatures = []
-      const {
-        typeParameters,
-        parameters = [],
-        typeAnnotation: returnType,
-      } = typeAnnotation
-      const comments = findComments(identifier.name)
-      const hasSameParamsType = {
-        current: false,
+      const tsTypeAnnotation = {
+        current: undefined,
       }
 
-      const original = j.exportNamedDeclaration(
-        makeDeclareFunction(
-          identifier.name,
-          parameters,
+      tsRoot.current
+        ?.find(j.VariableDeclarator, {
+          id: {
+            name: identifier.name,
+          },
+        })
+        .forEach(p => {
+          alreadyAddedExports.push(identifier.name)
+          // @ts-expect-error
+          tsTypeAnnotation.current = p.value.id.typeAnnotation?.typeAnnotation
+        })
+
+      const typeAnnotation =
+        tsTypeAnnotation.current ??
+        (identifier.typeAnnotation?.typeAnnotation as
+          | TSTypeAnnotation
+          | undefined)
+
+      if (typeAnnotation) {
+        const signatures = []
+        const {
           typeParameters,
-          returnType.typeAnnotation,
-        ),
-      )
+          parameters = [],
+          typeAnnotation: returnType,
+        } = typeAnnotation
+        const comments = findComments(identifier.name)
+        const hasSameParamsType = {
+          current: false,
+        }
 
-      signatures.push(original)
-
-      if (parameters.length > 1) {
-        const firstParam = parameters.slice(0, 1)
-        const otherParams = parameters.slice(1)
-        const returnFunction = j.tsFunctionType(firstParam)
-
-        returnFunction.typeAnnotation = returnType
-
-        const dataLastAnnotation = j.exportNamedDeclaration(
+        const original = j.exportNamedDeclaration(
           makeDeclareFunction(
             identifier.name,
-            otherParams,
+            parameters,
             typeParameters,
-            returnFunction,
+            returnType.typeAnnotation,
           ),
         )
 
-        hasSameParamsType.current = parameters.every(param => {
-          const fst = parameters[0]?.typeAnnotation?.typeAnnotation
-          const annotation = param?.typeAnnotation?.typeAnnotation
+        signatures.push(original)
 
-          if (
-            fst?.type === 'TSTypeReference' &&
-            annotation?.type === 'TSTypeReference'
-          ) {
-            return fst.typeName.name === annotation.typeName.name
-          }
+        if (parameters.length > 1) {
+          const firstParam = parameters.slice(0, 1)
+          const otherParams = parameters.slice(1)
+          const returnFunction = j.tsFunctionType(firstParam)
 
-          return fst?.type === annotation?.type
-        })
+          returnFunction.typeAnnotation = returnType
 
-        signatures.push(dataLastAnnotation)
+          const dataLastAnnotation = j.exportNamedDeclaration(
+            makeDeclareFunction(
+              identifier.name,
+              otherParams,
+              typeParameters,
+              returnFunction,
+            ),
+          )
+
+          hasSameParamsType.current = parameters.every(param => {
+            const fst = parameters[0]?.typeAnnotation?.typeAnnotation
+            const annotation = param?.typeAnnotation?.typeAnnotation
+
+            if (
+              fst?.type === 'TSTypeReference' &&
+              annotation?.type === 'TSTypeReference'
+            ) {
+              return fst.typeName.name === annotation.typeName.name
+            }
+
+            return fst?.type === annotation?.type
+          })
+
+          signatures.push(dataLastAnnotation)
+        }
+
+        if (hasSameParamsType.current) {
+          const [fst, snd] = signatures
+          signatures.length = 0
+          signatures.push(snd, fst)
+        }
+
+        if (comments) {
+          signatures[0].comments = comments
+        }
+
+        return signatures
       }
 
-      if (hasSameParamsType.current) {
-        const [fst, snd] = signatures
-        signatures.length = 0
-        signatures.push(snd, fst)
-      }
-
-      if (comments) {
-        signatures[0].comments = comments
-      }
-
-      return signatures
-    }
-
-    throw new Error('Something went wrong…')
-  })
+      throw new Error('Something went wrong…')
+    })
 
   const rootSource = root.toSource()
   const ts = j(rootSource)
@@ -337,7 +343,11 @@ const transformer = (file: FileInfo, api: API) => {
       currentExports.push(p.value)
     })
 
-  ts.find(j.ExportNamedDeclaration).forEach(p => {
+  ts.find(j.ExportNamedDeclaration, {
+    declaration: {
+      type: 'TSDeclareFunction',
+    },
+  }).forEach(p => {
     currentExports.push(p.value)
   })
 
