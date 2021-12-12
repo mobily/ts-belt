@@ -30,9 +30,9 @@
 ## Features
 
 - 🚀 built in `ReScript`, which generates highly performant JavaScript code (see the benchmark results [here](https://mobily.github.io/ts-belt/benchmarks/introduction))
-- 👀 provide more readable code, due to the `data-first` approach
-- ✨ support for `TypeScript` and `Flow`
-- 🛡 write safer code with `Option` and `Result` types
+- 👀 provides more readable code, due to the `data-first` approach
+- ✨ supports `TypeScript` and `Flow`
+- 🛡 helps you write safer code with `Option` and `Result` types
 - 🎯 all functions return immutable data (no side-effects)
 - 🌲 tree-shakeable
 - 📝 fully documented
@@ -70,6 +70,7 @@ Full documentation can be found [here](https://mobily.github.io/ts-belt/).
   </tr>
   <tr>
     <td align="center"><a href="https://typeofweb.com/"><img src="https://avatars.githubusercontent.com/u/1338731?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Michał Miszczyszyn</b></sub></a><br /><a href="#ideas-mmiszy" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://github.com/remnantkevin"><img src="https://avatars.githubusercontent.com/u/8270635?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Kevin</b></sub></a><br /><a href="https://github.com/mobily/ts-belt/commits?author=remnantkevin" title="Documentation">📖</a></td>
   </tr>
 </table>
 
