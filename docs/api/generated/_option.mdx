@@ -145,7 +145,7 @@ Returns `true` if the provided `option` is `None`, otherwise, returns `false`.
 
 
 ```ts
-function isNone<T>(option: Option<T>): option is Option<never>
+function isNone<T>(option: Option<T>): option is never
 ```
 
 ```ts
@@ -161,7 +161,7 @@ Returns `true` if the provided `option` is `Some(value)`, otherwise, returns `fa
 
 
 ```ts
-function isSome<T>(option: Option<T>): option is Option<T>
+function isSome<T>(option: Option<T>): option is T
 ```
 
 ```ts

@@ -51,8 +51,8 @@ export declare const getWithDefault: <T>(
   option: Option<T>,
   defaultValue: NonNullable<T>,
 ) => T
-export declare const isNone: <T>(option: Option<T>) => option is Option<never>
-export declare const isSome: <T>(option: Option<T>) => option is Option<T>
+export declare const isNone: <T>(option: Option<T>) => option is never
+export declare const isSome: <T>(option: Option<T>) => option is T
 export declare const tap: <T>(
   option: Option<T>,
   someFn: (value: T) => void,
