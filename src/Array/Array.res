@@ -16,7 +16,7 @@ export makeWithIndex = (n, mapFn) => Belt.Array.makeByU(n, mapFn)
 export make = (n, element) => Belt.Array.make(n, element)
 
 %comment("Alias for `make`.")
-export repeat = (n, element) => Belt.Array.make(n, element)
+export repeat = (n, element) => make(n, element)
 
 %comment("Returns the size of the provided array.")
 export length = xs => Belt.Array.length(xs)
