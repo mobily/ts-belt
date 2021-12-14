@@ -32,10 +32,10 @@ describe('set', () => {
       D.set({ name: 'Joe', location: 'Warsaw' }, 'location', 'Gdańsk'),
     ).toEqual({ name: 'Joe', location: 'Gdańsk' })
 
-    expect(D.set({ 0: false, 1: true }, 1, 'abc')).toEqual({
-      0: false,
-      1: 'abc',
-    })
+    expect(D.set({ 0: false, 1: true }, 1, 'abc')).toEqual(
+      // prettier-ignore
+      { 0: false, 1: 'abc' },
+    )
   })
 })
 
@@ -65,9 +65,9 @@ describe('set (pipe)', () => {
       pipe({ name: 'Joe', location: 'Warsaw' }, D.set('location', 'Gdańsk')),
     ).toEqual({ name: 'Joe', location: 'Gdańsk' })
 
-    expect(pipe({ 0: false, 1: true }, D.set(1, 'abc'))).toEqual({
-      0: false,
-      1: 'abc',
-    })
+    expect(pipe({ 0: false, 1: true }, D.set(1, 'abc'))).toEqual(
+      // prettier-ignore
+      { 0: false, 1: 'abc' },
+    )
   })
 })
