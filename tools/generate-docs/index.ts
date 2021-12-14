@@ -160,6 +160,9 @@ const transformer = (file: FileInfo, api: API) => {
       }
     })
 
+  const removePrettierIgnore = (str: string) => {
+    return str.replace('// prettier-ignore\n', '')
+  }
   const content = helpers
     .slice(0)
     .sort((a, b) => (a.name > b.name ? 1 : a.name < b.name ? -1 : 0))
@@ -168,10 +171,11 @@ const transformer = (file: FileInfo, api: API) => {
       const examples = value.examples
         .map((example, index) => {
           const lines = example.fn.split(/\r\n|\r|\n/).length
-          return `${example.fn} // → ${example.result.replace(
-            '// prettier-ignore\n',
-            '',
-          )}${lines > 1 && index !== value.examples.length - 1 ? '\n' : ''}`
+          return `${removePrettierIgnore(
+            example.fn,
+          )} // → ${removePrettierIgnore(example.result)}${
+            lines > 1 && index !== value.examples.length - 1 ? '\n' : ''
+          }`
         })
         .join('\n')
       const description = value.description
