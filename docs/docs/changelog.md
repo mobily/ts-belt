@@ -3,6 +3,13 @@ id: changelog
 title: Changelog
 ---
 
+### `v3.4.1`
+
+- 🐛 fixed `F.makeControlledThrottle`
+- 🐛 fixed `F.makeControlledDebounce`
+
+⬆️ The `invoke` method was accepting only a single argument.
+
 ### `v3.4.0`
 
 - 🐛 fixed the internal implementation for comparing objects
