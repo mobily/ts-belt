@@ -20,7 +20,6 @@
     "./src/**/index.ts"
   ],
   "exclude": [
-    "./tools/codemods/**/*",
     "./src/**/*.gen.tsx",
     "./__tests__/**/*"
   ]

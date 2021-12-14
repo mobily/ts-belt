@@ -1,11 +1,10 @@
-import { API, FileInfo, FunctionDeclaration } from 'jscodeshift'
+import { API, FunctionDeclaration } from 'jscodeshift'
 
 import * as path from 'path'
 import * as fs from 'fs'
 
-const transformer = (file: FileInfo, api: API) => {
-  const j = api.jscodeshift
-  const root = j(file.source)
+const transform = (source: string, j: API['jscodeshift']): string => {
+  const root = j(source)
   const exportedFunctions = []
 
   const readExternalFunction = (
@@ -38,6 +37,7 @@ const transformer = (file: FileInfo, api: API) => {
         fs.readFileSync(
           path.resolve(
             __dirname,
+            '..',
             '..',
             '..',
             'node_modules',
@@ -207,4 +207,4 @@ const transformer = (file: FileInfo, api: API) => {
   return root.toSource()
 }
 
-export default transformer
+export default transform

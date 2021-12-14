@@ -1,8 +1,7 @@
-import { API, FileInfo } from 'jscodeshift'
+import { API } from 'jscodeshift'
 
-const transformer = (file: FileInfo, api: API) => {
-  const j = api.jscodeshift
-  const root = j(file.source)
+const transform = (source: string, j: API['jscodeshift']): string => {
+  const root = j(source)
 
   root
     .find(j.Identifier, {
@@ -31,4 +30,4 @@ const transformer = (file: FileInfo, api: API) => {
   return root.toSource()
 }
 
-export default transformer
+export default transform
