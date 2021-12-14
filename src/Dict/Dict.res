@@ -25,9 +25,9 @@ export merge = (fst, snd) => assign(makeEmpty(), fst, snd)
 
 %comment("Adds a property. Equivalent to merging with `{key: value}`")
 export set = (dict, key, value) => {
-  let pairs = toPairs(dict)
-  let appended = Array.append(pairs, (key, value))
-  fromPairs(appended)
+  let obj = merge(makeEmpty(), dict)
+  Js.Dict.set(obj, key, value)
+  obj
 }
 
 %comment("Transforms each value in the object to a new value using the provided function.")

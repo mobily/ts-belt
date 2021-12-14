@@ -237,13 +237,21 @@ Adds a property. Equivalent to merging with `{key: value}`
 
 
 ```ts
-function set<T, K extends string, V>(dict: T, key: K, value: V): T & { [key in K]: V }
-function set<T, K extends string, V>(key: K, value: V): (dict: T) => T & { [key in K]: V }
+function set<T, K extends string | number, V>(dict: T, key: K, value: V): T & Record<K, V>
+function set<T, K extends string | number, V>(key: K, value: V): (dict: T) => T & Record<K, V>
 ```
 
 ```ts
 D.set({ name: 'Joe', location: 'Warsaw' }, 'location', 'Gdańsk') // → { name: 'Joe', location: 'Gdańsk' }
+D.set({ 0: false, 1: true }, 1, 'abc') // → {
+  0: false,
+  1: 'abc',
+}
 pipe({ name: 'Joe', location: 'Warsaw' }, D.set('location', 'Gdańsk')) // → { name: 'Joe', location: 'Gdańsk' }
+pipe({ 0: false, 1: true }, D.set(1, 'abc')) // → {
+  0: false,
+  1: 'abc',
+}
 ```
 
 ### toPairs

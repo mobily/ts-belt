@@ -40,16 +40,16 @@ export declare function merge<A, B>(snd: B): (fst: A) => A & B
 
 /** Adds a property. Equivalent to merging with `{key: value}` */
 
-export declare function set<T, K extends string, V>(
+export declare function set<T, K extends string | number, V>(
   dict: T,
   key: K,
   value: V,
-): T & { [key in K]: V }
+): T & Record<K, V>
 
-export declare function set<T, K extends string, V>(
+export declare function set<T, K extends string | number, V>(
   key: K,
   value: V,
-): (dict: T) => T & { [key in K]: V }
+): (dict: T) => T & Record<K, V>
 
 /** Transforms each value in the object to a new value using the provided function. */
 
