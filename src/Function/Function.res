@@ -85,11 +85,11 @@ export makeControlledThrottle = (fn, options) => {
     Belt.Option.mapWithDefaultU(timer.contents, (), (. timer) => Js.Global.clearTimeout(timer))
     timer := None
   }
-  let schedule = args => {
+  let schedule = restArgs => {
     if !isThrottled.contents {
       cancel()
       isThrottled := true
-      fn(args)
+      fn(restArgs)
       let timeout = Js.Global.setTimeout(() => {
         isThrottled := false
         timer := None
@@ -97,9 +97,9 @@ export makeControlledThrottle = (fn, options) => {
       timer := Some(timeout)
     }
   }
-  let invoke = args => {
+  let invoke = restArgs => {
     cancel()
-    fn(args)
+    fn(restArgs)
   }
   let isScheduled = () => isThrottled.contents
   let isLeading = ref(options.leading)
@@ -129,17 +129,17 @@ export makeControlledDebounce = (fn, options) => {
     Belt.Option.mapWithDefaultU(timer.contents, (), (. timer) => Js.Global.clearTimeout(timer))
     timer := None
   }
-  let schedule = args => {
+  let schedule = restArgs => {
     cancel()
     let timeout = Js.Global.setTimeout(() => {
-      fn(args)
+      fn(restArgs)
       timer := None
     }, options.delay)
     timer := Some(timeout)
   }
-  let invoke = args => {
+  let invoke = restArgs => {
     cancel()
-    fn(args)
+    fn(restArgs)
   }
   let isScheduled = () => Belt.Option.isSome(timer.contents)
   let isLeading = ref(options.leading)
