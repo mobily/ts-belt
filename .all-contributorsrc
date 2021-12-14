@@ -94,6 +94,16 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "anthony-khong",
+      "name": "Anthony Khong",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12151757?v=4",
+      "profile": "https://github.com/anthony-khong",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "commitConvention": "none"
