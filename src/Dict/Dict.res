@@ -29,6 +29,13 @@ export fromPairs = dict => Js.Dict.fromArray(dict)
 %comment("Merges two provided objects.")
 export merge = (fst, snd) => assign2(makeEmpty(), fst, snd)
 
+%comment("Adds a property. Equivalent to merging with `{key: value}`")
+export set = (dict, key, value) => {
+  let obj = merge(makeEmpty(), dict)
+  Js.Dict.set(obj, key, value)
+  obj
+}
+
 %comment("Transforms each value in the object to a new value using the provided function.")
 export map = (dict, mapFn) => {
   dict
