@@ -3,6 +3,11 @@ id: changelog
 title: Changelog
 ---
 
+### `v3.4.0`
+
+- 🐛 fixed the internal implementation for comparing objects
+- ✨ added `D.set`
+
 ### `v3.3.0`
 
 - ♻️ all tuples are now `readonly`
@@ -43,6 +48,6 @@ A.filter(['hello', 'world'], S.startsWith('h'))
 
 - 🐛 fixed `A.uniqBy` implementation
 
-### `v3.0.0.`
+### `v3.0.0`
 
 Initial `v3` implementation.
