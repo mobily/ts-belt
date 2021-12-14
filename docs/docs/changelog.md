@@ -8,7 +8,7 @@ title: Changelog
 - 🐛 fixed `F.makeControlledThrottle`
 - 🐛 fixed `F.makeControlledDebounce`
 
-⬆️ The `invoke` method was accepting only a single argument.
+⬆️ The `invoke` method was accepting only one argument.
 
 ### `v3.4.0`
 
