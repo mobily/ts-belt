@@ -96,7 +96,13 @@ describe('makeControlledDebounce', () => {
 
     expect(a).toEqual(3)
     expect(b).toEqual('4')
-    expect(spy).toBeCalledTimes(1)
+
+    fn.invoke(4, '5')
+
+    expect(a).toEqual(4)
+    expect(b).toEqual('5')
+
+    expect(spy).toBeCalledTimes(2)
   })
 
   it('invokes on demand', () => {

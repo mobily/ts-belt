@@ -91,7 +91,12 @@ describe('makeControlledThrottle', () => {
     fn.schedule(3, '4')
     expect(a).toEqual(3)
     expect(b).toEqual('4')
-    expect(spy).toBeCalledTimes(2)
+
+    fn.invoke(4, '5')
+    expect(a).toEqual(4)
+    expect(b).toEqual('5')
+
+    expect(spy).toBeCalledTimes(3)
   })
 
   it('invokes on demand', () => {
