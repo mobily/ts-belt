@@ -27,6 +27,10 @@
   <strong>Fast, modern, and practical utility library for FP in TypeScript.</strong>
 </p>
 
+## Documentation
+
+Full documentation can be found [here](https://mobily.github.io/ts-belt/).
+
 ## Features
 
 - 🚀 built in `ReScript`, which generates highly performant JavaScript code (see the benchmark results [here](https://mobily.github.io/ts-belt/benchmarks/introduction))
@@ -37,7 +41,9 @@
 - 🌲 tree-shakeable
 - 📝 fully documented
 
-## Installation
+## Getting started
+
+### Installation
 
 ```shell
 yarn add @mobily/ts-belt
@@ -49,9 +55,32 @@ or with `npm`
 npm install @mobily/ts-belt --save
 ```
 
-## Documentation
+### Usage
 
-Full documentation can be found [here](https://mobily.github.io/ts-belt/).
+| Module | Namespace | Description |
+|--|-----------|--|
+| [Array](https://mobily.github.io/ts-belt/api/array) | A | Utility functions for `Array`. |
+| [Boolean](https://mobily.github.io/ts-belt/api/boolean) | B | Utility functions for `Boolean`. |
+| [Number](https://mobily.github.io/ts-belt/api/number) | N | Utility functions for `Number`. |
+| [Object (Dict)](https://mobily.github.io/ts-belt/api/object) | D | Utility functions for `Object`. |
+| [String](https://mobily.github.io/ts-belt/api/string) | S | Utility functions for `String`. |
+| [Guards](https://mobily.github.io/ts-belt/api/guards) | G | Various TypeScript guards. |
+| [Option](https://mobily.github.io/ts-belt/api/option) | O | Functions for handling the `Option` type that represents the existence and nonexistence of a value. |
+| [Result](https://mobily.github.io/ts-belt/api/result) | R | Functions for describing the result of a certain operation without relying on exceptions. |
+| [Function](https://mobily.github.io/ts-belt/api/function) | F | Other useful functions. |
+
+```typescript
+import { A, O, N, pipe } from '@mobily/ts-belt'
+
+pipe(
+  [1, 2, 3, 4, 5], // → [1, 2, 3, 4, 5]
+  A.dropExactly(2), // → Some([3, 4, 5])
+  O.flatMap(A.head), // → Some(3)
+  O.map(N.multiply(10)), // → Some(30)
+  O.getWithDefault(0), // → 30
+) // → 30
+```
+
 
 ## Contributors
 
