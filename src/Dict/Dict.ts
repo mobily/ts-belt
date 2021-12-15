@@ -22,6 +22,11 @@ export declare const set: <T, K extends string | number, V>(
 export declare const update: <T, K extends keyof T, R>(
   dict: T,
   key: K,
+  fn: (value: Option<T[K]>) => R,
+) => T & Record<K, R>
+export declare const updateUnsafe: <T, K extends keyof T, R>(
+  dict: T,
+  key: K,
   fn: (value: T[K]) => R,
 ) => T & Record<K, R>
 export declare const map: <T extends Record<string, any>, R>(

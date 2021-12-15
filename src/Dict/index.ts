@@ -69,15 +69,28 @@ export declare function set<T, K extends string | number, V>(
   value: V,
 ): (dict: T) => T & Record<K, V>
 
-/** Updates a property by applying the provided function to the value corresponding to the provided key. */
+/** Updates a property by applying the provided function to the corresponding optional value. */
 
 export declare function update<T, K extends keyof T, R>(
+  dict: T,
+  key: K,
+  fn: (value: Option<T[K]>) => R,
+): T & Record<K, R>
+
+export declare function update<T, K extends keyof T, R>(
+  key: K,
+  fn: (value: Option<T[K]>) => R,
+): (dict: T) => T & Record<K, R>
+
+/** Updates a property by applying the provided function to the corresponding value. */
+
+export declare function updateUnsafe<T, K extends keyof T, R>(
   dict: T,
   key: K,
   fn: (value: T[K]) => R,
 ): T & Record<K, R>
 
-export declare function update<T, K extends keyof T, R>(
+export declare function updateUnsafe<T, K extends keyof T, R>(
   key: K,
   fn: (value: T[K]) => R,
 ): (dict: T) => T & Record<K, R>
