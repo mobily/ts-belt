@@ -69,7 +69,7 @@ export declare function set<T, K extends string | number, V>(
   value: V,
 ): (dict: T) => T & Record<K, V>
 
-/** Updates a property by applying the provided function. */
+/** Updates a property by applying the provided function to the value corresponding to the provided key. */
 
 export declare function update<T, K extends keyof T, R>(
   dict: T,

@@ -36,7 +36,7 @@ export set = (dict, key, value) => {
   obj
 }
 
-%comment("Updates a property by applying the provided function.")
+%comment("Updates a property by applying the provided function to the value corresponding to the provided key.")
 export update = (dict, key, fn) => {
   let value = Js.Dict.unsafeGet(dict, key)
   set(dict, key, fn(value))
