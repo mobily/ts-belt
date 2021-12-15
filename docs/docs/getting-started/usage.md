@@ -11,13 +11,13 @@ There are two ways to import `ts-belt` functions into your project.
 |--|-----------|--|
 | [Array](/api/array) | A | Utility functions for `Array`. |
 | [Boolean](/api/boolean) | B | Utility functions for `Boolean`. |
-| [Function](/api/function) | F | Utility functions that don't fit to other modules. |
-| [Guards](/api/guards) | G | Various TypeScript guards. |
 | [Number](/api/number) | N | Utility functions for `Number`. |
 | [Object (Dict)](/api/object) | D | Utility functions for `Object`. |
-| [Option](/api/option) | O | Functions for handling the `Option` type that represents the existence and nonexistence of a value. |
-| [Result](/api/result) | R | Describe the result of a certain operation without relying on exceptions. |
 | [String](/api/string) | S | Utility functions for `String`. |
+| [Guards](/api/guards) | G | Various TypeScript guards. |
+| [Option](/api/option) | O | Functions for handling the `Option` type that represents the existence and nonexistence of a value. |
+| [Result](/api/result) | R | Functions for describing the result of a certain operation without relying on exceptions. |
+| [Function](/api/function) | F | Other useful functions. |
 
 The full API reference can be found [here](/api/array).
 
