@@ -49,7 +49,7 @@ or with `npm`
 npm install @mobily/ts-belt --save
 ```
 
-## Api Reference
+## Documentation
 
 Full documentation can be found [here](https://mobily.github.io/ts-belt/).
 
