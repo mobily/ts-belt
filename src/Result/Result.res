@@ -35,7 +35,7 @@ export flatMap = (result, mapFn) => Belt.Result.flatMapU(result, mapFn)
 export getExn = result => Belt.Result.getExn(result)
 
 %comment("Returns `value` if `result` is `Ok(value)`, otherwise, returns a default value.")
-export getWithDefault = Belt.Result.getWithDefault
+export getWithDefault = result => Belt.Result.getWithDefault(result)
 
 %comment("Returns `value` if `result` is `Ok(value)`, otherwise, returns `undefined`.")
 export toUndefined = result => getWithDefault(result, Js.undefined)
