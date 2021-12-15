@@ -69,6 +69,19 @@ export declare function set<T, K extends string | number, V>(
   value: V,
 ): (dict: T) => T & Record<K, V>
 
+/** Updates a property by applying the provided function. */
+
+export declare function update<T, K extends keyof T, R>(
+  dict: T,
+  key: K,
+  fn: (value: T[K]) => R,
+): T & Record<K, R>
+
+export declare function update<T, K extends keyof T, R>(
+  key: K,
+  fn: (value: T[K]) => R,
+): (dict: T) => T & Record<K, R>
+
 /** Transforms each value in the object to a new value using the provided function. */
 
 export declare function map<T extends Record<string, any>, R>(

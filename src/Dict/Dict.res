@@ -36,6 +36,12 @@ export set = (dict, key, value) => {
   obj
 }
 
+%comment("Updates a property by applying the provided function.")
+export update = (dict, key, fn) => {
+  let value = Js.Dict.unsafeGet(dict, key)
+  set(dict, key, fn(value))
+}
+
 %comment("Transforms each value in the object to a new value using the provided function.")
 export map = (dict, mapFn) => {
   dict
