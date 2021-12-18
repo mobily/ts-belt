@@ -301,6 +301,60 @@ pipe(
 ) // → [['name', 'Joe'], ['age', 20]]
 ```
 
+### update
+
+Updates a property by applying the provided function to the corresponding optional value.
+
+
+```ts
+function update<T, K extends keyof T, R>(dict: T, key: K, fn: (value: Option<T[K]>) => R): T & Record<K, R>
+function update<T, K extends keyof T, R>(key: K, fn: (value: Option<T[K]>) => R): (dict: T) => T & Record<K, R>
+```
+
+```ts
+D.update({ name: 'Joe', location: 'Warsaw' }, 'name', v =>
+  O.getExn(v).toUpperCase(),
+) // → { name: 'JOE', location: 'Warsaw' }
+
+D.update({ 0: false, 1: true }, 1, v => +O.getExn(v)) // → { 0: false, 1: 1 }
+pipe(
+  { name: 'Joe', location: 'Warsaw' },
+  D.update('name', v => O.getExn(v).toUpperCase()),
+) // → { name: 'JOE', location: 'Warsaw' }
+
+pipe(
+  { 0: false, 1: true },
+  D.update(1, v => +O.getExn(v)),
+) // → { 0: false, 1: 1 }
+```
+
+### updateUnsafe
+
+Updates a property by applying the provided function to the corresponding value.
+
+
+```ts
+function updateUnsafe<T, K extends keyof T, R>(dict: T, key: K, fn: (value: T[K]) => R): T & Record<K, R>
+function updateUnsafe<T, K extends keyof T, R>(key: K, fn: (value: T[K]) => R): (dict: T) => T & Record<K, R>
+```
+
+```ts
+D.updateUnsafe({ name: 'Joe', location: 'Warsaw' }, 'name', v =>
+  v.toUpperCase(),
+) // → { name: 'JOE', location: 'Warsaw' }
+
+D.updateUnsafe({ 0: false, 1: true }, 1, v => +v) // → { 0: false, 1: 1 }
+pipe(
+  { name: 'Joe', location: 'Warsaw' },
+  D.updateUnsafe('name', v => v.toUpperCase()),
+) // → { name: 'JOE', location: 'Warsaw' }
+
+pipe(
+  { 0: false, 1: true },
+  D.updateUnsafe(1, v => +v),
+) // → { 0: false, 1: 1 }
+```
+
 ### values
 
 Returns a new array that contains all values of the provided object.

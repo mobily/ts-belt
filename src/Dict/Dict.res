@@ -36,6 +36,19 @@ export set = (dict, key, value) => {
   obj
 }
 
+%comment("Updates a property by applying the provided function to the corresponding optional value.")
+export update = (dict, key, fn) => {
+  let optionalValue = get(dict, key)
+  set(dict, key, fn(optionalValue))
+}
+
+%comment("Updates a property by applying the provided function to the corresponding value.")
+export updateUnsafe = (dict, key, fn) => {
+  let value = getUnsafe(dict, key)
+  set(dict, key, fn(value))
+}
+
+
 %comment("Transforms each value in the object to a new value using the provided function.")
 export map = (dict, mapFn) => {
   dict
