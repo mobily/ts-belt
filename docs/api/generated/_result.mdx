@@ -119,6 +119,8 @@ pipe(
 
 ### getWithDefault
 
+Returns `value` if `result` is `Ok(value)`, otherwise, returns a default value.
+
 
 ```ts
 function getWithDefault<A, B>(result: Result<A, B>, defaultValue: NonNullable<A>): A
@@ -359,7 +361,7 @@ pipe(
 
 ### toUndefined
 
-Returns `value` if `result` is `Ok(value)`, otherwise, returns a default value.
+Returns `value` if `result` is `Ok(value)`, otherwise, returns `undefined`.
 
 
 ```ts
