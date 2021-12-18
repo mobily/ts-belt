@@ -89,15 +89,16 @@ export declare function flatMap<A, B, R>(
 
 export declare function getExn<A, B>(result: Result<A, B>): A | never
 
+/** Returns `value` if `result` is `Ok(value)`, otherwise, returns a default value. */
+
 export declare function getWithDefault<A, B>(
   result: Result<A, B>,
   defaultValue: NonNullable<A>,
 ): A
+
 export declare function getWithDefault<A, B>(
   defaultValue: NonNullable<A>,
 ): (result: Result<A, B>) => A
-
-/** Returns `value` if `result` is `Ok(value)`, otherwise, returns a default value. */
 
 /** Returns `value` if `result` is `Ok(value)`, otherwise, returns `undefined`. */
 

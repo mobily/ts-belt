@@ -3,54 +3,68 @@ open Externals
 let placeholder = () => Js.Undefined.empty
 
 %comment("Creates an empty object. Alternative for `const obj = {} as SomeObjectType`.")
-export makeEmpty = Js.Dict.empty
+@gentype
+let makeEmpty = Js.Dict.empty
 
 %comment("Returns the value if the given key exists, otherwise returns `undefined`.")
-export getUnsafe = (dict, key) => Js.Dict.unsafeGet(dict, key)
+@gentype
+let getUnsafe = (dict, key) => Js.Dict.unsafeGet(dict, key)
 
 %comment("Returns `Some(value)` if the given key exists, otherwise returns `None`.")
-export get = (dict, key) => Js.Dict.get(dict, key)
+@gentype
+let get = (dict, key) => Js.Dict.get(dict, key)
 
 %comment("@deprecated Use either `D.get` or `D.getUnsafe` instead.")
-export prop = (dict, key) => Js.Dict.unsafeGet(dict, key)
+@gentype
+let prop = (dict, key) => Js.Dict.unsafeGet(dict, key)
 
 %comment("Converts an object into an array of `[key, value]` tuples.")
-export toPairs = dict => Externals.entries(dict)
+@gentype
+let toPairs = dict => Externals.entries(dict)
 
 %comment("Returns a new array that contains all values of the provided object.")
-export values = dict => Js.Dict.values(dict)
+@gentype
+let values = dict => Js.Dict.values(dict)
 
 %comment("Returns a new array that contains all keys of the provided object.")
-export keys = dict => Js.Dict.keys(dict)
+@gentype
+let keys = dict => Js.Dict.keys(dict)
 
 %comment("Creates a new object from an array of tuples (`[key, value]`).")
-export fromPairs = dict => Js.Dict.fromArray(dict)
+@gentype
+let fromPairs = dict => Js.Dict.fromArray(dict)
 
 %comment("Merges two provided objects.")
-export merge = (fst, snd) => assign2(makeEmpty(), fst, snd)
+@gentype
+let merge = (fst, snd) => assign2(makeEmpty(), fst, snd)
 
 %comment("Adds a property. Equivalent to merging with `{key: value}`")
-export set = (dict, key, value) => {
+@gentype
+let set = (dict, key, value) => {
   let obj = merge(makeEmpty(), dict)
   Js.Dict.set(obj, key, value)
   obj
 }
 
-%comment("Updates a property by applying the provided function to the corresponding optional value.")
-export update = (dict, key, fn) => {
+%comment(
+  "Updates a property by applying the provided function to the corresponding optional value."
+)
+@gentype
+let update = (dict, key, fn) => {
   let optionalValue = get(dict, key)
   set(dict, key, fn(optionalValue))
 }
 
 %comment("Updates a property by applying the provided function to the corresponding value.")
-export updateUnsafe = (dict, key, fn) => {
+@gentype
+let updateUnsafe = (dict, key, fn) => {
   let value = getUnsafe(dict, key)
   set(dict, key, fn(value))
 }
 
-
 %comment("Transforms each value in the object to a new value using the provided function.")
-export map = (dict, mapFn) => {
+@gentype
+let map = (dict, mapFn) => {
   dict
   ->keys
   ->Belt.Array.mapU((. key) => {
@@ -63,7 +77,8 @@ export map = (dict, mapFn) => {
 %comment(
   "Transforms each value in the object to a new value using the provided function (which takes two arguments: a property value and key)."
 )
-export mapWithKey = (dict, mapFn) => {
+@gentype
+let mapWithKey = (dict, mapFn) => {
   dict
   ->keys
   ->Belt.Array.mapU((. key) => {
@@ -74,7 +89,8 @@ export mapWithKey = (dict, mapFn) => {
 }
 
 %comment("Removes each property that doesn't satisfy the given predicate function.")
-export filter = (dict, predicateFn) => {
+@gentype
+let filter = (dict, predicateFn) => {
   dict
   ->keys
   ->Belt.Array.reduceU([], (. acc, key) => {
@@ -87,7 +103,8 @@ export filter = (dict, predicateFn) => {
 %comment(
   "Removes each property that doesn't satisfy the given predicate function (which takes two arguments: a property value and key)."
 )
-export filterWithKey = (dict, predicateFn) => {
+@gentype
+let filterWithKey = (dict, predicateFn) => {
   dict
   ->keys
   ->Belt.Array.reduceU([], (. acc, key) => {
@@ -98,10 +115,12 @@ export filterWithKey = (dict, predicateFn) => {
 }
 
 %comment("Removes each property that satisfies the given predicate function.")
-export reject = (dict, predicateFn) => filter(dict, value => !predicateFn(value))
+@gentype
+let reject = (dict, predicateFn) => filter(dict, value => !predicateFn(value))
 
 %comment(
   "Removes each property that satisfies the given predicate function (which takes two arguments: a property value and key)."
 )
-export rejectWithKey = (dict, predicateFn) =>
+@gentype
+let rejectWithKey = (dict, predicateFn) =>
   filterWithKey(dict, (key, value) => !predicateFn(key, value))
