@@ -95,6 +95,28 @@ export declare function updateUnsafe<T, K extends keyof T, R>(
   fn: (value: T[K]) => R,
 ): (dict: T) => T & Record<K, R>
 
+/** Returns a new object with the provided key deleted. */
+
+export declare function deleteKey<T, K extends keyof T>(
+  dict: T,
+  key: K,
+): Omit<T, K>
+
+export declare function deleteKey<T, K extends keyof T>(
+  key: K,
+): (dict: T) => Omit<T, K>
+
+/** Returns a new object with the provided keys deleted. */
+
+export declare function deleteKeys<T, K extends keyof T>(
+  dict: T,
+  keys: K[],
+): Omit<T, K>
+
+export declare function deleteKeys<T, K extends keyof T>(
+  keys: K[],
+): (dict: T) => Omit<T, K>
+
 /** Transforms each value in the object to a new value using the provided function. */
 
 export declare function map<T extends Record<string, any>, R>(

@@ -62,6 +62,24 @@ let updateUnsafe = (dict, key, fn) => {
   set(dict, key, fn(value))
 }
 
+%comment("Returns a new object with the provided key deleted.")
+@gentype
+let deleteKey = (dict, key) => {
+  let obj = merge(makeEmpty(), dict)
+  Js.Dict.unsafeDeleteKey(. obj, key)
+  obj
+}
+
+%comment("Returns a new object with the provided keys deleted.")
+@gentype
+let deleteKeys = (dict, keys) => {
+  let obj = merge(makeEmpty(), dict)
+  keys->Belt.Array.forEachU((. key) => {
+    Js.Dict.unsafeDeleteKey(. obj, key)
+  })
+  obj
+}
+
 %comment("Transforms each value in the object to a new value using the provided function.")
 @gentype
 let map = (dict, mapFn) => {

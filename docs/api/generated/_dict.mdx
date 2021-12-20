@@ -1,3 +1,40 @@
+### deleteKey
+
+Returns a new object with the provided key deleted.
+
+
+```ts
+function deleteKey<T, K extends keyof T>(dict: T, key: K): Omit<T, K>
+function deleteKey<T, K extends keyof T>(key: K): (dict: T) => Omit<T, K>
+```
+
+```ts
+D.deleteKey({ name: 'Joe', location: 'Warsaw' }, 'location') // → { name: 'Joe' }
+pipe({ name: 'Joe', location: 'Warsaw' }, D.deleteKey('location')) // → { name: 'Joe' }
+```
+
+### deleteKeys
+
+Returns a new object with the provided keys deleted.
+
+
+```ts
+function deleteKeys<T, K extends keyof T>(dict: T, keys: K[]): Omit<T, K>
+function deleteKeys<T, K extends keyof T>(keys: K[]): (dict: T) => Omit<T, K>
+```
+
+```ts
+D.deleteKeys(joe, []) // → { name: 'Joe', location: 'Warsaw' }
+D.deleteKeys(joe, ['name']) // → { location: 'Warsaw' }
+D.deleteKeys(joe, ['name', 'location']) // → {}
+pipe(joe, D.deleteKeys([])) // → {
+  name: 'Joe',
+  location: 'Warsaw',
+}
+pipe(joe, D.deleteKeys(['name'])) // → { location: 'Warsaw' }
+pipe(joe, D.deleteKeys(['name', 'location'])) // → {}
+```
+
 ### filter
 
 Removes each property that doesn't satisfy the given predicate function.
