@@ -142,3 +142,9 @@ let reject = (dict, predicateFn) => filter(dict, value => !predicateFn(value))
 @gentype
 let rejectWithKey = (dict, predicateFn) =>
   filterWithKey(dict, (key, value) => !predicateFn(key, value))
+
+%comment("Returns a new object with the provided keys selected.")
+@gentype
+let selectKeys = (dict, keys) => {
+  filterWithKey(dict, (key, _) => Js.Array.includes(key, keys))
+}

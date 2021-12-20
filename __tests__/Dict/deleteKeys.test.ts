@@ -20,10 +20,16 @@ describe('deleteKeys', () => {
   })
 
   it('*', () => {
-    const joe = { name: 'Joe', location: 'Warsaw' }
-    expect(D.deleteKeys(joe, [])).toEqual({ name: 'Joe', location: 'Warsaw' })
-    expect(D.deleteKeys(joe, ['name'])).toEqual({ location: 'Warsaw' })
-    expect(D.deleteKeys(joe, ['name', 'location'])).toEqual({})
+    expect(D.deleteKeys({ name: 'Joe', location: 'Warsaw' }, [])).toEqual({
+      name: 'Joe',
+      location: 'Warsaw',
+    })
+    expect(D.deleteKeys({ name: 'Joe', location: 'Warsaw' }, ['name'])).toEqual(
+      { location: 'Warsaw' },
+    )
+    expect(
+      D.deleteKeys({ name: 'Joe', location: 'Warsaw' }, ['name', 'location']),
+    ).toEqual({})
   })
 })
 
@@ -41,12 +47,20 @@ describe('deleteKeys (pipe)', () => {
   })
 
   it('*', () => {
-    const joe = { name: 'Joe', location: 'Warsaw' }
-    expect(pipe(joe, D.deleteKeys([]))).toEqual({
-      name: 'Joe',
-      location: 'Warsaw',
-    })
-    expect(pipe(joe, D.deleteKeys(['name']))).toEqual({ location: 'Warsaw' })
-    expect(pipe(joe, D.deleteKeys(['name', 'location']))).toEqual({})
+    expect(pipe({ name: 'Joe', location: 'Warsaw' }, D.deleteKeys([]))).toEqual(
+      {
+        name: 'Joe',
+        location: 'Warsaw',
+      },
+    )
+    expect(
+      pipe({ name: 'Joe', location: 'Warsaw' }, D.deleteKeys(['name'])),
+    ).toEqual({ location: 'Warsaw' })
+    expect(
+      pipe(
+        { name: 'Joe', location: 'Warsaw' },
+        D.deleteKeys(['name', 'location']),
+      ),
+    ).toEqual({})
   })
 })

@@ -182,3 +182,14 @@ export declare function rejectWithKey<T extends Record<string, any>>(
 export declare function rejectWithKey<T extends Record<string, any>>(
   predicateFn: (key: keyof T, value: T[keyof T]) => boolean,
 ): (dict: T) => Partial<T>
+
+/** Returns a new object with the provided keys selected. */
+
+export declare function selectKeys<T, K extends keyof T>(
+  dict: T,
+  keys: K[],
+): Pick<T, K>
+
+export declare function selectKeys<T, K extends keyof T>(
+  keys: K[],
+): (dict: T) => Pick<T, K>

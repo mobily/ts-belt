@@ -24,15 +24,21 @@ function deleteKeys<T, K extends keyof T>(keys: K[]): (dict: T) => Omit<T, K>
 ```
 
 ```ts
-D.deleteKeys(joe, []) // → { name: 'Joe', location: 'Warsaw' }
-D.deleteKeys(joe, ['name']) // → { location: 'Warsaw' }
-D.deleteKeys(joe, ['name', 'location']) // → {}
-pipe(joe, D.deleteKeys([])) // → {
+D.deleteKeys({ name: 'Joe', location: 'Warsaw' }, []) // → {
   name: 'Joe',
   location: 'Warsaw',
 }
-pipe(joe, D.deleteKeys(['name'])) // → { location: 'Warsaw' }
-pipe(joe, D.deleteKeys(['name', 'location'])) // → {}
+D.deleteKeys({ name: 'Joe', location: 'Warsaw' }, ['name']) // → { location: 'Warsaw' }
+D.deleteKeys({ name: 'Joe', location: 'Warsaw' }, ['name', 'location']) // → {}
+pipe({ name: 'Joe', location: 'Warsaw' }, D.deleteKeys([])) // → {
+  name: 'Joe',
+  location: 'Warsaw',
+}
+pipe({ name: 'Joe', location: 'Warsaw' }, D.deleteKeys(['name'])) // → { location: 'Warsaw' }
+pipe(
+  { name: 'Joe', location: 'Warsaw' },
+  D.deleteKeys(['name', 'location']),
+) // → {}
 ```
 
 ### filter
@@ -295,6 +301,16 @@ pipe(
   },
   D.rejectWithKey((key, _) => key === 'name'),
 ) // → { age: 20 }
+```
+
+### selectKeys
+
+Returns a new object with the provided keys selected.
+
+
+```ts
+function selectKeys<T, K extends keyof T>(dict: T, keys: K[]): Pick<T, K>
+function selectKeys<T, K extends keyof T>(keys: K[]): (dict: T) => Pick<T, K>
 ```
 
 ### set

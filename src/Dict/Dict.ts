@@ -61,6 +61,10 @@ export declare const rejectWithKey: <T extends Record<string, any>>(
   dict: T,
   predicateFn: (key: keyof T, value: T[keyof T]) => boolean,
 ) => Partial<T>
+export declare const selectKeys: <T, K extends keyof T>(
+  dict: T,
+  keys: K[],
+) => Pick<T, K>
 export declare const fromPairs: <T, K extends keyof any>(
   xs: ReadonlyArray<readonly [K, T]>,
 ) => Record<K, T>
