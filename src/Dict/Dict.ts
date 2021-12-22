@@ -59,3 +59,9 @@ export declare const fromPairs: <T, K extends keyof any>(
 export declare const toPairs: <T, K extends keyof any>(
   dict: Record<K, T>,
 ) => ReadonlyArray<readonly [K, T]>
+export declare const isEmpty: <T extends Record<string, any>>(
+  dict: T,
+) => boolean
+export declare const isNotEmpty: <T extends Record<string, any>>(
+  dict: T,
+) => boolean

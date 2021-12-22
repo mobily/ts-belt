@@ -124,3 +124,11 @@ let reject = (dict, predicateFn) => filter(dict, value => !predicateFn(value))
 @gentype
 let rejectWithKey = (dict, predicateFn) =>
   filterWithKey(dict, (key, value) => !predicateFn(key, value))
+
+%comment("Determines whether the given object is empty.")
+@gentype
+let isEmpty = dict => dict == makeEmpty()
+
+%comment("Determines whether the given object is not empty.")
+@gentype
+let isNotEmpty = dict => !isEmpty(dict)
