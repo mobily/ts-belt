@@ -318,6 +318,19 @@ export declare function reduce<A, B>(
   reduceFn: (_1: B, _2: A) => B,
 ): (xs: ReadonlyArray<A>) => B
 
+/** Works like A.reduce, except that the function `reduceFn` is applied to each item of `xs` from the last back to the first. */
+
+export declare function reduceReverse<A, B>(
+  xs: ReadonlyArray<A>,
+  initialValue: B,
+  reduceFn: (_1: B, _2: A) => B,
+): B
+
+export declare function reduceReverse<A, B>(
+  initialValue: B,
+  reduceFn: (_1: B, _2: A) => B,
+): (xs: ReadonlyArray<A>) => B
+
 /** Applies `reduceFn` (which has three parameters: an `accumulator` which starts with a value of `initialValue`, the next value from the array and its index) to each element of the provided array, and eventually it returns the final value of the accumulator. */
 
 export declare function reduceWithIndex<A, B>(

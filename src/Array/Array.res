@@ -283,6 +283,13 @@ let rejectWithIndex = (xs, predicateFn) =>
 let reduce = (xs, initialValue, reduceFn) => Belt.Array.reduceU(xs, initialValue, reduceFn)
 
 %comment(
+  "Works like A.reduce, except that the function `reduceFn` is applied to each item of `xs` from the last back to the first."
+)
+@gentype
+let reduceReverse = (xs, initialValue, reduceFn) =>
+  Belt.Array.reduceReverseU(xs, initialValue, reduceFn)
+
+%comment(
   "Applies `reduceFn` (which has three parameters: an `accumulator` which starts with a value of `initialValue`, the next value from the array and its index) to each element of the provided array, and eventually it returns the final value of the accumulator."
 )
 @gentype

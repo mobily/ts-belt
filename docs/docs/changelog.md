@@ -9,6 +9,7 @@ title: Changelog
 - ✨ added `D.updateUnsafe` ([@anthony-khong](https://github.com/anthony-khong))
 - ✨ added `D.isEmpty`
 - ✨ added `D.isNotEmpty`
+- ✨ added `A.reduceReverse`
 
 ### `v3.4.1`
 
