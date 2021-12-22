@@ -139,6 +139,29 @@ pipe(
 ) // → ['wo', 'rld']
 ```
 
+### filterMap
+
+Returns a new array that keep all elements that return `Some(value)` applied within `predicateFn`.
+
+
+```ts
+function filterMap<A, B>(xs: ReadonlyArray<A>, predicateFn: (_1: A) => Option<B>): ReadonlyArray<B>
+function filterMap<A, B>(predicateFn: (_1: A) => Option<B>): (xs: ReadonlyArray<A>) => ReadonlyArray<B>
+```
+
+```ts
+A.filterMap(['', 'hello', 'world', ''], value => {
+  return value.length > 0 ? O.Some(value.length) : O.None
+}) // → [5, 5]
+
+pipe(
+  [1, 2, 3, 4, 5],
+  A.filterMap(value => {
+    return value % 2 === 0 ? O.Some(value * 2) : O.None
+  }),
+) // → [4, 8]
+```
+
 ### filterWithIndex
 
 Returns a new array that keep all elements satisfy the given predicate (which take two arguments: the element for the array and its index).
@@ -362,6 +385,36 @@ Converts each element of the array to a string and concatenates them, separated 
 ```ts
 function join<A>(xs: ReadonlyArray<A>, delimiter: string): string
 function join<A>(delimiter: string): (xs: ReadonlyArray<A>) => string
+```
+
+### keep
+
+Alias for `filter`.
+
+
+```ts
+function keep<A>(xs: ReadonlyArray<A>, predicateFn: (_1: A) => boolean): ReadonlyArray<A>
+function keep<A>(predicateFn: (_1: A) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+```
+
+### keepMap
+
+Alias for `filterMap`.
+
+
+```ts
+function keepMap<A, B>(xs: ReadonlyArray<A>, predicateFn: (_1: A) => Option<B>): ReadonlyArray<B>
+function keepMap<A, B>(predicateFn: (_1: A) => Option<B>): (xs: ReadonlyArray<A>) => ReadonlyArray<B>
+```
+
+### keepWithIndex
+
+Alias for `filterWithIndex`.
+
+
+```ts
+function keepWithIndex<A>(xs: ReadonlyArray<A>, predicateFn: (_1: number, _2: A) => boolean): ReadonlyArray<A>
+function keepWithIndex<A>(predicateFn: (_1: number, _2: A) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
 ```
 
 ### last

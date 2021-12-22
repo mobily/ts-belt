@@ -10,6 +10,7 @@ title: Changelog
 - ✨ added `D.isEmpty`
 - ✨ added `D.isNotEmpty`
 - ✨ added `A.reduceReverse`
+- ✨ added `A.filterMap` (alias: `A.keepMap`)
 
 ### `v3.4.1`
 

@@ -272,6 +272,17 @@ export declare function filter<A>(
   predicateFn: (_1: A) => boolean,
 ): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
 
+/** Alias for `filter`. */
+
+export declare function keep<A>(
+  xs: ReadonlyArray<A>,
+  predicateFn: (_1: A) => boolean,
+): ReadonlyArray<A>
+
+export declare function keep<A>(
+  predicateFn: (_1: A) => boolean,
+): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+
 /** Returns a new array that keep all elements satisfy the given predicate (which take two arguments: the element for the array and its index). */
 
 export declare function filterWithIndex<A>(
@@ -280,6 +291,17 @@ export declare function filterWithIndex<A>(
 ): ReadonlyArray<A>
 
 export declare function filterWithIndex<A>(
+  predicateFn: (_1: number, _2: A) => boolean,
+): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+
+/** Alias for `filterWithIndex`. */
+
+export declare function keepWithIndex<A>(
+  xs: ReadonlyArray<A>,
+  predicateFn: (_1: number, _2: A) => boolean,
+): ReadonlyArray<A>
+
+export declare function keepWithIndex<A>(
   predicateFn: (_1: number, _2: A) => boolean,
 ): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
 
@@ -707,3 +729,25 @@ export declare function tap<A>(
 /** Returns a new tuple with the reverse order of the elements. */
 
 export declare function flip<A, B>(xs: readonly [A, B]): readonly [B, A]
+
+/** Returns a new array that keep all elements that return `Some(value)` applied within `predicateFn`. */
+
+export declare function filterMap<A, B>(
+  xs: ReadonlyArray<A>,
+  predicateFn: (_1: A) => Option<B>,
+): ReadonlyArray<B>
+
+export declare function filterMap<A, B>(
+  predicateFn: (_1: A) => Option<B>,
+): (xs: ReadonlyArray<A>) => ReadonlyArray<B>
+
+/** Alias for `filterMap`. */
+
+export declare function keepMap<A, B>(
+  xs: ReadonlyArray<A>,
+  predicateFn: (_1: A) => Option<B>,
+): ReadonlyArray<B>
+
+export declare function keepMap<A, B>(
+  predicateFn: (_1: A) => Option<B>,
+): (xs: ReadonlyArray<A>) => ReadonlyArray<B>

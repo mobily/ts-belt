@@ -244,6 +244,10 @@ let filter = (xs, predicateFn) => {
   arr
 }
 
+%comment("Alias for `filter`.")
+@gentype
+let keep = (xs, predicateFn) => filter(xs, predicateFn)
+
 %comment(
   "Returns a new array that keep all elements satisfy the given predicate (which take two arguments: the element for the array and its index)."
 )
@@ -262,6 +266,10 @@ let filterWithIndex = (xs, predicateFn) => {
 
   arr
 }
+
+%comment("Alias for `filterWithIndex`.")
+@gentype
+let keepWithIndex = (xs, predicateFn) => filterWithIndex(xs, predicateFn)
 
 %comment(
   "Returns a new array of elements from the provided array which do not satisfy the given predicate."
@@ -578,3 +586,13 @@ let flip = xs => {
   let (fst, snd) = xs
   (snd, fst)
 }
+
+%comment(
+  "Returns a new array that keep all elements that return `Some(value)` applied within `predicateFn`."
+)
+@gentype
+let filterMap = (xs, predicateFn) => Belt.Array.keepMapU(xs, predicateFn)
+
+%comment("Alias for `filterMap`.")
+@gentype
+let keepMap = (xs, predicateFn) => filterMap(xs, predicateFn)
