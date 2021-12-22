@@ -32,11 +32,11 @@ export declare function repeat<A>(element: A): (n: number) => ReadonlyArray<A>
 
 export declare function length<A>(xs: ReadonlyArray<A>): number
 
-/** Determines whether the array is empty. */
+/** Determines whether the given array is empty. */
 
 export declare function isEmpty<A>(xs: ReadonlyArray<A>): boolean
 
-/** Determines whether the array is not empty. */
+/** Determines whether the given array is not empty. */
 
 export declare function isNotEmpty<A>(xs: ReadonlyArray<A>): boolean
 

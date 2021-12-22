@@ -26,11 +26,11 @@ let repeat = (n, element) => make(n, element)
 @gentype
 let length = xs => Belt.Array.length(xs)
 
-%comment("Determines whether the array is empty.")
+%comment("Determines whether the given array is empty.")
 @gentype
 let isEmpty = xs => length(xs) == 0
 
-%comment("Determines whether the array is not empty.")
+%comment("Determines whether the given array is not empty.")
 @gentype
 let isNotEmpty = xs => length(xs) > 0
 
