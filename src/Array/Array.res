@@ -444,7 +444,7 @@ let uniqBy = (xs, uniqFn) => {
 
   while index.contents < length(xs) {
     let value = Belt.Array.getUnsafe(xs, index.contents)
-    let alreadyAdded = some(arr, (. x) => uniqFn(unsafe(x)) == uniqFn(value))
+    let alreadyAdded = some(arr, (. x) => uniqFn(coerce(x)) == uniqFn(value))
 
     if !alreadyAdded {
       Js.Array2.push(arr, value)->ignore
@@ -527,7 +527,7 @@ let flat = xs =>
     if Js.Array2.isArray(value) {
       Belt.Array.forEachU(value, (. element) => Js.Array2.push(acc, element)->ignore)
     } else {
-      Js.Array2.push(acc, unsafe(value))->ignore
+      Js.Array2.push(acc, coerce(value))->ignore
     }
     acc
   })
@@ -538,7 +538,7 @@ let rec flatten = (xs, arr) => {
   while index.contents < length(xs) {
     let value = Belt.Array.getUnsafe(xs, index.contents)
     if Js.Array2.isArray(value) {
-      flatten(unsafe(value), arr)->ignore
+      flatten(coerce(value), arr)->ignore
     } else {
       Js.Array2.push(arr, value)->ignore
     }
