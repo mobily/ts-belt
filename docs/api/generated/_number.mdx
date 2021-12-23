@@ -13,6 +13,21 @@ N.add(10, 20) // → 30
 pipe(5, N.add(10)) // → 15
 ```
 
+### clamp
+
+Clamps a value between an upper and lower bound
+
+
+```ts
+function clamp(min: number, max: number): (num: number) => number
+function clamp(num: number, min: number, max: number): number
+```
+
+```ts
+N.clamp(2, 4, 6) // → 4
+pipe(10, N.clamp(2, 5)) // → 5
+```
+
 ### divide
 
 Divides two numbers.
@@ -41,6 +56,66 @@ function divideWithModulo(a: number, b: number): readonly [number, number]
 ```ts
 N.divideWithModulo(20, 5) // → [4, 0]
 pipe(30, N.divideWithModulo(4)) // → [7.5, 2]
+```
+
+### gt
+
+Returns `true` if the first argument is greater than second argument. Otherwise it returns `false`
+
+
+```ts
+function gt<A>(b: A): (a: A) => boolean
+function gt<A>(a: A, b: A): boolean
+```
+
+```ts
+N.gt(2, 4) // → false
+pipe(4, N.gt(2)) // → true
+```
+
+### gte
+
+Returns `true` if the first argument is greater or equal than second argument. Otherwise it returns `false`
+
+
+```ts
+function gte<A>(b: A): (a: A) => boolean
+function gte<A>(a: A, b: A): boolean
+```
+
+```ts
+N.gte(2, 4) // → false
+pipe(4, N.gte(2)) // → true
+```
+
+### lt
+
+Returns `true` if the first argument is lower than second argument. Otherwise it returns `false`
+
+
+```ts
+function lt<A>(b: A): (a: A) => boolean
+function lt<A>(a: A, b: A): boolean
+```
+
+```ts
+N.lt(2, 4) // → true
+pipe(4, N.lt(2)) // → false
+```
+
+### lte
+
+Returns `true` if the first argument is lower or equal than second argument. Otherwise it returns `false`
+
+
+```ts
+function lte<A>(b: A): (a: A) => boolean
+function lte<A>(a: A, b: A): boolean
+```
+
+```ts
+N.lte(2, 4) // → true
+pipe(4, N.lte(2)) // → false
 ```
 
 ### modulo

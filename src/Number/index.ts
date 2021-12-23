@@ -46,3 +46,33 @@ export declare function divideWithModulo(
   a: number,
   b: number,
 ): readonly [number, number]
+
+/** Returns `true` if the first argument is greater than second argument. Otherwise it returns `false` */
+
+export declare function gt<A>(b: A): (a: A) => boolean
+
+export declare function gt<A>(a: A, b: A): boolean
+
+/** Returns `true` if the first argument is greater or equal than second argument. Otherwise it returns `false` */
+
+export declare function gte<A>(b: A): (a: A) => boolean
+
+export declare function gte<A>(a: A, b: A): boolean
+
+/** Returns `true` if the first argument is lower than second argument. Otherwise it returns `false` */
+
+export declare function lt<A>(b: A): (a: A) => boolean
+
+export declare function lt<A>(a: A, b: A): boolean
+
+/** Returns `true` if the first argument is lower or equal than second argument. Otherwise it returns `false` */
+
+export declare function lte<A>(b: A): (a: A) => boolean
+
+export declare function lte<A>(a: A, b: A): boolean
+
+/** Clamps a value between an upper and lower bound */
+
+export declare function clamp(min: number, max: number): (num: number) => number
+
+export declare function clamp(num: number, min: number, max: number): number
