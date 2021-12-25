@@ -3,6 +3,15 @@ id: changelog
 title: Changelog
 ---
 
+### `v3.5.0`
+
+- ✨ added `D.update` ([@anthony-khong](https://github.com/anthony-khong))
+- ✨ added `D.updateUnsafe` ([@anthony-khong](https://github.com/anthony-khong))
+- ✨ added `D.isEmpty`
+- ✨ added `D.isNotEmpty`
+- ✨ added `A.reduceReverse`
+- ✨ added `A.filterMap` (alias: `A.keepMap`)
+
 ### `v3.4.1`
 
 - 🐛 fixed `F.makeControlledThrottle`
@@ -12,8 +21,8 @@ title: Changelog
 
 ### `v3.4.0`
 
-- 🐛 fixed the internal implementation for comparing objects
-- ✨ added `D.set`
+- 🐛 fixed the internal implementation for comparing objects ([#10](https://github.com/mobily/ts-belt/issues/10))
+- ✨ added `D.set` ([@anthony-khong](https://github.com/anthony-khong))
 
 ### `v3.3.0`
 
@@ -47,13 +56,13 @@ A.filter(['hello', 'world'], S.startsWith('h'))
 ### `v3.1.0`
 
 - 🐛 fixed `S.head` return type
-- ✨ added `S.trimEnd`
-- ✨ added `S.trimStart`
-- ✨ added `S.last`
+- ✨ added `S.trimEnd` ([@Dilven](https://github.com/Dilven))
+- ✨ added `S.trimStart` ([@Dilven](https://github.com/Dilven))
+- ✨ added `S.last` ([@Dilven](https://github.com/Dilven))
 
 ### `v3.0.1`
 
-- 🐛 fixed `A.uniqBy` implementation
+- 🐛 fixed `A.uniqBy` signature ([#1](https://github.com/mobily/ts-belt/issues/1))
 
 ### `v3.0.0`
 

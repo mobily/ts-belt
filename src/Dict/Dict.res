@@ -148,3 +148,11 @@ let rejectWithKey = (dict, predicateFn) =>
 let selectKeys = (dict, keys) => {
   filterWithKey(dict, (key, _) => Js.Array.includes(key, keys))
 }
+
+%comment("Determines whether the given object is empty.")
+@gentype
+let isEmpty = dict => dict == makeEmpty()
+
+%comment("Determines whether the given object is not empty.")
+@gentype
+let isNotEmpty = dict => !isEmpty(dict)

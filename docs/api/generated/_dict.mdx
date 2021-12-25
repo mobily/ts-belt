@@ -143,6 +143,52 @@ pipe(
 ) // → ['Joe', undefined]
 ```
 
+### isEmpty
+
+Determines whether the given object is empty.
+
+
+```ts
+function isEmpty<T extends Record<string, any>>(dict: T): boolean
+```
+
+```ts
+D.isEmpty({ name: 'Joe', age: 20 }) // → false
+D.isEmpty({}) // → true
+pipe(
+  {
+    name: 'Joe',
+    age: 20,
+  },
+  D.isEmpty,
+) // → false
+
+pipe({}, D.isEmpty) // → true
+```
+
+### isNotEmpty
+
+Determines whether the given object is not empty.
+
+
+```ts
+function isNotEmpty<T extends Record<string, any>>(dict: T): boolean
+```
+
+```ts
+D.isNotEmpty({ name: 'Joe', age: 20 }) // → true
+D.isNotEmpty({}) // → false
+pipe(
+  {
+    name: 'Joe',
+    age: 20,
+  },
+  D.isNotEmpty,
+) // → true
+
+pipe({}, D.isNotEmpty) // → false
+```
+
 ### keys
 
 Returns a new array that contains all keys of the provided object.
@@ -313,6 +359,28 @@ function selectKeys<T, K extends keyof T>(dict: T, keys: K[]): Pick<T, K>
 function selectKeys<T, K extends keyof T>(keys: K[]): (dict: T) => Pick<T, K>
 ```
 
+```ts
+D.selectKeys({ name: 'Joe', location: 'Warsaw', age: 42 }, [
+  'name',
+  'age',
+]) // → { name: 'Joe', age: 42 }
+
+D.selectKeys(
+  { name: 'Joe', location: 'Warsaw' } as Record<string, string>,
+  ['name', 'age'],
+) // → { name: 'Joe' }
+
+pipe(
+  { name: 'Joe', location: 'Warsaw', age: 42 },
+  D.selectKeys(['name', 'age']),
+) // → { name: 'Joe', age: 42 }
+
+pipe(
+  { name: 'Joe', location: 'Warsaw' } as Record<string, string>,
+  D.selectKeys(['name', 'age']),
+) // → { name: 'Joe' }
+```
+
 ### set
 
 Adds a property. Equivalent to merging with `{key: value}`
@@ -365,20 +433,29 @@ function update<T, K extends keyof T, R>(key: K, fn: (value: Option<T[K]>) => R)
 ```
 
 ```ts
-D.update({ name: 'Joe', location: 'Warsaw' }, 'name', v =>
-  O.getExn(v).toUpperCase(),
+D.update({ name: 'Joe', location: 'Warsaw' }, 'name', option =>
+  O.mapWithDefault(option, 'unknown', S.toUpperCase),
 ) // → { name: 'JOE', location: 'Warsaw' }
 
-D.update({ 0: false, 1: true }, 1, v => +O.getExn(v)) // → { 0: false, 1: 1 }
+// ⬇️ const obj: Record<string, string> = { name: 'Joe', location: 'Warsaw' }
+D.update(obj, 'key', option =>
+  O.mapWithDefault(option, 'unknown', S.toUpperCase),
+) // → { name: 'Joe', key: 'unknown', location: 'Warsaw' }
+
 pipe(
   { name: 'Joe', location: 'Warsaw' },
-  D.update('name', v => O.getExn(v).toUpperCase()),
+  D.update('name', option =>
+    O.mapWithDefault(option, 'unknown', S.toUpperCase),
+  ),
 ) // → { name: 'JOE', location: 'Warsaw' }
 
+// ⬇️ const obj: Record<string, string> = { name: 'Joe', location: 'Warsaw' }
 pipe(
-  { 0: false, 1: true },
-  D.update(1, v => +O.getExn(v)),
-) // → { 0: false, 1: 1 }
+  obj,
+  D.update('key', option =>
+    O.mapWithDefault(option, 'unknown', S.toUpperCase),
+  ),
+) // → { name: 'Joe', key: 'unknown', location: 'Warsaw' }
 ```
 
 ### updateUnsafe
@@ -392,20 +469,19 @@ function updateUnsafe<T, K extends keyof T, R>(key: K, fn: (value: T[K]) => R): 
 ```
 
 ```ts
-D.updateUnsafe({ name: 'Joe', location: 'Warsaw' }, 'name', v =>
-  v.toUpperCase(),
+D.updateUnsafe(
+  { name: 'Joe', location: 'Warsaw' },
+  'name',
+  S.toUpperCase,
 ) // → { name: 'JOE', location: 'Warsaw' }
 
-D.updateUnsafe({ 0: false, 1: true }, 1, v => +v) // → { 0: false, 1: 1 }
+D.updateUnsafe({ 0: false, 1: true }, 1, B.inverse) // → { 0: false, 1: false }
 pipe(
   { name: 'Joe', location: 'Warsaw' },
-  D.updateUnsafe('name', v => v.toUpperCase()),
+  D.updateUnsafe('name', S.toUpperCase),
 ) // → { name: 'JOE', location: 'Warsaw' }
 
-pipe(
-  { 0: false, 1: true },
-  D.updateUnsafe(1, v => +v),
-) // → { 0: false, 1: 1 }
+pipe({ 0: false, 1: true }, D.updateUnsafe(1, B.inverse)) // → { 0: false, 1: false }
 ```
 
 ### values

@@ -1,6 +1,6 @@
 import { expectType } from 'ts-expect'
 
-import { D, pipe } from '../..'
+import { S, D, B, pipe } from '../..'
 
 const obj = {
   0: true,
@@ -42,14 +42,16 @@ describe('updateUnsafe', () => {
 
   it('*', () => {
     expect(
-      D.updateUnsafe({ name: 'Joe', location: 'Warsaw' }, 'name', v =>
-        v.toUpperCase(),
+      D.updateUnsafe(
+        { name: 'Joe', location: 'Warsaw' },
+        'name',
+        S.toUpperCase,
       ),
     ).toEqual({ name: 'JOE', location: 'Warsaw' })
 
-    expect(D.updateUnsafe({ 0: false, 1: true }, 1, v => +v)).toEqual(
+    expect(D.updateUnsafe({ 0: false, 1: true }, 1, B.inverse)).toEqual(
       // prettier-ignore
-      { 0: false, 1: 1 },
+      { 0: false, 1: false },
     )
   })
 })
@@ -121,18 +123,13 @@ describe('updateUnsafe (pipe)', () => {
     expect(
       pipe(
         { name: 'Joe', location: 'Warsaw' },
-        D.updateUnsafe('name', v => v.toUpperCase()),
+        D.updateUnsafe('name', S.toUpperCase),
       ),
     ).toEqual({ name: 'JOE', location: 'Warsaw' })
 
-    expect(
-      pipe(
-        { 0: false, 1: true },
-        D.updateUnsafe(1, v => +v),
-      ),
-    ).toEqual(
+    expect(pipe({ 0: false, 1: true }, D.updateUnsafe(1, B.inverse))).toEqual(
       // prettier-ignore
-      { 0: false, 1: 1 },
+      { 0: false, 1: false },
     )
   })
 })

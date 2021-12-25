@@ -26,11 +26,11 @@ let repeat = (n, element) => make(n, element)
 @gentype
 let length = xs => Belt.Array.length(xs)
 
-%comment("Determines whether the array is empty.")
+%comment("Determines whether the given array is empty.")
 @gentype
 let isEmpty = xs => length(xs) == 0
 
-%comment("Determines whether the array is not empty.")
+%comment("Determines whether the given array is not empty.")
 @gentype
 let isNotEmpty = xs => length(xs) > 0
 
@@ -244,6 +244,10 @@ let filter = (xs, predicateFn) => {
   arr
 }
 
+%comment("Alias for `filter`.")
+@gentype
+let keep = (xs, predicateFn) => filter(xs, predicateFn)
+
 %comment(
   "Returns a new array that keep all elements satisfy the given predicate (which take two arguments: the element for the array and its index)."
 )
@@ -263,6 +267,10 @@ let filterWithIndex = (xs, predicateFn) => {
   arr
 }
 
+%comment("Alias for `filterWithIndex`.")
+@gentype
+let keepWithIndex = (xs, predicateFn) => filterWithIndex(xs, predicateFn)
+
 %comment(
   "Returns a new array of elements from the provided array which do not satisfy the given predicate."
 )
@@ -281,6 +289,13 @@ let rejectWithIndex = (xs, predicateFn) =>
 )
 @gentype
 let reduce = (xs, initialValue, reduceFn) => Belt.Array.reduceU(xs, initialValue, reduceFn)
+
+%comment(
+  "Works like A.reduce, except that the function `reduceFn` is applied to each item of `xs` from the last back to the first."
+)
+@gentype
+let reduceReverse = (xs, initialValue, reduceFn) =>
+  Belt.Array.reduceReverseU(xs, initialValue, reduceFn)
 
 %comment(
   "Applies `reduceFn` (which has three parameters: an `accumulator` which starts with a value of `initialValue`, the next value from the array and its index) to each element of the provided array, and eventually it returns the final value of the accumulator."
@@ -444,7 +459,7 @@ let uniqBy = (xs, uniqFn) => {
 
   while index.contents < length(xs) {
     let value = Belt.Array.getUnsafe(xs, index.contents)
-    let alreadyAdded = some(arr, (. x) => uniqFn(unsafe(x)) == uniqFn(value))
+    let alreadyAdded = some(arr, (. x) => uniqFn(coerce(x)) == uniqFn(value))
 
     if !alreadyAdded {
       Js.Array2.push(arr, value)->ignore
@@ -527,7 +542,7 @@ let flat = xs =>
     if Js.Array2.isArray(value) {
       Belt.Array.forEachU(value, (. element) => Js.Array2.push(acc, element)->ignore)
     } else {
-      Js.Array2.push(acc, unsafe(value))->ignore
+      Js.Array2.push(acc, coerce(value))->ignore
     }
     acc
   })
@@ -538,7 +553,7 @@ let rec flatten = (xs, arr) => {
   while index.contents < length(xs) {
     let value = Belt.Array.getUnsafe(xs, index.contents)
     if Js.Array2.isArray(value) {
-      flatten(unsafe(value), arr)->ignore
+      flatten(coerce(value), arr)->ignore
     } else {
       Js.Array2.push(arr, value)->ignore
     }
@@ -571,3 +586,13 @@ let flip = xs => {
   let (fst, snd) = xs
   (snd, fst)
 }
+
+%comment(
+  "Returns a new array that keep all elements that return `Some(value)` applied within `predicateFn`."
+)
+@gentype
+let filterMap = (xs, predicateFn) => Belt.Array.keepMapU(xs, predicateFn)
+
+%comment("Alias for `filterMap`.")
+@gentype
+let keepMap = (xs, predicateFn) => filterMap(xs, predicateFn)

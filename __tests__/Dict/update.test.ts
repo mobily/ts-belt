@@ -1,6 +1,6 @@
 import { expectType } from 'ts-expect'
 
-import { D, O, pipe } from '../..'
+import { D, O, pipe, S } from '../..'
 
 const obj = {
   0: true,
@@ -36,15 +36,19 @@ describe('update', () => {
 
   it('*', () => {
     expect(
-      D.update({ name: 'Joe', location: 'Warsaw' }, 'name', v =>
-        O.getExn(v).toUpperCase(),
+      D.update({ name: 'Joe', location: 'Warsaw' }, 'name', option =>
+        O.mapWithDefault(option, 'unknown', S.toUpperCase),
       ),
     ).toEqual({ name: 'JOE', location: 'Warsaw' })
 
-    expect(D.update({ 0: false, 1: true }, 1, v => +O.getExn(v))).toEqual(
-      // prettier-ignore
-      { 0: false, 1: 1 },
-    )
+    const obj: Record<string, string> = { name: 'Joe', location: 'Warsaw' }
+
+    expect(
+      // ⬇️ const obj: Record<string, string> = { name: 'Joe', location: 'Warsaw' }
+      D.update(obj, 'key', option =>
+        O.mapWithDefault(option, 'unknown', S.toUpperCase),
+      ),
+    ).toEqual({ name: 'Joe', key: 'unknown', location: 'Warsaw' })
   })
 })
 
@@ -99,18 +103,25 @@ describe('update (pipe)', () => {
     expect(
       pipe(
         { name: 'Joe', location: 'Warsaw' },
-        D.update('name', v => O.getExn(v).toUpperCase()),
+        D.update('name', option =>
+          O.mapWithDefault(option, 'unknown', S.toUpperCase),
+        ),
       ),
     ).toEqual({ name: 'JOE', location: 'Warsaw' })
 
+    const obj: Record<string, string> = { name: 'Joe', location: 'Warsaw' }
+
     expect(
+      // ⬇️ const obj: Record<string, string> = { name: 'Joe', location: 'Warsaw' }
       pipe(
-        { 0: false, 1: true },
-        D.update(1, v => +O.getExn(v)),
+        obj,
+        D.update('key', option =>
+          O.mapWithDefault(option, 'unknown', S.toUpperCase),
+        ),
       ),
     ).toEqual(
       // prettier-ignore
-      { 0: false, 1: 1 },
+      { name: 'Joe', key: 'unknown', location: 'Warsaw' },
     )
   })
 })

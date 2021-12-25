@@ -32,11 +32,11 @@ export declare function repeat<A>(element: A): (n: number) => ReadonlyArray<A>
 
 export declare function length<A>(xs: ReadonlyArray<A>): number
 
-/** Determines whether the array is empty. */
+/** Determines whether the given array is empty. */
 
 export declare function isEmpty<A>(xs: ReadonlyArray<A>): boolean
 
-/** Determines whether the array is not empty. */
+/** Determines whether the given array is not empty. */
 
 export declare function isNotEmpty<A>(xs: ReadonlyArray<A>): boolean
 
@@ -272,6 +272,17 @@ export declare function filter<A>(
   predicateFn: (_1: A) => boolean,
 ): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
 
+/** Alias for `filter`. */
+
+export declare function keep<A>(
+  xs: ReadonlyArray<A>,
+  predicateFn: (_1: A) => boolean,
+): ReadonlyArray<A>
+
+export declare function keep<A>(
+  predicateFn: (_1: A) => boolean,
+): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+
 /** Returns a new array that keep all elements satisfy the given predicate (which take two arguments: the element for the array and its index). */
 
 export declare function filterWithIndex<A>(
@@ -280,6 +291,17 @@ export declare function filterWithIndex<A>(
 ): ReadonlyArray<A>
 
 export declare function filterWithIndex<A>(
+  predicateFn: (_1: number, _2: A) => boolean,
+): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+
+/** Alias for `filterWithIndex`. */
+
+export declare function keepWithIndex<A>(
+  xs: ReadonlyArray<A>,
+  predicateFn: (_1: number, _2: A) => boolean,
+): ReadonlyArray<A>
+
+export declare function keepWithIndex<A>(
   predicateFn: (_1: number, _2: A) => boolean,
 ): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
 
@@ -314,6 +336,19 @@ export declare function reduce<A, B>(
 ): B
 
 export declare function reduce<A, B>(
+  initialValue: B,
+  reduceFn: (_1: B, _2: A) => B,
+): (xs: ReadonlyArray<A>) => B
+
+/** Works like A.reduce, except that the function `reduceFn` is applied to each item of `xs` from the last back to the first. */
+
+export declare function reduceReverse<A, B>(
+  xs: ReadonlyArray<A>,
+  initialValue: B,
+  reduceFn: (_1: B, _2: A) => B,
+): B
+
+export declare function reduceReverse<A, B>(
   initialValue: B,
   reduceFn: (_1: B, _2: A) => B,
 ): (xs: ReadonlyArray<A>) => B
@@ -694,3 +729,25 @@ export declare function tap<A>(
 /** Returns a new tuple with the reverse order of the elements. */
 
 export declare function flip<A, B>(xs: readonly [A, B]): readonly [B, A]
+
+/** Returns a new array that keep all elements that return `Some(value)` applied within `predicateFn`. */
+
+export declare function filterMap<A, B>(
+  xs: ReadonlyArray<A>,
+  predicateFn: (_1: A) => Option<B>,
+): ReadonlyArray<B>
+
+export declare function filterMap<A, B>(
+  predicateFn: (_1: A) => Option<B>,
+): (xs: ReadonlyArray<A>) => ReadonlyArray<B>
+
+/** Alias for `filterMap`. */
+
+export declare function keepMap<A, B>(
+  xs: ReadonlyArray<A>,
+  predicateFn: (_1: A) => Option<B>,
+): ReadonlyArray<B>
+
+export declare function keepMap<A, B>(
+  predicateFn: (_1: A) => Option<B>,
+): (xs: ReadonlyArray<A>) => ReadonlyArray<B>

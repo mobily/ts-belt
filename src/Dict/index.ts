@@ -193,3 +193,13 @@ export declare function selectKeys<T, K extends keyof T>(
 export declare function selectKeys<T, K extends keyof T>(
   keys: K[],
 ): (dict: T) => Pick<T, K>
+
+/** Determines whether the given object is empty. */
+
+export declare function isEmpty<T extends Record<string, any>>(dict: T): boolean
+
+/** Determines whether the given object is not empty. */
+
+export declare function isNotEmpty<T extends Record<string, any>>(
+  dict: T,
+): boolean
