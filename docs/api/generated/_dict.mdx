@@ -365,20 +365,16 @@ D.selectKeys({ name: 'Joe', location: 'Warsaw', age: 42 }, [
   'age',
 ]) // → { name: 'Joe', age: 42 }
 
-D.selectKeys(
-  { name: 'Joe', location: 'Warsaw' } as Record<string, string>,
-  ['name', 'age'],
-) // → { name: 'Joe' }
+// ⬇️ const obj: Record<string, string> = { name: 'Joe', location: 'Warsaw' }
+D.selectKeys(obj, ['name', 'age']) // → { name: 'Joe' }
 
 pipe(
   { name: 'Joe', location: 'Warsaw', age: 42 },
   D.selectKeys(['name', 'age']),
 ) // → { name: 'Joe', age: 42 }
 
-pipe(
-  { name: 'Joe', location: 'Warsaw' } as Record<string, string>,
-  D.selectKeys(['name', 'age']),
-) // → { name: 'Joe' }
+// ⬇️ const obj: Record<string, string> = { name: 'Joe', location: 'Warsaw' }
+pipe(obj, D.selectKeys(['name', 'age'])) // → { name: 'Joe' }
 ```
 
 ### set

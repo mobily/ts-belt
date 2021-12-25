@@ -26,11 +26,11 @@ describe('selectKeys', () => {
         'age',
       ]),
     ).toEqual({ name: 'Joe', age: 42 })
+
+    const obj: Record<string, string> = { name: 'Joe', location: 'Warsaw' }
     expect(
-      D.selectKeys(
-        { name: 'Joe', location: 'Warsaw' } as Record<string, string>,
-        ['name', 'age'],
-      ),
+      // ⬇️ const obj: Record<string, string> = { name: 'Joe', location: 'Warsaw' }
+      D.selectKeys(obj, ['name', 'age']),
     ).toEqual({ name: 'Joe' })
   })
 })
@@ -55,11 +55,11 @@ describe('selectKeys (pipe)', () => {
         D.selectKeys(['name', 'age']),
       ),
     ).toEqual({ name: 'Joe', age: 42 })
+
+    const obj: Record<string, string> = { name: 'Joe', location: 'Warsaw' }
     expect(
-      pipe(
-        { name: 'Joe', location: 'Warsaw' } as Record<string, string>,
-        D.selectKeys(['name', 'age']),
-      ),
+      // ⬇️ const obj: Record<string, string> = { name: 'Joe', location: 'Warsaw' }
+      pipe(obj, D.selectKeys(['name', 'age'])),
     ).toEqual({ name: 'Joe' })
   })
 })
