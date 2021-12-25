@@ -11,7 +11,7 @@ const entryPoints = [
   'Dict',
   'Number',
 ].map(entryPoint => `src/${entryPoint}/index.js`)
-const rootPoints = ['src/index.js', 'src/pipe.js']
+const rootPoints = ['src/index.js', 'src/pipe.js', 'src/flow.js']
 
 const handleError = () => process.exit(1)
 const build = (entryPoints, options = {}) => {

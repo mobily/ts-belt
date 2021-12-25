@@ -1,4 +1,5 @@
 export { pipe } from './pipe.js'
+export { flow } from './flow.js'
 
 export * as F from './Function'
 export * as A from './Array'

@@ -1,3 +1,7 @@
+export declare type UnaryFunction<A, B> = (value: A) => B
+export declare type AnyArityFunction<A extends ReadonlyArray<unknown>, B> = (
+  ...args: A
+) => B
 export declare type EmptyObject = Record<string, any>
 export declare type ExtractValue<T> = Exclude<T, null | undefined>
 export declare type ExtractNested<T> = T extends ReadonlyArray<infer K>

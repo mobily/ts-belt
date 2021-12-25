@@ -1,4 +1,6 @@
 export { pipe } from './pipe'
+export { flow } from './flow'
+
 export { Option } from './Option'
 export { Result, Ok, Error } from './Result'
 
