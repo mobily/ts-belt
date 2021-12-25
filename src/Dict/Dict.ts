@@ -29,6 +29,14 @@ export declare const updateUnsafe: <T, K extends keyof T, R>(
   key: K,
   fn: (value: T[K]) => R,
 ) => T & Record<K, R>
+export declare const deleteKey: <T, K extends keyof T>(
+  dict: T,
+  key: K,
+) => Omit<T, K>
+export declare const deleteKeys: <T, K extends keyof T>(
+  dict: T,
+  keys: K[],
+) => Omit<T, K>
 export declare const map: <T extends Record<string, any>, R>(
   dict: T,
   mapFn: (value: T[keyof T]) => R,
@@ -53,6 +61,10 @@ export declare const rejectWithKey: <T extends Record<string, any>>(
   dict: T,
   predicateFn: (key: keyof T, value: T[keyof T]) => boolean,
 ) => Partial<T>
+export declare const selectKeys: <T, K extends keyof T>(
+  dict: T,
+  keys: K[],
+) => Pick<T, K>
 export declare const fromPairs: <T, K extends keyof any>(
   xs: ReadonlyArray<readonly [K, T]>,
 ) => Record<K, T>

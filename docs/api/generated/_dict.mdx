@@ -1,3 +1,46 @@
+### deleteKey
+
+Returns a new object with the provided key deleted.
+
+
+```ts
+function deleteKey<T, K extends keyof T>(dict: T, key: K): Omit<T, K>
+function deleteKey<T, K extends keyof T>(key: K): (dict: T) => Omit<T, K>
+```
+
+```ts
+D.deleteKey({ name: 'Joe', location: 'Warsaw' }, 'location') // → { name: 'Joe' }
+pipe({ name: 'Joe', location: 'Warsaw' }, D.deleteKey('location')) // → { name: 'Joe' }
+```
+
+### deleteKeys
+
+Returns a new object with the provided keys deleted.
+
+
+```ts
+function deleteKeys<T, K extends keyof T>(dict: T, keys: K[]): Omit<T, K>
+function deleteKeys<T, K extends keyof T>(keys: K[]): (dict: T) => Omit<T, K>
+```
+
+```ts
+D.deleteKeys({ name: 'Joe', location: 'Warsaw' }, []) // → {
+  name: 'Joe',
+  location: 'Warsaw',
+}
+D.deleteKeys({ name: 'Joe', location: 'Warsaw' }, ['name']) // → { location: 'Warsaw' }
+D.deleteKeys({ name: 'Joe', location: 'Warsaw' }, ['name', 'location']) // → {}
+pipe({ name: 'Joe', location: 'Warsaw' }, D.deleteKeys([])) // → {
+  name: 'Joe',
+  location: 'Warsaw',
+}
+pipe({ name: 'Joe', location: 'Warsaw' }, D.deleteKeys(['name'])) // → { location: 'Warsaw' }
+pipe(
+  { name: 'Joe', location: 'Warsaw' },
+  D.deleteKeys(['name', 'location']),
+) // → {}
+```
+
 ### filter
 
 Removes each property that doesn't satisfy the given predicate function.
@@ -304,6 +347,34 @@ pipe(
   },
   D.rejectWithKey((key, _) => key === 'name'),
 ) // → { age: 20 }
+```
+
+### selectKeys
+
+Returns a new object with the provided keys selected.
+
+
+```ts
+function selectKeys<T, K extends keyof T>(dict: T, keys: K[]): Pick<T, K>
+function selectKeys<T, K extends keyof T>(keys: K[]): (dict: T) => Pick<T, K>
+```
+
+```ts
+D.selectKeys({ name: 'Joe', location: 'Warsaw', age: 42 }, [
+  'name',
+  'age',
+]) // → { name: 'Joe', age: 42 }
+
+// ⬇️ const obj: Record<string, string> = { name: 'Joe', location: 'Warsaw' }
+D.selectKeys(obj, ['name', 'age']) // → { name: 'Joe' }
+
+pipe(
+  { name: 'Joe', location: 'Warsaw', age: 42 },
+  D.selectKeys(['name', 'age']),
+) // → { name: 'Joe', age: 42 }
+
+// ⬇️ const obj: Record<string, string> = { name: 'Joe', location: 'Warsaw' }
+pipe(obj, D.selectKeys(['name', 'age'])) // → { name: 'Joe' }
 ```
 
 ### set
