@@ -49,27 +49,27 @@ export declare function divideWithModulo(
 
 /** Returns `true` if the first argument is greater than second argument. Otherwise it returns `false` */
 
-export declare function gt<A>(b: A): (a: A) => boolean
+export declare function gt(b: number): (a: number) => boolean
 
-export declare function gt<A>(a: A, b: A): boolean
+export declare function gt(a: number, b: number): boolean
 
 /** Returns `true` if the first argument is greater or equal than second argument. Otherwise it returns `false` */
 
-export declare function gte<A>(b: A): (a: A) => boolean
+export declare function gte(b: number): (a: number) => boolean
 
-export declare function gte<A>(a: A, b: A): boolean
+export declare function gte(a: number, b: number): boolean
 
 /** Returns `true` if the first argument is lower than second argument. Otherwise it returns `false` */
 
-export declare function lt<A>(b: A): (a: A) => boolean
+export declare function lt(b: number): (a: number) => boolean
 
-export declare function lt<A>(a: A, b: A): boolean
+export declare function lt(a: number, b: number): boolean
 
 /** Returns `true` if the first argument is lower or equal than second argument. Otherwise it returns `false` */
 
-export declare function lte<A>(b: A): (a: A) => boolean
+export declare function lte(b: number): (a: number) => boolean
 
-export declare function lte<A>(a: A, b: A): boolean
+export declare function lte(a: number, b: number): boolean
 
 /** Clamps a value between an upper and lower bound */
 
