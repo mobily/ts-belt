@@ -3,6 +3,19 @@ id: changelog
 title: Changelog
 ---
 
+### `v3.6.0`
+
+- ✨ added `flip` ([#17](https://github.com/mobily/ts-belt/issues/17), learn more [here](/api/pipe-flow))
+- ✨ added `D.selectKeys` ([@anthony-khong](https://github.com/anthony-khong))
+- ✨ added `D.deleteKey` ([@anthony-khong](https://github.com/anthony-khong))
+- ✨ added `D.deleteKeys` ([@anthony-khong](https://github.com/anthony-khong))
+- ✨ added `N.clamp` ([@domeknn](https://github.com/domeknn))
+- ✨ added `N.gt` ([@domeknn](https://github.com/domeknn))
+- ✨ added `N.lt` ([@domeknn](https://github.com/domeknn))
+- ✨ added `N.gte` ([@domeknn](https://github.com/domeknn))
+- ✨ added `N.lte` ([@domeknn](https://github.com/domeknn))
+- 🐛 fixed `A.prependToAll` (the order of elements was incorrect after calling `prependToAll`)
+
 ### `v3.5.0`
 
 - ✨ added `D.update` ([@anthony-khong](https://github.com/anthony-khong))

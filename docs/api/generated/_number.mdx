@@ -64,8 +64,8 @@ Returns `true` if the first argument is greater than second argument. Otherwise 
 
 
 ```ts
-function gt<A>(b: A): (a: A) => boolean
-function gt<A>(a: A, b: A): boolean
+function gt(b: number): (a: number) => boolean
+function gt(a: number, b: number): boolean
 ```
 
 ```ts
@@ -79,8 +79,8 @@ Returns `true` if the first argument is greater or equal than second argument. O
 
 
 ```ts
-function gte<A>(b: A): (a: A) => boolean
-function gte<A>(a: A, b: A): boolean
+function gte(b: number): (a: number) => boolean
+function gte(a: number, b: number): boolean
 ```
 
 ```ts
@@ -94,8 +94,8 @@ Returns `true` if the first argument is lower than second argument. Otherwise it
 
 
 ```ts
-function lt<A>(b: A): (a: A) => boolean
-function lt<A>(a: A, b: A): boolean
+function lt(b: number): (a: number) => boolean
+function lt(a: number, b: number): boolean
 ```
 
 ```ts
@@ -109,8 +109,8 @@ Returns `true` if the first argument is lower or equal than second argument. Oth
 
 
 ```ts
-function lte<A>(b: A): (a: A) => boolean
-function lte<A>(a: A, b: A): boolean
+function lte(b: number): (a: number) => boolean
+function lte(a: number, b: number): boolean
 ```
 
 ```ts

@@ -134,6 +134,9 @@ svg[class*="ExternalLink"] {
   content: "Describe the result of a certain operation without relying on exceptions";
 }
 
+.sidebar-api-pipe-flow > .menu__link:after {
+  content: "Create a function composition";
+}
 
 .menu__list-item {
   padding: 4px 0;

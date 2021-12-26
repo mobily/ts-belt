@@ -9,6 +9,7 @@ const makeSidebar = names =>
 
 module.exports = {
   sidebar: makeSidebar([
+    'pipe-flow',
     'array',
     'boolean',
     'function',
