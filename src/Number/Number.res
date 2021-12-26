@@ -36,19 +36,19 @@ let divideWithModulo = (a, b) => (a /. b, mod(int_of_float(a), int_of_float(b)))
 
 %comment("Returns `true` if the first argument is greater than second argument. Otherwise it returns `false`")
 @gentype
-let gt = (a, b) => a > b
+let gt = (a: float, b: float) => a > b
 
 %comment("Returns `true` if the first argument is greater or equal than second argument. Otherwise it returns `false`")
 @gentype
-let gte = (a, b) => a >= b
+let gte = (a: float, b: float) => a >= b
 
 %comment("Returns `true` if the first argument is lower than second argument. Otherwise it returns `false`")
 @gentype
-let lt = (a, b) => a < b
+let lt = (a: float, b: float) => a < b
 
 %comment("Returns `true` if the first argument is lower or equal than second argument. Otherwise it returns `false`")
 @gentype
-let lte = (a, b) => a <= b
+let lte = (a: float, b: float) => a <= b
 
 %comment("Clamps a value between an upper and lower bound")
 @gentype
