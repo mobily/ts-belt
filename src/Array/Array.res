@@ -51,7 +51,7 @@ let prepend = (xs, element) => Belt.Array.concat([element], xs)
 )
 @gentype
 let prependToAll = (xs, delimiter) =>
-  Belt.Array.reduceU(xs, [], (. acc, value) => Belt.Array.concat([delimiter, value], acc))
+  Belt.Array.reduceU(xs, [], (. acc, value) => Belt.Array.concat(acc, [delimiter, value]))
 
 %comment("Creates a new array with the separator interposed between elements.")
 @gentype
