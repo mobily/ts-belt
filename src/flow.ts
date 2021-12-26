@@ -1,3 +1,7 @@
+/**
+ * Performs left-to-right function composition and returns a new function, the first argument may have any arity, the remaining arguments must be unary.
+ */
+
 export declare function flow<A extends ReadonlyArray<unknown>, B>(
   fn1: (...args: A) => B,
 ): (...args: A) => B

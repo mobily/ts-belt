@@ -1,3 +1,7 @@
+/**
+ * Performs left-to-right function composition (the first argument must be a value).
+ */
+
 export declare function pipe<A, B>(value: A, fn1: (arg: A) => B): B
 
 export declare function pipe<A, B, C>(
