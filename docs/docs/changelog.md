@@ -5,7 +5,7 @@ title: Changelog
 
 ### `v3.6.0`
 
-- ✨ added `flip` ([#17](https://github.com/mobily/ts-belt/issues/17), learn more [here](/api/pipe-flow))
+- ✨ added `flow` ([#17](https://github.com/mobily/ts-belt/issues/17), learn more [here](/api/pipe-flow))
 - ✨ added `D.selectKeys` ([@anthony-khong](https://github.com/anthony-khong))
 - ✨ added `D.deleteKey` ([@anthony-khong](https://github.com/anthony-khong))
 - ✨ added `D.deleteKeys` ([@anthony-khong](https://github.com/anthony-khong))
