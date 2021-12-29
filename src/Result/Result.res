@@ -124,3 +124,13 @@ let mapError = (result, mapFn) =>
   | Ok(_) as result => result
   | Error(err) => Error(mapFn(err))
   }
+
+%comment(
+  "Returns `mapFn(err)` when `result` is of the form `Error(err)`, otherwise, returns `result` unchanged."
+)
+@gentype
+let catchError = (result, mapFn) =>
+  switch result {
+  | Ok(_) as result => result
+  | Error(err) => mapFn(err)
+  }
