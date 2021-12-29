@@ -12,6 +12,7 @@
     "benchr": "^4.3.0"
   },
   "dependencies": {
+    "list": "^2.0.19",
     "lodash": "^4.17.21",
     "rambda": "^6.9.0",
     "ramda": "^0.27.1",

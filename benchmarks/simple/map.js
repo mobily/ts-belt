@@ -5,9 +5,14 @@ const {
   addRambda,
   addRamda,
   addRemeda,
+  addFunkiaList,
 } = require('../utils')
+const L = require('list')
+const R = require('ramda')
 
 const input = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+const listInput = L.from(input)
+
 const fn = x => x * 2
 
 module.exports = makeBenchmark(
@@ -33,6 +38,16 @@ module.exports = makeBenchmark(
       },
       () => {
         return pipe(input, map(fn))
+      },
+    ]
+  }),
+  addFunkiaList(L => {
+    return [
+      () => {
+        return L.map(fn, listInput)
+      },
+      () => {
+        return R.pipe(L.map(fn))(listInput)
       },
     ]
   }),
