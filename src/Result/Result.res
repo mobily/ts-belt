@@ -114,3 +114,13 @@ let handleError = (result, mapFn) =>
   | Ok(_) as result => result
   | Error(err) => Ok(mapFn(err))
   }
+
+%comment(
+  "Returns `result` unchanged if `result` is of the form `Ok`, otherwise, returns `Error(mapFn(err))`."
+)
+@gentype
+let mapError = (result, mapFn) =>
+  switch result {
+  | Ok(_) as result => result
+  | Error(err) => Error(mapFn(err))
+  }

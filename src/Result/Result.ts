@@ -68,3 +68,7 @@ export declare const handleError: <A, B>(
   result: Result<A, B>,
   mapFn: (err: B) => NonNullable<A>,
 ) => Result<A, void>
+export declare const mapError: <A, B, C>(
+  result: Result<A, B>,
+  mapFn: (err: B) => NonNullable<C>,
+) => Result<A, C>
