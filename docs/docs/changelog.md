@@ -3,6 +3,15 @@ id: changelog
 title: Changelog
 ---
 
+### `v3.7.0`
+
+- ✨ added `R.catchError`
+- ✨ added `R.handleError`
+- ✨ added `R.mapError`
+- ✨ added `R.tapError`
+- ✨ added `R.recover`
+- ✨ added `R.flip`
+
 ### `v3.6.0`
 
 - ✨ added `flow` ([#17](https://github.com/mobily/ts-belt/issues/17), learn more [here](/api/pipe-flow))
