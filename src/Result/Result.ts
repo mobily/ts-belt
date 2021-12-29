@@ -60,3 +60,7 @@ export declare const tap: <A, B>(
   result: Result<A, B>,
   okFn: (value: A) => void,
 ) => Result<A, B>
+export declare const tapError: <A, B>(
+  result: Result<A, B>,
+  errorFn: (err: B) => void,
+) => Result<A, B>

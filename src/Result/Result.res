@@ -92,3 +92,15 @@ let tap = (result, okFn) =>
     result
   | Error(_) => result
   }
+
+%comment(
+  "Applies a side-effect function to the value in `Error`, and returns the original `result`."
+)
+@gentype
+let tapError = (result, errorFn) =>
+  switch result {
+  | Ok(_) => result
+  | Error(err) =>
+    errorFn(err)
+    result
+  }
