@@ -1,11 +1,45 @@
+### catchError
+
+Returns `mapFn(err)` when `result` is of the form `Error(err)`, otherwise, returns `result` unchanged.
+
+
+```ts
+function catchError<A, B, C>(result: Result<A, B>, mapFn: (err: B) => Result<A, C>): Result<A, C>
+function catchError<A, B, C>(mapFn: (err: B) => Result<A, C>): (result: Result<A, B>) => Result<A, C>
+```
+
+```ts
+// type User = { name: string, age: number } | null
+pipe(
+  // ⬇️ const obj: User = { name: 'Joe', age: 20 }
+  R.fromNullable(obj, 'unknown'),
+  R.catchError(err => {
+    return R.Ok({
+      name: err,
+      age: 0,
+    })
+  }),
+  R.map(obj => obj.name),
+) // → Ok('Joe')
+
+pipe(
+  // ⬇️ const obj: User = null
+  R.fromNullable(obj, 'unknown'),
+  R.catchError(err => {
+    return R.Error(`${err} value`)
+  }),
+  R.map(obj => obj.name),
+) // → Error('unknown value')
+```
+
 ### flatMap
 
 Returns the result of `mapFn` (it must have a return type of `Result`) if `result` is `Ok(value)`, otherwise, returns `result` unchanged.
 
 
 ```ts
-function flatMap<A, B, R>(result: Result<A, B>, mapFn: (value: A) => Result<R, B>): Result<R, B>
-function flatMap<A, B, R>(mapFn: (value: A) => Result<R, B>): (result: Result<A, B>) => Result<R, B>
+function flatMap<A, B, C>(result: Result<A, B>, mapFn: (value: A) => Result<C, B>): Result<C, B>
+function flatMap<A, B, C>(mapFn: (value: A) => Result<C, B>): (result: Result<A, B>) => Result<C, B>
 ```
 
 ```ts
@@ -35,6 +69,31 @@ pipe(
       : R.Ok(100 / value)
   }),
 ) // → Error('never divide by zero')
+```
+
+### flip
+
+Swaps the values between the `Ok` and `Error`.
+
+
+```ts
+function flip<A, B>(result: Result<A, B>): Result<B, A>
+```
+
+```ts
+// type Value = string | null
+pipe(
+  // ⬇️ const value: Value = 'Joe'
+  R.fromNullable(value, 'value cannot be nullable'),
+  R.flip,
+) // → Error('Joe')
+
+// type Value = string | null
+pipe(
+  // ⬇️ const value: Value = null
+  R.fromNullable(value, 'value cannot be nullable'),
+  R.flip,
+) // → Ok('value cannot be nullable')
 ```
 
 ### fromFalsy
@@ -141,6 +200,43 @@ pipe(
 ) // → 'error'
 ```
 
+### handleError
+
+Converts errors into successful values, and returns a Result where the error channel is voided, to indicate that the error has been handled.
+
+
+```ts
+function handleError<A, B>(result: Result<A, B>, mapFn: (err: B) => NonNullable<A>): Result<A, void>
+function handleError<A, B>(mapFn: (err: B) => NonNullable<A>): (result: Result<A, B>) => Result<A, void>
+```
+
+```ts
+// type User = { name: string, age: number } | null
+pipe(
+  // ⬇️ const obj: User = { name: 'Joe', age: 20 }
+  R.fromNullable(obj, 'unknown'),
+  R.handleError(err => {
+    return {
+      name: err,
+      age: 0,
+    }
+  }),
+  R.map(obj => obj.name),
+) // → Ok('Joe')
+
+pipe(
+  // ⬇️ const obj: User = null
+  R.fromNullable(obj, 'unknown'),
+  R.handleError(err => {
+    return {
+      name: err,
+      age: 0,
+    }
+  }),
+  R.map(obj => obj.name),
+) // → Ok('unknown')
+```
+
 ### isError
 
 Returns `true` if the provided `result` is `Error(errorValue)`, otherwise, returns `false`.
@@ -213,6 +309,37 @@ pipe(
 ) // → Error('cannot be nullable')
 ```
 
+### mapError
+
+Returns `result` unchanged if `result` is of the form `Ok`, otherwise, returns `Error(mapFn(err))`.
+
+
+```ts
+function mapError<A, B, C>(result: Result<A, B>, mapFn: (err: B) => NonNullable<C>): Result<A, C>
+function mapError<A, B, C>(mapFn: (err: B) => NonNullable<C>): (result: Result<A, B>) => Result<A, C>
+```
+
+```ts
+// type User = { name: string, age: number } | null
+pipe(
+  // ⬇️ const obj: User = { name: 'Joe', age: 20 }
+  R.fromNullable(obj, 'unknown'),
+  R.mapError(err => {
+    return `${err} value`
+  }),
+  R.map(obj => obj.name),
+) // → Ok('Joe')
+
+pipe(
+  // ⬇️ const obj: User = null
+  R.fromNullable(obj, 'unknown'),
+  R.mapError(err => {
+    return `${err} value`
+  }),
+  R.map(obj => obj.name),
+) // → Error('unknown value')
+```
+
 ### mapWithDefault
 
 Returns the result of `mapFn` if `result` is `Ok(value)`, otherwise returns a default value.
@@ -275,6 +402,37 @@ pipe(
 ) // → 'cannot be nullable!'
 ```
 
+### recover
+
+Ensures that the returned result is `Ok` by returning the provided result if it's already [Ok], or by falling back to the default value, which will be wrapped in the `Ok` constructor, if the provided result is an `Error`.
+
+
+```ts
+function recover<A, B>(result: Result<A, B>, defaultValue: NonNullable<A>): Result<A, B>
+function recover<A, B>(defaultValue: NonNullable<A>): (result: Result<A, B>) => Result<A, B>
+```
+
+```ts
+// type User = { name: string | null, age: number } | null
+pipe(
+  // ⬇️ const obj: User = { name: 'Joe', age: 20 }
+  R.fromNullable(obj, 'value cannot be nullable'),
+  R.flatMap(obj => {
+    return obj.name ? R.Ok(obj.name) : R.Error('name not found')
+  }),
+  R.recover('unknown name'),
+) // → Ok('Joe')
+
+pipe(
+  // ⬇️ const obj: User = { name: null, age: 20 }
+  R.fromNullable(obj, 'value cannot be nullable'),
+  R.flatMap(obj => {
+    return obj.name ? R.Ok(obj.name) : R.Error('name not found')
+  }),
+  R.recover('unknown name'),
+) // → Ok('unknown name')
+```
+
 ### tap
 
 Applies a side-effect function to the value in `Ok`, and returns the original `result`.
@@ -291,6 +449,26 @@ pipe(
   R.map(S.isEmpty),
   R.tap(isEmpty => {
     console.log(isEmpty) // ⬅️ false
+  }),
+  R.getWithDefault(false),
+) // → false
+```
+
+### tapError
+
+Applies a side-effect function to the value in `Error`, and returns the original `result`.
+
+
+```ts
+function tapError<A, B>(result: Result<A, B>, errorFn: (err: B) => void): Result<A, B>
+function tapError<A, B>(errorFn: (err: B) => void): (result: Result<A, B>) => Result<A, B>
+```
+
+```ts
+pipe(
+  R.fromNullable(null, 'value cannot be nullable'),
+  R.tapError(err => {
+    console.log(err) // ⬅️ 'value cannot be nullable'
   }),
   R.getWithDefault(false),
 ) // → false
