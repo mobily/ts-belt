@@ -104,3 +104,13 @@ let tapError = (result, errorFn) =>
     errorFn(err)
     result
   }
+
+%comment(
+  "Converts errors into successful values, and returns a Result where the error channel is voided, to indicate that the error has been handled."
+)
+@gentype
+let handleError = (result, mapFn) =>
+  switch result {
+  | Ok(_) as result => result
+  | Error(err) => Ok(mapFn(err))
+  }

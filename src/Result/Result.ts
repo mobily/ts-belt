@@ -64,3 +64,7 @@ export declare const tapError: <A, B>(
   result: Result<A, B>,
   errorFn: (err: B) => void,
 ) => Result<A, B>
+export declare const handleError: <A, B>(
+  result: Result<A, B>,
+  mapFn: (err: B) => NonNullable<A>,
+) => Result<A, void>
