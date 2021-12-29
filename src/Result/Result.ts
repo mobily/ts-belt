@@ -28,10 +28,10 @@ export declare const fromPredicate: <A, B>(
   predicateFn: (value: A) => boolean,
   errorValue: NonNullable<B>,
 ) => Result<ExtractValue<A>, B>
-export declare const flatMap: <A, B, R>(
+export declare const flatMap: <A, B, C>(
   result: Result<A, B>,
-  mapFn: (value: A) => Result<R, B>,
-) => Result<R, B>
+  mapFn: (value: A) => Result<C, B>,
+) => Result<C, B>
 export declare const map: <A, B, R>(
   result: Result<A, B>,
   mapFn: (value: A) => NonNullable<R>,
@@ -80,3 +80,4 @@ export declare const recover: <A, B>(
   result: Result<A, B>,
   defaultValue: NonNullable<A>,
 ) => Result<A, B>
+export declare const flip: <A, B>(result: Result<A, B>) => Result<B, A>

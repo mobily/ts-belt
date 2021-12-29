@@ -140,3 +140,11 @@ let catchError = (result, mapFn) =>
 )
 @gentype
 let recover = (result, defaultValue) => catchError(result, _ => Ok(defaultValue))
+
+%comment("Swaps the values between the `Ok` and `Error`.")
+@gentype
+let flip = result =>
+  switch result {
+  | Ok(value) => Error(value)
+  | Error(err) => Ok(err)
+  }

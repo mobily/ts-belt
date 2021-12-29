@@ -76,14 +76,14 @@ export declare function mapWithDefault<A, B, R>(
 
 /** Returns the result of `mapFn` (it must have a return type of `Result`) if `result` is `Ok(value)`, otherwise, returns `result` unchanged. */
 
-export declare function flatMap<A, B, R>(
+export declare function flatMap<A, B, C>(
   result: Result<A, B>,
-  mapFn: (value: A) => Result<R, B>,
-): Result<R, B>
+  mapFn: (value: A) => Result<C, B>,
+): Result<C, B>
 
-export declare function flatMap<A, B, R>(
-  mapFn: (value: A) => Result<R, B>,
-): (result: Result<A, B>) => Result<R, B>
+export declare function flatMap<A, B, C>(
+  mapFn: (value: A) => Result<C, B>,
+): (result: Result<A, B>) => Result<C, B>
 
 /** Returns `value` if `result` is `Ok(value)`, otherwise, throws an exception. */
 
@@ -143,3 +143,62 @@ export declare function tap<A, B>(
 export declare function tap<A, B>(
   okFn: (value: A) => void,
 ): (result: Result<A, B>) => Result<A, B>
+
+/** Applies a side-effect function to the value in `Error`, and returns the original `result`. */
+
+export declare function tapError<A, B>(
+  result: Result<A, B>,
+  errorFn: (err: B) => void,
+): Result<A, B>
+
+export declare function tapError<A, B>(
+  errorFn: (err: B) => void,
+): (result: Result<A, B>) => Result<A, B>
+
+/** Converts errors into successful values, and returns a Result where the error channel is voided, to indicate that the error has been handled. */
+
+export declare function handleError<A, B>(
+  result: Result<A, B>,
+  mapFn: (err: B) => NonNullable<A>,
+): Result<A, void>
+
+export declare function handleError<A, B>(
+  mapFn: (err: B) => NonNullable<A>,
+): (result: Result<A, B>) => Result<A, void>
+
+/** Returns `result` unchanged if `result` is of the form `Ok`, otherwise, returns `Error(mapFn(err))`. */
+
+export declare function mapError<A, B, C>(
+  result: Result<A, B>,
+  mapFn: (err: B) => NonNullable<C>,
+): Result<A, C>
+
+export declare function mapError<A, B, C>(
+  mapFn: (err: B) => NonNullable<C>,
+): (result: Result<A, B>) => Result<A, C>
+
+/** Returns `mapFn(err)` when `result` is of the form `Error(err)`, otherwise, returns `result` unchanged. */
+
+export declare function catchError<A, B, C>(
+  result: Result<A, B>,
+  mapFn: (err: B) => Result<A, C>,
+): Result<A, C>
+
+export declare function catchError<A, B, C>(
+  mapFn: (err: B) => Result<A, C>,
+): (result: Result<A, B>) => Result<A, C>
+
+/** Ensures that the returned result is `Ok` by returning the provided result if it's already [Ok], or by falling back to the default value, which will be wrapped in the `Ok` constructor, if the provided result is an `Error`. */
+
+export declare function recover<A, B>(
+  result: Result<A, B>,
+  defaultValue: NonNullable<A>,
+): Result<A, B>
+
+export declare function recover<A, B>(
+  defaultValue: NonNullable<A>,
+): (result: Result<A, B>) => Result<A, B>
+
+/** Swaps the values between the `Ok` and `Error`. */
+
+export declare function flip<A, B>(result: Result<A, B>): Result<B, A>
