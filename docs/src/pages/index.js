@@ -10,7 +10,8 @@ const Home = () => {
   const context = useDocusaurusContext()
   const { siteConfig = {} } = context
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
+    localStorage.setItem('theme', 'light')
     document.querySelector('.navbar__brand').style = 'display: none;'
   }, [])
 
@@ -18,7 +19,11 @@ const Home = () => {
     <Layout>
       <header className={clsx('hero', styles.hero)}>
         <div className={styles.heroBanner}>
-          <img className={styles.titleImage} src="img/hero-logo.png" alt="TS Belt" />
+          <img
+            className={styles.titleImage}
+            src="img/hero-logo.png"
+            alt="ts-belt - fast, modern, and practical utility library for FP in TypeScript"
+          />
           <div className={styles.container}>
             <h1 className={styles.h1}>{siteConfig.title}</h1>
             <p className={styles.summary}>{siteConfig.tagline}</p>
