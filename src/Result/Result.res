@@ -134,3 +134,9 @@ let catchError = (result, mapFn) =>
   | Ok(_) as result => result
   | Error(err) => mapFn(err)
   }
+
+%comment(
+  "Ensures that the returned result is `Ok` by returning the provided result if it's already [Ok], or by falling back to the default value, which will be wrapped in the `Ok` constructor, if the provided result is an `Error`."
+)
+@gentype
+let recover = (result, defaultValue) => catchError(result, _ => Ok(defaultValue))

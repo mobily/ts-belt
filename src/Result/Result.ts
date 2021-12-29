@@ -76,3 +76,7 @@ export declare const catchError: <A, B, C>(
   result: Result<A, B>,
   mapFn: (err: B) => Result<A, C>,
 ) => Result<A, C>
+export declare const recover: <A, B>(
+  result: Result<A, B>,
+  defaultValue: NonNullable<A>,
+) => Result<A, B>
