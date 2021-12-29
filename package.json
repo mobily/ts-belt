@@ -61,7 +61,7 @@
     "all-contributors-cli": "^6.20.0",
     "common-tags": "^1.8.2",
     "coveralls": "^3.1.1",
-    "esbuild": "^0.14.5",
+    "esbuild": "0.14.0",
     "flow-bin": "^0.168.0",
     "flowgen": "^1.16.1",
     "foy": "^0.2.16",
