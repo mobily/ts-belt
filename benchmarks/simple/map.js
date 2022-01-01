@@ -89,7 +89,7 @@ module.exports = makeBenchmark(
   addNative(native => {
     return [
       () => {
-        return native.map(fn, input)
+        return native.map(fn)(input)
       },
       () => {
         return native.pipe(native.map(fn))(input)

@@ -74,7 +74,7 @@ module.exports = makeBenchmark(
   addNative(native => {
     return [
       () => {
-        return native.filter(fn, input)
+        return native.filter(fn)(input)
       },
       () => {
         return native.pipe(native.filter(fn))(input)
