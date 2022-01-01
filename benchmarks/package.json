@@ -5,6 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "test": "NODE_ENV=test node ./ensure-identical-output.js",
     "start": "bash ./scripts/run.sh",
     "generate": "bash ./scripts/generate.sh"
   },

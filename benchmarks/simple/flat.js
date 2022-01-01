@@ -47,18 +47,6 @@ module.exports = makeBenchmark(
       },
     ]
   }),
-  addRambda(rambda => {
-    const { pipe, flatten } = rambda
-
-    return [
-      () => {
-        return flatten(input)
-      },
-      () => {
-        return pipe(flatten)(input)
-      },
-    ]
-  }),
   addLodashFp(_ => {
     return [
       () => {

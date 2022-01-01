@@ -41,10 +41,10 @@ module.exports = makeBenchmark(
 
     return [
       () => {
-        return zip(xs, input)
+        return zip(input, xs)
       },
       () => {
-        return pipe(zip(xs))(input)
+        return pipe(zip(input))(xs)
       },
     ]
   }),
@@ -53,20 +53,20 @@ module.exports = makeBenchmark(
 
     return [
       () => {
-        return zip(xs, input)
+        return zip(input, xs)
       },
       () => {
-        return pipe(zip(xs))(input)
+        return pipe(zip(input))(xs)
       },
     ]
   }),
   addLodashFp(_ => {
     return [
       () => {
-        return _.zip(xs, input)
+        return _.zip(input, xs)
       },
       () => {
-        return _.pipe(_.zip(xs))(input)
+        return _.pipe(_.zip(input))(xs)
       },
     ]
   }),
