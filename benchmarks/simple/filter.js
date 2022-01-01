@@ -5,6 +5,7 @@ const {
   addRambda,
   addRamda,
   addRemeda,
+  addNative,
 } = require('../utils')
 
 const input = [1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -67,6 +68,16 @@ module.exports = makeBenchmark(
       },
       () => {
         return _.pipe(_.filter(fn))(input)
+      },
+    ]
+  }),
+  addNative(native => {
+    return [
+      () => {
+        return native.filter(fn, input)
+      },
+      () => {
+        return native.pipe(native.filter(fn))(input)
       },
     ]
   }),
