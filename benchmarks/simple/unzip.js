@@ -45,30 +45,30 @@ module.exports = makeBenchmark(
   //     },
   //   ]
   // }),
-  // addRamda(ramda => {
-  //   const { pipe, unzip } = ramda
+  addRamda(ramda => {
+    const { pipe, transpose: unzip } = ramda
 
-  //   return [
-  //     () => {
-  //       return unzip(input)
-  //     },
-  //     () => {
-  //       return pipe(unzip)(input)
-  //     },
-  //   ]
-  // }),
-  // addRambda(rambda => {
-  //   const { pipe, unzip } = rambda
+    return [
+      () => {
+        return unzip(input)
+      },
+      () => {
+        return pipe(unzip)(input)
+      },
+    ]
+  }),
+  addRambda(rambda => {
+    const { pipe, transpose: unzip } = rambda
 
-  //   return [
-  //     () => {
-  //       return unzip(input)
-  //     },
-  //     () => {
-  //       return pipe(unzip)(input)
-  //     },
-  //   ]
-  // }),
+    return [
+      () => {
+        return unzip(input)
+      },
+      () => {
+        return pipe(unzip)(input)
+      },
+    ]
+  }),
   addLodashFp(_ => {
     return [
       () => {
