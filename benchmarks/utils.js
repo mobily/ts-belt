@@ -8,6 +8,12 @@ const native = require('./native')
 const belt = require('..')
 
 exports.makeBenchmark = (title, ...rest) => {
+  if (process.env.NODE_ENV === 'test') {
+    return {
+      title,
+      suites: rest,
+    }
+  }
   suite(
     `${title} ${title.includes('→') ? '' : '(single function call)'}`,
     () => {
