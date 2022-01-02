@@ -42,16 +42,16 @@ module.exports = makeBenchmark(
       },
     ]
   }),
-  addFunkiaList(L => {
-    return [
-      () => {
-        return L.map(fn, listInput)
-      },
-      () => {
-        return R.pipe(L.map(fn))(listInput)
-      },
-    ]
-  }),
+  // addFunkiaList(L => {
+  //   return [
+  //     () => {
+  //       return L.map(fn, listInput)
+  //     },
+  //     () => {
+  //       return R.pipe(L.map(fn))(listInput)
+  //     },
+  //   ]
+  // }),
   addRamda(ramda => {
     const { pipe, map } = ramda
 

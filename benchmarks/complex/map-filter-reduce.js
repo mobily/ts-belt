@@ -47,17 +47,17 @@ module.exports = makeBenchmark(
       },
     ]
   }),
-  addFunkiaList(L => {
-    return [
-      () => {
-        return R.pipe(
-          L.map(mapFn),
-          L.filter(filterFn),
-          L.reduce(reduceFn, 0),
-        )(listInput)
-      },
-    ]
-  }),
+  // addFunkiaList(L => {
+  //   return [
+  //     () => {
+  //       return R.pipe(
+  //         L.map(mapFn),
+  //         L.filter(filterFn),
+  //         L.reduce(reduceFn, 0),
+  //       )(listInput)
+  //     },
+  //   ]
+  // }),
   addRamda(ramda => {
     const { pipe, map, filter, reduce } = ramda
 
