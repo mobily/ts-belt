@@ -6,6 +6,7 @@ const {
   addRamda,
   addRemeda,
   addFunkiaList,
+  addNative,
 } = require('../utils')
 const L = require('list')
 const R = require('ramda')
@@ -82,6 +83,16 @@ module.exports = makeBenchmark(
       },
       () => {
         return _.pipe(_.map(fn))(input)
+      },
+    ]
+  }),
+  addNative(native => {
+    return [
+      () => {
+        return native.map(fn)(input)
+      },
+      () => {
+        return native.pipe(native.map(fn))(input)
       },
     ]
   }),

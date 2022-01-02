@@ -5,6 +5,7 @@ const {
   addRambda,
   addRamda,
   addRemeda,
+  addNative,
 } = require('../utils')
 
 const input = [1, 2, 2, 3, 3, 5, 4, 3, 2, 1]
@@ -57,6 +58,26 @@ module.exports = makeBenchmark(
       },
       () => {
         return pipe(sort(fn))(input)
+      },
+    ]
+  }),
+  addLodashFp(_ => {
+    return [
+      () => {
+        return _.sortBy(fn, input)
+      },
+      () => {
+        return _.pipe(_.sortBy(fn))(input)
+      },
+    ]
+  }),
+  addNative(native => {
+    return [
+      () => {
+        return native.safeSort(fn)(input)
+      },
+      () => {
+        return native.pipe(native.safeSort(fn))(input)
       },
     ]
   }),
