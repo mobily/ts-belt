@@ -30,7 +30,7 @@ task<Options>('dist', async ctx => {
     `node node_modules/.bin/jscodeshift --run-in-band -t tools/javascript-codemods/post/index.ts ${js}`,
   )
 
-  await ctx.exec(['yarn generate tsc --esm --cjs', 'yarn generate flow'])
+  await ctx.exec(['yarn generate tsc', 'yarn generate flow'])
 
   if (ctx.options.runTests) {
     await ctx.exec('yarn test run -c')
@@ -58,7 +58,7 @@ task<DevOptions>('dev', async ctx => {
     `node node_modules/.bin/jscodeshift --run-in-band -t tools/javascript-codemods/post/index.ts ${js}`,
   )
 
-  await ctx.exec('yarn generate tsc --cjs')
+  await ctx.exec('yarn generate tsc')
 
   if (ctx.options.test) {
     await ctx.exec(

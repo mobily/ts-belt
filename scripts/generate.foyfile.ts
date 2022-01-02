@@ -36,10 +36,9 @@ desc('Generate Flow types')
 task('flow', async ctx => {
   const entryFile = await ctx.fs.readFile('index.js.flow', defaultEncoding)
   const content = entryFile.replace(/.\/dist\//g, './')
-  const files = await globby('dist/esm/**/*.d.ts')
+  const files = await globby('dist/**/*.d.ts')
 
-  await ctx.fs.writeFile('dist/index.js.flow', content, defaultEncoding)
-  await ctx.fs.writeFile('dist/index.mjs.flow', content, defaultEncoding)
+  await ctx.fs.writeFile('dist/types/index.js.flow', content, defaultEncoding)
 
   const defs = files.map(filename => {
     const fullpath = path.resolve(__dirname, '..', filename)
@@ -64,18 +63,7 @@ task('contributors', async ctx => {
 })
 
 desc('Generate tsc')
-option('--esm', 'esm')
-option('--cjs', 'cjs')
 strict()
 task<TSCOptions>('tsc', async ctx => {
-  if (!ctx.options.esm && !ctx.options.cjs) {
-    throw new Error('at least one param is required: --esm or --cjs')
-  }
-
-  await ctx.exec(
-    [
-      ctx.options.cjs && 'yarn tsc --outDir ./dist/cjs',
-      ctx.options.esm && 'yarn tsc --outDir ./dist/esm',
-    ].filter(Boolean),
-  )
+  await ctx.exec('yarn tsc --outDir ./dist/types')
 })
