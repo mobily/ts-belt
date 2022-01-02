@@ -12,7 +12,7 @@ describe('makeControlledThrottle', () => {
   })
 
   it('provides correct types', () => {
-    const listener = (a: number, b: string) => {
+    const listener = (_a: number, _b: string) => {
       //
     }
     expectType<F.Controlled<[number, string]>>(
@@ -157,7 +157,7 @@ describe('makeControlledThrottle (pipe)', () => {
   })
 
   it('provides correct types', () => {
-    const listener = (a: number, b: string) => {
+    const listener = (_a: number, _b: string) => {
       //
     }
     expectType<F.Controlled<[number, string]>>(

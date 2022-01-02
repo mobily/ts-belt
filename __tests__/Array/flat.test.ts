@@ -1,5 +1,3 @@
-import { expectType } from 'ts-expect'
-
 import { A, pipe } from '../..'
 
 // TODO: expectTypes

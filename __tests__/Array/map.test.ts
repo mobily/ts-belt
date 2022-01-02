@@ -1,5 +1,3 @@
-import { expectType } from 'ts-expect'
-
 import { A, pipe } from '../..'
 
 const xs = [1, 2, 3, 4, 5]

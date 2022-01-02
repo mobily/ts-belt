@@ -12,7 +12,7 @@ describe('debounce', () => {
   })
 
   it('provides correct types', () => {
-    const listener = (a: number, b: string) => {
+    const listener = (_a: number, _b: string) => {
       //
     }
     expectType<(arg0: number, arg1: string) => void>(F.debounce(listener, 500))
@@ -98,7 +98,7 @@ describe('debounce (pipe)', () => {
   })
 
   it('provides correct types', () => {
-    const listener = (a: number, b: string) => {
+    const listener = (_a: number, _b: string) => {
       //
     }
     expectType<(arg0: number, arg1: string) => void>(

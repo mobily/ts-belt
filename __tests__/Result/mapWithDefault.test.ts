@@ -1,4 +1,4 @@
-import { pipe, R, G } from '../..'
+import { pipe, R } from '../..'
 
 describe('mapWithDefault', () => {
   it('returns a default value', () => {

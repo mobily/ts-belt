@@ -3,7 +3,7 @@ import { pipe, O } from '../..'
 
 describe('getExn', () => {
   it('provides correct types', () => {
-    const value = null as unknown as string | null
+    const value = '' as unknown as string | null
     const option = O.fromNullable(value)
 
     expectType<string>(O.getExn(option))

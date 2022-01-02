@@ -12,7 +12,7 @@ describe('throttle', () => {
   })
 
   it('provides correct types', () => {
-    const listener = (a: number, b: string) => {
+    const listener = (_a: number, _b: string) => {
       //
     }
     expectType<(arg0: number, arg1: string) => void>(F.throttle(listener, 500))
@@ -97,7 +97,7 @@ describe('throttle (pipe)', () => {
   })
 
   it('provides correct types', () => {
-    const listener = (a: number, b: string) => {
+    const listener = (_a: number, _b: string) => {
       //
     }
     expectType<(arg0: number, arg1: string) => void>(

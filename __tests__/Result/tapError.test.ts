@@ -1,4 +1,4 @@
-import { pipe, R, S } from '../..'
+import { pipe, R } from '../..'
 
 describe('tapError', () => {
   it('applies a side-effect', () => {

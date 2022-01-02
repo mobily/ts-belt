@@ -12,7 +12,7 @@ describe('makeControlledDebounce', () => {
   })
 
   it('provides correct types', () => {
-    const listener = (a: number, b: string) => {
+    const listener = (_a: number, _b: string) => {
       //
     }
     expectType<F.Controlled<[number, string]>>(
@@ -163,7 +163,7 @@ describe('makeControlledDebounce (pipe)', () => {
   })
 
   it('provides correct types', () => {
-    const listener = (a: number, b: string) => {
+    const listener = (_a: number, _b: string) => {
       //
     }
     expectType<F.Controlled<[number, string]>>(
