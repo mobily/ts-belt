@@ -10,7 +10,7 @@ import rescript from './remove-rescript-types'
 import option from './make-option'
 import generics from './rename-generics'
 
-const transform = (file: FileInfo, api: API, options) => {
+const transform = (file: FileInfo, api: API) => {
   const j = api.jscodeshift
   const dirname = path.dirname(file.path)
   const basename = path.basename(file.path, '.gen.tsx')
