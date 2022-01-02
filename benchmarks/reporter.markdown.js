@@ -24,6 +24,7 @@ module.exports = runner => {
       const successful = suite.filter('successful')
       const table = new Table()
 
+      const fractions = []
       suite.forEach(function (bench) {
         if (bench.aborted) {
           table.cell('status', '×')
@@ -49,16 +50,28 @@ module.exports = runner => {
           // Show percentual difference between this benchmark and the fastest.
           if (fastest.length !== successful.length) {
             let diff = 'fastest'
+            const fraction = bench.hz / fastest[0].hz
             if (bench !== fastest[0]) {
               diff =
-                '-' + ((1.0 - bench.hz / fastest[0].hz) * 100).toFixed(2) + '%'
+                '-' + ((1.0 - fraction) * 100).toFixed(2) + '%'
             }
             table.cell('diff', diff)
+            fractions.push(diff === 'fastest'
+              ? 1
+              : fraction
+            )
           }
         }
         table.newRow()
       })
-      console.log('\n```bash\n' + table.print() + '```\n')
+      const tableLines = table.print().split('\n')
+      const output = []
+      for (let i = 0; i < tableLines.length; i++) {
+        output.push(tableLines[i])
+        output.push(''.padStart(Math.floor(tableLines[0].length * fractions[i]), '█'))
+        output.push('\n')
+      }
+      console.log('\n```bash\n' + output.join('\n').trim() + '\n```\n')
       if (successful.length > 1) {
         if (fastest.length === successful.length) {
           console.log('→ No discernible winner\n')
