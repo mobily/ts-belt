@@ -6,7 +6,7 @@ title: Changelog
 ### `v3.8.0`
 
 - 🐛 fixed `O.fromPredicate` implementation
-- ♻️ the `Option` type is now `T | undefined | null` (due to this update, adding `noUncheckedIndexedAccess` to your `tsconfig` is mandatory, you can see other recommended options [here](getting-started/config.md))
+- ♻️ the `Option` type is now `type Option<T> = T | undefined | null` (due to this update, adding `noUncheckedIndexedAccess` to your `tsconfig` is mandatory, you can see other recommended options [here](getting-started/config.md))
 
 ### `v3.7.0`
 
