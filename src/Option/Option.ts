@@ -10,7 +10,7 @@ export declare const fromNullable: <T>(value: T) => Option<ExtractValue<T>>
 export declare const fromFalsy: <T>(value: T) => Option<ExtractValue<T>>
 export declare const fromPredicate: <T>(
   value: T,
-  predicateFn: (value: T) => boolean,
+  predicateFn: (value: NonNullable<T>) => boolean,
 ) => Option<ExtractValue<T>>
 export declare const filter: <T>(
   option: Option<T>,

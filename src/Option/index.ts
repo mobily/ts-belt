@@ -18,11 +18,11 @@ export declare function fromFalsy<T>(value: T): Option<ExtractValue<T>>
 
 export declare function fromPredicate<T>(
   value: T,
-  predicateFn: (value: T) => boolean,
+  predicateFn: (value: NonNullable<T>) => boolean,
 ): Option<ExtractValue<T>>
 
 export declare function fromPredicate<T>(
-  predicateFn: (value: T) => boolean,
+  predicateFn: (value: NonNullable<T>) => boolean,
 ): (value: T) => Option<ExtractValue<T>>
 
 /** Returns the result of `mapFn` if `option` is `Some(value)`, otherwise, returns `None` and `mapFn` is not called. */

@@ -82,8 +82,8 @@ Returns `Some(value)` if the given predicate function returns `true`, otherwise,
 
 
 ```ts
-function fromPredicate<T>(value: T, predicateFn: (value: T) => boolean): Option<ExtractValue<T>>
-function fromPredicate<T>(predicateFn: (value: T) => boolean): (value: T) => Option<ExtractValue<T>>
+function fromPredicate<T>(value: T, predicateFn: (value: NonNullable<T>) => boolean): Option<ExtractValue<T>>
+function fromPredicate<T>(predicateFn: (value: NonNullable<T>) => boolean): (value: T) => Option<ExtractValue<T>>
 ```
 
 ```ts

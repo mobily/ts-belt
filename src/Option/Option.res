@@ -14,7 +14,8 @@ let fromFalsy = value => value ? Some(value) : None
   "Returns `Some(value)` if the given predicate function returns `true`, otherwise, returns `None`."
 )
 @gentype
-let fromPredicate = (value, predicateFn) => predicateFn(value) ? fromNullable(value) : None
+let fromPredicate = (value, predicateFn) =>
+  value->fromNullable->Belt.Option.flatMap(value => predicateFn(value) ? Some(value) : None)
 
 %comment(
   "Returns the result of `mapFn` if `option` is `Some(value)`, otherwise, returns `None` and `mapFn` is not called."
