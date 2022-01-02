@@ -8,8 +8,14 @@ import Option, { toc as optiontoc } from "./generated/_option.mdx"
 Belt (ReScript) represents the existence and nonexistence of a value by wrapping it with the `Option` type. TS Belt does the same and provides utility-functions for convenient work with the `Option` type.
 
 ```ts
-type Option<A> = Some<A> | None
+type Option<T> = T | undefined | null
 ```
+
+:::warning
+
+Adding `noUncheckedIndexedAccess` to your `tsconfig.json` is mandatory for the `Option` type!
+
+:::
 
 ```jsx live
 function() {
