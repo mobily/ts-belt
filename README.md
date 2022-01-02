@@ -16,7 +16,7 @@
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome">
   </a>
   <a href="#contributors">
-    <img src="https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square" alt="All Contributors">
+    <img src="https://img.shields.io/badge/all_contributors-11-orange.svg?style=flat-square" alt="All Contributors">
   </a>
   <a href="https://github.com/mobily/ts-belt/blob/master/LICENSE">
     <img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="GitHub license">
@@ -102,6 +102,7 @@ pipe(
     <td align="center"><a href="https://github.com/remnantkevin"><img src="https://avatars.githubusercontent.com/u/8270635?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Kevin</b></sub></a><br /><a href="https://github.com/mobily/ts-belt/commits?author=remnantkevin" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/anthony-khong"><img src="https://avatars.githubusercontent.com/u/12151757?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Anthony Khong</b></sub></a><br /><a href="https://github.com/mobily/ts-belt/commits?author=anthony-khong" title="Code">💻</a> <a href="https://github.com/mobily/ts-belt/commits?author=anthony-khong" title="Documentation">📖</a> <a href="https://github.com/mobily/ts-belt/commits?author=anthony-khong" title="Tests">⚠️</a></td>
     <td align="center"><a href="http://pyrolistical.github.com/"><img src="https://avatars.githubusercontent.com/u/463642?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Pyrolistical</b></sub></a><br /><a href="https://github.com/mobily/ts-belt/commits?author=Pyrolistical" title="Documentation">📖</a> <a href="#maintenance-Pyrolistical" title="Maintenance">🚧</a> <a href="#ideas-Pyrolistical" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://zoontek.me/"><img src="https://avatars.githubusercontent.com/u/1902323?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mathieu Acthernoene</b></sub></a><br /><a href="#ideas-zoontek" title="Ideas, Planning, & Feedback">🤔</a></td>
   </tr>
 </table>
 

@@ -119,6 +119,15 @@
         "maintenance",
         "ideas"
       ]
+    },
+    {
+      "login": "zoontek",
+      "name": "Mathieu Acthernoene",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1902323?v=4",
+      "profile": "https://zoontek.me/",
+      "contributions": [
+        "ideas"
+      ]
     }
   ],
   "commitConvention": "none"
