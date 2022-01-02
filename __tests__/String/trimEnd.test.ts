@@ -1,6 +1,6 @@
 import { expectType } from 'ts-expect'
 
-import { S } from '../../dist/cjs'
+import { S } from '../..'
 
 describe('trimEnd', () => {
   it('provides correct types', () => {
