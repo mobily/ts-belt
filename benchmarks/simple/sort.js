@@ -61,16 +61,6 @@ module.exports = makeBenchmark(
       },
     ]
   }),
-  addLodashFp(_ => {
-    return [
-      () => {
-        return _.sortBy(fn, input)
-      },
-      () => {
-        return _.pipe(_.sortBy(fn))(input)
-      },
-    ]
-  }),
   addNative(native => {
     return [
       () => {
