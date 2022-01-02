@@ -21,6 +21,13 @@ module.exports = {
     prism: {
       theme: require('prism-react-renderer/themes/github'),
     },
+    announcementBar: {
+      content:
+        '⭐️ If you like <strong>ts-belt</strong>, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/mobily/ts-belt">Github</a> and follow me on <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/__marcin_">Twitter</a>.',
+      backgroundColor: '#fff',
+      textColor: '#111',
+      isCloseable: true,
+    },
     navbar: {
       title: `v${root.version}`,
       logo: {
