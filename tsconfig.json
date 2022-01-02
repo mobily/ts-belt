@@ -14,13 +14,13 @@
     "noUnusedParameters": false,
     "sourceMap": false,
     "pretty": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "noUncheckedIndexedAccess": true
   },
   "include": [
     "./src/**/index.ts"
   ],
   "exclude": [
-    "./src/**/*.gen.tsx",
-    "./__tests__/**/*"
+    "./src/**/*.gen.tsx"
   ]
 }
