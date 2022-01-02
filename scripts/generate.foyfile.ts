@@ -65,5 +65,7 @@ task('contributors', async ctx => {
 desc('Generate tsc')
 strict()
 task<TSCOptions>('tsc', async ctx => {
-  await ctx.exec('yarn tsc --outDir ./dist/types')
+  await ctx.exec(
+    'yarn tsc --outDir ./dist/types --project ./tsconfig.build.json',
+  )
 })

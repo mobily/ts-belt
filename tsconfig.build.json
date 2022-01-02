@@ -1,9 +1,5 @@
 {
   "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "sourceMap": false,
-    "removeComments": false
-  },
   "exclude": [
     "./__tests__/**/*",
     "./playground"

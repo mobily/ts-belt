@@ -18,6 +18,8 @@
     "noUncheckedIndexedAccess": true
   },
   "include": [
+    "./__tests__/**/*",
+    "./playground/*.ts",
     "./src/**/index.ts"
   ],
   "exclude": [
