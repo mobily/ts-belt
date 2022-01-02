@@ -25,7 +25,7 @@ Install all dependencies and build `ts-belt`:
 
 ```bash
 yarn
-yarn build
+yarn build dist -t
 ```
 
 Go to the `benchmarks` directory and install all dependencies as well:
@@ -40,7 +40,7 @@ Then, run the following command in order to run benchmark suites:
 ```bash
 yarn start
 # or
-yarn generate # in order to generate a markdown file
+yarn generate # if you want to generate a markdown file
 ```
 
 :::info
