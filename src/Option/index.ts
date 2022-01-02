@@ -1,9 +1,7 @@
 import { Result } from '../Result'
 import { ExtractValue } from '../types'
 
-export declare abstract class Option<T> {
-  protected opaque?: T
-}
+export declare type Option<T> = T | null | undefined
 
 export declare const Some: <T>(value: NonNullable<T>) => Option<T>
 export declare const None: Option<never>
