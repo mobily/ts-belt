@@ -107,6 +107,17 @@
         "doc",
         "test"
       ]
+    },
+    {
+      "login": "Pyrolistical",
+      "name": "Pyrolistical",
+      "avatar_url": "https://avatars.githubusercontent.com/u/463642?v=4",
+      "profile": "http://pyrolistical.github.com/",
+      "contributions": [
+        "doc",
+        "code",
+        "ideas"
+      ]
     }
   ],
   "commitConvention": "none"
