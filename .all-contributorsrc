@@ -18,7 +18,8 @@
         "code",
         "doc",
         "test",
-        "design"
+        "design",
+        "maintenance"
       ]
     },
     {
@@ -115,7 +116,7 @@
       "profile": "http://pyrolistical.github.com/",
       "contributions": [
         "doc",
-        "code",
+        "maintenance",
         "ideas"
       ]
     }
