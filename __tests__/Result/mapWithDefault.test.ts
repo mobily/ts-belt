@@ -13,13 +13,12 @@ describe('mapWithDefault', () => {
   it('should skip a default value', () => {
     expect(
       pipe(
-        R.fromNullable([1, 2, 3], 'this is bad'),
-        R.mapWithDefault(0, arr => {
-          const [fst] = arr
-          return fst
+        R.fromNullable('hello', 'this is bad'),
+        R.mapWithDefault('default', str => {
+          return `${str} world`
         }),
       ),
-    ).toEqual(1)
+    ).toEqual('hello world')
   })
 
   it('*', () => {

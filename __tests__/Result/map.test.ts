@@ -13,13 +13,12 @@ describe('map', () => {
   it('returns Ok', () => {
     expect(
       pipe(
-        R.fromNullable([1, 2, 3], 'this is bad'),
-        R.map(arr => {
-          const [fst] = arr
-          return fst
+        R.fromNullable('hello', 'this is bad'),
+        R.map(str => {
+          return `${str} world`
         }),
       ),
-    ).toEqual(R.Ok(1))
+    ).toEqual(R.Ok('hello world'))
   })
 
   it('*', () => {
