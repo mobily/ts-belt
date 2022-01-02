@@ -1,6 +1,12 @@
+import { expectType } from 'ts-expect'
 import { pipe, O, A } from '../..'
 
 describe('toNullable', () => {
+  it('provides correct types', () => {
+    expectType<null>(O.toNullable(O.None))
+    expectType<string | null>(O.toNullable(O.Some('hello')))
+  })
+
   it('returns null', () => {
     expect(pipe(O.None, O.toNullable)).toBe(null)
     expect(

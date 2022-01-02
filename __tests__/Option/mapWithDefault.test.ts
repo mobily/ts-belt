@@ -1,6 +1,18 @@
+import { expectType } from 'ts-expect'
 import { pipe, O, A } from '../..'
 
 describe('mapWithDefault', () => {
+  it('provides correct types', () => {
+    const value = null as unknown as string | null
+    const option = O.fromNullable(value)
+
+    expectType<string>(
+      O.mapWithDefault(option, 'default', value => {
+        return `${value}!`
+      }),
+    )
+  })
+
   it('returns a default value', () => {
     expect(
       pipe(

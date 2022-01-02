@@ -1,6 +1,14 @@
+import { expectType } from 'ts-expect'
 import { pipe, O } from '../..'
 
 describe('getWithDefault', () => {
+  it('provides correct types', () => {
+    const value = null as unknown as string | null
+    const option = O.fromNullable(value)
+
+    expectType<string>(O.getWithDefault(option, 'default'))
+  })
+
   it('returns a default value', () => {
     expect(pipe(O.fromNullable(null), O.getWithDefault('default value'))).toBe(
       'default value',

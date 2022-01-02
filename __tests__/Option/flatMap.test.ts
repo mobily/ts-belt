@@ -1,6 +1,18 @@
+import { expectType } from 'ts-expect'
 import { pipe, O } from '../..'
 
 describe('flatMap', () => {
+  it('provides correct types', () => {
+    const value = null as unknown as string | null
+    const option = O.fromNullable(value)
+
+    expectType<O.Option<string>>(
+      O.flatMap(option, value =>
+        value.length > 3 ? O.Some('this is fine') : O.None,
+      ),
+    )
+  })
+
   it('returns None', () => {
     expect(
       pipe(

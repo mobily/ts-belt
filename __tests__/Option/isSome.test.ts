@@ -1,6 +1,12 @@
+import { expectType } from 'ts-expect'
 import { pipe, O } from '../..'
 
 describe('isSome', () => {
+  it('provides correct types', () => {
+    expectType<boolean>(O.isSome(O.None))
+    expectType<boolean>(O.isSome(O.Some('hello')))
+  })
+
   it('returns true', () => {
     expect(O.isSome(O.Some('string'))).toBeTruthy()
     expect(pipe(O.fromNullable('value'), O.isSome)).toBeTruthy()

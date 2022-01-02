@@ -1,6 +1,16 @@
+import { expectType } from 'ts-expect'
 import { pipe, O, A, R } from '../..'
 
 describe('toResult', () => {
+  it('provides correct types', () => {
+    const value = null as unknown as string | null
+    const option = O.fromNullable(value)
+
+    expectType<R.Result<string, string>>(O.toResult(option, 'error'))
+    expectType<R.Result<string, string>>(O.toResult(O.Some('hello'), 'error'))
+    expectType<R.Result<unknown, string>>(O.toResult(O.None, 'error'))
+  })
+
   it('returns Error', () => {
     expect(pipe(O.fromNullable(null), O.toResult('this is bad'))).toEqual(
       R.Error('this is bad'),

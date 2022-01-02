@@ -1,6 +1,12 @@
+import { expectType } from 'ts-expect'
 import { O, A } from '../..'
 
 describe('fromPredicate', () => {
+  it('provides correct types', () => {
+    const value = null as unknown as string | null
+    expectType<O.Option<string>>(O.fromPredicate(value, str => str.length > 3))
+  })
+
   it('returns None', () => {
     expect(O.fromPredicate('string', str => str.length > 10)).toEqual(O.None)
     expect(O.fromPredicate(0, n => n !== 0)).toEqual(O.None)

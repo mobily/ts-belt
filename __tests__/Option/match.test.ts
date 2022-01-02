@@ -1,6 +1,20 @@
+import { expectType } from 'ts-expect'
 import { pipe, O, A } from '../..'
 
 describe('match', () => {
+  it('provides correct types', () => {
+    const value = null as unknown as string | null
+    const option = O.fromNullable(value)
+
+    expectType<number>(
+      O.match(
+        option,
+        str => str.length,
+        () => 0,
+      ),
+    )
+  })
+
   it('returns a result of someFn', () => {
     expect(
       pipe(

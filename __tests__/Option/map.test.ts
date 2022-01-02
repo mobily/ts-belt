@@ -1,6 +1,18 @@
+import { expectType } from 'ts-expect'
 import { pipe, O, A } from '../..'
 
 describe('map', () => {
+  it('provides correct types', () => {
+    const value = null as unknown as string | null
+    const option = O.fromNullable(value)
+
+    expectType<O.Option<string>>(
+      O.map(option, value => {
+        return `${value}!`
+      }),
+    )
+  })
+
   it('returns None', () => {
     expect(
       pipe(

@@ -1,6 +1,12 @@
+import { expectType } from 'ts-expect'
 import { pipe, O, A } from '../..'
 
 describe('toUndefined', () => {
+  it('provides correct types', () => {
+    expectType<undefined>(O.toUndefined(O.None))
+    expectType<string | undefined>(O.toUndefined(O.Some('hello')))
+  })
+
   it('returns undefined', () => {
     expect(pipe(O.None, O.toUndefined)).toEqual(undefined)
     expect(

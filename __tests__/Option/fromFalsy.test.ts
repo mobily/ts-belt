@@ -1,6 +1,14 @@
+import { expectType } from 'ts-expect'
 import { O } from '../..'
 
 describe('fromFalsy', () => {
+  it('provides correct types', () => {
+    const value = null as unknown as string | null
+
+    expectType<O.Option<string>>(O.fromFalsy(value))
+    expectType<O.Option<never>>(O.fromFalsy(null))
+  })
+
   it('returns None', () => {
     expect(O.fromFalsy(null)).toEqual(O.None)
     expect(O.fromFalsy(undefined)).toEqual(O.None)

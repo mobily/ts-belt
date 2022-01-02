@@ -1,6 +1,11 @@
+import { expectType } from 'ts-expect'
 import { A, O } from '../..'
 
 describe('get', () => {
+  it('provides correct types', () => {
+    expectType<O.Option<number>>(A.get([1, 2, 3, 4, 5], 0))
+  })
+
   it('returns None', () => {
     expect(A.get([], 0)).toEqual(O.None)
     expect(A.get([1, 2, 3], 3)).toEqual(O.None)

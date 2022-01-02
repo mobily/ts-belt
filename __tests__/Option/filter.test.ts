@@ -1,6 +1,13 @@
+import { expectType } from 'ts-expect'
 import { pipe, O, A } from '../..'
 
 describe('filter', () => {
+  it('provides correct types', () => {
+    const value = null as unknown as string | null
+    const option = O.fromNullable(value)
+    expectType<O.Option<string>>(O.filter(option, value => value.length === 3))
+  })
+
   it('returns None', () => {
     expect(
       pipe(

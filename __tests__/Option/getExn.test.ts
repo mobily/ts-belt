@@ -1,6 +1,14 @@
+import { expectType } from 'ts-expect'
 import { pipe, O } from '../..'
 
 describe('getExn', () => {
+  it('provides correct types', () => {
+    const value = null as unknown as string | null
+    const option = O.fromNullable(value)
+
+    expectType<string>(O.getExn(option))
+  })
+
   it('should throw an error', () => {
     expect(() => {
       pipe(O.fromNullable(null), O.getExn)
