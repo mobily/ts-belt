@@ -1,11 +1,26 @@
+### contains
+
+Checks if `option` is the `Some` variant and contains the given value.
+
+
+```ts
+function contains<A>(option: Option<A>, value: any): boolean
+function contains<A>(value: any): (option: Option<A>) => boolean
+```
+
+```ts
+pipe(O.fromNullable([3, 6, 9]), O.flatMap(A.head), O.contains(3)) // → true
+pipe(O.fromNullable([3, 6, 9]), O.flatMap(A.get(1)), O.contains(3)) // → false
+```
+
 ### filter
 
 Returns `Some(value)` if `option` is `Some(value)` and the result of `predicateFn` is truthy, otherwise, returns `None`.
 
 
 ```ts
-function filter<T>(option: Option<T>, predicateFn: (value: T) => boolean): Option<T>
-function filter<T>(predicateFn: (value: T) => boolean): (option: Option<T>) => Option<T>
+function filter<A>(option: Option<A>, predicateFn: (value: A) => boolean): Option<A>
+function filter<A>(predicateFn: (value: A) => boolean): (option: Option<A>) => Option<A>
 ```
 
 ```ts
@@ -28,8 +43,8 @@ Returns the result of `mapFn` (it must have a return type of `Option`) if `optio
 
 
 ```ts
-function flatMap<T, R>(option: Option<T>, mapFn: (value: T) => Option<R>): Option<R>
-function flatMap<T, R>(mapFn: (value: T) => Option<R>): (option: Option<T>) => Option<R>
+function flatMap<A, B>(option: Option<A>, mapFn: (value: A) => Option<B>): Option<B>
+function flatMap<A, B>(mapFn: (value: A) => Option<B>): (option: Option<A>) => Option<B>
 ```
 
 ```ts
@@ -47,7 +62,7 @@ Returns `Some(value)` if the provided value is not falsy, otherwise, returns `No
 
 
 ```ts
-function fromFalsy<T>(value: T): Option<ExtractValue<T>>
+function fromFalsy<A>(value: A): Option<ExtractValue<A>>
 ```
 
 ```ts
@@ -64,7 +79,7 @@ Returns `Some(value)` if the provided value is non-nullable, otherwise, returns 
 
 
 ```ts
-function fromNullable<T>(value: T): Option<ExtractValue<T>>
+function fromNullable<A>(value: A): Option<ExtractValue<A>>
 ```
 
 ```ts
@@ -82,8 +97,8 @@ Returns `Some(value)` if the given predicate function returns `true`, otherwise,
 
 
 ```ts
-function fromPredicate<T>(value: T, predicateFn: (value: NonNullable<T>) => boolean): Option<ExtractValue<T>>
-function fromPredicate<T>(predicateFn: (value: NonNullable<T>) => boolean): (value: T) => Option<ExtractValue<T>>
+function fromPredicate<A>(value: A, predicateFn: (value: NonNullable<A>) => boolean): Option<ExtractValue<A>>
+function fromPredicate<A>(predicateFn: (value: NonNullable<A>) => boolean): (value: A) => Option<ExtractValue<A>>
 ```
 
 ```ts
@@ -104,7 +119,7 @@ Returns `value` if `option` is `Some(value)`, otherwise, throws an exception.
 
 
 ```ts
-function getExn<T>(option: Option<T>): T | never
+function getExn<A>(option: Option<A>): A | never
 ```
 
 ```ts
@@ -121,8 +136,8 @@ Returns `value` if `option` is `Some(value)`, otherwise, returns a default value
 
 
 ```ts
-function getWithDefault<T>(option: Option<T>, defaultValue: NonNullable<T>): T
-function getWithDefault<T>(defaultValue: NonNullable<T>): (option: Option<T>) => T
+function getWithDefault<A>(option: Option<A>, defaultValue: NonNullable<A>): A
+function getWithDefault<A>(defaultValue: NonNullable<A>): (option: Option<A>) => A
 ```
 
 ```ts
@@ -145,7 +160,7 @@ Returns `true` if the provided `option` is `None`, otherwise, returns `false`.
 
 
 ```ts
-function isNone<T>(option: Option<T>): option is Option<never>
+function isNone<A>(option: Option<A>): option is Option<never>
 ```
 
 ```ts
@@ -161,7 +176,7 @@ Returns `true` if the provided `option` is `Some(value)`, otherwise, returns `fa
 
 
 ```ts
-function isSome<T>(option: Option<T>): option is Option<T>
+function isSome<A>(option: Option<A>): option is Option<A>
 ```
 
 ```ts
@@ -177,8 +192,8 @@ Returns the result of `mapFn` if `option` is `Some(value)`, otherwise, returns `
 
 
 ```ts
-function map<T, R>(option: Option<T>, mapFn: (value: T) => NonNullable<R>): Option<R>
-function map<T, R>(mapFn: (value: T) => NonNullable<R>): (option: Option<T>) => Option<R>
+function map<A, B>(option: Option<A>, mapFn: (value: A) => NonNullable<B>): Option<B>
+function map<A, B>(mapFn: (value: A) => NonNullable<B>): (option: Option<A>) => Option<B>
 ```
 
 ```ts
@@ -201,8 +216,8 @@ Returns `Some(value)` if the result of `mapFn` is non-nullable, otherwise, retur
 
 
 ```ts
-function mapNullable<T, R>(option: Option<T>, mapFn: (value: T) => R | null | undefined): Option<ExtractValue<R>>
-function mapNullable<T, R>(mapFn: (value: T) => R | null | undefined): (option: Option<T>) => Option<ExtractValue<R>>
+function mapNullable<A, B>(option: Option<A>, mapFn: (value: A) => B | null | undefined): Option<ExtractValue<B>>
+function mapNullable<A, B>(mapFn: (value: A) => B | null | undefined): (option: Option<A>) => Option<ExtractValue<B>>
 ```
 
 ```ts
@@ -223,8 +238,8 @@ Returns the result of `mapFn` if `option` is `Some(value)`, otherwise, returns a
 
 
 ```ts
-function mapWithDefault<T, R>(option: Option<T>, defaultValue: NonNullable<R>, mapFn: (value: T) => R): R
-function mapWithDefault<T, R>(defaultValue: NonNullable<R>, mapFn: (value: T) => R): (option: Option<T>) => R
+function mapWithDefault<A, B>(option: Option<A>, defaultValue: NonNullable<B>, mapFn: (value: A) => B): B
+function mapWithDefault<A, B>(defaultValue: NonNullable<B>, mapFn: (value: A) => B): (option: Option<A>) => B
 ```
 
 ```ts
@@ -247,8 +262,8 @@ Returns the result of `someFn` if `option` is `Some(value)`, otherwise, returns 
 
 
 ```ts
-function match<T, R>(option: Option<T>, someFn: (value: T) => R, noneFn: () => R): R
-function match<T, R>(someFn: (value: T) => R, noneFn: () => R): (option: Option<T>) => R
+function match<A, B>(option: Option<A>, someFn: (value: A) => B, noneFn: () => B): B
+function match<A, B>(someFn: (value: A) => B, noneFn: () => B): (option: Option<A>) => B
 ```
 
 ```ts
@@ -279,8 +294,8 @@ Applies a side-effect function to the value in `Some`, and returns the original 
 
 
 ```ts
-function tap<T>(option: Option<T>, someFn: (value: T) => void): Option<T>
-function tap<T>(someFn: (value: T) => void): (option: Option<T>) => Option<T>
+function tap<A>(option: Option<A>, someFn: (value: A) => void): Option<A>
+function tap<A>(someFn: (value: A) => void): (option: Option<A>) => Option<A>
 ```
 
 ```ts
@@ -300,7 +315,7 @@ Returns `value` if `option` is `Some(value)`, otherwise, returns `null`.
 
 
 ```ts
-function toNullable<T>(option: Option<T>): T | null
+function toNullable<A>(option: Option<A>): A | null
 ```
 
 ```ts
@@ -343,7 +358,7 @@ Returns `value` if `option` is `Some(value)`, otherwise, returns `undefined`.
 
 
 ```ts
-function toUndefined<T>(option: Option<T>): T | undefined
+function toUndefined<A>(option: Option<A>): A | undefined
 ```
 
 ```ts

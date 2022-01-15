@@ -55,3 +55,4 @@ export declare const tap: <A>(
   option: Option<A>,
   someFn: (value: A) => void,
 ) => Option<A>
+export declare const contains: <A>(option: Option<A>, value: any) => boolean

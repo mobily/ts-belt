@@ -108,3 +108,8 @@ let tap = (option, someFn) =>
     option
   | None => option
   }
+
+%comment("Checks if `option` is the `Some` variant and contains the given value.")
+@gentype
+let contains = (option, value) =>
+  Belt.Option.mapWithDefaultU(option, false, (. someValue) => someValue == value)

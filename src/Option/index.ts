@@ -148,6 +148,8 @@ export declare function tap<A>(
   someFn: (value: A) => void,
 ): (option: Option<A>) => Option<A>
 
-export declare function tap<T>(
-  someFn: (value: T) => void,
-): (option: Option<T>) => Option<T>
+/** Checks if `option` is the `Some` variant and contains the given value. */
+
+export declare function contains<A>(option: Option<A>, value: any): boolean
+
+export declare function contains<A>(value: any): (option: Option<A>) => boolean
