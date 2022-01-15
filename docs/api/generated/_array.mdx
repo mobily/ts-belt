@@ -941,3 +941,12 @@ Creates a new array by applying `zipFn` to corresponding elements of two provide
 function zipWith<A, B, C>(xs0: ReadonlyArray<A>, xs1: ReadonlyArray<B>, zipFn: (_1: A, _2: B) => C): ReadonlyArray<C>
 function zipWith<A, B, C>(xs1: ReadonlyArray<B>, zipFn: (_1: A, _2: B) => C): (xs0: ReadonlyArray<A>) => ReadonlyArray<C>
 ```
+
+### zipWithIndex
+
+Creates a new array of each value paired with its index in a tuple.
+
+
+```ts
+function zipWithIndex<A>(xs: ReadonlyArray<A>): ReadonlyArray<readonly [A, number]>
+```

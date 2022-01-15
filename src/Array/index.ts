@@ -775,3 +775,9 @@ export declare function removeFirst<A>(
 export declare function removeFirst<A>(
   value: A,
 ): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+
+/** Creates a new array of each value paired with its index in a tuple. */
+
+export declare function zipWithIndex<A>(
+  xs: ReadonlyArray<A>,
+): ReadonlyArray<readonly [A, number]>

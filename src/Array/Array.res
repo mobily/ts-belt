@@ -620,3 +620,11 @@ let removeFirstBy = (xs, value, predicateFn) => {
 %comment("Creates a copy of the given array with the first occurrence of the given element removed")
 @gentype
 let removeFirst = (xs, value) => removeFirstBy(xs, value, (x, y) => x == y)
+
+%comment("Creates a new array of each value paired with its index in a tuple.")
+@gentype
+let zipWithIndex = xs =>
+  Belt.Array.reduceWithIndexU(xs, [], (. acc, value, index) => {
+    Js.Array2.push(acc, (value, index))->ignore
+    acc
+  })
