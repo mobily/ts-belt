@@ -3,9 +3,19 @@ id: changelog
 title: Changelog
 ---
 
+### `v3.9.0`
+
+- 🐛 fixed `R.fromPredicate`
+- ✨ added `O.contains`
+- ✨ added `O.zip`
+- ✨ added `O.zipWith`
+- ✨ added `A.removeFirst`
+- ✨ added `A.removeFirstBy`
+- ✨ added `A.zipWithIndex`
+
 ### `v3.8.0`
 
-- 🐛 fixed `O.fromPredicate` implementation
+- 🐛 fixed `O.fromPredicate`
 - ♻️ the `Option` type is now `type Option<T> = T | undefined | null` (due to this update, adding `noUncheckedIndexedAccess` to your `tsconfig` is mandatory, you can see other recommended options [here](getting-started/config.md))
 
 ### `v3.7.0`
