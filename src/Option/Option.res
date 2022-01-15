@@ -113,3 +113,13 @@ let tap = (option, someFn) =>
 @gentype
 let contains = (option, value) =>
   Belt.Option.mapWithDefaultU(option, false, (. someValue) => someValue == value)
+
+%comment(
+  "Combines two Options into a single Option containing a tuple of their values, if both Options are `Some` variants, otherwise, returns `None`."
+)
+@gentype
+let zip = (fstOption, sndOption) =>
+  switch (fstOption, sndOption) {
+  | (Some(x), Some(y)) => Some((x, y))
+  | _ => None
+  }

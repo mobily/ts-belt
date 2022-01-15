@@ -153,3 +153,14 @@ export declare function tap<A>(
 export declare function contains<A>(option: Option<A>, value: any): boolean
 
 export declare function contains<A>(value: any): (option: Option<A>) => boolean
+
+/** Combines two Options into a single Option containing a tuple of their values, if both Options are `Some` variants, otherwise, returns `None`. */
+
+export declare function zip<A, B>(
+  sndOption: Option<B>,
+): (fstOption: Option<A>) => Option<readonly [A, B]>
+
+export declare function zip<A, B>(
+  fstOption: Option<A>,
+  sndOption: Option<B>,
+): Option<readonly [A, B]>

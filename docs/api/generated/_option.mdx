@@ -370,3 +370,18 @@ pipe(
 
 pipe(O.fromNullable([]), O.flatMap(A.takeExactly(2)), O.toUndefined) // → undefined
 ```
+
+### zip
+
+Combines two Options into a single Option containing a tuple of their values, if both Options are `Some` variants, otherwise, returns `None`.
+
+
+```ts
+function zip<A, B>(sndOption: Option<B>): (fstOption: Option<A>) => Option<readonly [A, B]>
+function zip<A, B>(fstOption: Option<A>, sndOption: Option<B>): Option<readonly [A, B]>
+```
+
+```ts
+pipe(O.fromNullable('hello'), O.zip(O.fromNullable('world'))) // → Some(['hello', 'world'])
+```
+```

@@ -56,3 +56,7 @@ export declare const tap: <A>(
   someFn: (value: A) => void,
 ) => Option<A>
 export declare const contains: <A>(option: Option<A>, value: any) => boolean
+export declare const zip: <A, B>(
+  fstOption: Option<A>,
+  sndOption: Option<B>,
+) => Option<readonly [A, B]>
