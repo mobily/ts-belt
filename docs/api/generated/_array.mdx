@@ -950,3 +950,7 @@ Creates a new array of each value paired with its index in a tuple.
 ```ts
 function zipWithIndex<A>(xs: ReadonlyArray<A>): ReadonlyArray<readonly [A, number]>
 ```
+
+```ts
+A.zipWithIndex(['hello', 'world']) // → [['hello', 0], ['world', 1]]
+```
