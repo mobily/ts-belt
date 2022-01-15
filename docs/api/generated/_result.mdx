@@ -141,8 +141,15 @@ Returns `Ok(value)` if the predicate function returns `true`, otherwise, returns
 
 
 ```ts
-function fromPredicate<A, B>(value: A, predicateFn: (value: A) => boolean, errorValue: NonNullable<B>): Result<ExtractValue<A>, B>
-function fromPredicate<A, B>(predicateFn: (value: A) => boolean, errorValue: NonNullable<B>): (value: A) => Result<ExtractValue<A>, B>
+function fromPredicate<A, B>(
+    value: A,
+    predicateFn: (value: NonNullable<A>) => boolean,
+    errorValue: NonNullable<B>
+): Result<ExtractValue<A>, B>
+function fromPredicate<A, B>(
+    predicateFn: (value: NonNullable<A>) => boolean,
+    errorValue: NonNullable<B>
+): (value: A) => Result<ExtractValue<A>, B>
 ```
 
 ```ts

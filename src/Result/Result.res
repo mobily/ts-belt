@@ -16,7 +16,9 @@ let fromFalsy = (value, errorValue) => value ? Ok(value) : Error(errorValue)
 )
 @gentype
 let fromPredicate = (value, predicateFn, errorValue) =>
-  predicateFn(value) ? fromNullable(value, errorValue) : Error(errorValue)
+  value
+  ->fromNullable(errorValue)
+  ->Belt.Result.flatMap(value => predicateFn(value) ? Ok(value) : Error(errorValue))
 
 %comment(
   "Returns the result of `mapFn` if `result` is `Ok(value)`, otherwise, returns `Error(errorValue)` and `mapFn` is not called."

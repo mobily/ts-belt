@@ -41,12 +41,12 @@ export declare function fromFalsy<A, B>(
 
 export declare function fromPredicate<A, B>(
   value: A,
-  predicateFn: (value: A) => boolean,
+  predicateFn: (value: NonNullable<A>) => boolean,
   errorValue: NonNullable<B>,
 ): Result<ExtractValue<A>, B>
 
 export declare function fromPredicate<A, B>(
-  predicateFn: (value: A) => boolean,
+  predicateFn: (value: NonNullable<A>) => boolean,
   errorValue: NonNullable<B>,
 ): (value: A) => Result<ExtractValue<A>, B>
 

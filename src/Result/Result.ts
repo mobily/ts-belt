@@ -25,7 +25,7 @@ export declare const fromFalsy: <A, B>(
 ) => Result<ExtractValue<A>, B>
 export declare const fromPredicate: <A, B>(
   value: A,
-  predicateFn: (value: A) => boolean,
+  predicateFn: (value: NonNullable<A>) => boolean,
   errorValue: NonNullable<B>,
 ) => Result<ExtractValue<A>, B>
 export declare const flatMap: <A, B, C>(
