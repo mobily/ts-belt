@@ -1,57 +1,57 @@
 import type { Result } from '../Result/Result'
 import type { ExtractValue } from '../types'
 
-export declare type Option<T> = T | null | undefined
+export declare type Option<A> = A | null | undefined
 
-export declare const Some: <T>(value: NonNullable<T>) => Option<T>
+export declare const Some: <A>(value: NonNullable<A>) => Option<A>
 export declare const None: Option<never>
 
-export declare const fromNullable: <T>(value: T) => Option<ExtractValue<T>>
-export declare const fromFalsy: <T>(value: T) => Option<ExtractValue<T>>
-export declare const fromPredicate: <T>(
-  value: T,
-  predicateFn: (value: NonNullable<T>) => boolean,
-) => Option<ExtractValue<T>>
-export declare const filter: <T>(
-  option: Option<T>,
-  predicateFn: (value: T) => boolean,
-) => Option<T>
-export declare const map: <T, R>(
-  option: Option<T>,
-  mapFn: (value: T) => NonNullable<R>,
-) => Option<R>
-export declare const flatMap: <T, R>(
-  option: Option<T>,
-  mapFn: (value: T) => Option<R>,
-) => Option<R>
-export declare const mapNullable: <T, R>(
-  option: Option<T>,
-  mapFn: (value: T) => R | null | undefined,
-) => Option<ExtractValue<R>>
-export declare const mapWithDefault: <T, R>(
-  option: Option<T>,
-  defaultValue: NonNullable<R>,
-  mapFn: (value: T) => R,
-) => R
-export declare const match: <T, R>(
-  option: Option<T>,
-  someFn: (value: T) => R,
-  noneFn: () => R,
-) => R
-export declare const toNullable: <T>(option: Option<T>) => T | null
-export declare const toUndefined: <T>(option: Option<T>) => T | undefined
+export declare const fromNullable: <A>(value: A) => Option<ExtractValue<A>>
+export declare const fromFalsy: <A>(value: A) => Option<ExtractValue<A>>
+export declare const fromPredicate: <A>(
+  value: A,
+  predicateFn: (value: NonNullable<A>) => boolean,
+) => Option<ExtractValue<A>>
+export declare const filter: <A>(
+  option: Option<A>,
+  predicateFn: (value: A) => boolean,
+) => Option<A>
+export declare const map: <A, B>(
+  option: Option<A>,
+  mapFn: (value: A) => NonNullable<B>,
+) => Option<B>
+export declare const flatMap: <A, B>(
+  option: Option<A>,
+  mapFn: (value: A) => Option<B>,
+) => Option<B>
+export declare const mapNullable: <A, B>(
+  option: Option<A>,
+  mapFn: (value: A) => B | null | undefined,
+) => Option<ExtractValue<B>>
+export declare const mapWithDefault: <A, B>(
+  option: Option<A>,
+  defaultValue: NonNullable<B>,
+  mapFn: (value: A) => B,
+) => B
+export declare const match: <A, B>(
+  option: Option<A>,
+  someFn: (value: A) => B,
+  noneFn: () => B,
+) => B
+export declare const toNullable: <A>(option: Option<A>) => A | null
+export declare const toUndefined: <A>(option: Option<A>) => A | undefined
 export declare const toResult: <A, B>(
   option: Option<A>,
   errorValue: NonNullable<B>,
 ) => Result<A, B>
-export declare const getExn: <T>(option: Option<T>) => T | never
-export declare const getWithDefault: <T>(
-  option: Option<T>,
-  defaultValue: NonNullable<T>,
-) => T
-export declare const isNone: <T>(option: Option<T>) => option is Option<never>
-export declare const isSome: <T>(option: Option<T>) => option is Option<T>
-export declare const tap: <T>(
-  option: Option<T>,
-  someFn: (value: T) => void,
-) => Option<T>
+export declare const getExn: <A>(option: Option<A>) => A | never
+export declare const getWithDefault: <A>(
+  option: Option<A>,
+  defaultValue: NonNullable<A>,
+) => A
+export declare const isNone: <A>(option: Option<A>) => option is Option<never>
+export declare const isSome: <A>(option: Option<A>) => option is Option<A>
+export declare const tap: <A>(
+  option: Option<A>,
+  someFn: (value: A) => void,
+) => Option<A>

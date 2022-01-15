@@ -1,109 +1,109 @@
 import { Result } from '../Result'
 import { ExtractValue } from '../types'
 
-export declare type Option<T> = T | null | undefined
+export declare type Option<A> = A | null | undefined
 
-export declare const Some: <T>(value: NonNullable<T>) => Option<T>
+export declare const Some: <A>(value: NonNullable<A>) => Option<A>
 export declare const None: Option<never>
 
 /** Returns `Some(value)` if the provided value is non-nullable, otherwise, returns `None`. */
 
-export declare function fromNullable<T>(value: T): Option<ExtractValue<T>>
+export declare function fromNullable<A>(value: A): Option<ExtractValue<A>>
 
 /** Returns `Some(value)` if the provided value is not falsy, otherwise, returns `None`. */
 
-export declare function fromFalsy<T>(value: T): Option<ExtractValue<T>>
+export declare function fromFalsy<A>(value: A): Option<ExtractValue<A>>
 
 /** Returns `Some(value)` if the given predicate function returns `true`, otherwise, returns `None`. */
 
-export declare function fromPredicate<T>(
-  value: T,
-  predicateFn: (value: NonNullable<T>) => boolean,
-): Option<ExtractValue<T>>
+export declare function fromPredicate<A>(
+  value: A,
+  predicateFn: (value: NonNullable<A>) => boolean,
+): Option<ExtractValue<A>>
 
-export declare function fromPredicate<T>(
-  predicateFn: (value: NonNullable<T>) => boolean,
-): (value: T) => Option<ExtractValue<T>>
+export declare function fromPredicate<A>(
+  predicateFn: (value: NonNullable<A>) => boolean,
+): (value: A) => Option<ExtractValue<A>>
 
 /** Returns the result of `mapFn` if `option` is `Some(value)`, otherwise, returns `None` and `mapFn` is not called. */
 
-export declare function map<T, R>(
-  option: Option<T>,
-  mapFn: (value: T) => NonNullable<R>,
-): Option<R>
+export declare function map<A, B>(
+  option: Option<A>,
+  mapFn: (value: A) => NonNullable<B>,
+): Option<B>
 
-export declare function map<T, R>(
-  mapFn: (value: T) => NonNullable<R>,
-): (option: Option<T>) => Option<R>
+export declare function map<A, B>(
+  mapFn: (value: A) => NonNullable<B>,
+): (option: Option<A>) => Option<B>
 
 /** Returns the result of `mapFn` (it must have a return type of `Option`) if `option` is `Some(value)`, otherwise, returns `None`. */
 
-export declare function flatMap<T, R>(
-  option: Option<T>,
-  mapFn: (value: T) => Option<R>,
-): Option<R>
+export declare function flatMap<A, B>(
+  option: Option<A>,
+  mapFn: (value: A) => Option<B>,
+): Option<B>
 
-export declare function flatMap<T, R>(
-  mapFn: (value: T) => Option<R>,
-): (option: Option<T>) => Option<R>
+export declare function flatMap<A, B>(
+  mapFn: (value: A) => Option<B>,
+): (option: Option<A>) => Option<B>
 
 /** Returns the result of `mapFn` if `option` is `Some(value)`, otherwise, returns a default value. */
 
-export declare function mapWithDefault<T, R>(
-  option: Option<T>,
-  defaultValue: NonNullable<R>,
-  mapFn: (value: T) => R,
-): R
+export declare function mapWithDefault<A, B>(
+  option: Option<A>,
+  defaultValue: NonNullable<B>,
+  mapFn: (value: A) => B,
+): B
 
-export declare function mapWithDefault<T, R>(
-  defaultValue: NonNullable<R>,
-  mapFn: (value: T) => R,
-): (option: Option<T>) => R
+export declare function mapWithDefault<A, B>(
+  defaultValue: NonNullable<B>,
+  mapFn: (value: A) => B,
+): (option: Option<A>) => B
 
 /** Returns `Some(value)` if the result of `mapFn` is non-nullable, otherwise, returns `None`. */
 
-export declare function mapNullable<T, R>(
-  option: Option<T>,
-  mapFn: (value: T) => R | null | undefined,
-): Option<ExtractValue<R>>
+export declare function mapNullable<A, B>(
+  option: Option<A>,
+  mapFn: (value: A) => B | null | undefined,
+): Option<ExtractValue<B>>
 
-export declare function mapNullable<T, R>(
-  mapFn: (value: T) => R | null | undefined,
-): (option: Option<T>) => Option<ExtractValue<R>>
+export declare function mapNullable<A, B>(
+  mapFn: (value: A) => B | null | undefined,
+): (option: Option<A>) => Option<ExtractValue<B>>
 
 /** Returns `Some(value)` if `option` is `Some(value)` and the result of `predicateFn` is truthy, otherwise, returns `None`. */
 
-export declare function filter<T>(
-  option: Option<T>,
-  predicateFn: (value: T) => boolean,
-): Option<T>
+export declare function filter<A>(
+  option: Option<A>,
+  predicateFn: (value: A) => boolean,
+): Option<A>
 
-export declare function filter<T>(
-  predicateFn: (value: T) => boolean,
-): (option: Option<T>) => Option<T>
+export declare function filter<A>(
+  predicateFn: (value: A) => boolean,
+): (option: Option<A>) => Option<A>
 
 /** Returns `value` if `option` is `Some(value)`, otherwise, returns a default value. */
 
-export declare function getWithDefault<T>(
-  option: Option<T>,
-  defaultValue: NonNullable<T>,
-): T
+export declare function getWithDefault<A>(
+  option: Option<A>,
+  defaultValue: NonNullable<A>,
+): A
 
-export declare function getWithDefault<T>(
-  defaultValue: NonNullable<T>,
-): (option: Option<T>) => T
+export declare function getWithDefault<A>(
+  defaultValue: NonNullable<A>,
+): (option: Option<A>) => A
 
 /** Returns `value` if `option` is `Some(value)`, otherwise, throws an exception. */
 
-export declare function getExn<T>(option: Option<T>): T | never
+export declare function getExn<A>(option: Option<A>): A | never
 
 /** Returns `value` if `option` is `Some(value)`, otherwise, returns `null`. */
 
-export declare function toNullable<T>(option: Option<T>): T | null
+export declare function toNullable<A>(option: Option<A>): A | null
 
 /** Returns `value` if `option` is `Some(value)`, otherwise, returns `undefined`. */
 
-export declare function toUndefined<T>(option: Option<T>): T | undefined
+export declare function toUndefined<A>(option: Option<A>): A | undefined
 
 /** Returns `Ok(value)` if `option` is `Some(value)`, otherwise, returns `Error(errorValue)`, both `Ok` and `Error` come from the `Result` type. */
 
@@ -118,31 +118,35 @@ export declare function toResult<A, B>(
 
 /** Returns the result of `someFn` if `option` is `Some(value)`, otherwise, returns the result of `noneFn`. */
 
-export declare function match<T, R>(
-  option: Option<T>,
-  someFn: (value: T) => R,
-  noneFn: () => R,
-): R
+export declare function match<A, B>(
+  option: Option<A>,
+  someFn: (value: A) => B,
+  noneFn: () => B,
+): B
 
-export declare function match<T, R>(
-  someFn: (value: T) => R,
-  noneFn: () => R,
-): (option: Option<T>) => R
+export declare function match<A, B>(
+  someFn: (value: A) => B,
+  noneFn: () => B,
+): (option: Option<A>) => B
 
 /** Returns `true` if the provided `option` is `None`, otherwise, returns `false`. */
 
-export declare function isNone<T>(option: Option<T>): option is Option<never>
+export declare function isNone<A>(option: Option<A>): option is Option<never>
 
 /** Returns `true` if the provided `option` is `Some(value)`, otherwise, returns `false`. */
 
-export declare function isSome<T>(option: Option<T>): option is Option<T>
+export declare function isSome<A>(option: Option<A>): option is Option<A>
 
 /** Applies a side-effect function to the value in `Some`, and returns the original `option`. */
 
-export declare function tap<T>(
-  option: Option<T>,
-  someFn: (value: T) => void,
-): Option<T>
+export declare function tap<A>(
+  option: Option<A>,
+  someFn: (value: A) => void,
+): Option<A>
+
+export declare function tap<A>(
+  someFn: (value: A) => void,
+): (option: Option<A>) => Option<A>
 
 export declare function tap<T>(
   someFn: (value: T) => void,
