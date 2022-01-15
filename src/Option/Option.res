@@ -123,3 +123,13 @@ let zip = (fstOption, sndOption) =>
   | (Some(x), Some(y)) => Some((x, y))
   | _ => None
   }
+
+%comment(
+  "Combines two Options into a single Option. The new value is produced by applying the given function to both values, if both Options are `Some` variants, otherwise, returns `None`."
+)
+@gentype
+let zipWith = (fstOption, sndOption, mapFn) =>
+  switch (fstOption, sndOption) {
+  | (Some(x), Some(y)) => Some(mapFn(x, y))
+  | _ => None
+  }

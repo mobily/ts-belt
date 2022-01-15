@@ -60,3 +60,8 @@ export declare const zip: <A, B>(
   fstOption: Option<A>,
   sndOption: Option<B>,
 ) => Option<readonly [A, B]>
+export declare const zipWith: <A, B, C>(
+  fstOption: Option<A>,
+  sndOption: Option<B>,
+  mapFn: (arg0: A, arg1: B) => Option<C>,
+) => Option<C>

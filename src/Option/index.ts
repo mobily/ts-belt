@@ -164,3 +164,16 @@ export declare function zip<A, B>(
   fstOption: Option<A>,
   sndOption: Option<B>,
 ): Option<readonly [A, B]>
+
+/** Combines two Options into a single Option. The new value is produced by applying the given function to both values, if both Options are `Some` variants, otherwise, returns `None`. */
+
+export declare function zipWith<A, B, C>(
+  fstOption: Option<A>,
+  sndOption: Option<B>,
+  mapFn: (arg0: A, arg1: B) => Option<C>,
+): Option<C>
+
+export declare function zipWith<A, B, C>(
+  sndOption: Option<B>,
+  mapFn: (arg0: A, arg1: B) => Option<C>,
+): (fstOption: Option<A>) => Option<C>

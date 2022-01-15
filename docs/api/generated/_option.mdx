@@ -384,4 +384,24 @@ function zip<A, B>(fstOption: Option<A>, sndOption: Option<B>): Option<readonly 
 ```ts
 pipe(O.fromNullable('hello'), O.zip(O.fromNullable('world'))) // → Some(['hello', 'world'])
 ```
+
+### zipWith
+
+Combines two Options into a single Option. The new value is produced by applying the given function to both values, if both Options are `Some` variants, otherwise, returns `None`.
+
+
+```ts
+function zipWith<A, B, C>(
+    fstOption: Option<A>,
+    sndOption: Option<B>,
+    mapFn: (arg0: A, arg1: B) => Option<C>
+): Option<C>
+function zipWith<A, B, C>(sndOption: Option<B>, mapFn: (arg0: A, arg1: B) => Option<C>): (fstOption: Option<A>) => Option<C>
+```
+
+```ts
+pipe(
+  O.fromNullable('hello'),
+  O.zipWith(O.fromNullable('world'), S.concat),
+) // → Some('helloworld')
 ```
