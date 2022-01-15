@@ -764,3 +764,14 @@ export declare function removeFirstBy<A, B>(
   value: B,
   predicateFn: (_1: A, _2: B) => boolean,
 ): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+
+/** Creates a copy of the given array with the first occurrence of the given element removed */
+
+export declare function removeFirst<A>(
+  xs: ReadonlyArray<A>,
+  value: A,
+): ReadonlyArray<A>
+
+export declare function removeFirst<A>(
+  value: A,
+): (xs: ReadonlyArray<A>) => ReadonlyArray<A>

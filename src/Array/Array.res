@@ -616,3 +616,7 @@ let removeFirstBy = (xs, value, predicateFn) => {
   })
   xs
 }
+
+%comment("Creates a copy of the given array with the first occurrence of the given element removed")
+@gentype
+let removeFirst = (xs, value) => removeFirstBy(xs, value, (x, y) => x == y)
