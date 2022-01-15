@@ -596,3 +596,23 @@ let filterMap = (xs, predicateFn) => Belt.Array.keepMapU(xs, predicateFn)
 %comment("Alias for `filterMap`.")
 @gentype
 let keepMap = (xs, predicateFn) => filterMap(xs, predicateFn)
+
+%comment(
+  "Removes the first occurrence of the given value from the array, using the given equality function."
+)
+@gentype
+let removeFirstBy = (xs, value, predicateFn) => {
+  let (_, xs) = Belt.Array.reduceU(xs, (false, []), (. acc, v) => {
+    let (found, ys) = acc
+    if found {
+      Js.Array2.push(ys, v)->ignore
+      (true, ys)
+    } else if predicateFn(v, value) {
+      (true, ys)
+    } else {
+      Js.Array2.push(ys, v)->ignore
+      (false, ys)
+    }
+  })
+  xs
+}

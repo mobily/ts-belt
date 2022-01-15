@@ -617,6 +617,23 @@ function removeAt<A>(xs: ReadonlyArray<A>, targetIndex: number): ReadonlyArray<A
 function removeAt<A>(targetIndex: number): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
 ```
 
+### removeFirstBy
+
+Removes the first occurrence of the given value from the array, using the given equality function.
+
+
+```ts
+function removeFirstBy<A, B>(xs: ReadonlyArray<A>, value: B, predicateFn: (_1: A, _2: B) => boolean): ReadonlyArray<A>
+function removeFirstBy<A, B>(value: B, predicateFn: (_1: A, _2: B) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+```
+
+```ts
+A.removeFirstBy([1, 2, 1, 3, 4], 2, N.gt) // → [1, 2, 1, 4]
+pipe(
+  ['hello', 'wrld', 'world'],
+  A.removeFirstBy(4, (str, length) => str.length === length),
+) // → ['hello', 'world']
+```
 ### repeat
 
 Alias for `make`.

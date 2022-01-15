@@ -751,3 +751,16 @@ export declare function keepMap<A, B>(
 export declare function keepMap<A, B>(
   predicateFn: (_1: A) => Option<B>,
 ): (xs: ReadonlyArray<A>) => ReadonlyArray<B>
+
+/** Removes the first occurrence of the given value from the array, using the given equality function. */
+
+export declare function removeFirstBy<A, B>(
+  xs: ReadonlyArray<A>,
+  value: B,
+  predicateFn: (_1: A, _2: B) => boolean,
+): ReadonlyArray<A>
+
+export declare function removeFirstBy<A, B>(
+  value: B,
+  predicateFn: (_1: A, _2: B) => boolean,
+): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
