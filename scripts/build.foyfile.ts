@@ -1,5 +1,11 @@
-import { task, desc, option, strict } from 'foy'
+import { task, desc, option, setGlobalOptions } from 'foy'
 import * as globby from 'globby'
+
+setGlobalOptions({
+  strict: true,
+  logCommand: false,
+  loading: false,
+})
 
 type Options = {
   readonly runTests: boolean
@@ -12,7 +18,6 @@ type DevOptions = {
 
 desc('Build dist')
 option('-t, --run-tests', 'run tests')
-strict()
 task<Options>('dist', async ctx => {
   await ctx.exec([
     'yarn clean',
@@ -40,7 +45,6 @@ task<Options>('dist', async ctx => {
 desc('Build for development purposes')
 option('-t, --test <name>', 'run tests for a single file')
 option('-n, --namespace <name>', 'namespace')
-strict()
 task<DevOptions>('dev', async ctx => {
   if (!ctx.options.namespace) {
     throw new Error('-n is required')

@@ -1,8 +1,14 @@
-import { task, desc, option, strict } from 'foy'
+import { task, desc, option, setGlobalOptions } from 'foy'
 import { compiler, beautify } from 'flowgen'
 
 import * as globby from 'globby'
 import * as path from 'path'
+
+setGlobalOptions({
+  strict: true,
+  logCommand: false,
+  loading: false,
+})
 
 type Options = {
   readonly rebuild: boolean
@@ -16,7 +22,6 @@ const defaultEncoding = { encoding: 'utf8' } as const
 
 desc('Generate docs')
 option('-r, --rebuild', 'rebuild rescript files')
-strict()
 task<Options>('docs', async ctx => {
   const files = await globby('src/**/index.ts')
   const ts = files.join(' ')
@@ -63,7 +68,6 @@ task('contributors', async ctx => {
 })
 
 desc('Generate tsc')
-strict()
 task<TSCOptions>('tsc', async ctx => {
   await ctx.exec(
     'yarn tsc --outDir ./dist/types --project ./tsconfig.build.json',

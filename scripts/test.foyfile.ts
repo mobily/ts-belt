@@ -1,5 +1,11 @@
-import { task, desc, option, strict } from 'foy'
+import { task, desc, option, setGlobalOptions } from 'foy'
 import * as globby from 'globby'
+
+setGlobalOptions({
+  strict: true,
+  logCommand: false,
+  loading: false,
+})
 
 type Options = {
   readonly namespace: string
@@ -11,7 +17,6 @@ desc('Run tests')
 option('-n, --namespace <name>', 'namespace')
 option('-f, --file <name>', 'file')
 option('-c, --coverage', 'coverage')
-strict()
 task<Options>('run', async ctx => {
   const coverage = ctx.options.coverage ? '--coverage' : ''
 
