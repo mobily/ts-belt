@@ -2,8 +2,7 @@ import { expectType } from 'ts-expect'
 
 import { G, F, pipe } from '../..'
 
-const isNotString = <T>(value: T): value is Exclude<T, string> =>
-  G.isNot(value, G.isString)
+const isNotString = G.isNot(G.isString)
 
 describe('isNot', () => {
   it('provides correct types', () => {
@@ -34,7 +33,7 @@ describe('isNot', () => {
 
   it('*', () => {
     expect(
-      // ⬇️ const isNotString = <T>(value: T): value is Exclude<T, string> => G.isNot(value, G.isString)
+      // ⬇️ const isNotString = G.isNot(G.isString)
       isNotString(0),
     ).toEqual(true)
   })

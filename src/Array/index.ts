@@ -263,35 +263,68 @@ export declare function mapWithIndex<A, B>(
 
 /** Returns a new array that keep all elements satisfy the given predicate. */
 
+export declare function filter<A, B extends A>(
+  xs: ReadonlyArray<A>,
+  predicateFn: (value: A) => value is B,
+): ReadonlyArray<B>
+
+export declare function filter<A, B extends A>(
+  predicateFn: (value: A) => value is B,
+): (xs: ReadonlyArray<A>) => ReadonlyArray<B>
+
+/** Returns a new array that keep all elements satisfy the given predicate. */
+
 export declare function filter<A>(
   xs: ReadonlyArray<A>,
-  predicateFn: (_1: A) => boolean,
+  predicateFn: (value: A) => boolean,
 ): ReadonlyArray<A>
 
 export declare function filter<A>(
-  predicateFn: (_1: A) => boolean,
+  predicateFn: (value: A) => boolean,
 ): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+
+/** Alias for `filter`. */
+
+export declare function keep<A, B extends A>(
+  xs: ReadonlyArray<A>,
+  predicateFn: (value: A) => value is B,
+): ReadonlyArray<B>
+
+export declare function keep<A, B extends A>(
+  predicateFn: (value: A) => value is B,
+): (xs: ReadonlyArray<A>) => ReadonlyArray<B>
 
 /** Alias for `filter`. */
 
 export declare function keep<A>(
   xs: ReadonlyArray<A>,
-  predicateFn: (_1: A) => boolean,
+  predicateFn: (value: A) => boolean,
 ): ReadonlyArray<A>
 
 export declare function keep<A>(
-  predicateFn: (_1: A) => boolean,
+  predicateFn: (value: A) => boolean,
 ): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+
+/** Returns a new array that keep all elements satisfy the given predicate (which take two arguments: the element for the array and its index). */
+
+export declare function filterWithIndex<A, B extends A>(
+  xs: ReadonlyArray<A>,
+  predicateFn: (index: number, value: A) => value is B,
+): ReadonlyArray<B>
+
+export declare function filterWithIndex<A, B extends A>(
+  predicateFn: (index: number, value: A) => value is B,
+): (xs: ReadonlyArray<A>) => ReadonlyArray<B>
 
 /** Returns a new array that keep all elements satisfy the given predicate (which take two arguments: the element for the array and its index). */
 
 export declare function filterWithIndex<A>(
   xs: ReadonlyArray<A>,
-  predicateFn: (_1: number, _2: A) => boolean,
+  predicateFn: (index: number, value: A) => boolean,
 ): ReadonlyArray<A>
 
 export declare function filterWithIndex<A>(
-  predicateFn: (_1: number, _2: A) => boolean,
+  predicateFn: (index: number, value: A) => boolean,
 ): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
 
 /** Alias for `filterWithIndex`. */
@@ -396,13 +429,26 @@ export declare function shuffle<A>(xs: ReadonlyArray<A>): ReadonlyArray<A>
 
 /** Splits the provided array into two separate arrays - one containing elements which satisfy the predicate, and the other array containing the elements which do not satisfy the predicate. */
 
+export declare function partition<A, B extends A>(
+  xs: ReadonlyArray<A>,
+  predicateFn: (value: A) => value is B,
+): readonly [ReadonlyArray<B>, ReadonlyArray<Exclude<A, B>>]
+
+export declare function partition<A, B extends A>(
+  predicateFn: (value: A) => value is B,
+): (
+  xs: ReadonlyArray<A>,
+) => readonly [ReadonlyArray<B>, ReadonlyArray<Exclude<A, B>>]
+
+/** Splits the provided array into two separate arrays - one containing elements which satisfy the predicate, and the other array containing the elements which do not satisfy the predicate. */
+
 export declare function partition<A>(
   xs: ReadonlyArray<A>,
-  fn: (_1: A) => boolean,
+  predicateFn: (value: A) => boolean,
 ): readonly [ReadonlyArray<A>, ReadonlyArray<A>]
 
 export declare function partition<A>(
-  fn: (_1: A) => boolean,
+  predicateFn: (value: A) => boolean,
 ): (xs: ReadonlyArray<A>) => readonly [ReadonlyArray<A>, ReadonlyArray<A>]
 
 /** Returns a new array containing the concatenation of two provided arrays. */

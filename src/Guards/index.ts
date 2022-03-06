@@ -3,41 +3,48 @@ import { GuardObject } from '../types'
 import { GuardPromise } from '../types'
 import { GuardArray } from '../types'
 
-export declare function isString<T>(
-  value: T | string,
-): value is GuardValue<T, string>
-export declare function isNumber<T>(
-  value: T | number,
-): value is GuardValue<T, number>
-export declare function isBoolean<T>(
-  value: T | boolean,
-): value is GuardValue<T, boolean>
-export declare function isPromise<T>(
-  value: T | Promise<unknown>,
-): value is GuardPromise<T>
-export declare function isArray<T>(
-  value: T | ReadonlyArray<unknown>,
-): value is GuardArray<T>
-export declare function isObject<T>(value: T | object): value is GuardObject<T>
-export declare function isFunction<T>(
-  value: T | Function,
-): value is GuardValue<T, Function>
-export declare function isError<T>(
-  value: T | Error,
-): value is GuardValue<T, Error>
-export declare function isDate<T>(value: T): value is Extract<T, Date>
-export declare function isNullable<T>(
-  value: T,
-): value is Extract<T, null | undefined>
-export declare function isNotNullable<T>(value: T): value is NonNullable<T>
-export declare function isNull<T>(value: T | null | undefined): value is null
-export declare function isUndefined<T>(
-  value: T | null | undefined,
+export declare function isString<A>(
+  value: A | string,
+): value is GuardValue<A, string>
+export declare function isNumber<A>(
+  value: A | number,
+): value is GuardValue<A, number>
+export declare function isBoolean<A>(
+  value: A | boolean,
+): value is GuardValue<A, boolean>
+export declare function isPromise<A>(
+  value: A | Promise<unknown>,
+): value is GuardPromise<A>
+export declare function isArray<A>(
+  value: A | ReadonlyArray<unknown>,
+): value is GuardArray<A>
+export declare function isObject<A>(value: A | object): value is GuardObject<A>
+export declare function isFunction<A>(
+  value: A | Function,
+): value is GuardValue<A, Function>
+export declare function isError<A>(
+  value: A | Error,
+): value is GuardValue<A, Error>
+export declare function isDate<A>(value: A): value is Extract<A, Date>
+export declare function isNullable<A>(
+  value: A,
+): value is Extract<A, null | undefined>
+export declare function isNotNullable<A>(value: A): value is NonNullable<A>
+export declare function isNull<A>(value: A | null | undefined): value is null
+export declare function isUndefined<A>(
+  value: A | null | undefined,
 ): value is undefined
-export declare function isNot<T>(
-  value: T,
-  predicateFn: (value: T) => boolean,
+export declare function isNot<A, B extends A>(
+  value: A,
+  predicateFn: (value: A) => value is B,
+): value is Exclude<A, B>
+export declare function isNot<A, B extends A>(
+  predicateFn: (value: A) => value is B,
+): (value: A) => value is Exclude<A, B>
+export declare function isNot<A>(
+  value: A,
+  predicateFn: (value: A) => any,
 ): boolean
-export declare function isNot<T>(
-  predicateFn: (value: T) => boolean,
-): (value: T) => boolean
+export declare function isNot<A>(
+  predicateFn: (value: A) => any,
+): (value: A) => boolean

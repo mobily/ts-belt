@@ -1,6 +1,6 @@
 import { expectType } from 'ts-expect'
 
-import { A, F, S, pipe } from '../..'
+import { A, F, S, pipe, G } from '../..'
 
 describe('filter', () => {
   it('provides correct types', () => {
@@ -8,10 +8,7 @@ describe('filter', () => {
       expectType<number>(value)
       return value % 2 === 0
     })
-    A.filter([1, 'hello'], value => {
-      expectType<number | string>(value)
-      return !value
-    })
+    expectType<ReadonlyArray<string>>(A.filter([1, 'hello'], G.isString))
     expectType<ReadonlyArray<string>>(A.filter(['hello'], S.startsWith('h')))
     expectType<ReadonlyArray<number>>(A.filter([1], F.equals(1)))
   })
@@ -31,6 +28,8 @@ describe('filter (pipe)', () => {
       }),
     )
     pipe(['hello', 'world'], A.filter(S.endsWith('o')))
+
+    expectType<ReadonlyArray<string>>(pipe([1, 'hello'], A.filter(G.isString)))
   })
 
   it('*', () => {
