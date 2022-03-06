@@ -17,7 +17,6 @@ const transform = (file: FileInfo, api: API) => {
   const ctx = {
     file,
     currentExports: [],
-    alreadyAddedExports: [],
   }
   const source = [
     rescript,

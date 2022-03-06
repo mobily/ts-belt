@@ -1,18 +1,60 @@
 import {
   API,
   Identifier,
-  TSTypeAnnotation,
   VariableDeclarator,
   TSTypeParameterDeclaration,
   Collection,
   ASTPath,
   ExportNamedDeclaration,
+  TSDeclareFunction,
+  TSFunctionType,
+  TSTypeAnnotation,
 } from 'jscodeshift'
 
 import * as path from 'path'
 import * as fs from 'fs'
 
 const defaultEncoding = { encoding: 'utf-8' } as const
+const coerce = <A>(a: any) => a as A
+const getIdentifier = (p: ASTPath<ExportNamedDeclaration>): Identifier => {
+  const { declaration } = p.value
+
+  if (
+    declaration.type === 'TSDeclareFunction' ||
+    declaration.type === 'ClassDeclaration' ||
+    declaration.type === 'TSTypeAliasDeclaration'
+  ) {
+    return declaration.id as Identifier
+  }
+
+  if (declaration.type === 'VariableDeclaration') {
+    const declarator = declaration.declarations[0] as VariableDeclarator
+    return declarator.id as Identifier
+  }
+
+  throw new Error('Unexpected identifier')
+}
+const fixIdentifierName = (id: Identifier) => {
+  id.name = id.name.replace('_', '')
+  return id
+}
+const getTSFunctionOptions = (p: TSFunctionType | TSDeclareFunction) => {
+  if (p.type === 'TSDeclareFunction') {
+    return {
+      parameters: coerce<Identifier[]>(p.params) || [],
+      typeAnnotation: coerce<TSTypeAnnotation>(p.returnType),
+      typeParameters: p.typeParameters,
+    }
+  }
+
+  const { typeParameters, parameters = [], typeAnnotation } = p
+
+  return {
+    parameters,
+    typeParameters,
+    typeAnnotation,
+  }
+}
 
 const transform = (
   source: string,
@@ -22,60 +64,41 @@ const transform = (
   const root = j(source)
   const dirname = path.dirname(ctx.file.path)
   const basename = path.basename(ctx.file.path, '.gen.tsx')
-  const genTSXFile = path.resolve(dirname, `${basename}.ts`)
-  const bsJSFile = path.resolve(dirname, `${basename}.bs.js`)
+  const customTSFile = path.resolve(dirname, `${basename}.ts`)
+  const rescriptJSFile = path.resolve(dirname, `${basename}.bs.js`)
+  const tsFunctionDeclarations: TSDeclareFunction[] = []
+  const empty = j('')
+  const alreadyAddedExports = []
 
-  const genTSX: Collection<any> | undefined = fs.existsSync(genTSXFile)
-    ? j(fs.readFileSync(genTSXFile, defaultEncoding))
-    : undefined
+  const customTS: Collection<any> = fs.existsSync(customTSFile)
+    ? j(fs.readFileSync(customTSFile, defaultEncoding))
+    : empty
+  const rescriptJS: Collection<any> = fs.existsSync(rescriptJSFile)
+    ? j(fs.readFileSync(rescriptJSFile, defaultEncoding))
+    : empty
 
-  const bsJS: Collection<any> | undefined = fs.existsSync(bsJSFile)
-    ? j(fs.readFileSync(bsJSFile, defaultEncoding))
-    : undefined
-
-  const makeDeclareFunction = (
+  const makeTSDeclareFunction = (
     name: string,
     parameters: any[],
     typeParameters: TSTypeParameterDeclaration,
     returnType: any,
   ) => {
-    const declareFunction = j.tsDeclareFunction(j.identifier(name), parameters)
+    const tsDeclareFunction = j.tsDeclareFunction(
+      j.identifier(name),
+      parameters,
+    )
 
-    declareFunction.declare = true
-    declareFunction.typeParameters = typeParameters
-    declareFunction.returnType = j.tsTypeAnnotation(returnType)
+    tsDeclareFunction.declare = true
+    tsDeclareFunction.typeParameters = typeParameters
+    tsDeclareFunction.returnType = j.tsTypeAnnotation(returnType)
 
-    return declareFunction
+    return tsDeclareFunction
   }
-  const takeExportIdentifier = (p: ASTPath<ExportNamedDeclaration>) => {
-    const { declaration } = p.value
-
-    if (declaration.type === 'VariableDeclaration') {
-      const declarator = declaration.declarations[0] as VariableDeclarator
-      const identifier = declarator.id as Identifier
-
-      if (identifier.name.endsWith('_')) {
-        // @ts-expect-error
-        declarator.id.name = declarator.id.name.replace('_', '')
-      }
-
-      return identifier
-    } else if (
-      declaration.type === 'TSDeclareFunction' ||
-      declaration.type === 'ClassDeclaration' ||
-      declaration.type === 'TSTypeAliasDeclaration'
-    ) {
-      return declaration.id
-    }
-
-    throw new Error('Unexpected identifier')
-  }
-
   const findComments = (id: string) => {
     let comments = undefined
 
-    bsJS
-      ?.find(j.FunctionDeclaration)
+    rescriptJS
+      .find(j.FunctionDeclaration)
       .filter(p => {
         return (
           p.parent.value.type === 'Program' &&
@@ -91,8 +114,8 @@ const transform = (
       })
 
     if (!comments) {
-      bsJS
-        ?.find(j.VariableDeclaration)
+      rescriptJS
+        .find(j.VariableDeclaration)
         .filter(p => {
           const [declarator] = p.value.declarations
           return (
@@ -110,6 +133,86 @@ const transform = (
 
     return comments
   }
+  const makeFunctionSignatures = (
+    identifier: Identifier,
+    tsFunctionType: TSFunctionType | TSDeclareFunction,
+  ) => {
+    const signatures = []
+    const {
+      typeParameters,
+      parameters = [],
+      typeAnnotation,
+    } = getTSFunctionOptions(tsFunctionType)
+
+    const comments = findComments(identifier.name)
+
+    let hasSameParamsType = false
+
+    const original = j.exportNamedDeclaration(
+      makeTSDeclareFunction(
+        identifier.name,
+        parameters,
+        typeParameters,
+        typeAnnotation.typeAnnotation,
+      ),
+    )
+
+    signatures.push(original)
+
+    if (parameters.length > 1) {
+      const firstParam = parameters.slice(0, 1)
+      const otherParams = parameters.slice(1)
+      const returnFunction = j.tsFunctionType(firstParam)
+
+      returnFunction.typeAnnotation = typeAnnotation
+
+      const dataLastAnnotation = j.exportNamedDeclaration(
+        makeTSDeclareFunction(
+          identifier.name,
+          otherParams,
+          typeParameters,
+          returnFunction,
+        ),
+      )
+
+      hasSameParamsType = parameters.every(parameter => {
+        const fstTypeAnnotation = coerce<Identifier>(parameters[0])
+          ?.typeAnnotation?.typeAnnotation
+        const sndAnnotationType =
+          coerce<Identifier>(parameter)?.typeAnnotation?.typeAnnotation
+
+        if (
+          fstTypeAnnotation?.type === 'TSTypeReference' &&
+          sndAnnotationType?.type === 'TSTypeReference'
+        ) {
+          return (
+            coerce<Identifier>(fstTypeAnnotation.typeName).name ===
+            coerce<Identifier>(sndAnnotationType.typeName).name
+          )
+        }
+
+        return fstTypeAnnotation?.type === sndAnnotationType?.type
+      })
+
+      signatures.push(dataLastAnnotation)
+    }
+
+    if (hasSameParamsType) {
+      const [fst, snd] = signatures
+      signatures.length = 0
+      signatures.push(snd, fst)
+    }
+
+    if (comments) {
+      signatures[0].comments = comments
+    }
+
+    return signatures
+  }
+
+  customTS.find(j.TSDeclareFunction).forEach(p => {
+    tsFunctionDeclarations.push(p.value)
+  })
 
   root
     .find(j.ExportNamedDeclaration, {
@@ -118,94 +221,29 @@ const transform = (
       },
     })
     .replaceWith(p => {
-      const identifier = takeExportIdentifier(p)
+      const identifier = getIdentifier(p)
 
-      let genTSXTypeAnnotation = undefined
+      fixIdentifierName(identifier)
+      alreadyAddedExports.push(identifier.name)
 
-      genTSX
-        ?.find(j.VariableDeclarator, {
-          id: {
-            name: identifier.name,
-          },
-        })
-        .forEach(p => {
-          ctx.alreadyAddedExports.push(identifier.name)
-          // @ts-expect-error
-          genTSXTypeAnnotation = p.value.id.typeAnnotation?.typeAnnotation
-        })
+      const currentTSFunctionDeclaration = tsFunctionDeclarations.filter(
+        tsFunctionDeclaration => {
+          return tsFunctionDeclaration.id.name === identifier.name
+        },
+      )
 
-      const typeAnnotation =
-        genTSXTypeAnnotation ??
-        (identifier.typeAnnotation?.typeAnnotation as
-          | TSTypeAnnotation
-          | undefined)
+      if (currentTSFunctionDeclaration.length) {
+        return currentTSFunctionDeclaration.reduce((acc, p) => {
+          return acc.concat(makeFunctionSignatures(identifier, p))
+        }, [])
+      }
 
-      if (typeAnnotation) {
-        const signatures = []
-        const {
-          typeParameters,
-          parameters = [],
-          typeAnnotation: returnType,
-        } = typeAnnotation
-        const comments = findComments(identifier.name)
+      const tsFunctionType = identifier.typeAnnotation?.typeAnnotation as
+        | TSFunctionType
+        | undefined
 
-        let hasSameParamsType = false
-
-        const original = j.exportNamedDeclaration(
-          makeDeclareFunction(
-            identifier.name,
-            parameters,
-            typeParameters,
-            returnType.typeAnnotation,
-          ),
-        )
-
-        signatures.push(original)
-
-        if (parameters.length > 1) {
-          const firstParam = parameters.slice(0, 1)
-          const otherParams = parameters.slice(1)
-          const returnFunction = j.tsFunctionType(firstParam)
-
-          returnFunction.typeAnnotation = returnType
-
-          const dataLastAnnotation = j.exportNamedDeclaration(
-            makeDeclareFunction(
-              identifier.name,
-              otherParams,
-              typeParameters,
-              returnFunction,
-            ),
-          )
-
-          hasSameParamsType = parameters.every(param => {
-            const fst = parameters[0]?.typeAnnotation?.typeAnnotation
-            const annotation = param?.typeAnnotation?.typeAnnotation
-
-            if (
-              fst?.type === 'TSTypeReference' &&
-              annotation?.type === 'TSTypeReference'
-            ) {
-              return fst.typeName.name === annotation.typeName.name
-            }
-
-            return fst?.type === annotation?.type
-          })
-
-          signatures.push(dataLastAnnotation)
-        }
-
-        if (hasSameParamsType) {
-          const [fst, snd] = signatures
-          signatures.length = 0
-          signatures.push(snd, fst)
-        }
-
-        if (comments) {
-          signatures[0].comments = comments
-        }
-
-        return signatures
+      if (tsFunctionType) {
+        return makeFunctionSignatures(identifier, tsFunctionType)
       }
 
       throw new Error('Something went wrong…')
@@ -213,11 +251,11 @@ const transform = (
 
   const recreatedRoot = j(root.toSource())
 
-  genTSX
-    ?.find(j.ExportNamedDeclaration)
+  customTS
+    .find(j.ExportNamedDeclaration)
     .filter(p => {
-      const identifier = takeExportIdentifier(p)
-      return !ctx.alreadyAddedExports.includes(identifier.name)
+      const identifier = getIdentifier(p)
+      return !alreadyAddedExports.includes(identifier.name)
     })
     .forEach(p => {
       ctx.currentExports.push(p.value)
