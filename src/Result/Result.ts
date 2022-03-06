@@ -15,69 +15,69 @@ export declare type Result<A, B> = Ok<A> | Error<B>
 export declare const Ok: <T>(value: NonNullable<T>) => Ok<T>
 export declare const Error: <T>(value: NonNullable<T>) => Error<T>
 
-export declare const fromNullable: <A, B>(
+export declare function fromNullable<A, B>(
   value: A,
   errorValue: NonNullable<B>,
-) => Result<ExtractValue<A>, B>
-export declare const fromFalsy: <A, B>(
+): Result<ExtractValue<A>, B>
+export declare function fromFalsy<A, B>(
   value: A,
   errorValue: NonNullable<B>,
-) => Result<ExtractValue<A>, B>
-export declare const fromPredicate: <A, B>(
+): Result<ExtractValue<A>, B>
+export declare function fromPredicate<A, B>(
   value: A,
   predicateFn: (value: NonNullable<A>) => boolean,
   errorValue: NonNullable<B>,
-) => Result<ExtractValue<A>, B>
-export declare const flatMap: <A, B, C>(
+): Result<ExtractValue<A>, B>
+export declare function flatMap<A, B, C>(
   result: Result<A, B>,
   mapFn: (value: A) => Result<C, B>,
-) => Result<C, B>
-export declare const map: <A, B, R>(
+): Result<C, B>
+export declare function map<A, B, R>(
   result: Result<A, B>,
   mapFn: (value: A) => NonNullable<R>,
-) => Result<R, B>
-export declare const mapWithDefault: <A, B, R>(
+): Result<R, B>
+export declare function mapWithDefault<A, B, R>(
   result: Result<A, B>,
   defaultValue: NonNullable<R>,
   mapFn: (value: A) => NonNullable<R>,
-) => R
-export declare const getWithDefault: <A, B>(
+): R
+export declare function getWithDefault<A, B>(
   result: Result<A, B>,
   defaultValue: NonNullable<A>,
-) => A
-export declare const getExn: <A, B>(result: Result<A, B>) => A | never
-export declare const match: <A, B, R>(
+): A
+export declare function getExn<A, B>(result: Result<A, B>): A | never
+export declare function match<A, B, R>(
   result: Result<A, B>,
   okFn: (value: A) => R,
   errorFn: (value: B) => R,
-) => R
-export declare const toNullable: <A, B>(result: Result<A, B>) => A | null
-export declare const toOption: <A, B>(result: Result<A, B>) => Option<A>
-export declare const toUndefined: <A, B>(result: Result<A, B>) => A | undefined
-export declare const isOk: <A, B>(result: Result<A, B>) => result is Ok<A>
-export declare const isError: <A, B>(result: Result<A, B>) => result is Error<B>
-export declare const tap: <A, B>(
+): R
+export declare function toNullable<A, B>(result: Result<A, B>): A | null
+export declare function toOption<A, B>(result: Result<A, B>): Option<A>
+export declare function toUndefined<A, B>(result: Result<A, B>): A | undefined
+export declare function isOk<A, B>(result: Result<A, B>): result is Ok<A>
+export declare function isError<A, B>(result: Result<A, B>): result is Error<B>
+export declare function tap<A, B>(
   result: Result<A, B>,
   okFn: (value: A) => void,
-) => Result<A, B>
-export declare const tapError: <A, B>(
+): Result<A, B>
+export declare function tapError<A, B>(
   result: Result<A, B>,
   errorFn: (err: B) => void,
-) => Result<A, B>
-export declare const handleError: <A, B>(
+): Result<A, B>
+export declare function handleError<A, B>(
   result: Result<A, B>,
   mapFn: (err: B) => NonNullable<A>,
-) => Result<A, void>
-export declare const mapError: <A, B, C>(
+): Result<A, void>
+export declare function mapError<A, B, C>(
   result: Result<A, B>,
   mapFn: (err: B) => NonNullable<C>,
-) => Result<A, C>
-export declare const catchError: <A, B, C>(
+): Result<A, C>
+export declare function catchError<A, B, C>(
   result: Result<A, B>,
   mapFn: (err: B) => Result<A, C>,
-) => Result<A, C>
-export declare const recover: <A, B>(
+): Result<A, C>
+export declare function recover<A, B>(
   result: Result<A, B>,
   defaultValue: NonNullable<A>,
-) => Result<A, B>
-export declare const flip: <A, B>(result: Result<A, B>) => Result<B, A>
+): Result<A, B>
+export declare function flip<A, B>(result: Result<A, B>): Result<B, A>
