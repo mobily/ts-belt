@@ -329,13 +329,24 @@ export declare function filterWithIndex<A>(
 
 /** Alias for `filterWithIndex`. */
 
+export declare function keepWithIndex<A, B extends A>(
+  xs: ReadonlyArray<A>,
+  predicateFn: (index: number, value: A) => value is B,
+): ReadonlyArray<B>
+
+export declare function keepWithIndex<A, B extends A>(
+  predicateFn: (index: number, value: A) => value is B,
+): (xs: ReadonlyArray<A>) => ReadonlyArray<B>
+
+/** Alias for `filterWithIndex`. */
+
 export declare function keepWithIndex<A>(
   xs: ReadonlyArray<A>,
-  predicateFn: (_1: number, _2: A) => boolean,
+  predicateFn: (index: number, value: A) => boolean,
 ): ReadonlyArray<A>
 
 export declare function keepWithIndex<A>(
-  predicateFn: (_1: number, _2: A) => boolean,
+  predicateFn: (index: number, value: A) => boolean,
 ): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
 
 /** Returns a new array of elements from the provided array which do not satisfy the given predicate. */

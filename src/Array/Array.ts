@@ -37,6 +37,14 @@ export declare function keep<A>(
   xs: ReadonlyArray<A>,
   predicateFn: (value: A) => boolean,
 ): ReadonlyArray<A>
+export declare function keepWithIndex<A, B extends A>(
+  xs: ReadonlyArray<A>,
+  predicateFn: (index: number, value: A) => value is B,
+): ReadonlyArray<B>
+export declare function keepWithIndex<A>(
+  xs: ReadonlyArray<A>,
+  predicateFn: (index: number, value: A) => boolean,
+): ReadonlyArray<A>
 export declare function partition<A, B extends A>(
   xs: ReadonlyArray<A>,
   predicateFn: (value: A) => value is B,
