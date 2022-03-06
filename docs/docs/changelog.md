@@ -3,6 +3,10 @@ id: changelog
 title: Changelog
 ---
 
+### `v3.9.1`
+
+- ✨ make `A.filter`, `A.filterWithIndex`, `A.keep`, `A.partition`, `G.isNot` types aware of type guards ([#25](https://github.com/mobily/ts-belt/issues/25))
+
 ### `v3.9.0`
 
 - 🐛 fixed `R.fromPredicate`

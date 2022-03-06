@@ -2,7 +2,7 @@
 
 
 ```ts
-function isArray<T>(value: T | ReadonlyArray<unknown>): value is GuardArray<T>
+function isArray<A>(value: A | ReadonlyArray<unknown>): value is GuardArray<A>
 ```
 
 ```ts
@@ -14,7 +14,7 @@ pipe(['hello', 'world'], G.isArray) // → true
 
 
 ```ts
-function isBoolean<T>(value: T | boolean): value is GuardValue<T, boolean>
+function isBoolean<A>(value: A | boolean): value is GuardValue<A, boolean>
 ```
 
 ```ts
@@ -26,7 +26,7 @@ pipe(true, G.isBoolean) // → true
 
 
 ```ts
-function isDate<T>(value: T): value is Extract<T, Date>
+function isDate<A>(value: A): value is Extract<A, Date>
 ```
 
 ```ts
@@ -38,7 +38,7 @@ pipe(new Date(), G.isDate) // → true
 
 
 ```ts
-function isError<T>(value: T | Error): value is GuardValue<T, Error>
+function isError<A>(value: A | Error): value is GuardValue<A, Error>
 ```
 
 ```ts
@@ -50,7 +50,7 @@ pipe(new Error('oops!'), G.isError) // → true
 
 
 ```ts
-function isFunction<T>(value: T | Function): value is GuardValue<T, Function>
+function isFunction<A>(value: A | Function): value is GuardValue<A, Function>
 ```
 
 ```ts
@@ -62,12 +62,14 @@ pipe(F.ignore, G.isFunction) // → true
 
 
 ```ts
-function isNot<T>(value: T, predicateFn: (value: T) => boolean): boolean
-function isNot<T>(predicateFn: (value: T) => boolean): (value: T) => boolean
+function isNot<A, B extends A>(value: A, predicateFn: (value: A) => value is B): value is Exclude<A, B>
+function isNot<A, B extends A>(predicateFn: (value: A) => value is B): (value: A) => value is Exclude<A, B>
+function isNot<A>(value: A, predicateFn: (value: A) => any): boolean
+function isNot<A>(predicateFn: (value: A) => any): (value: A) => boolean
 ```
 
 ```ts
-// ⬇️ const isNotString = <T>(value: T): value is Exclude<T, string> => G.isNot(value, G.isString)
+// ⬇️ const isNotString = G.isNot(G.isString)
 isNotString(0) // → true
 
 pipe('ts-belt', G.isNot(G.isString)) // → false
@@ -77,7 +79,7 @@ pipe('ts-belt', G.isNot(G.isString)) // → false
 
 
 ```ts
-function isNotNullable<T>(value: T): value is NonNullable<T>
+function isNotNullable<A>(value: A): value is NonNullable<A>
 ```
 
 ```ts
@@ -91,7 +93,7 @@ pipe(undefined, G.isNotNullable) // → false
 
 
 ```ts
-function isNull<T>(value: T | null | undefined): value is null
+function isNull<A>(value: A | null | undefined): value is null
 ```
 
 ```ts
@@ -103,7 +105,7 @@ pipe(null, G.isNull) // → true
 
 
 ```ts
-function isNullable<T>(value: T): value is Extract<T, null | undefined>
+function isNullable<A>(value: A): value is Extract<A, null | undefined>
 ```
 
 ```ts
@@ -115,7 +117,7 @@ pipe(undefined, G.isNullable) // → true
 
 
 ```ts
-function isNumber<T>(value: T | number): value is GuardValue<T, number>
+function isNumber<A>(value: A | number): value is GuardValue<A, number>
 ```
 
 ```ts
@@ -127,7 +129,7 @@ pipe(3, G.isNumber) // → true
 
 
 ```ts
-function isObject<T>(value: T | object): value is GuardObject<T>
+function isObject<A>(value: A | object): value is GuardObject<A>
 ```
 
 ```ts
@@ -139,7 +141,7 @@ pipe({}, G.isObject) // → true
 
 
 ```ts
-function isPromise<T>(value: T | Promise<unknown>): value is GuardPromise<T>
+function isPromise<A>(value: A | Promise<unknown>): value is GuardPromise<A>
 ```
 
 ```ts
@@ -151,7 +153,7 @@ pipe(Promise.resolve(1), G.isPromise) // → true
 
 
 ```ts
-function isString<T>(value: T | string): value is GuardValue<T, string>
+function isString<A>(value: A | string): value is GuardValue<A, string>
 ```
 
 ```ts
@@ -163,7 +165,7 @@ pipe('belt', G.isString) // → true
 
 
 ```ts
-function isUndefined<T>(value: T | null | undefined): value is undefined
+function isUndefined<A>(value: A | null | undefined): value is undefined
 ```
 
 ```ts

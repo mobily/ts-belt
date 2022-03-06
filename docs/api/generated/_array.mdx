@@ -122,8 +122,10 @@ Returns a new array that keep all elements satisfy the given predicate.
 
 
 ```ts
-function filter<A>(xs: ReadonlyArray<A>, predicateFn: (_1: A) => boolean): ReadonlyArray<A>
-function filter<A>(predicateFn: (_1: A) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function filter<A, B extends A>(xs: ReadonlyArray<A>, predicateFn: (value: A) => value is B): ReadonlyArray<B>
+function filter<A, B extends A>(predicateFn: (value: A) => value is B): (xs: ReadonlyArray<A>) => ReadonlyArray<B>
+function filter<A>(xs: ReadonlyArray<A>, predicateFn: (value: A) => boolean): ReadonlyArray<A>
+function filter<A>(predicateFn: (value: A) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
 ```
 
 ```ts
@@ -168,8 +170,10 @@ Returns a new array that keep all elements satisfy the given predicate (which ta
 
 
 ```ts
-function filterWithIndex<A>(xs: ReadonlyArray<A>, predicateFn: (_1: number, _2: A) => boolean): ReadonlyArray<A>
-function filterWithIndex<A>(predicateFn: (_1: number, _2: A) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function filterWithIndex<A, B extends A>(xs: ReadonlyArray<A>, predicateFn: (index: number, value: A) => value is B): ReadonlyArray<B>
+function filterWithIndex<A, B extends A>(predicateFn: (index: number, value: A) => value is B): (xs: ReadonlyArray<A>) => ReadonlyArray<B>
+function filterWithIndex<A>(xs: ReadonlyArray<A>, predicateFn: (index: number, value: A) => boolean): ReadonlyArray<A>
+function filterWithIndex<A>(predicateFn: (index: number, value: A) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
 ```
 
 ### find
@@ -393,8 +397,10 @@ Alias for `filter`.
 
 
 ```ts
-function keep<A>(xs: ReadonlyArray<A>, predicateFn: (_1: A) => boolean): ReadonlyArray<A>
-function keep<A>(predicateFn: (_1: A) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function keep<A, B extends A>(xs: ReadonlyArray<A>, predicateFn: (value: A) => value is B): ReadonlyArray<B>
+function keep<A, B extends A>(predicateFn: (value: A) => value is B): (xs: ReadonlyArray<A>) => ReadonlyArray<B>
+function keep<A>(xs: ReadonlyArray<A>, predicateFn: (value: A) => boolean): ReadonlyArray<A>
+function keep<A>(predicateFn: (value: A) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
 ```
 
 ### keepMap
@@ -413,8 +419,10 @@ Alias for `filterWithIndex`.
 
 
 ```ts
-function keepWithIndex<A>(xs: ReadonlyArray<A>, predicateFn: (_1: number, _2: A) => boolean): ReadonlyArray<A>
-function keepWithIndex<A>(predicateFn: (_1: number, _2: A) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function keepWithIndex<A, B extends A>(xs: ReadonlyArray<A>, predicateFn: (index: number, value: A) => value is B): ReadonlyArray<B>
+function keepWithIndex<A, B extends A>(predicateFn: (index: number, value: A) => value is B): (xs: ReadonlyArray<A>) => ReadonlyArray<B>
+function keepWithIndex<A>(xs: ReadonlyArray<A>, predicateFn: (index: number, value: A) => boolean): ReadonlyArray<A>
+function keepWithIndex<A>(predicateFn: (index: number, value: A) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
 ```
 
 ### last
@@ -509,8 +517,17 @@ Splits the provided array into two separate arrays - one containing elements whi
 
 
 ```ts
-function partition<A>(xs: ReadonlyArray<A>, fn: (_1: A) => boolean): readonly [ReadonlyArray<A>, ReadonlyArray<A>]
-function partition<A>(fn: (_1: A) => boolean): (xs: ReadonlyArray<A>) => readonly [ReadonlyArray<A>, ReadonlyArray<A>]
+function partition<A, B extends A>(xs: ReadonlyArray<A>, predicateFn: (value: A) => value is B): readonly [ReadonlyArray<B>, ReadonlyArray<Exclude<A, B>>]
+function partition<A, B extends A>(predicateFn: (value: A) => value is B): (
+  xs: ReadonlyArray<A>,
+) => readonly [ReadonlyArray<B>, ReadonlyArray<Exclude<A, B>>]
+function partition<A>(xs: ReadonlyArray<A>, predicateFn: (value: A) => boolean): readonly [ReadonlyArray<A>, ReadonlyArray<A>]
+function partition<A>(predicateFn: (value: A) => boolean): (xs: ReadonlyArray<A>) => readonly [ReadonlyArray<A>, ReadonlyArray<A>]
+```
+
+```ts
+A.partition([1, 2, 3, 4], value => value > 2) // → [[3, 4],[1, 2]]
+pipe([1, 'hello', 2, 'world'], A.partition(G.isString)) // → [['hello', 'world'], [1, 2]]
 ```
 
 ### prepend
