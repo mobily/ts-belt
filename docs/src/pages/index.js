@@ -113,9 +113,10 @@ const Home = () => {
         <Row marginBottom={2} alignX="center">
           <Features>
             <Feature>
-              <strong>ts-belt</strong> is built in ReScript, which generates
-              highly performant JavaScript code, see the benchmark results by
-              clicking on the button below.
+              <strong>ts-belt</strong> is built with ReScript, which generates
+              highly performant JavaScript code, comparing to the alternatives
+              (such as <u>lodash</u>, <u>ram(b)da</u> and <u>remeda</u>),{' '}
+              <strong>ts-belt</strong> is much faster ⚡
             </Feature>
           </Features>
         </Row>
