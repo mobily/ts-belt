@@ -1,0 +1,38 @@
+.card {
+  border: 1px solid var(--ifm-color-gray-200);
+  border-radius: 2px;
+  display: block;
+  cursor: pointer;
+  transition: all .2s;
+  min-height: 175px;
+  color: #111;
+}
+
+@media screen and (max-width: 768px) {
+  .card {
+    min-height: 0;
+  }
+}
+
+.card:hover {
+  text-decoration: none;
+  box-shadow: 0 3px 8px -4px #00000014, 0 5px 20px #0000000d, 0 6px 32px 12px #00000008;
+  border-color: transparent;
+}
+
+.title {
+  padding: 12px;
+  border-bottom: 1px solid var(--ifm-color-gray-200);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--ifm-color-gray-700);
+  transition: color .2s;
+}
+
+.card:hover > .title {
+  color: #000;
+}
+
+.body {
+  padding: 12px;
+}

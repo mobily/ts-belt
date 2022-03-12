@@ -1,0 +1,26 @@
+.columns {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+@media screen and (max-width: 768px) {
+  .columns {
+    flex-direction: column;
+    margin-bottom: 0 !important;
+  }
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+
+@media screen and (max-width: 768px) {
+  .column {
+    margin-bottom: 1rem;
+  }
+}

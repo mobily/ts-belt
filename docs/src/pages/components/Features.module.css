@@ -1,0 +1,32 @@
+.features {
+  text-align: center;
+  max-width: 74vw;
+}
+
+@media screen and (max-width: 768px) {
+  .features {
+    max-width: 100vh;
+    padding: 0 1rem;
+  }
+}
+
+.feature {
+  font-size: 1.3rem;
+  line-height: 2rem;
+  color: var(--ifm-color-gray-700);
+}
+
+@media screen and (max-width: 992px) {
+  .features {
+    font-size: 1.2rem;
+  }
+}
+
+.dot {
+  margin: 0 16px;
+  color: #000;
+}
+
+.feature > strong {
+  color: #000;
+}

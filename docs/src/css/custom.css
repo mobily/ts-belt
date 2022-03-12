@@ -105,7 +105,7 @@ svg[class*="ExternalLink"] {
 }
 
 .sidebar-api-option > .menu__link:after {
-  content: "Option represents the existence and nonexistence of a value";
+  content: "Functions for handling the Option data type that represents the existence and nonexistence of a value";
 }
 
 .sidebar-api-function > .menu__link:after {
@@ -133,7 +133,7 @@ svg[class*="ExternalLink"] {
 }
 
 .sidebar-api-result > .menu__link:after {
-  content: "Describe the result of a certain operation without relying on exceptions";
+  content: "Functions for describing the result of a certain operation without relying on exceptions";
 }
 
 .sidebar-api-pipe-flow > .menu__link:after {
@@ -211,4 +211,8 @@ button[class*=announcementBarClose_] {
 
 div[class*="announcementBarContent_"] {
   font-size: 95%;
+}
+
+.footer--dark {
+  --ifm-footer-background-color: #111;
 }

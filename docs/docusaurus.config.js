@@ -17,7 +17,7 @@ module.exports = {
     },
   ],
   themeConfig: {
-    image: 'img/hero-logo.png',
+    image: 'img/ts-belt-frame.png',
     prism: {
       theme: require('prism-react-renderer/themes/github'),
     },
@@ -66,7 +66,7 @@ module.exports = {
       ],
     },
     footer: {
-      style: 'light',
+      style: 'dark',
       links: [
         {
           title: 'Github',
