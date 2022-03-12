@@ -41,6 +41,8 @@
     "typescript",
     "flow",
     "functional-programming",
+    "functional",
+    "programming",
     "fp",
     "monad",
     "option",
@@ -48,7 +50,8 @@
     "result",
     "result-type",
     "array",
-    "utility"
+    "utility",
+    "utils"
   ],
   "author": "Marcin Dziewulski <hello@mobily.pl>",
   "homepage": "https://github.com/mobily/ts-belt#readme",
