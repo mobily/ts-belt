@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkts_belt_docs=self.webpackChunkts_belt_docs||[]).push([[4],{6090:(e,t,s)=>{s.r(t),s.d(t,{default:()=>r});var c=s(7294),l=s(7019);const n="wrapper_85Jk";const r=function(e){var t=e.children;return c.createElement(l.Z,null,c.createElement("div",{className:n},t))}}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkts_belt_docs=self.webpackChunkts_belt_docs||[]).push([[627],{4013:(e,t,s)=>{s.r(t),s.d(t,{default:()=>n});var c=s(7294);const l="title_YWWp";const n=function(e){var t=e.children;return c.createElement("h2",{className:l},t)}}}]);
