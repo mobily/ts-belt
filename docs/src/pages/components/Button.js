@@ -6,7 +6,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl'
 
 import styles from './Button.module.css'
 
-export const Button = props => {
+const Button = props => {
   const { children, to, variant } = props
 
   return (
@@ -22,3 +22,5 @@ export const Button = props => {
     </Link>
   )
 }
+
+export default Button

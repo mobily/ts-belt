@@ -2,7 +2,7 @@ import React from 'react'
 
 import styles from './Row.module.css'
 
-export const Row = props => {
+const Row = props => {
   const {
     children,
     alignX = 'flex-start',
@@ -24,3 +24,5 @@ export const Row = props => {
     </div>
   )
 }
+
+export default Row

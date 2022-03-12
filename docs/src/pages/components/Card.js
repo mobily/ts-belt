@@ -5,7 +5,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl'
 
 import styles from './Card.module.css'
 
-export const Card = props => {
+const Card = props => {
   const { children, title, to } = props
   const link = useBaseUrl(to)
 
@@ -16,3 +16,5 @@ export const Card = props => {
     </Link>
   )
 }
+
+export default Card

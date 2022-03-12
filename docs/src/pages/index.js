@@ -1,39 +1,20 @@
 import React from 'react'
 import BrowserOnly from '@docusaurus/BrowserOnly'
-import clsx from 'clsx'
-import Layout from '@theme/Layout'
 import Link from '@docusaurus/Link'
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import useBaseUrl from '@docusaurus/useBaseUrl'
-import styles from './styles.module.css'
 
-import {
-  Card,
-  Hero,
-  Row,
-  Columns,
-  Column,
-  Features,
-  Feature,
-  Title,
-  Page,
-  Button,
-} from './components'
-
-const LinkToHook = props => {
-  const { name, to, isDotVisible = true } = props
-  return (
-    <span className={styles.hookName}>
-      <Link to={useBaseUrl(`api/hooks/${to}`)}>{name}</Link>
-      {isDotVisible ? <span>·</span> : null}
-    </span>
-  )
-}
+import Card from './components/Card'
+import Hero from './components/Hero'
+import Row from './components/Row'
+import Columns from './components/Columns'
+import Column from './components/Column'
+import Features from './components/Features'
+import Feature from './components/Feature'
+import Title from './components/Title'
+import Page from './components/Page'
+import Button from './components/Button'
 
 const Home = () => {
-  const context = useDocusaurusContext()
-  const { siteConfig = {} } = context
-
   React.useLayoutEffect(() => {
     localStorage.setItem('theme', 'light')
     document.querySelector('.navbar__brand').style = 'display: none;'

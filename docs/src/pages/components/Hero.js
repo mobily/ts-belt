@@ -5,12 +5,13 @@ import Link from '@docusaurus/Link'
 import useBaseUrl from '@docusaurus/useBaseUrl'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 
-import { Button } from './Button'
-import { Columns, Column } from './Columns'
+import Button from './Button'
+import Columns from './Columns'
+import Column from './Column'
 
 import styles from './Hero.module.css'
 
-export const Hero = props => {
+const Hero = props => {
   const { api, logo } = props
 
   const context = useDocusaurusContext()
@@ -42,3 +43,5 @@ export const Hero = props => {
     </header>
   )
 }
+
+export default Hero

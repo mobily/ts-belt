@@ -6,9 +6,9 @@ const Context = React.createContext({
   space: 0,
 })
 
-const useColumns = () => React.useContext(Context)
+export const useColumns = () => React.useContext(Context)
 
-export const Columns = props => {
+const Columns = props => {
   const { children, space, marginBottom = 0 } = props
   return (
     <Context.Provider value={{ space }}>
@@ -25,18 +25,4 @@ export const Columns = props => {
   )
 }
 
-export const Column = props => {
-  const { children } = props
-  const { space } = useColumns()
-
-  return (
-    <div
-      className={styles.column}
-      style={{
-        marginLeft: `${space}rem`,
-      }}
-    >
-      {children}
-    </div>
-  )
-}
+export default Columns

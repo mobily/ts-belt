@@ -3,7 +3,7 @@ import Layout from '@theme/Layout'
 
 import styles from './Page.module.css'
 
-export const Page = props => {
+const Page = props => {
   const { children } = props
 
   return (
@@ -12,3 +12,5 @@ export const Page = props => {
     </Layout>
   )
 }
+
+export default Page

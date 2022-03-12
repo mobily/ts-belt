@@ -2,7 +2,7 @@ import React from 'react'
 
 import styles from './Features.module.css'
 
-export const Features = props => {
+const Features = props => {
   const { children } = props
   const length = React.Children.count(children)
 
@@ -22,8 +22,4 @@ export const Features = props => {
   )
 }
 
-export const Feature = props => {
-  const { children, isDotVisible = true } = props
-
-  return <span className={styles.feature}>{children}</span>
-}
+export default Features
