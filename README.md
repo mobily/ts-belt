@@ -65,7 +65,7 @@ npm install @mobily/ts-belt --save
 | [Object (Dict)](https://mobily.github.io/ts-belt/api/object) | D | Utility functions for `Object`. |
 | [String](https://mobily.github.io/ts-belt/api/string) | S | Utility functions for `String`. |
 | [Guards](https://mobily.github.io/ts-belt/api/guards) | G | Various TypeScript guards. |
-| [Option](https://mobily.github.io/ts-belt/api/option) | O | Functions for handling the `Option` type that represents the existence and nonexistence of a value. |
+| [Option](https://mobily.github.io/ts-belt/api/option) | O | Functions for handling the `Option` data type that represents the existence and nonexistence of a value. |
 | [Result](https://mobily.github.io/ts-belt/api/result) | R | Functions for describing the result of a certain operation without relying on exceptions. |
 | [Function](https://mobily.github.io/ts-belt/api/function) | F | Other useful functions. |
 
