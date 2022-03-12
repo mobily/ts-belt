@@ -59,8 +59,8 @@ const Home = () => {
             </Column>
             <Column>
               <Card title="Function" to="api/function">
-                Other useful utility functions such as <code>debounce</code> or{' '}
-                <code>throttle</code>.
+                Other useful utility functions (such as <code>debounce</code>,{' '}
+                <code>throttle</code> and more).
               </Card>
             </Column>
           </Columns>
