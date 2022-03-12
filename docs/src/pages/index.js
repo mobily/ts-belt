@@ -1,5 +1,4 @@
 import React from 'react'
-import BrowserOnly from '@docusaurus/BrowserOnly'
 import Link from '@docusaurus/Link'
 import useBaseUrl from '@docusaurus/useBaseUrl'
 
