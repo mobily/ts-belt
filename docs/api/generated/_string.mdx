@@ -53,6 +53,11 @@ function getUnsafe(str: string, n: number): string
 function getUnsafe(n: number): (str: string) => string
 ```
 
+```ts
+S.getUnsafe('hello', 1) // → 'e'
+pipe('world', S.getUnsafe(1)) // → 'o'
+```
+
 ### head
 
 Returns `Some(value)` where `value` is the first character of the string, or `None` if the given string is empty.
@@ -76,6 +81,11 @@ function includes(searchValue: string): (str: string) => boolean
 function includes(str: string, searchValue: string): boolean
 ```
 
+```ts
+S.includes('hello', 'll') // → true
+pipe('world', S.includes('ll')) // → false
+```
+
 ### indexOf
 
 Returns `Some(index)`, where `index` is the starting position of the first occurrence of `searchValue` within `str`.
@@ -84,6 +94,11 @@ Returns `Some(index)`, where `index` is the starting position of the first occur
 ```ts
 function indexOf(searchValue: string): (str: string) => Option<number>
 function indexOf(str: string, searchValue: string): Option<number>
+```
+
+```ts
+S.indexOf('hello', 'e') // → Some(1)
+pipe(['hello', 'world'], A.keepMap(S.indexOf('o'))) // → [4, 1]
 ```
 
 ### isEmpty
@@ -95,6 +110,12 @@ Returns `true` if the provided string is empty.
 function isEmpty(str: string): boolean
 ```
 
+```ts
+S.isEmpty('hello world') // → false
+S.isEmpty('') // → true
+pipe('ts-belt', S.isEmpty) // → false
+```
+
 ### isNotEmpty
 
 Returns `true` if the provided string is not empty.
@@ -102,6 +123,12 @@ Returns `true` if the provided string is not empty.
 
 ```ts
 function isNotEmpty(str: string): boolean
+```
+
+```ts
+S.isNotEmpty('hello world') // → true
+S.isNotEmpty('') // → false
+pipe('ts-belt', S.isNotEmpty) // → true
 ```
 
 ### last
@@ -127,6 +154,12 @@ function lastIndexOf(searchValue: string): (str: string) => Option<number>
 function lastIndexOf(str: string, searchValue: string): Option<number>
 ```
 
+```ts
+S.lastIndexOf('ts,rescript', 's') // → Some(5)
+S.lastIndexOf('ts,rescript', 'x') // → None
+pipe(['hello', 'ts'], A.keepMap(S.lastIndexOf('l'))) // → [3]
+```
+
 ### length
 
 Returns the length of the given string.
@@ -136,6 +169,11 @@ Returns the length of the given string.
 function length(str: string): number
 ```
 
+```ts
+S.length('hello') // → 5
+pipe('ts-belt', S.length) // → 7
+```
+
 ### make
 
 Converts the given value to a string.
@@ -143,6 +181,13 @@ Converts the given value to a string.
 
 ```ts
 function make<A>(value: A): string
+```
+
+```ts
+S.make(['hello', 'world']) // → 'hello,world'
+S.make(true) // → 'true'
+pipe({}, S.make) // → '[object Object]'
+pipe(100, S.make) // → '100'
 ```
 
 ### match
@@ -165,6 +210,11 @@ function remove(value: string): (str: string) => string
 function remove(str: string, value: string): string
 ```
 
+```ts
+S.remove('hello', 'l') // → 'helo'
+pipe('ts-belt', S.remove('ts-')) // → 'belt'
+```
+
 ### removeAll
 
 Returns a new string with every occurrence of `value` removed from `str`.
@@ -173,6 +223,11 @@ Returns a new string with every occurrence of `value` removed from `str`.
 ```ts
 function removeAll(value: string): (str: string) => string
 function removeAll(str: string, value: string): string
+```
+
+```ts
+S.removeAll('hello', 'l') // → 'heo'
+pipe('hXellXo wXXorXXld', S.removeAll('X')) // → 'hello world'
 ```
 
 ### repeat
