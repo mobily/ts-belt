@@ -121,7 +121,7 @@ const Home = () => {
           </Features>
         </Row>
         <Row alignX="center">
-          <Button to="benchmarks/introduction">See results</Button>
+          <Button to="benchmarks/v3.7.0/macbook-pro-2017">See results</Button>
         </Row>
       </Row>
     </Page>
