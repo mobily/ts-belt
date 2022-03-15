@@ -35,11 +35,17 @@ export declare function tryCatch<A, B>(
   value: A,
   fn: (value: A) => B,
 ): Result<B, string>
+export declare function once<A extends any[], B>(
+  fn: (...args: A) => B,
+): (...args: A) => B
 export declare function before<A extends any[], B>(
   times: number,
   fn: (...args: A) => B,
 ): (...args: A) => B
 export declare function after<A extends any[], B>(
   times: number,
+  fn: (...args: A) => B,
+): (...args: A) => B
+export declare function memoize<A extends any[], B>(
   fn: (...args: A) => B,
 ): (...args: A) => B

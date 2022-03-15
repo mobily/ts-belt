@@ -219,3 +219,15 @@ export declare function after<A extends any[], B>(
 export declare function after<A extends any[], B>(
   fn: (...args: A) => B,
 ): (times: number) => (...args: A) => B
+
+/** Takes a function and returns a new function which will invoke the given function once, and any successive calls will be suppressed, returning the value of the first call. */
+
+export declare function once<A extends any[], B>(
+  fn: (...args: A) => B,
+): (...args: A) => B
+
+/** Alias for `once`. */
+
+export declare function memoize<A extends any[], B>(
+  fn: (...args: A) => B,
+): (...args: A) => B

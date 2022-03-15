@@ -237,3 +237,25 @@ let after = (times, fn) => {
       Some(fn(restArgs))
     }
 }
+
+%comment(
+  "Takes a function and returns a new function which will invoke the given function once, and any successive calls will be suppressed, returning the value of the first call."
+)
+@gentype
+let once = fn => {
+  let lastResult = ref(None)
+
+  (. restArgs) => {
+    switch lastResult.contents {
+    | Some(result) => result
+    | None =>
+      let result = fn(restArgs)
+      lastResult := Some(result)
+      result
+    }
+  }
+}
+
+%comment("Alias for `once`.")
+@gentype
+let memoize = fn => once(fn)
