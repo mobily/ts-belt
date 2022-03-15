@@ -208,3 +208,14 @@ export declare function before<A extends any[], B>(
 export declare function before<A extends any[], B>(
   fn: (...args: A) => B,
 ): (times: number) => (...args: A) => B
+
+/** Takes a function and returns a new function that when called, will suppress the first `times` invocations. */
+
+export declare function after<A extends any[], B>(
+  times: number,
+  fn: (...args: A) => B,
+): (...args: A) => B
+
+export declare function after<A extends any[], B>(
+  fn: (...args: A) => B,
+): (times: number) => (...args: A) => B

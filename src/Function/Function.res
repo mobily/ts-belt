@@ -222,3 +222,18 @@ let before = (times, fn) => {
     }
   }
 }
+
+%comment(
+  "Takes a function and returns a new function that when called, will suppress the first `times` invocations."
+)
+@gentype
+let after = (times, fn) => {
+  let count = ref(0)
+  (. restArgs) =>
+    if count.contents < times {
+      count := succ(count.contents)
+      None
+    } else {
+      Some(fn(restArgs))
+    }
+}

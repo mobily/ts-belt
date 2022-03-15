@@ -39,3 +39,7 @@ export declare function before<A extends any[], B>(
   times: number,
   fn: (...args: A) => B,
 ): (...args: A) => B
+export declare function after<A extends any[], B>(
+  times: number,
+  fn: (...args: A) => B,
+): (...args: A) => B
