@@ -1,3 +1,5 @@
+import { Result } from '../Result'
+
 export declare type Controlled<A extends any[]> = {
   readonly cancel: () => void
   readonly invoke: (...args: A) => void
@@ -184,3 +186,14 @@ export declare function debounce<A extends any[]>(
 export declare function debounce<A extends any[]>(
   delay: number,
 ): (fn: (...args: A) => void) => (...args: A) => void
+
+/** Takes a function, which is called in the `try/catch` block, and returns the `Result` data type. */
+
+export declare function tryCatch<A, B>(
+  value: A,
+  fn: (value: A) => B,
+): Result<B, string>
+
+export declare function tryCatch<A, B>(
+  fn: (value: A) => B,
+): (value: A) => Result<B, string>

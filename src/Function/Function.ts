@@ -1,3 +1,5 @@
+import { Result } from '../Result'
+
 export declare type Controlled<A extends any[]> = {
   readonly cancel: () => void
   readonly invoke: (...args: A) => void
@@ -29,3 +31,7 @@ export declare function throttle<A extends any[]>(
   fn: (...args: A) => void,
   delay: number,
 ): (...args: A) => void
+export declare function tryCatch<A, B>(
+  value: A,
+  fn: (value: A) => B,
+): Result<B, string>

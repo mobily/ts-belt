@@ -178,3 +178,19 @@ let makeControlledDebounce = (fn, options) => {
 )
 @gentype
 let debounce = (fn, delay) => makeControlledDebounce(fn, {delay: delay, leading: false}).schedule
+
+%comment(
+  "Takes a function, which is called in the `try/catch` block, and returns the `Result` data type."
+)
+@gentype
+let tryCatch = (value, fn) => {
+  try {
+    Ok(fn(value))
+  } catch {
+  | Js.Exn.Error(obj) =>
+    switch Js.Exn.message(obj) {
+    | Some(message) => Error(message)
+    | None => Error("Unknown Error")
+    }
+  }
+}
