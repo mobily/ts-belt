@@ -259,3 +259,24 @@ let once = fn => {
 %comment("Alias for `once`.")
 @gentype
 let memoize = fn => once(fn)
+
+%comment(
+  "Takes a function and returns a new function which once called, stores the result produced by the given function in a closure-based cache, using a cache key created by the function `makeKeyFn`."
+)
+@gentype
+let memoizeWithKey = (makeKeyFn, fn) => {
+  let cache = ref(Belt.Map.String.empty)
+
+  (. restArgs) => {
+    let key = makeKeyFn(restArgs)
+    let result = Belt.Map.String.get(cache.contents, key)
+
+    switch result {
+    | Some(result) => result
+    | None =>
+      let result = fn(restArgs)
+      cache := Belt.Map.String.set(cache.contents, key, result)
+      result
+    }
+  }
+}

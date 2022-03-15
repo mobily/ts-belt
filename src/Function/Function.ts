@@ -49,3 +49,7 @@ export declare function after<A extends any[], B>(
 export declare function memoize<A extends any[], B>(
   fn: (...args: A) => B,
 ): (...args: A) => B
+export declare function memoizeWithKey<A extends any[], B>(
+  makeKeyFn: (...args: A) => string,
+  fn: (...args: A) => B,
+): (...args: A) => B

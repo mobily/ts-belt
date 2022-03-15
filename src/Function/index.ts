@@ -231,3 +231,14 @@ export declare function once<A extends any[], B>(
 export declare function memoize<A extends any[], B>(
   fn: (...args: A) => B,
 ): (...args: A) => B
+
+/** Takes a function and returns a new function which once called, stores the result produced by the given function in a closure-based cache, using a cache key created by the function `makeKeyFn`. */
+
+export declare function memoizeWithKey<A extends any[], B>(
+  fn: (...args: A) => B,
+): (makeKeyFn: (...args: A) => string) => (...args: A) => B
+
+export declare function memoizeWithKey<A extends any[], B>(
+  makeKeyFn: (...args: A) => string,
+  fn: (...args: A) => B,
+): (...args: A) => B
