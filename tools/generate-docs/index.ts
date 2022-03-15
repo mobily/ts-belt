@@ -172,7 +172,7 @@ const transformer = (file: FileInfo, api: API) => {
         .map((example, index) => {
           const lines = example.fn.split(/\r\n|\r|\n/).length
           return `${removePrettierIgnore(
-            example.fn,
+            example.fn.replace('/*\n', '').replace('*/', ''),
           )} // → ${removePrettierIgnore(example.result)}${
             lines > 1 && index !== value.examples.length - 1 ? '\n' : ''
           }`

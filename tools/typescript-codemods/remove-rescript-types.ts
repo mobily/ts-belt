@@ -12,6 +12,15 @@ const transform = (source: string, j: API['jscodeshift']): string => {
       return j.identifier('RegExp')
     })
 
+  // Js_re_t to RegExp
+  root
+    .find(j.Identifier, {
+      name: 'Belt_Map_String_key',
+    })
+    .replaceWith(_p => {
+      return j.identifier('string')
+    })
+
   // Js_undefined<T> to T | undefined
   root
     .find(j.TSFunctionType, {
