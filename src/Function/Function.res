@@ -194,3 +194,31 @@ let tryCatch = (value, fn) => {
     }
   }
 }
+
+%comment(
+  "Takes a function and returns a new function which when called, will allow the first `times` calls to invoke the given function, and any successive calls will be suppressed and the last result will be returned."
+)
+@gentype
+let before = (times, fn) => {
+  let count = ref(0)
+  let lastResult = ref(None)
+
+  (. restArgs) => {
+    switch lastResult.contents {
+    | Some(result) =>
+      if count.contents < times {
+        let result = fn(restArgs)
+        lastResult := Some(result)
+        count := succ(count.contents)
+        result
+      } else {
+        result
+      }
+    | None =>
+      let result = fn(restArgs)
+      lastResult := Some(result)
+      count := succ(count.contents)
+      result
+    }
+  }
+}

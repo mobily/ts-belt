@@ -197,3 +197,14 @@ export declare function tryCatch<A, B>(
 export declare function tryCatch<A, B>(
   fn: (value: A) => B,
 ): (value: A) => Result<B, string>
+
+/** Takes a function and returns a new function which when called, will allow the first `times` calls to invoke the given function, and any successive calls will be suppressed and the last result will be returned. */
+
+export declare function before<A extends any[], B>(
+  times: number,
+  fn: (...args: A) => B,
+): (...args: A) => B
+
+export declare function before<A extends any[], B>(
+  fn: (...args: A) => B,
+): (times: number) => (...args: A) => B
