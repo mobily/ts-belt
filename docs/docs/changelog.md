@@ -3,78 +3,87 @@ id: changelog
 title: Changelog
 ---
 
+### `v3.10.0`
+
+- ✨ added [`F.tryCatch`](/api/function/#trycatch)
+- ✨ added [`F.once`](/api/function/#once)
+- ✨ added [`F.before`](/api/function/#before)
+- ✨ added [`F.after`](/api/function/#after)
+- ✨ added [`F.memoize`](/api/function/#memoize)
+- ✨ added [`F.memoizeWithKey`](/api/function/#memoizewithkey)
+
 ### `v3.9.1`
 
-- ✨ make `A.filter`, `A.filterWithIndex`, `A.keep`, `A.keepWithIndex`, `A.partition` and `G.isNot` types aware of type guards ([#25](https://github.com/mobily/ts-belt/issues/25))
+- ✨ make [`A.filter`](/api/array#filter), [`A.filterWithIndex`](/api/array#filterwithindex), [`A.keep`](/api/array#keep), [`A.keepWithIndex`](/api/array#keepwithindex), [`A.partition`](/api/array#partition) and [`G.isNot`](/api/guards#isnot) types aware of type guards ([#25](https://github.com/mobily/ts-belt/issues/25))
 
 ### `v3.9.0`
 
-- 🐛 fixed `R.fromPredicate`
-- ✨ added `O.contains`
-- ✨ added `O.zip`
-- ✨ added `O.zipWith`
-- ✨ added `A.removeFirst`
-- ✨ added `A.removeFirstBy`
-- ✨ added `A.zipWithIndex`
+- 🐛 fixed [`R.fromPredicate`](/api/result#frompredicate)
+- ✨ added [`O.contains`](/api/option#contains)
+- ✨ added [`O.zip`](/api/option#zip)
+- ✨ added [`O.zipWith`](/api/option#zipwith)
+- ✨ added [`A.removeFirst`](/api/array#removefirst)
+- ✨ added [`A.removeFirstBy`](/api/array#removefirstby)
+- ✨ added [`A.zipWithIndex`](/api/array#zipwithindex)
 
 ### `v3.8.0`
 
-- 🐛 fixed `O.fromPredicate`
+- 🐛 fixed [`O.fromPredicate`](/api/option#frompredicate)
 - ♻️ the `Option` type is now `type Option<T> = T | undefined | null` (due to this update, adding `noUncheckedIndexedAccess` to your `tsconfig` is mandatory, you can see other recommended options [here](getting-started/config.md))
 
 ### `v3.7.0`
 
-- ✨ added `R.catchError`
-- ✨ added `R.handleError`
-- ✨ added `R.mapError`
-- ✨ added `R.tapError`
-- ✨ added `R.recover`
-- ✨ added `R.flip`
+- ✨ added [`R.catchError`](/api/result#catcherror)
+- ✨ added [`R.handleError`](/api/result#handleerror)
+- ✨ added [`R.mapError`](/api/result#maperror)
+- ✨ added [`R.tapError`](/api/result#taperror)
+- ✨ added [`R.recover`](/api/result#recover)
+- ✨ added [`R.flip`](/api/result#flip)
 
 ### `v3.6.0`
 
-- ✨ added `flow` ([#17](https://github.com/mobily/ts-belt/issues/17), learn more [here](/api/pipe-flow))
-- ✨ added `D.selectKeys` ([@anthony-khong](https://github.com/anthony-khong))
-- ✨ added `D.deleteKey` ([@anthony-khong](https://github.com/anthony-khong))
-- ✨ added `D.deleteKeys` ([@anthony-khong](https://github.com/anthony-khong))
-- ✨ added `N.clamp` ([@domeknn](https://github.com/domeknn))
-- ✨ added `N.gt` ([@domeknn](https://github.com/domeknn))
-- ✨ added `N.lt` ([@domeknn](https://github.com/domeknn))
-- ✨ added `N.gte` ([@domeknn](https://github.com/domeknn))
-- ✨ added `N.lte` ([@domeknn](https://github.com/domeknn))
-- 🐛 fixed `A.prependToAll` (the order of elements was incorrect after calling `prependToAll`)
+- ✨ added [`flow`](/api/pipe-flow#flow) ([#17](https://github.com/mobily/ts-belt/issues/17)
+- ✨ added [`D.selectKeys`](/api/number#selectkeys) ([@anthony-khong](https://github.com/anthony-khong))
+- ✨ added [`D.deleteKey`](/api/number#deletekey) ([@anthony-khong](https://github.com/anthony-khong))
+- ✨ added [`D.deleteKeys`](/api/number#deletekeys) ([@anthony-khong](https://github.com/anthony-khong))
+- ✨ added [`N.clamp`](/api/number#clamp) ([@domeknn](https://github.com/domeknn))
+- ✨ added [`N.gt`](/api/number#gt) ([@domeknn](https://github.com/domeknn))
+- ✨ added [`N.lt`](/api/number#lt) ([@domeknn](https://github.com/domeknn))
+- ✨ added [`N.gte`](/api/number#gte) ([@domeknn](https://github.com/domeknn))
+- ✨ added [`N.lte`](/api/number#lte) ([@domeknn](https://github.com/domeknn))
+- 🐛 fixed [`A.prependToAll`](/api/array#prependtoall) (the order of elements was incorrect after calling `prependToAll`)
 
 ### `v3.5.0`
 
-- ✨ added `D.update` ([@anthony-khong](https://github.com/anthony-khong))
-- ✨ added `D.updateUnsafe` ([@anthony-khong](https://github.com/anthony-khong))
-- ✨ added `D.isEmpty`
-- ✨ added `D.isNotEmpty`
-- ✨ added `A.reduceReverse`
-- ✨ added `A.filterMap` (alias: `A.keepMap`)
+- ✨ added [`D.update`](/api/object#update) ([@anthony-khong](https://github.com/anthony-khong))
+- ✨ added [`D.updateUnsafe`](/api/object#updateunsafe) ([@anthony-khong](https://github.com/anthony-khong))
+- ✨ added [`D.isEmpty`](/api/object#isempty)
+- ✨ added [`D.isNotEmpty`](/api/object#isnotempty)
+- ✨ added [`A.reduceReverse`](/api/array#reducereverse)
+- ✨ added [`A.filterMap`](/api/array#filtermap) (alias: [`A.keepMap`](/api/array#keepmap))
 
 ### `v3.4.1`
 
-- 🐛 fixed `F.makeControlledThrottle`
-- 🐛 fixed `F.makeControlledDebounce`
+- 🐛 fixed [`F.makeControlledThrottle`](/api/function#makecontrolledthrottle)
+- 🐛 fixed [`F.makeControlledDebounce`](/api/function#makecontrolleddebounce)
 
 ⬆️ The `invoke` method was accepting only one argument.
 
 ### `v3.4.0`
 
 - 🐛 fixed the internal implementation for comparing objects ([#10](https://github.com/mobily/ts-belt/issues/10))
-- ✨ added `D.set` ([@anthony-khong](https://github.com/anthony-khong))
+- ✨ added [`D.set`](/api/object#set) ([@anthony-khong](https://github.com/anthony-khong))
 
 ### `v3.3.0`
 
 - ♻️ all tuples are now `readonly`
-- 🗑 `D.prop` has been deprecated (please use either `D.get` or `D.getUnsafe`)
-- ✨ added `A.flip`
-- ✨ added `F.tap`
-- ✨ added `F.debounce`
-- ✨ added `F.makeControlledDebounce`
-- ✨ added `F.throttle`
-- ✨ added `F.makeControlledThrottle`
+- 🗑 `D.prop` has been deprecated (please use either [`D.get`](/api/object#get) or [`D.getUnsafe`](/api/object#getunsafe))
+- ✨ added [`A.flip`](/api/array#flip)
+- ✨ added [`F.tap`](/api/function#tap)
+- ✨ added [`F.debounce`](/api/function#debounce)
+- ✨ added [`F.makeControlledDebounce`](/api/function#makecontrolleddebounce)
+- ✨ added [`F.throttle`](/api/function#throttle)
+- ✨ added [`F.makeControlledThrottle`](/api/function#makecontrolledthrottle)
 
 ### `v3.2.0`
 
@@ -86,9 +95,9 @@ A.reduce(['hello', 'world'], '', S.concat)
 A.filter(['hello', 'world'], S.startsWith('h'))
 ```
 
-- ✨ added `O.tap`
-- ✨ added `R.tap`
-- ✨ added `A.tap`
+- ✨ added [`O.tap`](/api/option#tap)
+- ✨ added [`R.tap`](/api/result#tap)
+- ✨ added [`A.tap`](/api/array#tap)
 
 ### `v3.1.1`
 
@@ -96,14 +105,14 @@ A.filter(['hello', 'world'], S.startsWith('h'))
 
 ### `v3.1.0`
 
-- 🐛 fixed `S.head` return type
-- ✨ added `S.trimEnd` ([@Dilven](https://github.com/Dilven))
-- ✨ added `S.trimStart` ([@Dilven](https://github.com/Dilven))
-- ✨ added `S.last` ([@Dilven](https://github.com/Dilven))
+- 🐛 fixed [`S.head`](/api/string#head) return type
+- ✨ added [`S.trimEnd`](/api/string#trimEnd) ([@Dilven](https://github.com/Dilven))
+- ✨ added [`S.trimStart`](/api/string#trimStart) ([@Dilven](https://github.com/Dilven))
+- ✨ added [`S.last`](/api/string#last) ([@Dilven](https://github.com/Dilven))
 
 ### `v3.0.1`
 
-- 🐛 fixed `A.uniqBy` signature ([#1](https://github.com/mobily/ts-belt/issues/1))
+- 🐛 fixed [`A.uniqBy`](/api/array#uniqby) signature ([#1](https://github.com/mobily/ts-belt/issues/1))
 
 ### `v3.0.0`
 
