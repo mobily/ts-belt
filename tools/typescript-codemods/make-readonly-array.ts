@@ -24,33 +24,19 @@ const transform = (source: string, j: API['jscodeshift']): string => {
       return p.value
     })
 
-  // T[] to ReadonlyArray<T>
+  // T[] to Array<T>
   root.find(j.TSArrayType).replaceWith(p => {
     const elementType = p.value.elementType
 
     if (elementType) {
       return j.tsTypeReference(
-        j.identifier('ReadonlyArray'),
+        j.identifier('Array'),
         j.tsTypeParameterInstantiation([elementType]),
       )
     }
 
     return p.value
   })
-
-  // Array<T> to ReadonlyArray<T>
-  root
-    .find(j.TSTypeReference, {
-      typeName: {
-        name: 'Array',
-        type: 'Identifier',
-      },
-    })
-    .forEach(p => {
-      if (p.value.typeName.type === 'Identifier') {
-        p.value.typeName.name = 'ReadonlyArray'
-      }
-    })
 
   return root.toSource()
 }

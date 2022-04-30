@@ -32,7 +32,7 @@ const transform = (file: FileInfo, api: API) => {
   const root = j(source)
 
   const addImport = (name: string, path?: string) => {
-    if (name === basename) {
+    if (name === basename && basename !== 'Array') {
       return
     }
 
@@ -71,6 +71,8 @@ const transform = (file: FileInfo, api: API) => {
             addImport('GuardObject', '../types'),
             addImport('GuardPromise', '../types'),
             addImport('GuardArray', '../types'),
+            addImport('Array', '../types'),
+            addImport('Mutable', '../types'),
             ...ctx.currentExports,
           ].filter(Boolean),
         )

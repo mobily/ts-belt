@@ -4,8 +4,8 @@ Adds a single element to the end of an array.
 
 
 ```ts
-function append<A>(xs: ReadonlyArray<A>, element: A): ReadonlyArray<A>
-function append<A>(element: A): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function append<A>(xs: Array<A>, element: A): Array<A>
+function append<A>(element: A): (xs: Array<A>) => Array<A>
 ```
 
 ### at
@@ -14,8 +14,8 @@ Alias for `get`.
 
 
 ```ts
-function at<A>(xs: ReadonlyArray<A>, index: number): Option<A>
-function at<A>(index: number): (xs: ReadonlyArray<A>) => Option<A>
+function at<A>(xs: Array<A>, index: number): Option<A>
+function at<A>(index: number): (xs: Array<A>) => Option<A>
 ```
 
 ### concat
@@ -24,8 +24,8 @@ Returns a new array containing the concatenation of two provided arrays.
 
 
 ```ts
-function concat<A>(xs1: ReadonlyArray<A>): (xs0: ReadonlyArray<A>) => ReadonlyArray<A>
-function concat<A>(xs0: ReadonlyArray<A>, xs1: ReadonlyArray<A>): ReadonlyArray<A>
+function concat<A>(xs1: Array<A>): (xs0: Array<A>) => Array<A>
+function concat<A>(xs0: Array<A>, xs1: Array<A>): Array<A>
 ```
 
 ### concatMany
@@ -34,7 +34,7 @@ Returns a new array as the concatenation of the provided array of arrays.
 
 
 ```ts
-function concatMany<A>(xs: ReadonlyArray<ReadonlyArray<A>>): ReadonlyArray<A>
+function concatMany<A>(xs: Array<Array<A>>): Array<A>
 ```
 
 ### copy
@@ -43,7 +43,7 @@ Returns a copy of the provided array.
 
 
 ```ts
-function copy<A>(xs: ReadonlyArray<A>): ReadonlyArray<A>
+function copy<A>(xs: Array<A>): Array<A>
 ```
 
 ### deepFlat
@@ -52,7 +52,7 @@ Creates a new array with all sub-array elements concatenated into it recursively
 
 
 ```ts
-function deepFlat<A>(xs: ReadonlyArray<A>): ReadonlyArray<ExtractNested<A>>
+function deepFlat<A>(xs: Array<A>): Array<ExtractNested<A>>
 ```
 
 ### drop
@@ -61,8 +61,8 @@ Returns a new array that does not contain the first `n` elements of the provided
 
 
 ```ts
-function drop<A>(xs: ReadonlyArray<A>, n: number): ReadonlyArray<A>
-function drop<A>(n: number): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function drop<A>(xs: Array<A>, n: number): Array<A>
+function drop<A>(n: number): (xs: Array<A>) => Array<A>
 ```
 
 ```ts
@@ -78,8 +78,8 @@ Returns a new array (`Some(xs)`) that does not contain the first `n` elements of
 
 
 ```ts
-function dropExactly<A>(xs: ReadonlyArray<A>, n: number): Option<ReadonlyArray<A>>
-function dropExactly<A>(n: number): (xs: ReadonlyArray<A>) => Option<ReadonlyArray<A>>
+function dropExactly<A>(xs: Array<A>, n: number): Option<Array<A>>
+function dropExactly<A>(n: number): (xs: Array<A>) => Option<Array<A>>
 ```
 
 ### dropWhile
@@ -88,8 +88,8 @@ Drops elements from the beginning of the array until an element is reached which
 
 
 ```ts
-function dropWhile<A>(xs: ReadonlyArray<A>, predicateFn: (_1: A) => boolean): ReadonlyArray<A>
-function dropWhile<A>(predicateFn: (_1: A) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function dropWhile<A>(xs: Array<A>, predicateFn: (_1: A) => boolean): Array<A>
+function dropWhile<A>(predicateFn: (_1: A) => boolean): (xs: Array<A>) => Array<A>
 ```
 
 ### eq
@@ -98,12 +98,8 @@ Returns `false` if length of both arrays is not the same, otherwise compares ele
 
 
 ```ts
-function eq<A>(
-    xs0: ReadonlyArray<A>,
-    xs1: ReadonlyArray<A>,
-    comparatorFn: (_1: A, _2: A) => boolean
-): boolean
-function eq<A>(xs1: ReadonlyArray<A>, comparatorFn: (_1: A, _2: A) => boolean): (xs0: ReadonlyArray<A>) => boolean
+function eq<A>(xs0: Array<A>, xs1: Array<A>, comparatorFn: (_1: A, _2: A) => boolean): boolean
+function eq<A>(xs1: Array<A>, comparatorFn: (_1: A, _2: A) => boolean): (xs0: Array<A>) => boolean
 ```
 
 ### every
@@ -112,8 +108,8 @@ Returns `true`` if all elements satisfy the given predicate.
 
 
 ```ts
-function every<A>(xs: ReadonlyArray<A>, fn: (_1: A) => boolean): boolean
-function every<A>(fn: (_1: A) => boolean): (xs: ReadonlyArray<A>) => boolean
+function every<A>(xs: Array<A>, fn: (_1: A) => boolean): boolean
+function every<A>(fn: (_1: A) => boolean): (xs: Array<A>) => boolean
 ```
 
 ### filter
@@ -122,10 +118,10 @@ Returns a new array that keep all elements satisfy the given predicate.
 
 
 ```ts
-function filter<A, B extends A>(xs: ReadonlyArray<A>, predicateFn: (value: A) => value is B): ReadonlyArray<B>
-function filter<A, B extends A>(predicateFn: (value: A) => value is B): (xs: ReadonlyArray<A>) => ReadonlyArray<B>
-function filter<A>(xs: ReadonlyArray<A>, predicateFn: (value: A) => boolean): ReadonlyArray<A>
-function filter<A>(predicateFn: (value: A) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function filter<A, B extends A>(xs: Array<A>, predicateFn: (value: A) => value is B): Array<B>
+function filter<A, B extends A>(predicateFn: (value: A) => value is B): (xs: Array<A>) => Array<B>
+function filter<A>(xs: Array<A>, predicateFn: (value: A) => boolean): Array<A>
+function filter<A>(predicateFn: (value: A) => boolean): (xs: Array<A>) => Array<A>
 ```
 
 ```ts
@@ -147,8 +143,8 @@ Returns a new array that keep all elements that return `Some(value)` applied wit
 
 
 ```ts
-function filterMap<A, B>(xs: ReadonlyArray<A>, predicateFn: (_1: A) => Option<B>): ReadonlyArray<B>
-function filterMap<A, B>(predicateFn: (_1: A) => Option<B>): (xs: ReadonlyArray<A>) => ReadonlyArray<B>
+function filterMap<A, B>(xs: Array<A>, predicateFn: (_1: A) => Option<B>): Array<B>
+function filterMap<A, B>(predicateFn: (_1: A) => Option<B>): (xs: Array<A>) => Array<B>
 ```
 
 ```ts
@@ -170,10 +166,10 @@ Returns a new array that keep all elements satisfy the given predicate (which ta
 
 
 ```ts
-function filterWithIndex<A, B extends A>(xs: ReadonlyArray<A>, predicateFn: (index: number, value: A) => value is B): ReadonlyArray<B>
-function filterWithIndex<A, B extends A>(predicateFn: (index: number, value: A) => value is B): (xs: ReadonlyArray<A>) => ReadonlyArray<B>
-function filterWithIndex<A>(xs: ReadonlyArray<A>, predicateFn: (index: number, value: A) => boolean): ReadonlyArray<A>
-function filterWithIndex<A>(predicateFn: (index: number, value: A) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function filterWithIndex<A, B extends A>(xs: Array<A>, predicateFn: (index: number, value: A) => value is B): Array<B>
+function filterWithIndex<A, B extends A>(predicateFn: (index: number, value: A) => value is B): (xs: Array<A>) => Array<B>
+function filterWithIndex<A>(xs: Array<A>, predicateFn: (index: number, value: A) => boolean): Array<A>
+function filterWithIndex<A>(predicateFn: (index: number, value: A) => boolean): (xs: Array<A>) => Array<A>
 ```
 
 ### find
@@ -182,8 +178,8 @@ Alias for `getBy`.
 
 
 ```ts
-function find<A>(xs: ReadonlyArray<A>, predicateFn: (_1: A) => boolean): Option<A>
-function find<A>(predicateFn: (_1: A) => boolean): (xs: ReadonlyArray<A>) => Option<A>
+function find<A>(xs: Array<A>, predicateFn: (_1: A) => boolean): Option<A>
+function find<A>(predicateFn: (_1: A) => boolean): (xs: Array<A>) => Option<A>
 ```
 
 ### flat
@@ -192,7 +188,7 @@ Creates a new array with all sub-array elements concatenated into it (the single
 
 
 ```ts
-function flat<A>(xs: ReadonlyArray<A>): ReadonlyArray<A extends ReadonlyArray<infer B> ? B : A>
+function flat<A>(xs: Array<A>): Array<A extends Array<infer B> ? B : A>
 ```
 
 ### flip
@@ -220,8 +216,8 @@ Calls `fn` on each element of the provided array.
 
 
 ```ts
-function forEach<A>(xs: ReadonlyArray<A>, fn: (_1: A) => void): void
-function forEach<A>(fn: (_1: A) => void): (xs: ReadonlyArray<A>) => void
+function forEach<A>(xs: Array<A>, fn: (_1: A) => void): void
+function forEach<A>(fn: (_1: A) => void): (xs: Array<A>) => void
 ```
 
 ### forEachWithIndex
@@ -230,8 +226,8 @@ Calls `fn` (which takes two arguments: the element from array and its index) on 
 
 
 ```ts
-function forEachWithIndex<A>(xs: ReadonlyArray<A>, fn: (_1: number, _2: A) => void): void
-function forEachWithIndex<A>(fn: (_1: number, _2: A) => void): (xs: ReadonlyArray<A>) => void
+function forEachWithIndex<A>(xs: Array<A>, fn: (_1: number, _2: A) => void): void
+function forEachWithIndex<A>(fn: (_1: number, _2: A) => void): (xs: Array<A>) => void
 ```
 
 ### get
@@ -240,8 +236,8 @@ Returns `Some(value)` at the given index, or `None` if the given index is out of
 
 
 ```ts
-function get<A>(xs: ReadonlyArray<A>, index: number): Option<A>
-function get<A>(index: number): (xs: ReadonlyArray<A>) => Option<A>
+function get<A>(xs: Array<A>, index: number): Option<A>
+function get<A>(index: number): (xs: Array<A>) => Option<A>
 ```
 
 ### getBy
@@ -250,8 +246,8 @@ Returns `Some(value)` for the first element in the array that satisifies the giv
 
 
 ```ts
-function getBy<A>(xs: ReadonlyArray<A>, predicateFn: (_1: A) => boolean): Option<A>
-function getBy<A>(predicateFn: (_1: A) => boolean): (xs: ReadonlyArray<A>) => Option<A>
+function getBy<A>(xs: Array<A>, predicateFn: (_1: A) => boolean): Option<A>
+function getBy<A>(predicateFn: (_1: A) => boolean): (xs: Array<A>) => Option<A>
 ```
 
 ### getIndexBy
@@ -260,8 +256,8 @@ Returns `Some(index)` for the first value in the provided array that satisifies 
 
 
 ```ts
-function getIndexBy<A>(xs: ReadonlyArray<A>, predicateFn: (_1: A) => boolean): Option<number>
-function getIndexBy<A>(predicateFn: (_1: A) => boolean): (xs: ReadonlyArray<A>) => Option<number>
+function getIndexBy<A>(xs: Array<A>, predicateFn: (_1: A) => boolean): Option<number>
+function getIndexBy<A>(predicateFn: (_1: A) => boolean): (xs: Array<A>) => Option<number>
 ```
 
 ### getUndefined
@@ -270,8 +266,8 @@ Returns `value` at the given index, or `undefined` if the given index is out of 
 
 
 ```ts
-function getUndefined<A>(xs: ReadonlyArray<A>, index: number): A | undefined
-function getUndefined<A>(index: number): (xs: ReadonlyArray<A>) => A | undefined
+function getUndefined<A>(xs: Array<A>, index: number): A | undefined
+function getUndefined<A>(index: number): (xs: Array<A>) => A | undefined
 ```
 
 ### getUnsafe
@@ -280,8 +276,8 @@ Returns `value` at the given index (use only if you're entirely sure that a valu
 
 
 ```ts
-function getUnsafe<A>(xs: ReadonlyArray<A>, index: number): A
-function getUnsafe<A>(index: number): (xs: ReadonlyArray<A>) => A
+function getUnsafe<A>(xs: Array<A>, index: number): A
+function getUnsafe<A>(index: number): (xs: Array<A>) => A
 ```
 
 ### groupBy
@@ -290,8 +286,8 @@ Splits the given array into sub-arrays in an object, grouped by the result of ru
 
 
 ```ts
-function groupBy<A, B extends PropertyKey>(xs: ReadonlyArray<A>, groupFn: (item: A) => B): Partial<Record<B, readonly [A, ...A[]]>>
-function groupBy<A, B extends PropertyKey>(groupFn: (item: A) => B): (xs: ReadonlyArray<A>) => Partial<Record<B, readonly [A, ...A[]]>>
+function groupBy<A, B extends PropertyKey>(xs: Array<A>, groupFn: (item: A) => B): Partial<Record<B, readonly [A, ...A[]]>>
+function groupBy<A, B extends PropertyKey>(groupFn: (item: A) => B): (xs: Array<A>) => Partial<Record<B, readonly [A, ...A[]]>>
 ```
 
 ### head
@@ -300,7 +296,7 @@ Returns `Some(value)` where `value` is the first element of the array, or `None`
 
 
 ```ts
-function head<A>(xs: ReadonlyArray<A>): Option<A>
+function head<A>(xs: Array<A>): Option<A>
 ```
 
 ### includes
@@ -309,8 +305,8 @@ Returns `true` if the provided value is equal to at least one element of the giv
 
 
 ```ts
-function includes<A>(xs: ReadonlyArray<A>, value: A): boolean
-function includes<A>(value: A): (xs: ReadonlyArray<A>) => boolean
+function includes<A>(xs: Array<A>, value: A): boolean
+function includes<A>(value: A): (xs: Array<A>) => boolean
 ```
 
 ### init
@@ -319,7 +315,7 @@ Returns a new array (`Some(xs)`) with all elements except the last of the provid
 
 
 ```ts
-function init<A>(xs: ReadonlyArray<A>): Option<ReadonlyArray<A>>
+function init<A>(xs: Array<A>): Option<Array<A>>
 ```
 
 ### initOrEmpty
@@ -328,7 +324,7 @@ Returns a new array with all elements except the last of the provided array, or 
 
 
 ```ts
-function initOrEmpty<A>(xs: ReadonlyArray<A>): ReadonlyArray<A>
+function initOrEmpty<A>(xs: Array<A>): Array<A>
 ```
 
 ### insertAt
@@ -337,8 +333,8 @@ Creates a new array that inserts the given value at the given index (no insertio
 
 
 ```ts
-function insertAt<A>(xs: ReadonlyArray<A>, targetIndex: number, element: A): ReadonlyArray<A>
-function insertAt<A>(targetIndex: number, element: A): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function insertAt<A>(xs: Array<A>, targetIndex: number, element: A): Array<A>
+function insertAt<A>(targetIndex: number, element: A): (xs: Array<A>) => Array<A>
 ```
 
 ### intersperse
@@ -347,8 +343,8 @@ Creates a new array with the separator interposed between elements.
 
 
 ```ts
-function intersperse<A>(xs: ReadonlyArray<A>, delimiter: A): ReadonlyArray<A>
-function intersperse<A>(delimiter: A): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function intersperse<A>(xs: Array<A>, delimiter: A): Array<A>
+function intersperse<A>(delimiter: A): (xs: Array<A>) => Array<A>
 ```
 
 ### isEmpty
@@ -357,7 +353,7 @@ Determines whether the given array is empty.
 
 
 ```ts
-function isEmpty<A>(xs: ReadonlyArray<A>): boolean
+function isEmpty<A>(xs: Array<A>): boolean
 ```
 
 ```ts
@@ -372,7 +368,7 @@ Determines whether the given array is not empty.
 
 
 ```ts
-function isNotEmpty<A>(xs: ReadonlyArray<A>): boolean
+function isNotEmpty<A>(xs: Array<A>): boolean
 ```
 
 ```ts
@@ -387,8 +383,8 @@ Converts each element of the array to a string and concatenates them, separated 
 
 
 ```ts
-function join<A>(xs: ReadonlyArray<A>, delimiter: string): string
-function join<A>(delimiter: string): (xs: ReadonlyArray<A>) => string
+function join<A>(xs: Array<A>, delimiter: string): string
+function join<A>(delimiter: string): (xs: Array<A>) => string
 ```
 
 ### keep
@@ -397,10 +393,10 @@ Alias for `filter`.
 
 
 ```ts
-function keep<A, B extends A>(xs: ReadonlyArray<A>, predicateFn: (value: A) => value is B): ReadonlyArray<B>
-function keep<A, B extends A>(predicateFn: (value: A) => value is B): (xs: ReadonlyArray<A>) => ReadonlyArray<B>
-function keep<A>(xs: ReadonlyArray<A>, predicateFn: (value: A) => boolean): ReadonlyArray<A>
-function keep<A>(predicateFn: (value: A) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function keep<A, B extends A>(xs: Array<A>, predicateFn: (value: A) => value is B): Array<B>
+function keep<A, B extends A>(predicateFn: (value: A) => value is B): (xs: Array<A>) => Array<B>
+function keep<A>(xs: Array<A>, predicateFn: (value: A) => boolean): Array<A>
+function keep<A>(predicateFn: (value: A) => boolean): (xs: Array<A>) => Array<A>
 ```
 
 ### keepMap
@@ -409,8 +405,8 @@ Alias for `filterMap`.
 
 
 ```ts
-function keepMap<A, B>(xs: ReadonlyArray<A>, predicateFn: (_1: A) => Option<B>): ReadonlyArray<B>
-function keepMap<A, B>(predicateFn: (_1: A) => Option<B>): (xs: ReadonlyArray<A>) => ReadonlyArray<B>
+function keepMap<A, B>(xs: Array<A>, predicateFn: (_1: A) => Option<B>): Array<B>
+function keepMap<A, B>(predicateFn: (_1: A) => Option<B>): (xs: Array<A>) => Array<B>
 ```
 
 ### keepWithIndex
@@ -419,10 +415,10 @@ Alias for `filterWithIndex`.
 
 
 ```ts
-function keepWithIndex<A, B extends A>(xs: ReadonlyArray<A>, predicateFn: (index: number, value: A) => value is B): ReadonlyArray<B>
-function keepWithIndex<A, B extends A>(predicateFn: (index: number, value: A) => value is B): (xs: ReadonlyArray<A>) => ReadonlyArray<B>
-function keepWithIndex<A>(xs: ReadonlyArray<A>, predicateFn: (index: number, value: A) => boolean): ReadonlyArray<A>
-function keepWithIndex<A>(predicateFn: (index: number, value: A) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function keepWithIndex<A, B extends A>(xs: Array<A>, predicateFn: (index: number, value: A) => value is B): Array<B>
+function keepWithIndex<A, B extends A>(predicateFn: (index: number, value: A) => value is B): (xs: Array<A>) => Array<B>
+function keepWithIndex<A>(xs: Array<A>, predicateFn: (index: number, value: A) => boolean): Array<A>
+function keepWithIndex<A>(predicateFn: (index: number, value: A) => boolean): (xs: Array<A>) => Array<A>
 ```
 
 ### last
@@ -431,7 +427,7 @@ Returns the last element (`Some(value)`) in the array, or `None` if the given ar
 
 
 ```ts
-function last<A>(xs: ReadonlyArray<A>): Option<A>
+function last<A>(xs: Array<A>): Option<A>
 ```
 
 ### length
@@ -440,7 +436,7 @@ Returns the size of the provided array.
 
 
 ```ts
-function length<A>(xs: ReadonlyArray<A>): number
+function length<A>(xs: Array<A>): number
 ```
 
 ```ts
@@ -454,8 +450,8 @@ Returns a new array of size `n` populated by `element`, or an empty array if `n`
 
 
 ```ts
-function make<A>(n: number, element: A): ReadonlyArray<A>
-function make<A>(element: A): (n: number) => ReadonlyArray<A>
+function make<A>(n: number, element: A): Array<A>
+function make<A>(element: A): (n: number) => Array<A>
 ```
 
 ```ts
@@ -470,7 +466,7 @@ Creates an empty array. Alternative for `const xs = [] as ReadonlyArray<A>`.
 
 
 ```ts
-function makeEmpty<A>(): ReadonlyArray<A>
+function makeEmpty<A>(): Array<A>
 ```
 
 ```ts
@@ -483,8 +479,8 @@ Returns a new array of size `n` populated by `mapFn(index)`, or an empty array i
 
 
 ```ts
-function makeWithIndex<A>(n: number, mapFn: (_1: number) => A): ReadonlyArray<A>
-function makeWithIndex<A>(mapFn: (_1: number) => A): (n: number) => ReadonlyArray<A>
+function makeWithIndex<A>(n: number, mapFn: (_1: number) => A): Array<A>
+function makeWithIndex<A>(mapFn: (_1: number) => A): (n: number) => Array<A>
 ```
 
 ```ts
@@ -497,8 +493,8 @@ Returns a new array by calling `mapFn` for each element of the provided array.
 
 
 ```ts
-function map<A, B>(xs: ReadonlyArray<A>, mapFn: (_1: A) => B): ReadonlyArray<B>
-function map<A, B>(mapFn: (_1: A) => B): (xs: ReadonlyArray<A>) => ReadonlyArray<B>
+function map<A, B>(xs: Array<A>, mapFn: (_1: A) => B): Array<B>
+function map<A, B>(mapFn: (_1: A) => B): (xs: Array<A>) => Array<B>
 ```
 
 ### mapWithIndex
@@ -507,8 +503,8 @@ Returns a new array by calling `mapFn` (which takes two arguments: the element f
 
 
 ```ts
-function mapWithIndex<A, B>(xs: ReadonlyArray<A>, mapFn: (_1: number, _2: A) => B): ReadonlyArray<B>
-function mapWithIndex<A, B>(mapFn: (_1: number, _2: A) => B): (xs: ReadonlyArray<A>) => ReadonlyArray<B>
+function mapWithIndex<A, B>(xs: Array<A>, mapFn: (_1: number, _2: A) => B): Array<B>
+function mapWithIndex<A, B>(mapFn: (_1: number, _2: A) => B): (xs: Array<A>) => Array<B>
 ```
 
 ### partition
@@ -517,12 +513,10 @@ Splits the provided array into two separate arrays - one containing elements whi
 
 
 ```ts
-function partition<A, B extends A>(xs: ReadonlyArray<A>, predicateFn: (value: A) => value is B): readonly [ReadonlyArray<B>, ReadonlyArray<Exclude<A, B>>]
-function partition<A, B extends A>(predicateFn: (value: A) => value is B): (
-  xs: ReadonlyArray<A>,
-) => readonly [ReadonlyArray<B>, ReadonlyArray<Exclude<A, B>>]
-function partition<A>(xs: ReadonlyArray<A>, predicateFn: (value: A) => boolean): readonly [ReadonlyArray<A>, ReadonlyArray<A>]
-function partition<A>(predicateFn: (value: A) => boolean): (xs: ReadonlyArray<A>) => readonly [ReadonlyArray<A>, ReadonlyArray<A>]
+function partition<A, B extends A>(xs: Array<A>, predicateFn: (value: A) => value is B): readonly [Array<B>, Array<Exclude<A, B>>]
+function partition<A, B extends A>(predicateFn: (value: A) => value is B): (xs: Array<A>) => readonly [Array<B>, Array<Exclude<A, B>>]
+function partition<A>(xs: Array<A>, predicateFn: (value: A) => boolean): readonly [Array<A>, Array<A>]
+function partition<A>(predicateFn: (value: A) => boolean): (xs: Array<A>) => readonly [Array<A>, Array<A>]
 ```
 
 ```ts
@@ -536,8 +530,8 @@ Prepends a single element to the start of the given array.
 
 
 ```ts
-function prepend<A>(xs: ReadonlyArray<A>, element: A): ReadonlyArray<A>
-function prepend<A>(element: A): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function prepend<A>(xs: Array<A>, element: A): Array<A>
+function prepend<A>(element: A): (xs: Array<A>) => Array<A>
 ```
 
 ### prependToAll
@@ -546,8 +540,8 @@ Returns a new array which contains the given delimiter inserted before every ele
 
 
 ```ts
-function prependToAll<A>(xs: ReadonlyArray<A>, delimiter: A): ReadonlyArray<A>
-function prependToAll<A>(delimiter: A): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function prependToAll<A>(xs: Array<A>, delimiter: A): Array<A>
+function prependToAll<A>(delimiter: A): (xs: Array<A>) => Array<A>
 ```
 
 ### range
@@ -556,8 +550,8 @@ Returns a new array of numbers from `start` (inclusive) to `finish` (exclusive).
 
 
 ```ts
-function range(finish: number): (start: number) => ReadonlyArray<number>
-function range(start: number, finish: number): ReadonlyArray<number>
+function range(finish: number): (start: number) => Array<number>
+function range(start: number, finish: number): Array<number>
 ```
 
 ### rangeBy
@@ -566,8 +560,8 @@ Returns a new array of numbers from `start` (inclusive) to `finish` (exclusive).
 
 
 ```ts
-function rangeBy(finish: number, step: number): (start: number) => ReadonlyArray<number>
-function rangeBy(start: number, finish: number, step: number): ReadonlyArray<number>
+function rangeBy(finish: number, step: number): (start: number) => Array<number>
+function rangeBy(start: number, finish: number, step: number): Array<number>
 ```
 
 ### reduce
@@ -576,8 +570,8 @@ Applies `reduceFn` (which has two parameters: an `accumulator` which starts with
 
 
 ```ts
-function reduce<A, B>(xs: ReadonlyArray<A>, initialValue: B, reduceFn: (_1: B, _2: A) => B): B
-function reduce<A, B>(initialValue: B, reduceFn: (_1: B, _2: A) => B): (xs: ReadonlyArray<A>) => B
+function reduce<A, B>(xs: Array<A>, initialValue: B, reduceFn: (_1: B, _2: A) => B): B
+function reduce<A, B>(initialValue: B, reduceFn: (_1: B, _2: A) => B): (xs: Array<A>) => B
 ```
 
 ### reduceReverse
@@ -586,8 +580,8 @@ Works like A.reduce, except that the function `reduceFn` is applied to each item
 
 
 ```ts
-function reduceReverse<A, B>(xs: ReadonlyArray<A>, initialValue: B, reduceFn: (_1: B, _2: A) => B): B
-function reduceReverse<A, B>(initialValue: B, reduceFn: (_1: B, _2: A) => B): (xs: ReadonlyArray<A>) => B
+function reduceReverse<A, B>(xs: Array<A>, initialValue: B, reduceFn: (_1: B, _2: A) => B): B
+function reduceReverse<A, B>(initialValue: B, reduceFn: (_1: B, _2: A) => B): (xs: Array<A>) => B
 ```
 
 ### reduceWithIndex
@@ -596,12 +590,8 @@ Applies `reduceFn` (which has three parameters: an `accumulator` which starts wi
 
 
 ```ts
-function reduceWithIndex<A, B>(
-    xs: ReadonlyArray<A>,
-    initialValue: B,
-    reduceFn: (_1: B, _2: A, _3: number) => B
-): B
-function reduceWithIndex<A, B>(initialValue: B, reduceFn: (_1: B, _2: A, _3: number) => B): (xs: ReadonlyArray<A>) => B
+function reduceWithIndex<A, B>(xs: Array<A>, initialValue: B, reduceFn: (_1: B, _2: A, _3: number) => B): B
+function reduceWithIndex<A, B>(initialValue: B, reduceFn: (_1: B, _2: A, _3: number) => B): (xs: Array<A>) => B
 ```
 
 ### reject
@@ -610,8 +600,8 @@ Returns a new array of elements from the provided array which do not satisfy the
 
 
 ```ts
-function reject<A>(xs: ReadonlyArray<A>, predicateFn: (_1: A) => boolean): ReadonlyArray<A>
-function reject<A>(predicateFn: (_1: A) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function reject<A>(xs: Array<A>, predicateFn: (_1: A) => boolean): Array<A>
+function reject<A>(predicateFn: (_1: A) => boolean): (xs: Array<A>) => Array<A>
 ```
 
 ### rejectWithIndex
@@ -620,8 +610,8 @@ Returns a new array of elements from the provided array which do not satisfy the
 
 
 ```ts
-function rejectWithIndex<A>(xs: ReadonlyArray<A>, predicateFn: (_1: number, _2: A) => boolean): ReadonlyArray<A>
-function rejectWithIndex<A>(predicateFn: (_1: number, _2: A) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function rejectWithIndex<A>(xs: Array<A>, predicateFn: (_1: number, _2: A) => boolean): Array<A>
+function rejectWithIndex<A>(predicateFn: (_1: number, _2: A) => boolean): (xs: Array<A>) => Array<A>
 ```
 
 ### removeAt
@@ -630,8 +620,8 @@ Creates a new array without the element at the given index (the original array i
 
 
 ```ts
-function removeAt<A>(xs: ReadonlyArray<A>, targetIndex: number): ReadonlyArray<A>
-function removeAt<A>(targetIndex: number): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function removeAt<A>(xs: Array<A>, targetIndex: number): Array<A>
+function removeAt<A>(targetIndex: number): (xs: Array<A>) => Array<A>
 ```
 
 ### removeFirst
@@ -640,8 +630,8 @@ Creates a copy of the given array with the first occurrence of the given element
 
 
 ```ts
-function removeFirst<A>(xs: ReadonlyArray<A>, value: A): ReadonlyArray<A>
-function removeFirst<A>(value: A): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function removeFirst<A>(xs: Array<A>, value: A): Array<A>
+function removeFirst<A>(value: A): (xs: Array<A>) => Array<A>
 ```
 
 ```ts
@@ -655,8 +645,8 @@ Removes the first occurrence of the given value from the array, using the given 
 
 
 ```ts
-function removeFirstBy<A, B>(xs: ReadonlyArray<A>, value: B, predicateFn: (_1: A, _2: B) => boolean): ReadonlyArray<A>
-function removeFirstBy<A, B>(value: B, predicateFn: (_1: A, _2: B) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function removeFirstBy<A, B>(xs: Array<A>, value: B, predicateFn: (_1: A, _2: B) => boolean): Array<A>
+function removeFirstBy<A, B>(value: B, predicateFn: (_1: A, _2: B) => boolean): (xs: Array<A>) => Array<A>
 ```
 
 ```ts
@@ -673,8 +663,8 @@ Alias for `make`.
 
 
 ```ts
-function repeat<A>(n: number, element: A): ReadonlyArray<A>
-function repeat<A>(element: A): (n: number) => ReadonlyArray<A>
+function repeat<A>(n: number, element: A): Array<A>
+function repeat<A>(element: A): (n: number) => Array<A>
 ```
 
 ### replaceAt
@@ -683,8 +673,8 @@ Creates a new array by replacing the value at the given index with the given val
 
 
 ```ts
-function replaceAt<A>(xs: ReadonlyArray<A>, targetIndex: number, element: A): ReadonlyArray<A>
-function replaceAt<A>(targetIndex: number, element: A): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function replaceAt<A>(xs: Array<A>, targetIndex: number, element: A): Array<A>
+function replaceAt<A>(targetIndex: number, element: A): (xs: Array<A>) => Array<A>
 ```
 
 ### reverse
@@ -693,7 +683,7 @@ Returns a new array with the elements of the provided array in reverse order.
 
 
 ```ts
-function reverse<A>(xs: ReadonlyArray<A>): ReadonlyArray<A>
+function reverse<A>(xs: Array<A>): Array<A>
 ```
 
 ```ts
@@ -707,7 +697,7 @@ Returns a new array with elements in the original array randomly shuffled.
 
 
 ```ts
-function shuffle<A>(xs: ReadonlyArray<A>): ReadonlyArray<A>
+function shuffle<A>(xs: Array<A>): Array<A>
 ```
 
 ### slice
@@ -716,8 +706,8 @@ Returns a new array with the `len` elements of the given array starting at `offs
 
 
 ```ts
-function slice<A>(xs: ReadonlyArray<A>, offset: number, len: number): ReadonlyArray<A>
-function slice<A>(offset: number, len: number): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function slice<A>(xs: Array<A>, offset: number, len: number): Array<A>
+function slice<A>(offset: number, len: number): (xs: Array<A>) => Array<A>
 ```
 
 ### sliceToEnd
@@ -726,8 +716,8 @@ Returns a new array with the elements of the given array starting at `offset` (o
 
 
 ```ts
-function sliceToEnd<A>(xs: ReadonlyArray<A>, offset: number): ReadonlyArray<A>
-function sliceToEnd<A>(offset: number): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function sliceToEnd<A>(xs: Array<A>, offset: number): Array<A>
+function sliceToEnd<A>(offset: number): (xs: Array<A>) => Array<A>
 ```
 
 ### some
@@ -736,8 +726,8 @@ Returns `true` if at least one of the elements in the given array satifies the p
 
 
 ```ts
-function some<A>(xs: ReadonlyArray<A>, fn: (_1: A) => boolean): boolean
-function some<A>(fn: (_1: A) => boolean): (xs: ReadonlyArray<A>) => boolean
+function some<A>(xs: Array<A>, fn: (_1: A) => boolean): boolean
+function some<A>(fn: (_1: A) => boolean): (xs: Array<A>) => boolean
 ```
 
 ### sort
@@ -746,8 +736,8 @@ Returns a new array, sorted according to the comparator function.
 
 
 ```ts
-function sort<A>(xs: ReadonlyArray<A>, sortFn: (_1: A, _2: A) => number): ReadonlyArray<A>
-function sort<A>(sortFn: (_1: A, _2: A) => number): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function sort<A>(xs: Array<A>, sortFn: (_1: A, _2: A) => number): Array<A>
+function sort<A>(sortFn: (_1: A, _2: A) => number): (xs: Array<A>) => Array<A>
 ```
 
 ### sortBy
@@ -756,8 +746,8 @@ Returns a new array, sorted according to the provided function.
 
 
 ```ts
-function sortBy<A, B>(xs: ReadonlyArray<A>, sortFn: (_1: A) => B): ReadonlyArray<A>
-function sortBy<A, B>(sortFn: (_1: A) => B): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function sortBy<A, B>(xs: Array<A>, sortFn: (_1: A) => B): Array<A>
+function sortBy<A, B>(sortFn: (_1: A) => B): (xs: Array<A>) => Array<A>
 ```
 
 ### splitAt
@@ -766,10 +756,8 @@ Returns two arrays (`Some([xs, ys])`), with the original array divided at the gi
 
 
 ```ts
-function splitAt<A>(xs: ReadonlyArray<A>, offset: number): Option<readonly [ReadonlyArray<A>, ReadonlyArray<A>]>
-function splitAt<A>(offset: number): (
-  xs: ReadonlyArray<A>,
-) => Option<readonly [ReadonlyArray<A>, ReadonlyArray<A>]>
+function splitAt<A>(xs: Array<A>, offset: number): Option<readonly [Array<A>, Array<A>]>
+function splitAt<A>(offset: number): (xs: Array<A>) => Option<readonly [Array<A>, Array<A>]>
 ```
 
 ### splitEvery
@@ -778,8 +766,8 @@ Returns an array of arrays, where each of the inner arrays has length equal to t
 
 
 ```ts
-function splitEvery<A>(xs: ReadonlyArray<A>, size: number): ReadonlyArray<ReadonlyArray<A>>
-function splitEvery<A>(size: number): (xs: ReadonlyArray<A>) => ReadonlyArray<ReadonlyArray<A>>
+function splitEvery<A>(xs: Array<A>, size: number): Array<Array<A>>
+function splitEvery<A>(size: number): (xs: Array<A>) => Array<Array<A>>
 ```
 
 ### swapAt
@@ -788,8 +776,8 @@ Creates a new array with the elements at the two given indexes swapped (the orig
 
 
 ```ts
-function swapAt<A>(xs: ReadonlyArray<A>, targetIndex: number, swapIndex: number): ReadonlyArray<A>
-function swapAt<A>(targetIndex: number, swapIndex: number): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function swapAt<A>(xs: Array<A>, targetIndex: number, swapIndex: number): Array<A>
+function swapAt<A>(targetIndex: number, swapIndex: number): (xs: Array<A>) => Array<A>
 ```
 
 ### tail
@@ -798,7 +786,7 @@ Returns a new array containing all but the the first element of the provided arr
 
 
 ```ts
-function tail<A>(xs: ReadonlyArray<A>): Option<ReadonlyArray<A>>
+function tail<A>(xs: Array<A>): Option<Array<A>>
 ```
 
 ```ts
@@ -814,7 +802,7 @@ Returns a new array containing all but the first element of the provided array, 
 
 
 ```ts
-function tailOrEmpty<A>(xs: ReadonlyArray<A>): ReadonlyArray<A>
+function tailOrEmpty<A>(xs: Array<A>): Array<A>
 ```
 
 ### take
@@ -823,8 +811,8 @@ Returns a new array including the first `n` elements of the provided array, or a
 
 
 ```ts
-function take<A>(xs: ReadonlyArray<A>, n: number): ReadonlyArray<A>
-function take<A>(n: number): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function take<A>(xs: Array<A>, n: number): Array<A>
+function take<A>(n: number): (xs: Array<A>) => Array<A>
 ```
 
 ### takeExactly
@@ -833,8 +821,8 @@ Returns a new array (`Some(xs)`) with the first `n` elements of the provided arr
 
 
 ```ts
-function takeExactly<A>(xs: ReadonlyArray<A>, n: number): Option<ReadonlyArray<A>>
-function takeExactly<A>(n: number): (xs: ReadonlyArray<A>) => Option<ReadonlyArray<A>>
+function takeExactly<A>(xs: Array<A>, n: number): Option<Array<A>>
+function takeExactly<A>(n: number): (xs: Array<A>) => Option<Array<A>>
 ```
 
 ### takeWhile
@@ -843,8 +831,8 @@ Returns a new array, filled with elements from the provided array until an eleme
 
 
 ```ts
-function takeWhile<A>(xs: ReadonlyArray<A>, predicateFn: (_1: A) => boolean): ReadonlyArray<A>
-function takeWhile<A>(predicateFn: (_1: A) => boolean): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function takeWhile<A>(xs: Array<A>, predicateFn: (_1: A) => boolean): Array<A>
+function takeWhile<A>(predicateFn: (_1: A) => boolean): (xs: Array<A>) => Array<A>
 ```
 
 ### tap
@@ -853,8 +841,8 @@ Applies a side-effect function on each element of the provided array.
 
 
 ```ts
-function tap<A>(xs: ReadonlyArray<A>, fn: (_1: A) => void): ReadonlyArray<A>
-function tap<A>(fn: (_1: A) => void): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function tap<A>(xs: Array<A>, fn: (_1: A) => void): Array<A>
+function tap<A>(fn: (_1: A) => void): (xs: Array<A>) => Array<A>
 ```
 
 ### toTuple
@@ -863,7 +851,7 @@ Converts the given array to the TypeScript's tuple.
 
 
 ```ts
-function toTuple<T extends ReadonlyArray<any>>(xs: readonly [...T]): readonly [...T]
+function toTuple<T extends Array<any>>(xs: readonly [...T]): readonly [...T]
 ```
 
 ### uncons
@@ -872,7 +860,7 @@ Splits the provided array into head and tail parts (as a tuple), but only if the
 
 
 ```ts
-function uncons<A>(xs: ReadonlyArray<A>): Option<readonly [A, ReadonlyArray<A>]>
+function uncons<A>(xs: Array<A>): Option<readonly [A, Array<A>]>
 ```
 
 ### uniq
@@ -881,7 +869,7 @@ Returns a new array containing only one copy of each element in the provided arr
 
 
 ```ts
-function uniq<A>(xs: ReadonlyArray<A>): ReadonlyArray<A>
+function uniq<A>(xs: Array<A>): Array<A>
 ```
 
 ```ts
@@ -903,8 +891,8 @@ Returns a new array containing only one copy of each element in the provided arr
 
 
 ```ts
-function uniqBy<A, B>(xs: ReadonlyArray<A>, uniqFn: (_1: A) => B): ReadonlyArray<A>
-function uniqBy<A, B>(uniqFn: (_1: A) => B): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function uniqBy<A, B>(xs: Array<A>, uniqFn: (_1: A) => B): Array<A>
+function uniqBy<A, B>(uniqFn: (_1: A) => B): (xs: Array<A>) => Array<A>
 ```
 
 ```ts
@@ -926,7 +914,7 @@ Takes an array of pairs and creates a pair of arrays. The first array contains a
 
 
 ```ts
-function unzip<A, B>(xs: ReadonlyArray<readonly [A, B]>): readonly [ReadonlyArray<A>, ReadonlyArray<B>]
+function unzip<A, B>(xs: Array<readonly [A, B]>): readonly [Array<A>, Array<B>]
 ```
 
 ### updateAt
@@ -935,8 +923,8 @@ Creates a new array that replaces the value at the given index with the value re
 
 
 ```ts
-function updateAt<A>(xs: ReadonlyArray<A>, targetIndex: number, fn: (_1: A) => A): ReadonlyArray<A>
-function updateAt<A>(targetIndex: number, fn: (_1: A) => A): (xs: ReadonlyArray<A>) => ReadonlyArray<A>
+function updateAt<A>(xs: Array<A>, targetIndex: number, fn: (_1: A) => A): Array<A>
+function updateAt<A>(targetIndex: number, fn: (_1: A) => A): (xs: Array<A>) => Array<A>
 ```
 
 ### zip
@@ -945,8 +933,8 @@ Creates a new array of pairs from corresponding elements of two provided arrays.
 
 
 ```ts
-function zip<A, B>(xs1: ReadonlyArray<B>): (xs0: ReadonlyArray<A>) => ReadonlyArray<readonly [A, B]>
-function zip<A, B>(xs0: ReadonlyArray<A>, xs1: ReadonlyArray<B>): ReadonlyArray<readonly [A, B]>
+function zip<A, B>(xs1: Array<B>): (xs0: Array<A>) => Array<readonly [A, B]>
+function zip<A, B>(xs0: Array<A>, xs1: Array<B>): Array<readonly [A, B]>
 ```
 
 ### zipWith
@@ -955,8 +943,8 @@ Creates a new array by applying `zipFn` to corresponding elements of two provide
 
 
 ```ts
-function zipWith<A, B, C>(xs0: ReadonlyArray<A>, xs1: ReadonlyArray<B>, zipFn: (_1: A, _2: B) => C): ReadonlyArray<C>
-function zipWith<A, B, C>(xs1: ReadonlyArray<B>, zipFn: (_1: A, _2: B) => C): (xs0: ReadonlyArray<A>) => ReadonlyArray<C>
+function zipWith<A, B, C>(xs0: Array<A>, xs1: Array<B>, zipFn: (_1: A, _2: B) => C): Array<C>
+function zipWith<A, B, C>(xs1: Array<B>, zipFn: (_1: A, _2: B) => C): (xs0: Array<A>) => Array<C>
 ```
 
 ### zipWithIndex
@@ -965,7 +953,7 @@ Creates a new array of each value paired with its index in a tuple.
 
 
 ```ts
-function zipWithIndex<A>(xs: ReadonlyArray<A>): ReadonlyArray<readonly [A, number]>
+function zipWithIndex<A>(xs: Array<A>): Array<readonly [A, number]>
 ```
 
 ```ts

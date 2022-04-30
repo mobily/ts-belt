@@ -1,4 +1,5 @@
 import { Option } from '../Option'
+import { Array } from '../types'
 
 export declare function makeEmpty<T>(): T
 export declare function get<T, K extends keyof T>(dict: T, key: K): Option<T[K]>
@@ -6,10 +7,10 @@ export declare function getUnsafe<T, K extends keyof T>(dict: T, key: K): T[K]
 export declare function prop<T, K extends keyof T>(dict: T, key: K): T[K]
 export declare function values<T extends string | number, R>(
   dict: Record<T, R>,
-): ReadonlyArray<R>
+): Array<R>
 export declare function keys<T extends Record<string, unknown>>(
   dict: T,
-): ReadonlyArray<keyof T>
+): Array<keyof T>
 export declare function merge<A, B>(fst: A, snd: B): A & B
 export declare function set<T, K extends string | number, V>(
   dict: T,
@@ -32,7 +33,7 @@ export declare function deleteKey<T, K extends keyof T>(
 ): Omit<T, K>
 export declare function deleteKeys<T, K extends keyof T>(
   dict: T,
-  keys: K[],
+  keys: ReadonlyArray<K>,
 ): Omit<T, K>
 export declare function map<T extends Record<string, any>, R>(
   dict: T,
@@ -60,14 +61,14 @@ export declare function rejectWithKey<T extends Record<string, any>>(
 ): Partial<T>
 export declare function selectKeys<T, K extends keyof T>(
   dict: T,
-  keys: K[],
+  keys: ReadonlyArray<K>,
 ): Pick<T, K>
 export declare function fromPairs<T, K extends keyof any>(
-  xs: ReadonlyArray<readonly [K, T]>,
+  xs: Array<readonly [K, T]>,
 ): Record<K, T>
 export declare function toPairs<T, K extends keyof any>(
   dict: Record<K, T>,
-): ReadonlyArray<readonly [K, T]>
+): Array<readonly [K, T]>
 export declare function isEmpty<T extends Record<string, any>>(dict: T): boolean
 export declare function isNotEmpty<T extends Record<string, any>>(
   dict: T,

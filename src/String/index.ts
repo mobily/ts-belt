@@ -1,4 +1,5 @@
 import { Option } from '../Option'
+import { Array } from '../types'
 
 /** Converts the given value to a string. */
 
@@ -59,25 +60,20 @@ export declare function isNotEmpty(str: string): boolean
 
 /** Splits the given string at every occurrence of `delimiter` and returns an array of the resulting substrings. */
 
-export declare function split(
-  delimiter: string,
-): (str: string) => ReadonlyArray<string>
+export declare function split(delimiter: string): (str: string) => Array<string>
 
-export declare function split(
-  str: string,
-  delimiter: string,
-): ReadonlyArray<string>
+export declare function split(str: string, delimiter: string): Array<string>
 
 /** Splits the given string at every occurrence of `regex` and returns an array of the resulting substrings. */
 
 export declare function splitByRe(
   str: string,
   regex: RegExp,
-): ReadonlyArray<Option<string>>
+): Array<Option<string>>
 
 export declare function splitByRe(
   regex: RegExp,
-): (str: string) => ReadonlyArray<Option<string>>
+): (str: string) => Array<Option<string>>
 
 /** Splits the string at the given index, returning a tuple of the parts. */
 
@@ -155,14 +151,11 @@ export declare function search(regex: RegExp): (str: string) => Option<number>
 
 /** Matches the given string against the provided regular expression, ir returns `None` if there is no match. */
 
-export declare function match(
-  str: string,
-  regex: RegExp,
-): Option<ReadonlyArray<string>>
+export declare function match(str: string, regex: RegExp): Option<Array<string>>
 
 export declare function match(
   regex: RegExp,
-): (str: string) => Option<ReadonlyArray<string>>
+): (str: string) => Option<Array<string>>
 
 /** Returns a string consisting of `n` repetitions of `str`. */
 
@@ -218,7 +211,7 @@ export declare function get(n: number): (str: string) => Option<string>
 
 /** Creates an array with one character of `str` per element. */
 
-export declare function toArray(str: string): ReadonlyArray<string>
+export declare function toArray(str: string): Array<string>
 
 /** Returns `Some(value)` where `value` is the first character of the string, or `None` if the given string is empty. */
 

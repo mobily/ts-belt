@@ -93,7 +93,7 @@ Creates a new object from an array of tuples (`[key, value]`).
 
 
 ```ts
-function fromPairs<T, K extends keyof any>(xs: ReadonlyArray<readonly [K, T]>): Record<K, T>
+function fromPairs<T, K extends keyof any>(xs: Array<readonly [K, T]>): Record<K, T>
 ```
 
 ```ts
@@ -195,7 +195,7 @@ Returns a new array that contains all keys of the provided object.
 
 
 ```ts
-function keys<T extends Record<string, unknown>>(dict: T): ReadonlyArray<keyof T>
+function keys<T extends Record<string, unknown>>(dict: T): Array<keyof T>
 ```
 
 ```ts
@@ -400,7 +400,7 @@ Converts an object into an array of `[key, value]` tuples.
 
 
 ```ts
-function toPairs<T, K extends keyof any>(dict: Record<K, T>): ReadonlyArray<readonly [K, T]>
+function toPairs<T, K extends keyof any>(dict: Record<K, T>): Array<readonly [K, T]>
 ```
 
 ```ts
@@ -486,7 +486,7 @@ Returns a new array that contains all values of the provided object.
 
 
 ```ts
-function values<T extends string | number, R>(dict: Record<T, R>): ReadonlyArray<R>
+function values<T extends string | number, R>(dict: Record<T, R>): Array<R>
 ```
 
 ```ts

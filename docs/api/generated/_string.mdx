@@ -196,8 +196,8 @@ Matches the given string against the provided regular expression, ir returns `No
 
 
 ```ts
-function match(str: string, regex: RegExp): Option<ReadonlyArray<string>>
-function match(regex: RegExp): (str: string) => Option<ReadonlyArray<string>>
+function match(str: string, regex: RegExp): Option<Array<string>>
+function match(regex: RegExp): (str: string) => Option<Array<string>>
 ```
 
 ### remove
@@ -306,8 +306,8 @@ Splits the given string at every occurrence of `delimiter` and returns an array 
 
 
 ```ts
-function split(delimiter: string): (str: string) => ReadonlyArray<string>
-function split(str: string, delimiter: string): ReadonlyArray<string>
+function split(delimiter: string): (str: string) => Array<string>
+function split(str: string, delimiter: string): Array<string>
 ```
 
 ### splitAt
@@ -326,8 +326,8 @@ Splits the given string at every occurrence of `regex` and returns an array of t
 
 
 ```ts
-function splitByRe(str: string, regex: RegExp): ReadonlyArray<Option<string>>
-function splitByRe(regex: RegExp): (str: string) => ReadonlyArray<Option<string>>
+function splitByRe(str: string, regex: RegExp): Array<Option<string>>
+function splitByRe(regex: RegExp): (str: string) => Array<Option<string>>
 ```
 
 ### startsWith
@@ -351,7 +351,7 @@ Creates an array with one character of `str` per element.
 
 
 ```ts
-function toArray(str: string): ReadonlyArray<string>
+function toArray(str: string): Array<string>
 ```
 
 ### toLowerCase

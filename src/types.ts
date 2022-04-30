@@ -1,14 +1,19 @@
+/// <reference path="global.d.ts" />
+export declare type Array<T> = Belt.UseMutableArrays extends 1
+  ? T[]
+  : readonly T[]
+export declare type Mutable<T> = { -readonly [P in keyof T]-?: T[P] }
 export declare type EmptyObject = Record<string, any>
 export declare type ExtractValue<T> = Exclude<T, null | undefined>
-export declare type ExtractNested<T> = T extends ReadonlyArray<infer K>
+export declare type ExtractNested<T> = T extends Array<infer K>
   ? ExtractNested<K>
   : T
 export declare type GuardArray<T extends unknown> = Extract<
   T,
-  Array<any> | ReadonlyArray<any>
+  Array<any>
 > extends never
-  ? ReadonlyArray<unknown>
-  : Extract<T, Array<any> | ReadonlyArray<any>>
+  ? Array<unknown>
+  : Extract<T, Array<any>>
 export declare type GuardPromise<T extends unknown> = Extract<
   T,
   Promise<any>
@@ -17,10 +22,10 @@ export declare type GuardPromise<T extends unknown> = Extract<
   : Extract<T, Promise<any>>
 export declare type GuardObject<T extends unknown> = Exclude<
   Extract<T, object>,
-  Array<any> | Function | ReadonlyArray<any>
+  Function | Array<any>
 > extends never
   ? { [k: string]: unknown }
-  : Exclude<Extract<T, object>, Array<any> | Function | ReadonlyArray<any>>
+  : Exclude<Extract<T, object>, Function | Array<any>>
 export declare type GuardValue<T, V> = Extract<T, V> extends never
   ? V
   : Extract<T, V> extends any

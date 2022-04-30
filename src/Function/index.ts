@@ -1,4 +1,6 @@
 import { Result } from '../Result'
+import { Array } from '../types'
+import { Mutable } from '../types'
 
 export declare type Controlled<A extends any[]> = {
   readonly cancel: () => void
@@ -119,22 +121,22 @@ export declare function when<A>(
 
 export declare function allPass<A>(
   value: A,
-  fns: ReadonlyArray<(_1: A) => boolean>,
+  fns: Array<(_1: A) => boolean>,
 ): boolean
 
 export declare function allPass<A>(
-  fns: ReadonlyArray<(_1: A) => boolean>,
+  fns: Array<(_1: A) => boolean>,
 ): (value: A) => boolean
 
 /** Determines whether at least one of the provided predicate returns `true` for the given value. */
 
 export declare function anyPass<A>(
   value: A,
-  fns: ReadonlyArray<(_1: A) => boolean>,
+  fns: Array<(_1: A) => boolean>,
 ): boolean
 
 export declare function anyPass<A>(
-  fns: ReadonlyArray<(_1: A) => boolean>,
+  fns: Array<(_1: A) => boolean>,
 ): (value: A) => boolean
 
 /** Applies a side-effect function on the given value and returns the original value. */

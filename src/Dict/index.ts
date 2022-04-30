@@ -1,4 +1,5 @@
 import { Option } from '../Option'
+import { Array } from '../types'
 
 /** Creates an empty object. Alternative for `const obj = {} as SomeObjectType`. */
 
@@ -30,24 +31,24 @@ export declare function prop<T, K extends keyof T>(key: K): (dict: T) => T[K]
 
 export declare function toPairs<T, K extends keyof any>(
   dict: Record<K, T>,
-): ReadonlyArray<readonly [K, T]>
+): Array<readonly [K, T]>
 
 /** Returns a new array that contains all values of the provided object. */
 
 export declare function values<T extends string | number, R>(
   dict: Record<T, R>,
-): ReadonlyArray<R>
+): Array<R>
 
 /** Returns a new array that contains all keys of the provided object. */
 
 export declare function keys<T extends Record<string, unknown>>(
   dict: T,
-): ReadonlyArray<keyof T>
+): Array<keyof T>
 
 /** Creates a new object from an array of tuples (`[key, value]`). */
 
 export declare function fromPairs<T, K extends keyof any>(
-  xs: ReadonlyArray<readonly [K, T]>,
+  xs: Array<readonly [K, T]>,
 ): Record<K, T>
 
 /** Merges two provided objects. */
@@ -110,11 +111,11 @@ export declare function deleteKey<T, K extends keyof T>(
 
 export declare function deleteKeys<T, K extends keyof T>(
   dict: T,
-  keys: K[],
+  keys: ReadonlyArray<K>,
 ): Omit<T, K>
 
 export declare function deleteKeys<T, K extends keyof T>(
-  keys: K[],
+  keys: ReadonlyArray<K>,
 ): (dict: T) => Omit<T, K>
 
 /** Transforms each value in the object to a new value using the provided function. */
@@ -187,11 +188,11 @@ export declare function rejectWithKey<T extends Record<string, any>>(
 
 export declare function selectKeys<T, K extends keyof T>(
   dict: T,
-  keys: K[],
+  keys: ReadonlyArray<K>,
 ): Pick<T, K>
 
 export declare function selectKeys<T, K extends keyof T>(
-  keys: K[],
+  keys: ReadonlyArray<K>,
 ): (dict: T) => Pick<T, K>
 
 /** Determines whether the given object is empty. */
