@@ -244,3 +244,11 @@ export declare function memoizeWithKey<A extends any[], B>(
   makeKeyFn: (...args: A) => string,
   fn: (...args: A) => B,
 ): (...args: A) => B
+
+/** Takes a value and converts its immutable type to a mutable one. */
+
+export declare function toMutable<T>(value: T): Mutable<T>
+
+/** Takes a value and coerces a new type. */
+
+export declare function coerce<T>(value: any): T

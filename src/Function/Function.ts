@@ -1,4 +1,5 @@
 import { Result } from '../Result'
+import { Mutable } from '../types'
 
 export declare type Controlled<A extends any[]> = {
   readonly cancel: () => void
@@ -53,3 +54,5 @@ export declare function memoizeWithKey<A extends any[], B>(
   makeKeyFn: (...args: A) => string,
   fn: (...args: A) => B,
 ): (...args: A) => B
+export declare function toMutable<T>(value: T): Mutable<T>
+export declare function coerce<T>(value: any): T

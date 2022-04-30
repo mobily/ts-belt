@@ -75,6 +75,15 @@ function both<A>(value: A, fn0: (_1: A) => boolean, fn1: (_1: A) => boolean): bo
 function both<A>(fn0: (_1: A) => boolean, fn1: (_1: A) => boolean): (value: A) => boolean
 ```
 
+### coerce
+
+Takes a value and coerces a new type.
+
+
+```ts
+function coerce<T>(value: any): T
+```
+
 ### debounce
 
 Takes a function, and returns a new function (no control values) which when called, will only invoke the given input function after a period of inactivity.
@@ -258,6 +267,15 @@ Takes a function and returns a new function (no control values) which when used,
 ```ts
 function throttle<A extends any[]>(fn: (...args: A) => void, delay: number): (...args: A) => void
 function throttle<A extends any[]>(delay: number): (fn: (...args: A) => void) => (...args: A) => void
+```
+
+### toMutable
+
+Takes a value and converts its immutable type to a mutable one.
+
+
+```ts
+function toMutable<T>(value: T): Mutable<T>
 ```
 
 ### truthy

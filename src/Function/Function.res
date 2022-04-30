@@ -280,3 +280,11 @@ let memoizeWithKey = (makeKeyFn, fn) => {
     }
   }
 }
+
+%comment("Takes a value and converts its immutable type to a mutable one.")
+@gentype
+let toMutable = value => value
+
+%comment("Takes a value and coerces a new type.")
+@gentype
+let coerce = value => value
