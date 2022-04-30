@@ -3,6 +3,12 @@ id: changelog
 title: Changelog
 ---
 
+### `v3.11.0`
+
+- ✨ added a possibility for using either immutable or mutable arrays by default (read more [here](/docs/config/#immutable-vs-mutable))
+- ✨ added [`F.toMutable`](/api/function/#tomutable)
+- ✨ added [`F.coerce`](/api/function/#coerce)
+
 ### `v3.10.0`
 
 - ✨ added [`F.tryCatch`](/api/function/#trycatch)
