@@ -21,14 +21,14 @@
     "index.js.flow"
   ],
   "scripts": {
-    "build": "yarn foy -c ./scripts/build.foyfile.ts",
+    "build": "yarn foy -c ./scripts/build.ts",
     "clean": "rm -rf ./dist && rm -f ./tsconfig.tsbuildinfo",
-    "test": "yarn foy -c ./scripts/test.foyfile.ts",
+    "test": "yarn foy -c ./scripts/test.ts",
     "re:clean": "yarn rescript clean",
     "re:build": "yarn rescript build",
     "re:dev": "yarn rescript build -w",
-    "transform": "yarn foy -c ./scripts/transform.foyfile.ts",
-    "generate": "yarn foy -c ./scripts/generate.foyfile.ts"
+    "transform": "yarn foy -c ./scripts/transform.ts",
+    "generate": "yarn foy -c ./scripts/generate.ts"
   },
   "engines": {
     "node": ">= 10.*"

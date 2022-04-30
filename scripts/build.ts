@@ -36,6 +36,8 @@ task<Options>('dist', async ctx => {
   )
 
   await ctx.exec(['yarn generate tsc', 'yarn generate flow'])
+  await ctx.fs.copyFile('./src/global.d.ts', './dist/types/global.d.ts')
+  await ctx.fs.copyFile('./src/types.ts', './dist/types/types.d.ts')
 
   if (ctx.options.runTests) {
     await ctx.exec('yarn test run -c')
