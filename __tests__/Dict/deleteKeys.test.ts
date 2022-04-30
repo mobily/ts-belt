@@ -8,9 +8,12 @@ const rec: Record<string, number> = { a: 1, b: 2, c: 3 }
 
 describe('deleteKeys', () => {
   it('provides correct types', () => {
+    const keys = ['x', 'y'] as const
+
     expectType<Omit<typeof obj, 'x' | 'y'>>(D.deleteKeys(obj, ['x', 'y']))
     expectType<typeof rec>(D.deleteKeys(rec, ['a', 'b']))
     expectType<typeof rec>(D.deleteKeys(rec, ['y', 'z']))
+    expectType<typeof rec>(D.deleteKeys(rec, keys))
   })
 
   it('deletes the right keys', () => {

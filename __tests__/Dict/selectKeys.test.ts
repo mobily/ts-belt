@@ -8,9 +8,12 @@ const rec: Record<string, number> = { a: 1, b: 2, c: 3 }
 
 describe('selectKeys', () => {
   it('provides correct types', () => {
+    const keys = ['x', 'y'] as const
+
     expectType<Pick<typeof obj, 'x' | 'y'>>(D.selectKeys(obj, ['x', 'y']))
     expectType<typeof rec>(D.selectKeys(rec, ['a', 'b']))
     expectType<typeof rec>(D.selectKeys(rec, ['y', 'z']))
+    expectType<typeof rec>(D.selectKeys(rec, keys))
   })
 
   it('selects the right keys', () => {

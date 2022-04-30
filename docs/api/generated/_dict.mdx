@@ -19,8 +19,8 @@ Returns a new object with the provided keys deleted.
 
 
 ```ts
-function deleteKeys<T, K extends keyof T>(dict: T, keys: K[]): Omit<T, K>
-function deleteKeys<T, K extends keyof T>(keys: K[]): (dict: T) => Omit<T, K>
+function deleteKeys<T, K extends keyof T>(dict: T, keys: ReadonlyArray<K>): Omit<T, K>
+function deleteKeys<T, K extends keyof T>(keys: ReadonlyArray<K>): (dict: T) => Omit<T, K>
 ```
 
 ```ts
@@ -355,8 +355,8 @@ Returns a new object with the provided keys selected.
 
 
 ```ts
-function selectKeys<T, K extends keyof T>(dict: T, keys: K[]): Pick<T, K>
-function selectKeys<T, K extends keyof T>(keys: K[]): (dict: T) => Pick<T, K>
+function selectKeys<T, K extends keyof T>(dict: T, keys: ReadonlyArray<K>): Pick<T, K>
+function selectKeys<T, K extends keyof T>(keys: ReadonlyArray<K>): (dict: T) => Pick<T, K>
 ```
 
 ```ts
