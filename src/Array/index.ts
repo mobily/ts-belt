@@ -783,3 +783,9 @@ export declare function any<A>(
 export declare function difference<A>(ys: Array<A>): (xs: Array<A>) => Array<A>
 
 export declare function difference<A>(xs: Array<A>, ys: Array<A>): Array<A>
+
+/** Returns union of two arrays. */
+
+export declare function union<A>(ys: Array<A>): (xs: Array<A>) => Array<A>
+
+export declare function union<A>(xs: Array<A>, ys: Array<A>): Array<A>
