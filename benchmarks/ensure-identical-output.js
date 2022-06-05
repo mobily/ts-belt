@@ -4,6 +4,7 @@ const testFiles = [
   './complex/deepFlat-uniq-groupBy',
   './complex/map-filter-reduce',
   './simple/deepFlat',
+  './simple/difference',
   './simple/dropWhile',
   './simple/filter',
   './simple/find',
@@ -11,6 +12,7 @@ const testFiles = [
   // './simple/forEach', // skip this one as there is no output to compare
   './simple/fromPairs',
   './simple/groupBy',
+  './simple/intersection',
   './simple/intersperse',
   './simple/map',
   './simple/reduce',
@@ -19,6 +21,7 @@ const testFiles = [
   './simple/splitEvery',
   './simple/takeWhile',
   './simple/toPairs',
+  './simple/union',
   './simple/uniq',
   './simple/unzip',
   './simple/zip',
@@ -44,7 +47,7 @@ testFiles.forEach(testFile => {
     if (skippedSuites.includes(suite.label)) {
       continue
     }
-    const rawFnResult = suite.rawFn();
+    const rawFnResult = suite.rawFn()
     if (!R.equals(rawFnResult, firstSuite.results.rawFn)) {
       console.error('rawFn test', testFile)
       console.error(`${firstSuite.label} result`, firstSuite.results.rawFn)
@@ -53,7 +56,7 @@ testFiles.forEach(testFile => {
       process.exit(1)
     }
     if (firstSuite.results.pipeFn) {
-      const pipeFnResult = suite.pipeFn();
+      const pipeFnResult = suite.pipeFn()
       if (!R.equals(pipeFnResult, firstSuite.results.pipeFn)) {
         console.error('pipeFn test', testFile)
         console.error(`${firstSuite.label} result`, firstSuite.results.pipeFn)
