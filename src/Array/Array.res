@@ -648,3 +648,10 @@ let difference = (xs, ys) => xs->uniq->reject(value => includes(ys, value))
 %comment("Returns union of two arrays.")
 @gentype
 let union = (xs, ys) => xs->concat(ys)->uniq
+
+%comment("Returns intersection of two arrays.")
+@gentype
+let intersection = (xs, ys) => {
+  let (xs, ys) = Belt.Array.length(xs) > Belt.Array.length(ys) ? (xs, ys) : (ys, xs)
+  xs->filter(value => includes(ys, value))->uniq
+}

@@ -789,3 +789,11 @@ export declare function difference<A>(xs: Array<A>, ys: Array<A>): Array<A>
 export declare function union<A>(ys: Array<A>): (xs: Array<A>) => Array<A>
 
 export declare function union<A>(xs: Array<A>, ys: Array<A>): Array<A>
+
+/** Returns intersection of two arrays. */
+
+export declare function intersection<A>(
+  ys: Array<A>,
+): (xs: Array<A>) => Array<A>
+
+export declare function intersection<A>(xs: Array<A>, ys: Array<A>): Array<A>
