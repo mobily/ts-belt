@@ -100,8 +100,13 @@ Returns a default value if `value` is nullable.
 
 
 ```ts
-function defaultTo<T>(defaultValue: NonNullable<T>, value: T | null | undefined): NonNullable<T>
-function defaultTo<T>(value: T | null | undefined): (defaultValue: NonNullable<T>) => NonNullable<T>
+function defaultTo<A, B extends NonNullable<A>>(value: A, defaultValue: B): B
+function defaultTo<A, B extends NonNullable<A>>(defaultValue: B): (value: A) => B
+```
+
+```ts
+F.defaultTo(nullable, 'default') // → 'default'
+pipe(2, F.defaultTo(1)) // → 2
 ```
 
 ### either
@@ -321,8 +326,24 @@ Tests the given value by passing it to the predicate, if the predicate is satisf
 
 
 ```ts
-function unless<A>(value: A, predicateFn: (_1: A) => boolean, falsyFn: (_1: A) => A): A
-function unless<A>(predicateFn: (_1: A) => boolean, falsyFn: (_1: A) => A): (value: A) => A
+function unless<A, B>(value: A, predicateFn: (value: A) => boolean, falsyFn: (value: A) => B): A | B
+function unless<A, B>(predicateFn: (value: A) => boolean, falsyFn: (value: A) => B): (value: A) => A | B
+```
+
+```ts
+F.unless(
+  'ts',
+  value => value.length > 2,
+  value => `${value}-belt`,
+) // → 'ts-belt'
+
+pipe(
+  'ts',
+  F.unless(
+    value => value.length > 0,
+    value => `${value}-belt`,
+  ),
+) // → 'ts'
 ```
 
 ### when
@@ -331,6 +352,22 @@ Tests the given value by passing it to the predicate, if the predicate is satisf
 
 
 ```ts
-function when<A>(value: A, predicateFn: (_1: A) => boolean, truthyFn: (_1: A) => A): A
-function when<A>(predicateFn: (_1: A) => boolean, truthyFn: (_1: A) => A): (value: A) => A
+function when<A, B>(value: A, predicateFn: (value: A) => boolean, truthyFn: (value: A) => B): A | B
+function when<A, B>(predicateFn: (value: A) => boolean, truthyFn: (value: A) => B): (value: A) => A | B
+```
+
+```ts
+F.when(
+  'ts',
+  value => value.length > 1,
+  value => `${value}-belt`,
+) // → 'ts-belt'
+
+pipe(
+  'ts',
+  F.when(
+    value => value.length > 2,
+    value => `${value}-belt`,
+  ),
+) // → 'ts'
 ```

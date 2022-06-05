@@ -1,3 +1,39 @@
+### all
+
+Returns `true` if all elements of the array match the predicate function, otherwise, returns `false`.
+
+
+```ts
+function all<A>(xs: Array<A>, predicateFn: (_1: A) => boolean): boolean
+function all<A>(predicateFn: (_1: A) => boolean): (xs: Array<A>) => boolean
+```
+
+```ts
+A.all(['hello', 'world'], value => value.length > 0) // → true
+pipe(
+  [1, 2, 3, 4, 5],
+  A.all(value => value > 3),
+) // → false
+```
+
+### any
+
+Returns `true` if at least one of the elements of the array match the predicate function, otherwise, returns `false`.
+
+
+```ts
+function any<A>(xs: Array<A>, predicateFn: (_1: A) => boolean): boolean
+function any<A>(predicateFn: (_1: A) => boolean): (xs: Array<A>) => boolean
+```
+
+```ts
+A.any(['', 'hello', 'world'], value => value.length > 0) // → true
+pipe(
+  [1, 2, 3, 4, 5],
+  A.any(value => value > 5),
+) // → false
+```
+
 ### append
 
 Adds a single element to the end of an array.
@@ -53,6 +89,21 @@ Creates a new array with all sub-array elements concatenated into it recursively
 
 ```ts
 function deepFlat<A>(xs: Array<A>): Array<ExtractNested<A>>
+```
+
+### difference
+
+Returns elements from the first array, not existing in the second array.
+
+
+```ts
+function difference<A>(ys: Array<A>): (xs: Array<A>) => Array<A>
+function difference<A>(xs: Array<A>, ys: Array<A>): Array<A>
+```
+
+```ts
+A.difference([1, 2, 3, 4], [3, 4, 5, 6]) // → [1, 2]
+pipe([5, 2, 3, 5, 6], A.difference([5, 2, 3, 1, 5, 4])) // → [6]
 ```
 
 ### drop
@@ -335,6 +386,21 @@ Creates a new array that inserts the given value at the given index (no insertio
 ```ts
 function insertAt<A>(xs: Array<A>, targetIndex: number, element: A): Array<A>
 function insertAt<A>(targetIndex: number, element: A): (xs: Array<A>) => Array<A>
+```
+
+### intersection
+
+Returns intersection of two arrays.
+
+
+```ts
+function intersection<A>(ys: Array<A>): (xs: Array<A>) => Array<A>
+function intersection<A>(xs: Array<A>, ys: Array<A>): Array<A>
+```
+
+```ts
+A.intersection([1, 2, 3, 4], [3, 4, 5, 6]) // → [3, 4]
+pipe([5, 2, 3, 5, 6], A.intersection([5, 2, 3, 1, 5, 4])) // → [5, 2, 3]
 ```
 
 ### intersperse
@@ -861,6 +927,21 @@ Splits the provided array into head and tail parts (as a tuple), but only if the
 
 ```ts
 function uncons<A>(xs: Array<A>): Option<readonly [A, Array<A>]>
+```
+
+### union
+
+Returns union of two arrays.
+
+
+```ts
+function union<A>(ys: Array<A>): (xs: Array<A>) => Array<A>
+function union<A>(xs: Array<A>, ys: Array<A>): Array<A>
+```
+
+```ts
+A.union([1, 2, 3, 4], [3, 4, 5, 6]) // → [1, 2, 3, 4, 5, 6]
+pipe([5, 2, 3, 5, 6], A.union([5, 2, 3, 1, 5, 4])) // → [5, 2, 3, 6, 1, 4]
 ```
 
 ### uniq

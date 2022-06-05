@@ -6,6 +6,12 @@ module.exports = {
     },
     {
       type: 'category',
+      label: 'v3.12.0',
+      collapsed: false,
+      items: ['v3.12.0/macbook-pro-2021'],
+    },
+    {
+      type: 'category',
       label: 'v3.7.0',
       collapsed: false,
       items: ['v3.7.0/macbook-pro-2017', 'v3.7.0/macbook-air-2020'],
