@@ -11,10 +11,10 @@ export declare type Options = {
   readonly delay: number
   readonly leading: boolean
 }
-export declare function defaultTo<T>(
-  defaultValue: NonNullable<T>,
-  value: T | null | undefined,
-): NonNullable<T>
+export declare function defaultTo<A, B extends NonNullable<A>>(
+  value: A,
+  defaultValue: B,
+): B
 export declare function equals(fst: any, snd: any): boolean
 export declare function makeControlledDebounce<A extends any[]>(
   fn: (...args: A) => void,

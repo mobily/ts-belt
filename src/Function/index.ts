@@ -55,14 +55,14 @@ export declare function always<A>(value: A): () => A
 
 /** Returns a default value if `value` is nullable. */
 
-export declare function defaultTo<T>(
-  defaultValue: NonNullable<T>,
-  value: T | null | undefined,
-): NonNullable<T>
+export declare function defaultTo<A, B extends NonNullable<A>>(
+  value: A,
+  defaultValue: B,
+): B
 
-export declare function defaultTo<T>(
-  value: T | null | undefined,
-): (defaultValue: NonNullable<T>) => NonNullable<T>
+export declare function defaultTo<A, B extends NonNullable<A>>(
+  defaultValue: B,
+): (value: A) => B
 
 /** Always returns `false`. */
 
