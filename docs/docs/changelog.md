@@ -3,6 +3,15 @@ id: changelog
 title: Changelog
 ---
 
+### `v3.12.0`
+
+- ✨ added [`A.all`](/api/array/#all)
+- ✨ added [`A.any`](/api/array/#any)
+- ✨ added [`A.difference`](/api/array/#difference)
+- ✨ added [`A.intersection`](/api/array/#intersection)
+- ✨ added [`A.union`](/api/array/#union)
+- ♻️ various tweaks to TypeScript signatures ([`F.defaultTo`](/api/function/#defaultto), [`F.when`](/api/function/#when), [`F.unless`](/api/function/#unless))
+
 ### `v3.11.0`
 
 - ✨ added a possibility for using either immutable or mutable arrays by default (read more [here](/docs/getting-started/config#immutable-vs-mutable))
