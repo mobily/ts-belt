@@ -56,3 +56,8 @@ export declare function memoizeWithKey<A extends any[], B>(
 ): (...args: A) => B
 export declare function toMutable<T>(value: T): Mutable<T>
 export declare function coerce<T>(value: any): T
+export declare function unless<A, B>(
+  value: A,
+  predicateFn: (value: A) => boolean,
+  falsyFn: (value: A) => B,
+): A | B

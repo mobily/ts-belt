@@ -93,16 +93,16 @@ export declare function ignore(): void
 
 /** Tests the given value by passing it to the predicate, if the predicate is satisfied, the function returns `value`, otherwise, returns the result of `falsyFn`. */
 
-export declare function unless<A>(
+export declare function unless<A, B>(
   value: A,
-  predicateFn: (_1: A) => boolean,
-  falsyFn: (_1: A) => A,
-): A
+  predicateFn: (value: A) => boolean,
+  falsyFn: (value: A) => B,
+): A | B
 
-export declare function unless<A>(
-  predicateFn: (_1: A) => boolean,
-  falsyFn: (_1: A) => A,
-): (value: A) => A
+export declare function unless<A, B>(
+  predicateFn: (value: A) => boolean,
+  falsyFn: (value: A) => B,
+): (value: A) => A | B
 
 /** Tests the given value by passing it to the predicate, if the predicate is satisfied, the function returns the result of `truthyFn`, otherwise, returns `value`. */
 
