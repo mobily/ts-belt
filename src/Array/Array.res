@@ -634,3 +634,9 @@ let zipWithIndex = xs =>
 )
 @gentype
 let all = (xs, predicateFn) => Belt.Array.everyU(xs, (. value) => predicateFn(value))
+
+%comment(
+  "Returns `true` if at least one of the elements of the array match the predicate function, otherwise, returns `false`."
+)
+@gentype
+let any = (xs, predicateFn) => Belt.Array.someU(xs, (. value) => predicateFn(value))

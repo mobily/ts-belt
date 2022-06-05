@@ -766,3 +766,14 @@ export declare function all<A>(
 export declare function all<A>(
   predicateFn: (_1: A) => boolean,
 ): (xs: Array<A>) => boolean
+
+/** Returns `true` if at least one of the elements of the array match the predicate function, otherwise, returns `false`. */
+
+export declare function any<A>(
+  xs: Array<A>,
+  predicateFn: (_1: A) => boolean,
+): boolean
+
+export declare function any<A>(
+  predicateFn: (_1: A) => boolean,
+): (xs: Array<A>) => boolean
