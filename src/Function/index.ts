@@ -106,16 +106,16 @@ export declare function unless<A, B>(
 
 /** Tests the given value by passing it to the predicate, if the predicate is satisfied, the function returns the result of `truthyFn`, otherwise, returns `value`. */
 
-export declare function when<A>(
+export declare function when<A, B>(
   value: A,
-  predicateFn: (_1: A) => boolean,
-  truthyFn: (_1: A) => A,
-): A
+  predicateFn: (value: A) => boolean,
+  truthyFn: (value: A) => B,
+): A | B
 
-export declare function when<A>(
-  predicateFn: (_1: A) => boolean,
-  truthyFn: (_1: A) => A,
-): (value: A) => A
+export declare function when<A, B>(
+  predicateFn: (value: A) => boolean,
+  truthyFn: (value: A) => B,
+): (value: A) => A | B
 
 /** Determines whether all the provided predicates return `true` for the given value. */
 
