@@ -755,3 +755,14 @@ export declare function removeFirst<A>(value: A): (xs: Array<A>) => Array<A>
 export declare function zipWithIndex<A>(
   xs: Array<A>,
 ): Array<readonly [A, number]>
+
+/** Returns `true` if all elements of the array match the predicate function, otherwise, returns `false`. */
+
+export declare function all<A>(
+  xs: Array<A>,
+  predicateFn: (_1: A) => boolean,
+): boolean
+
+export declare function all<A>(
+  predicateFn: (_1: A) => boolean,
+): (xs: Array<A>) => boolean

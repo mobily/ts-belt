@@ -628,3 +628,9 @@ let zipWithIndex = xs =>
     Js.Array2.push(acc, (value, index))->ignore
     acc
   })
+
+%comment(
+  "Returns `true` if all elements of the array match the predicate function, otherwise, returns `false`."
+)
+@gentype
+let all = (xs, predicateFn) => Belt.Array.everyU(xs, (. value) => predicateFn(value))
