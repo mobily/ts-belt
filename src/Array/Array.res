@@ -640,3 +640,7 @@ let all = (xs, predicateFn) => Belt.Array.everyU(xs, (. value) => predicateFn(va
 )
 @gentype
 let any = (xs, predicateFn) => Belt.Array.someU(xs, (. value) => predicateFn(value))
+
+%comment("Returns elements from the first array, not existing in the second array.")
+@gentype
+let difference = (xs, ys) => xs->uniq->reject(value => includes(ys, value))

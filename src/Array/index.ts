@@ -777,3 +777,9 @@ export declare function any<A>(
 export declare function any<A>(
   predicateFn: (_1: A) => boolean,
 ): (xs: Array<A>) => boolean
+
+/** Returns elements from the first array, not existing in the second array. */
+
+export declare function difference<A>(ys: Array<A>): (xs: Array<A>) => Array<A>
+
+export declare function difference<A>(xs: Array<A>, ys: Array<A>): Array<A>
