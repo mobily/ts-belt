@@ -56,6 +56,26 @@ pipe(
 ) // → Some('hello world!')
 ```
 
+### fromExecution
+
+Returns `Some(value)` (`value` is the result of `fn`) if `fn` didn't throw an error, otherwise, returns `None`.
+
+
+```ts
+function fromExecution<A>(fn: () => A): Option<ExtractValue<A>>
+```
+
+```ts
+type User = { readonly name: string }
+const parseJSON = <T>(value: string) => () => JSON.parse(value) as T
+const okJSON = `{"name": "John"}`
+const badJSON = `{name": John}`
+
+O.fromExecution(parseJSON<User>(okJSON)) // → Some({ name: 'John' })
+
+O.fromExecution(parseJSON<User>(badJSON)) // → None
+```
+
 ### fromFalsy
 
 Returns `Some(value)` if the provided value is not falsy, otherwise, returns `None`.
@@ -111,6 +131,20 @@ O.fromPredicate(
   [1, 2, 3],
   A.some(x => x === 4),
 ) // → None
+```
+
+### fromPromise
+
+Returns `Some(value)` if `promise` is resolved successfully, otherwise, returns `None`.
+
+
+```ts
+function fromPromise<A>(promise: Promise<A>): Promise<Option<ExtractValue<A>>>
+```
+
+```ts
+await O.fromPromise(Promise.resolve('hello world')) // → Some('hello world')
+await O.fromPromise(Promise.reject('oops')) // → None
 ```
 
 ### getExn
