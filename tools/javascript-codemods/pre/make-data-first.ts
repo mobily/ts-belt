@@ -5,18 +5,15 @@ import * as fs from 'fs'
 
 const transform = (source: string, j: API['jscodeshift']): string => {
   const root = j(source)
-  const exportedFunctions = []
+  const exportedFunctions = [] as string[]
 
   const readExternalFunction = (
     module: string,
     functionName: string,
   ): FunctionDeclaration | undefined => {
-    const beltModule = {
-      current: undefined,
-    }
-    const beltFunction = {
-      current: undefined,
-    }
+    let beltModule = undefined as string | undefined
+    let beltFunction = undefined as FunctionDeclaration | undefined
+
     root
       .find(j.ImportDeclaration)
       .filter(p => {
@@ -29,20 +26,13 @@ const transform = (source: string, j: API['jscodeshift']): string => {
         return false
       })
       .forEach(p => {
-        beltModule.current = p.value.source.value as string
+        beltModule = p.value.source.value as string
       })
 
-    if (beltModule.current) {
+    if (beltModule) {
       const belt = j(
         fs.readFileSync(
-          path.resolve(
-            __dirname,
-            '..',
-            '..',
-            '..',
-            'node_modules',
-            beltModule.current,
-          ),
+          path.resolve(__dirname, '..', '..', '..', 'node_modules', beltModule),
           {
             encoding: 'utf-8',
           },
@@ -56,10 +46,10 @@ const transform = (source: string, j: API['jscodeshift']): string => {
           },
         })
         .forEach(p => {
-          beltFunction.current = p.value
+          beltFunction = p.value
         })
 
-      return beltFunction.current
+      return beltFunction
     }
   }
 
@@ -67,8 +57,12 @@ const transform = (source: string, j: API['jscodeshift']): string => {
     functionDeclaration: FunctionDeclaration,
     name?: string,
   ) => {
-    const n = name ?? functionDeclaration.id.name
+    const n = name ?? functionDeclaration.id?.name
     const id = `_${n}`
+
+    if (!n) {
+      throw new Error(`Cannot find the identifier: ${n}`)
+    }
 
     const dataFirst = j.functionDeclaration(
       j.identifier(n),
@@ -133,23 +127,28 @@ const transform = (source: string, j: API['jscodeshift']): string => {
   }
 
   root.find(j.ExportNamedDeclaration).forEach(p => {
-    p.value.specifiers.forEach(exportSpecifier => {
-      exportedFunctions.push(exportSpecifier.local.name)
+    p.value.specifiers?.forEach(exportSpecifier => {
+      if (exportSpecifier.local?.type === 'Identifier') {
+        exportedFunctions.push(exportSpecifier.local.name)
+      }
     })
   })
 
   root
     .find(j.FunctionDeclaration)
     .filter(p => {
-      return exportedFunctions.includes(p.value.id.name)
+      return exportedFunctions.includes(p.value.id?.name ?? '')
     })
     .replaceWith(p => {
       if (p.value.params.length > 1) {
         const [id, dataFirst] = makeDataFirst(p.value)
 
-        p.value.id.name = id
+        if (p.value.id) {
+          p.value.id.name = id
+          return [p.value, dataFirst]
+        }
 
-        return [p.value, dataFirst]
+        throw new Error(`Cannot find the identifier: ${p.value}`)
       }
 
       return p.value
@@ -164,7 +163,7 @@ const transform = (source: string, j: API['jscodeshift']): string => {
         declarator.type === 'VariableDeclarator' &&
         declarator.id.type === 'Identifier'
       ) {
-        return exportedFunctions.includes(declarator.id.name)
+        return exportedFunctions.includes(declarator.id?.name ?? '')
       }
 
       return false
@@ -180,6 +179,7 @@ const transform = (source: string, j: API['jscodeshift']): string => {
       if (
         declarator.type === 'VariableDeclarator' &&
         declarator.id.type === 'Identifier' &&
+        // @ts-expect-error
         memberExpression.type === 'MemberExpression' &&
         memberExpression.object.type === 'Identifier' &&
         memberExpression.property.type === 'Identifier'
@@ -189,7 +189,7 @@ const transform = (source: string, j: API['jscodeshift']): string => {
           memberExpression.property.name,
         )
 
-        if (beltFunction.params.length > 1) {
+        if (beltFunction && beltFunction?.params.length > 1) {
           const [id, dataFirst] = makeDataFirst(
             beltFunction,
             declarator.id.name,

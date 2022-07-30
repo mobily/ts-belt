@@ -12,7 +12,7 @@ const transform = (source: string, j: API['jscodeshift']): string => {
       },
     })
     .replaceWith(p => {
-      if (p.value.typeAnnotation.typeAnnotation.type === 'TSArrayType') {
+      if (p.value.typeAnnotation?.typeAnnotation?.type === 'TSArrayType') {
         const fn = j.tsFunctionType(p.value.parameters)
         fn.typeParameters = p.value.typeParameters
         fn.typeAnnotation = j.tsTypeAnnotation(

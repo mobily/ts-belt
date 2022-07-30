@@ -9,7 +9,11 @@ import {
   TSDeclareFunction,
   TSFunctionType,
   TSTypeAnnotation,
+  CommentBlock,
+  CommentLine,
 } from 'jscodeshift'
+
+import * as AST from 'ast-types/gen/kinds'
 
 import * as path from 'path'
 import * as fs from 'fs'
@@ -20,14 +24,14 @@ const getIdentifier = (p: ASTPath<ExportNamedDeclaration>): Identifier => {
   const { declaration } = p.value
 
   if (
-    declaration.type === 'TSDeclareFunction' ||
-    declaration.type === 'ClassDeclaration' ||
-    declaration.type === 'TSTypeAliasDeclaration'
+    declaration?.type === 'TSDeclareFunction' ||
+    declaration?.type === 'ClassDeclaration' ||
+    declaration?.type === 'TSTypeAliasDeclaration'
   ) {
     return declaration.id as Identifier
   }
 
-  if (declaration.type === 'VariableDeclaration') {
+  if (declaration?.type === 'VariableDeclaration') {
     const declarator = declaration.declarations[0] as VariableDeclarator
     return declarator.id as Identifier
   }
@@ -68,7 +72,7 @@ const transform = (
   const rescriptJSFile = path.resolve(dirname, `${basename}.bs.js`)
   const tsFunctionDeclarations: TSDeclareFunction[] = []
   const empty = j('')
-  const alreadyAddedExports = []
+  const alreadyAddedExports = [] as string[]
 
   const customTS: Collection<any> = fs.existsSync(customTSFile)
     ? j(fs.readFileSync(customTSFile, defaultEncoding))
@@ -80,7 +84,7 @@ const transform = (
   const makeTSDeclareFunction = (
     name: string,
     parameters: any[],
-    typeParameters: TSTypeParameterDeclaration,
+    typeParameters: any,
     returnType: any,
   ) => {
     const tsDeclareFunction = j.tsDeclareFunction(
@@ -95,18 +99,18 @@ const transform = (
     return tsDeclareFunction
   }
   const findComments = (id: string) => {
-    let comments = undefined
+    let comments = undefined as AST.CommentKind[] | undefined | null
 
     rescriptJS
       .find(j.FunctionDeclaration)
       .filter(p => {
         return (
           p.parent.value.type === 'Program' &&
-          (p.value.id.name === id ||
-            p.value.id.name === `${id}_` ||
-            p.value.id.name === `_${id}` ||
-            p.value.id.name === `_${id}_`) &&
-          p.value.comments?.length > 0
+          (p.value.id?.name === id ||
+            p.value.id?.name === `${id}_` ||
+            p.value.id?.name === `_${id}` ||
+            p.value.id?.name === `_${id}_`) &&
+          (p.value.comments?.length ?? 0) > 0
         )
       })
       .forEach(p => {
@@ -123,7 +127,7 @@ const transform = (
             declarator.type === 'VariableDeclarator' &&
             declarator.id.type === 'Identifier' &&
             (declarator.id.name === id || declarator.id.name === `_${id}`) &&
-            p.value.comments?.length > 0
+            (p.value.comments?.length ?? 0) > 0
           )
         })
         .forEach(p => {
@@ -137,7 +141,7 @@ const transform = (
     identifier: Identifier,
     tsFunctionType: TSFunctionType | TSDeclareFunction,
   ) => {
-    const signatures = []
+    const signatures = [] as ExportNamedDeclaration[]
     const {
       typeParameters,
       parameters = [],
@@ -153,7 +157,7 @@ const transform = (
         identifier.name,
         parameters,
         typeParameters,
-        typeAnnotation.typeAnnotation,
+        typeAnnotation?.typeAnnotation,
       ),
     )
 
@@ -228,14 +232,14 @@ const transform = (
 
       const currentTSFunctionDeclaration = tsFunctionDeclarations.filter(
         tsFunctionDeclaration => {
-          return tsFunctionDeclaration.id.name === identifier.name
+          return tsFunctionDeclaration.id?.name === identifier.name
         },
       )
 
       if (currentTSFunctionDeclaration.length) {
         return currentTSFunctionDeclaration.reduce((acc, p) => {
           return acc.concat(makeFunctionSignatures(identifier, p))
-        }, [])
+        }, [] as ExportNamedDeclaration[])
       }
 
       const tsFunctionType = identifier.typeAnnotation?.typeAnnotation as

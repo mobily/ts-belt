@@ -20,6 +20,7 @@ const transform = (source: string, j: API['jscodeshift']): string => {
       return literals.some(equalName(p.value))
     })
     .replaceWith(p => {
+      // @ts-expect-error
       const [, value] = literals.find(equalName(p.value))
       return j.identifier(value)
     })

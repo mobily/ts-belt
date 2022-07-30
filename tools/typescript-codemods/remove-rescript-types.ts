@@ -21,6 +21,14 @@ const transform = (source: string, j: API['jscodeshift']): string => {
       return j.identifier('string')
     })
 
+  root
+    .find(j.Identifier, {
+      name: 'Js_Promise_error',
+    })
+    .replaceWith(_p => {
+      return j.identifier('Error')
+    })
+
   // Js_undefined<T> to T | undefined
   root
     .find(j.TSFunctionType, {
@@ -33,9 +41,9 @@ const transform = (source: string, j: API['jscodeshift']): string => {
       },
     })
     .replaceWith(p => {
-      if (p.value.typeAnnotation.typeAnnotation.type === 'TSTypeReference') {
+      if (p.value.typeAnnotation?.typeAnnotation?.type === 'TSTypeReference') {
         const params =
-          p.value.typeAnnotation.typeAnnotation.typeParameters.params
+          p.value.typeAnnotation?.typeAnnotation?.typeParameters?.params ?? []
         const [type] = params
 
         if (type) {

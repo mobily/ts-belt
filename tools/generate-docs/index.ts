@@ -21,7 +21,7 @@ const transformer = (file: FileInfo, api: API) => {
   const j = api.jscodeshift
   const root = j(file.source)
   const helpers = [] as Helper[]
-  const alreadyAdded = []
+  const alreadyAdded = [] as string[]
   const dirname = path.basename(path.dirname(file.path))
 
   root
@@ -44,7 +44,7 @@ const transformer = (file: FileInfo, api: API) => {
         const comments = (p.value.comments ?? []).map(comment => {
           return comment.value.trim()
         })
-        const { name } = p.value.declaration.id
+        const name = p.value.declaration.id?.name ?? ''
         const [description] = comments
 
         helpers.push({
@@ -105,7 +105,7 @@ const transformer = (file: FileInfo, api: API) => {
             value === p.value.declaration.id.name,
         )
       ) {
-        const { name } = p.value.declaration.id
+        const name = p.value.declaration.id?.name ?? ''
 
         alreadyAdded.push(name)
 
