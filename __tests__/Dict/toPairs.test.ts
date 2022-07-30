@@ -1,6 +1,6 @@
 import { expectType } from 'ts-expect'
 
-import { D, pipe } from '../..'
+import { D, pipe, A } from '../..'
 
 type T = {
   readonly name: string
@@ -12,11 +12,25 @@ const user: T = {
   age: 20,
 }
 
+const obj = {} as Record<string, number>
+const number = {
+  0: 1,
+  1: 'ts-belt',
+}
+const symbol = {
+  [Symbol()]: 'oops',
+}
+
 describe('toPairs', () => {
   it('provides correct types', () => {
     expectType<ReadonlyArray<readonly [string, string | number]>>(
       D.toPairs(user),
     )
+    expectType<ReadonlyArray<readonly [string, number]>>(D.toPairs(obj))
+    expectType<ReadonlyArray<readonly [string, string | number]>>(
+      D.toPairs(number),
+    )
+    expectType<ReadonlyArray<readonly [string, string]>>(D.toPairs(symbol))
   })
 
   it('converts an object into an array of [key, value] tuples.', () => {
@@ -43,6 +57,15 @@ describe('toPairs (pipe)', () => {
   it('provides correct types', () => {
     expectType<ReadonlyArray<readonly [string, string | number]>>(
       pipe(user, D.toPairs),
+    )
+
+    pipe(
+      user,
+      D.toPairs,
+      A.forEach(([key, value]) => {
+        expectType<string>(key)
+        expectType<string | number>(value)
+      }),
     )
   })
 
