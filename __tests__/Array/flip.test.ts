@@ -20,7 +20,7 @@ describe('flip (pipe)', () => {
   it('provides correct types', () => {
     expectType<readonly [number, number]>(pipe(A.toTuple([1, 2]), A.flip))
 
-    expectType<Record<string, 'name' | 'location'>>(
+    expectType<Record<string, string>>(
       pipe(
         { name: 'Joe', location: 'Warsaw' },
         D.toPairs,
