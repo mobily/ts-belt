@@ -15,7 +15,9 @@ export declare function defaultTo<A, B extends NonNullable<A>>(
   value: A,
   defaultValue: B,
 ): B
-export declare function equals(fst: any, snd: any): boolean
+export declare function equals<A, B = A>(snd: A): (fst: B) => boolean
+export declare function equals<A, B = A>(fst: A, snd: B): boolean
+export declare function equals(): boolean
 export declare function makeControlledDebounce<A extends any[]>(
   fn: (...args: A) => void,
   options: Options,
