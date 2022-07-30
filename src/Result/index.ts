@@ -50,6 +50,18 @@ export declare function fromPredicate<A, B>(
   errorValue: NonNullable<B>,
 ): (value: A) => Result<ExtractValue<A>, B>
 
+/** Returns `Ok(value)` (`value` is the result of `fn`) if `fn` didn't throw an error, otherwise, returns `Error(err)`. */
+
+export declare function fromExecution<A>(
+  fn: () => A,
+): Result<ExtractValue<A>, globalThis.Error>
+
+/** Returns `Ok(value)` if `promise` is resolved successfully, otherwise, returns `Error(err)`. */
+
+export declare function fromPromise<A>(
+  promise: Promise<A>,
+): Promise<Result<ExtractValue<A>, globalThis.Error>>
+
 /** Returns the result of `mapFn` if `result` is `Ok(value)`, otherwise, returns `Error(errorValue)` and `mapFn` is not called. */
 
 export declare function map<A, B, R>(

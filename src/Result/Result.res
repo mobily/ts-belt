@@ -21,6 +21,27 @@ let fromPredicate = (value, predicateFn, errorValue) =>
   ->Belt.Result.flatMap(value => predicateFn(value) ? Ok(value) : Error(errorValue))
 
 %comment(
+  "Returns `Ok(value)` (`value` is the result of `fn`) if `fn` didn't throw an error, otherwise, returns `Error(err)`."
+)
+@gentype
+let fromExecution = fn => {
+  try {
+    Ok(fn())
+  } catch {
+  | Js.Exn.Error(err) => Error(err)
+  }
+}
+
+%comment(
+  "Returns `Ok(value)` if `promise` is resolved successfully, otherwise, returns `Error(err)`."
+)
+@gentype
+let fromPromise = promise => {
+  open Js.Promise
+  promise->then_(value => resolve(Ok(value)), _)->catch(err => resolve(Error(err)), _)
+}
+
+%comment(
   "Returns the result of `mapFn` if `result` is `Ok(value)`, otherwise, returns `Error(errorValue)` and `mapFn` is not called."
 )
 @gentype

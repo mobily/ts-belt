@@ -96,6 +96,26 @@ pipe(
 ) // → Ok('value cannot be nullable')
 ```
 
+### fromExecution
+
+Returns `Ok(value)` (`value` is the result of `fn`) if `fn` didn't throw an error, otherwise, returns `Error(err)`.
+
+
+```ts
+function fromExecution<A>(fn: () => A): Result<ExtractValue<A>, globalThis.Error>
+```
+
+```ts
+type User = { readonly name: string }
+const parseJSON = <T>(value: string) => () => JSON.parse(value) as T
+const okJSON = `{"name": "John"}`
+const badJSON = `{name": John}`
+
+R.fromExecution(parseJSON<User>(okJSON)) // → Ok({ name: 'John' })
+
+R.fromExecution(parseJSON<User>(badJSON)) // → Error(new SyntaxError('Unexpected token n in JSON at position 1'))
+```
+
 ### fromFalsy
 
 Returns `Ok(value)` if `value` is not falsy, otherwise, returns `Error(errorValue)`.
@@ -164,6 +184,20 @@ R.fromPredicate(
   A.some(x => x === 4),
   'value not found',
 ) // → Error('value not found')
+```
+
+### fromPromise
+
+Returns `Ok(value)` if `promise` is resolved successfully, otherwise, returns `Error(err)`.
+
+
+```ts
+function fromPromise<A>(promise: Promise<A>): Promise<Result<ExtractValue<A>, globalThis.Error>>
+```
+
+```ts
+await R.fromPromise(Promise.resolve('hello world')) // → Ok('hello world')
+await R.fromPromise(Promise.reject('oops')) // → Error('oops')
 ```
 
 ### getExn

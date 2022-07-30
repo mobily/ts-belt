@@ -28,6 +28,12 @@ export declare function fromPredicate<A, B>(
   predicateFn: (value: NonNullable<A>) => boolean,
   errorValue: NonNullable<B>,
 ): Result<ExtractValue<A>, B>
+export declare function fromExecution<A>(
+  fn: () => A,
+): Result<ExtractValue<A>, globalThis.Error>
+export declare function fromPromise<A>(
+  promise: Promise<A>,
+): Promise<Result<ExtractValue<A>, globalThis.Error>>
 export declare function flatMap<A, B, C>(
   result: Result<A, B>,
   mapFn: (value: A) => Result<C, B>,
