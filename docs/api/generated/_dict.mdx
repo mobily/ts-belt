@@ -100,7 +100,7 @@ function fromPairs<T, K extends string | number>(xs: Array<readonly [K, T]>): Re
 D.fromPairs([
   ['name', 'Joe'],
   ['location', 'Warsaw'],
-]) // → { name: 'Joe', location: 'Warsaw' }
+] as const) // → { name: 'Joe', location: 'Warsaw' }
 
 pipe(
   [
