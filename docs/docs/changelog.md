@@ -3,6 +3,16 @@ id: changelog
 title: Changelog
 ---
 
+### `v3.13.0`
+
+- ✨ added [`R.fromExecution`](/api/result/#fromexecution)
+- ✨ added [`R.fromPromise`](/api/result/#frompromise)
+- ✨ added [`O.fromExecution`](/api/option/#fromexecution)
+- ✨ added [`O.fromPromise`](/api/option/#frompromise)
+- ✨ added [`S.append`](/api/string/#append) (alias for [`S.concat`](/api/string/#concat))
+- ✨ added [`S.prepend`](/api/string/#prepend)
+- ♻️ various tweaks to function signatures ([`F.equals`](/api/function/#equals), [`D.toPairs`](/api/object/#topairs), [`F.fromPairs`](/api/object/#frompairs))
+
 ### `v3.12.0`
 
 - ✨ added [`A.all`](/api/array/#all)
@@ -10,7 +20,7 @@ title: Changelog
 - ✨ added [`A.difference`](/api/array/#difference)
 - ✨ added [`A.intersection`](/api/array/#intersection)
 - ✨ added [`A.union`](/api/array/#union)
-- ♻️ various tweaks to TypeScript signatures ([`F.defaultTo`](/api/function/#defaultto), [`F.when`](/api/function/#when), [`F.unless`](/api/function/#unless))
+- ♻️ various tweaks to function signatures ([`F.defaultTo`](/api/function/#defaultto), [`F.when`](/api/function/#when), [`F.unless`](/api/function/#unless))
 
 ### `v3.11.0`
 
