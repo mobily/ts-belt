@@ -29,9 +29,9 @@ export declare function prop<T, K extends keyof T>(key: K): (dict: T) => T[K]
 
 /** Converts an object into an array of `[key, value]` tuples. */
 
-export declare function toPairs<T, K extends keyof any>(
+export declare function toPairs<T, K extends string | number>(
   dict: Record<K, T>,
-): Array<readonly [K, T]>
+): Array<readonly [string, T]>
 
 /** Returns a new array that contains all values of the provided object. */
 
@@ -47,9 +47,9 @@ export declare function keys<T extends Record<string, unknown>>(
 
 /** Creates a new object from an array of tuples (`[key, value]`). */
 
-export declare function fromPairs<T, K extends keyof any>(
+export declare function fromPairs<T, K extends string | number>(
   xs: Array<readonly [K, T]>,
-): Record<K, T>
+): Record<string, T>
 
 /** Merges two provided objects. */
 

@@ -93,7 +93,7 @@ Creates a new object from an array of tuples (`[key, value]`).
 
 
 ```ts
-function fromPairs<T, K extends keyof any>(xs: Array<readonly [K, T]>): Record<K, T>
+function fromPairs<T, K extends string | number>(xs: Array<readonly [K, T]>): Record<string, T>
 ```
 
 ```ts
@@ -103,7 +103,10 @@ D.fromPairs([
 ]) // → { name: 'Joe', location: 'Warsaw' }
 
 pipe(
-  [A.toTuple(['name', 'Joe']), A.toTuple(['location', 'Warsaw'])],
+  [
+    ['name', 'Joe'],
+    ['location', 'Warsaw'],
+  ] as const,
   D.fromPairs,
 ) // → { name: 'Joe', location: 'Warsaw' }
 ```
@@ -400,7 +403,7 @@ Converts an object into an array of `[key, value]` tuples.
 
 
 ```ts
-function toPairs<T, K extends keyof any>(dict: Record<K, T>): Array<readonly [K, T]>
+function toPairs<T, K extends string | number>(dict: Record<K, T>): Array<readonly [string, T]>
 ```
 
 ```ts

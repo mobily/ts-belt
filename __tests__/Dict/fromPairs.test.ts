@@ -1,20 +1,26 @@
 import { expectType } from 'ts-expect'
 
-import { A, D, pipe } from '../..'
+import { D, pipe } from '../..'
 
 const xs = [
-  ['name', 'Joe'],
+  ['day', 10],
   ['age', 20],
-] as readonly (readonly [string, string | number])[]
+] as readonly (readonly [string, number])[]
+
+const ys = [
+  [0, 'Joe'],
+  [1, 20],
+] as readonly (readonly [number, string | number])[]
 
 describe('fromPairs', () => {
   it('provides correct types', () => {
-    expectType<Record<string, string | number>>(D.fromPairs(xs))
+    expectType<Record<string, number>>(D.fromPairs(xs))
+    expectType<Record<string, string | number>>(D.fromPairs(ys))
   })
 
   it('creates a new object from an array of tuples', () => {
     expect(D.fromPairs(xs)).toEqual({
-      name: 'Joe',
+      day: 10,
       age: 20,
     })
   })
@@ -31,17 +37,20 @@ describe('fromPairs', () => {
 
 describe('fromPairs (pipe)', () => {
   it('provides correct types', () => {
-    expectType<Record<string, string | number>>(pipe(xs, D.fromPairs))
+    expectType<Record<string, number>>(pipe(xs, D.fromPairs))
   })
 
   it('creates a new object from an array of tuples', () => {
-    expect(pipe(xs, D.fromPairs)).toEqual({ name: 'Joe', age: 20 })
+    expect(pipe(xs, D.fromPairs)).toEqual({ day: 10, age: 20 })
   })
 
   it('*', () => {
     expect(
       pipe(
-        [A.toTuple(['name', 'Joe']), A.toTuple(['location', 'Warsaw'])],
+        [
+          ['name', 'Joe'],
+          ['location', 'Warsaw'],
+        ] as const,
         D.fromPairs,
       ),
     ).toEqual({ name: 'Joe', location: 'Warsaw' })

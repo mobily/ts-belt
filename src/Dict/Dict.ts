@@ -63,12 +63,12 @@ export declare function selectKeys<T, K extends keyof T>(
   dict: T,
   keys: ReadonlyArray<K>,
 ): Pick<T, K>
-export declare function fromPairs<T, K extends keyof any>(
+export declare function fromPairs<T, K extends string | number>(
   xs: Array<readonly [K, T]>,
-): Record<K, T>
-export declare function toPairs<T, K extends keyof any>(
+): Record<string, T>
+export declare function toPairs<T, K extends string | number>(
   dict: Record<K, T>,
-): Array<readonly [K, T]>
+): Array<readonly [string, T]>
 export declare function isEmpty<T extends Record<string, any>>(dict: T): boolean
 export declare function isNotEmpty<T extends Record<string, any>>(
   dict: T,
