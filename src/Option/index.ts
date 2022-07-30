@@ -25,6 +25,16 @@ export declare function fromPredicate<A>(
   predicateFn: (value: NonNullable<A>) => boolean,
 ): (value: A) => Option<ExtractValue<A>>
 
+/** Returns `Some(value)` (`value` is the result of `fn`) if `fn` didn't throw an error, otherwise, returns `None`. */
+
+export declare function fromExecution<A>(fn: () => A): Option<ExtractValue<A>>
+
+/** Returns `Some(value)` if `promise` is resolved successfully, otherwise, returns `None`. */
+
+export declare function fromPromise<A>(
+  promise: Promise<A>,
+): Promise<Option<ExtractValue<A>>>
+
 /** Returns the result of `mapFn` if `option` is `Some(value)`, otherwise, returns `None` and `mapFn` is not called. */
 
 export declare function map<A, B>(

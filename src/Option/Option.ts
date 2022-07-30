@@ -12,6 +12,10 @@ export declare function fromPredicate<A>(
   value: A,
   predicateFn: (value: NonNullable<A>) => boolean,
 ): Option<ExtractValue<A>>
+export declare function fromExecution<A>(fn: () => A): Option<ExtractValue<A>>
+export declare function fromPromise<A>(
+  promise: Promise<A>,
+): Promise<Option<ExtractValue<A>>>
 export declare function filter<A>(
   option: Option<A>,
   predicateFn: (value: A) => boolean,

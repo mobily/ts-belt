@@ -18,6 +18,25 @@ let fromPredicate = (value, predicateFn) =>
   value->fromNullable->Belt.Option.flatMap(value => predicateFn(value) ? Some(value) : None)
 
 %comment(
+  "Returns `Some(value)` (`value` is the result of `fn`) if `fn` didn't throw an error, otherwise, returns `None`."
+)
+@gentype
+let fromExecution = fn => {
+  try {
+    Some(fn())
+  } catch {
+  | _ => None
+  }
+}
+
+%comment("Returns `Some(value)` if `promise` is resolved successfully, otherwise, returns `None`.")
+@gentype
+let fromPromise = promise => {
+  open Js.Promise
+  promise->then_(value => resolve(Some(value)), _)->catch(_ => resolve(None), _)
+}
+
+%comment(
   "Returns the result of `mapFn` if `option` is `Some(value)`, otherwise, returns `None` and `mapFn` is not called."
 )
 @gentype
