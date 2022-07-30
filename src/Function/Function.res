@@ -190,7 +190,7 @@ let tryCatch = (value, fn) => {
   | Js.Exn.Error(obj) =>
     switch Js.Exn.message(obj) {
     | Some(message) => Error(message)
-    | None => Error("Unknown Error")
+    | None => Error("F.tryCatch: unknown error")
     }
   }
 }
