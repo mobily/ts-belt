@@ -10,9 +10,17 @@ let make = value => Js.String2.make(value)
 @gentype
 let length = str => Js.String2.length(str)
 
-%comment("Returns a new string with `append` added after `str`.")
+%comment("Returns a new string with `appendValue` added after `str`.")
 @gentype
-let concat = (str, append) => Js.String2.concat(str, append)
+let concat = (str, appendValue) => Js.String2.concat(str, appendValue)
+
+%comment("Alias for `concat`.")
+@gentype
+let append = (str, appendValue) => Js.String2.concat(str, appendValue)
+
+%comment("Returns a new string with `prependValue` added before `str`.")
+@gentype
+let prepend = (str, prependValue) => Js.String2.concat(prependValue, str)
 
 %comment(
   "Returns the substring of `str` starting at character `start` up to but not including `end`."

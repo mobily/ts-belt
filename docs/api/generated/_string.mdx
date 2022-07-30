@@ -1,11 +1,21 @@
-### concat
+### append
 
-Returns a new string with `append` added after `str`.
+Alias for `concat`.
 
 
 ```ts
-function concat(append: string): (str: string) => string
-function concat(str: string, append: string): string
+function append(appendValue: string): (str: string) => string
+function append(str: string, appendValue: string): string
+```
+
+### concat
+
+Returns a new string with `appendValue` added after `str`.
+
+
+```ts
+function concat(appendValue: string): (str: string) => string
+function concat(str: string, appendValue: string): string
 ```
 
 ```ts
@@ -198,6 +208,21 @@ Matches the given string against the provided regular expression, ir returns `No
 ```ts
 function match(str: string, regex: RegExp): Option<Array<string>>
 function match(regex: RegExp): (str: string) => Option<Array<string>>
+```
+
+### prepend
+
+Returns a new string with `prependValue` added before `str`.
+
+
+```ts
+function prepend(prependValue: string): (str: string) => string
+function prepend(str: string, prependValue: string): string
+```
+
+```ts
+S.prepend('hello', 'world') // → 'worldhello'
+pipe('ts', S.prepend('belt')) // → 'beltts'
 ```
 
 ### remove

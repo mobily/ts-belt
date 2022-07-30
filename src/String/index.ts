@@ -9,11 +9,23 @@ export declare function make<A>(value: A): string
 
 export declare function length(str: string): number
 
-/** Returns a new string with `append` added after `str`. */
+/** Returns a new string with `appendValue` added after `str`. */
 
-export declare function concat(append: string): (str: string) => string
+export declare function concat(appendValue: string): (str: string) => string
 
-export declare function concat(str: string, append: string): string
+export declare function concat(str: string, appendValue: string): string
+
+/** Alias for `concat`. */
+
+export declare function append(appendValue: string): (str: string) => string
+
+export declare function append(str: string, appendValue: string): string
+
+/** Returns a new string with `prependValue` added before `str`. */
+
+export declare function prepend(prependValue: string): (str: string) => string
+
+export declare function prepend(str: string, prependValue: string): string
 
 /** Returns the substring of `str` starting at character `start` up to but not including `end`. */
 
