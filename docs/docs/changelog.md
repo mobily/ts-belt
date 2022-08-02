@@ -3,6 +3,10 @@ id: changelog
 title: Changelog
 ---
 
+### `v3.13.1`
+
+- 🐛 fixed [`D.get`](/api/object/#get) signature
+
 ### `v3.13.0`
 
 - ✨ added [`R.fromExecution`](/api/result/#fromexecution)
