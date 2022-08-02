@@ -117,8 +117,8 @@ Returns `Some(value)` if the given key exists, otherwise returns `None`.
 
 
 ```ts
-function get<T, K extends keyof T>(dict: T, key: K): Option<T[K]>
-function get<T, K extends keyof T>(key: K): (dict: T) => Option<T[K]>
+function get<T, K extends keyof T>(dict: T, key: K): Option<ExtractValue<T[K]>>
+function get<T, K extends keyof T>(key: K): (dict: T) => Option<ExtractValue<T[K]>>
 ```
 
 ```ts

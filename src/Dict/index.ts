@@ -1,4 +1,5 @@
 import { Option } from '../Option'
+import { ExtractValue } from '../types'
 import { Array } from '../types'
 
 /** Creates an empty object. Alternative for `const obj = {} as SomeObjectType`. */
@@ -15,11 +16,14 @@ export declare function getUnsafe<T, K extends keyof T>(
 
 /** Returns `Some(value)` if the given key exists, otherwise returns `None`. */
 
-export declare function get<T, K extends keyof T>(dict: T, key: K): Option<T[K]>
+export declare function get<T, K extends keyof T>(
+  dict: T,
+  key: K,
+): Option<ExtractValue<T[K]>>
 
 export declare function get<T, K extends keyof T>(
   key: K,
-): (dict: T) => Option<T[K]>
+): (dict: T) => Option<ExtractValue<T[K]>>
 
 /** @deprecated Use either `D.get` or `D.getUnsafe` instead. */
 

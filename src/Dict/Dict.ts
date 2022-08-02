@@ -1,8 +1,11 @@
 import { Option } from '../Option'
-import { Array } from '../types'
+import { Array, ExtractValue } from '../types'
 
 export declare function makeEmpty<T>(): T
-export declare function get<T, K extends keyof T>(dict: T, key: K): Option<T[K]>
+export declare function get<T, K extends keyof T>(
+  dict: T,
+  key: K,
+): Option<ExtractValue<T[K]>>
 export declare function getUnsafe<T, K extends keyof T>(dict: T, key: K): T[K]
 export declare function prop<T, K extends keyof T>(dict: T, key: K): T[K]
 export declare function values<T extends string | number, R>(
