@@ -1,7 +1,7 @@
 {
   "name": "@mobily/ts-belt",
   "version": "3.0.0",
-  "namespace": true,
+  "namespace": false,
   "bsc-flags": ["-bs-super-errors", "-bs-no-version-header"],
   "gentypeconfig": {
     "language": "typescript",
