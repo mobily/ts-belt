@@ -482,13 +482,13 @@ export declare function eq<A>(
   comparatorFn: (_1: A, _2: A) => boolean,
 ): (xs0: Array<A>) => boolean
 
-/** Returns a new array of numbers from `start` (inclusive) to `finish` (exclusive). */
+/** Returns a new inclusive array of numbers from `start` to `finish` (it returns an empty array when `start` > `finish`). */
 
 export declare function range(finish: number): (start: number) => Array<number>
 
 export declare function range(start: number, finish: number): Array<number>
 
-/** Returns a new array of numbers from `start` (inclusive) to `finish` (exclusive). */
+/** Returns a new inclusive array of numbers from `start` to `finish` (it returns an empty array when `step` is 0 or negative, it also returns an empty array when `start` > `finish`). */
 
 export declare function rangeBy(
   finish: number,

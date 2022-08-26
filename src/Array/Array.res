@@ -55,7 +55,7 @@ let prependToAll = (xs, delimiter) =>
 
 %comment("Creates a new array with the separator interposed between elements.")
 @gentype
-let intersperse = (xs, delimiter) =>
+let intersperse = (xs, delimiter) => {
   Belt.Array.reduceWithIndexU(xs, [], (. acc, value, index) => {
     switch index {
     | x if xs->length->pred == x => Js.Array2.push(acc, value)
@@ -63,6 +63,7 @@ let intersperse = (xs, delimiter) =>
     }->ignore
     acc
   })
+}
 
 %comment("Returns `Some(value)` at the given index, or `None` if the given index is out of range.")
 @gentype
@@ -380,11 +381,15 @@ let sliceToEnd = (xs, offset) => Belt.Array.sliceToEnd(xs, offset)
 @gentype
 let eq = (xs0, xs1, comparatorFn) => Belt.Array.eqU(xs0, xs1, comparatorFn)
 
-%comment("Returns a new array of numbers from `start` (inclusive) to `finish` (exclusive).")
+%comment(
+  "Returns a new inclusive array of numbers from `start` to `finish` (it returns an empty array when `start` > `finish`)."
+)
 @gentype
 let range = (start, finish) => Belt.Array.range(start, finish)
 
-%comment("Returns a new array of numbers from `start` (inclusive) to `finish` (exclusive).")
+%comment(
+  "Returns a new inclusive array of numbers from `start` to `finish` (it returns an empty array when `step` is 0 or negative, it also returns an empty array when `start` > `finish`)."
+)
 @gentype
 let rangeBy = (start, finish, step) => Belt.Array.rangeBy(start, finish, ~step)
 
@@ -623,11 +628,12 @@ let removeFirst = (xs, value) => removeFirstBy(xs, value, (x, y) => x == y)
 
 %comment("Creates a new array of each value paired with its index in a tuple.")
 @gentype
-let zipWithIndex = xs =>
+let zipWithIndex = xs => {
   Belt.Array.reduceWithIndexU(xs, [], (. acc, value, index) => {
     Js.Array2.push(acc, (value, index))->ignore
     acc
   })
+}
 
 %comment(
   "Returns `true` if all elements of the array match the predicate function, otherwise, returns `false`."

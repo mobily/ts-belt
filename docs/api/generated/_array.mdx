@@ -612,7 +612,7 @@ function prependToAll<A>(delimiter: A): (xs: Array<A>) => Array<A>
 
 ### range
 
-Returns a new array of numbers from `start` (inclusive) to `finish` (exclusive).
+Returns a new inclusive array of numbers from `start` to `finish` (it returns an empty array when `start` > `finish`).
 
 
 ```ts
@@ -622,7 +622,7 @@ function range(start: number, finish: number): Array<number>
 
 ### rangeBy
 
-Returns a new array of numbers from `start` (inclusive) to `finish` (exclusive).
+Returns a new inclusive array of numbers from `start` to `finish` (it returns an empty array when `step` is 0 or negative, it also returns an empty array when `start` > `finish`).
 
 
 ```ts
