@@ -1,5 +1,5 @@
 import { Option } from '../Option'
-import { Array, ExtractValue } from '../types'
+import { Array, ExtractValue, StringKeyOf } from '../types'
 
 export declare function makeEmpty<T>(): T
 export declare function get<T, K extends keyof T>(
@@ -13,7 +13,7 @@ export declare function values<T extends string | number, R>(
 ): Array<R>
 export declare function keys<T extends Record<string, unknown>>(
   dict: T,
-): Array<keyof T>
+): Array<StringKeyOf<T>>
 export declare function merge<A, B>(fst: A, snd: B): A & B
 export declare function set<T, K extends string | number, V>(
   dict: T,

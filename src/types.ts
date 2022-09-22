@@ -8,6 +8,7 @@ export declare type ExtractValue<T> = Exclude<T, null | undefined>
 export declare type ExtractNested<T> = T extends Array<infer K>
   ? ExtractNested<K>
   : T
+export type StringKeyOf<T> = `${Extract<keyof T, string | number>}`
 export declare type GuardArray<T extends unknown> = Extract<
   T,
   Array<any>
