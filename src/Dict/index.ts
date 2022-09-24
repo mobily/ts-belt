@@ -1,6 +1,5 @@
 import { Option } from '../Option'
-import { ExtractValue } from '../types'
-import { Array } from '../types'
+import { ExtractValue, Array, StringKeyOf } from '../types'
 
 /** Creates an empty object. Alternative for `const obj = {} as SomeObjectType`. */
 
@@ -47,7 +46,7 @@ export declare function values<T extends string | number, R>(
 
 export declare function keys<T extends Record<string, unknown>>(
   dict: T,
-): Array<keyof T>
+): Array<StringKeyOf<T>>
 
 /** Creates a new object from an array of tuples (`[key, value]`). */
 
