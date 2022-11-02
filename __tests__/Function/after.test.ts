@@ -1,6 +1,6 @@
 import { expectType } from 'ts-expect'
 
-import { F, N, O, Option } from '../..'
+import { F, N, O } from '../..'
 
 const fn = (n: number) => {
   return `called ${n} times`
@@ -12,9 +12,9 @@ const fn2 = (n: number, x: string) => {
 
 describe('after', () => {
   it('provides correct types', () => {
-    expectType<(n: number) => Option<string>>(F.after(2, fn))
+    expectType<(n: number) => O.Option<string>>(F.after(2, fn))
     expectType<(n: number, x: string) => string>(F.after(2, fn2))
-    expectType<(n: number) => Option<number>>(F.after(2, N.add(2)))
+    expectType<(n: number) => O.Option<number>>(F.after(2, N.add(2)))
   })
 
   it('handles multiple parameters', function () {

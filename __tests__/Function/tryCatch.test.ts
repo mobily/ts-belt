@@ -1,6 +1,6 @@
 import { expectType } from 'ts-expect'
 
-import { R, Result, F, pipe, O } from '../..'
+import { R, F, pipe, O } from '../..'
 
 type User = {
   readonly name: string
@@ -12,11 +12,11 @@ const throwError = (_x: number): number => {
 
 describe('tryCatch', () => {
   it('provides correct types', () => {
-    expectType<Result<unknown, Error>>(F.tryCatch('<>', JSON.parse))
-    expectType<Result<User, Error>>(
+    expectType<R.Result<unknown, Error>>(F.tryCatch('<>', JSON.parse))
+    expectType<R.Result<User, Error>>(
       F.tryCatch<string, User>('{"name": "Joe"}', JSON.parse),
     )
-    expectType<Result<number, Error>>(F.tryCatch(1, throwError))
+    expectType<R.Result<number, Error>>(F.tryCatch(1, throwError))
     F.tryCatch('hello', str => {
       expectType<string>(str)
     })
@@ -48,11 +48,11 @@ describe('tryCatch', () => {
 
 describe('tryCatch (pipe)', () => {
   it('provides correct types', () => {
-    expectType<Result<unknown, Error>>(pipe('<>', F.tryCatch(JSON.parse)))
-    expectType<Result<User, Error>>(
+    expectType<R.Result<unknown, Error>>(pipe('<>', F.tryCatch(JSON.parse)))
+    expectType<R.Result<User, Error>>(
       pipe('{"name": "Joe"}', F.tryCatch<string, User>(JSON.parse)),
     )
-    expectType<Result<number, Error>>(F.tryCatch(1, throwError))
+    expectType<R.Result<number, Error>>(F.tryCatch(1, throwError))
     pipe(
       'hello',
       F.tryCatch(str => {
