@@ -4,7 +4,7 @@ import { F, pipe } from '../..'
 
 describe('debounce', () => {
   beforeEach(() => {
-    jest.useFakeTimers('modern')
+    jest.useFakeTimers()
   })
 
   afterEach(() => {
@@ -90,7 +90,7 @@ describe('debounce', () => {
 
 describe('debounce (pipe)', () => {
   beforeEach(() => {
-    jest.useFakeTimers('modern')
+    jest.useFakeTimers()
   })
 
   afterEach(() => {

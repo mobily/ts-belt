@@ -4,7 +4,7 @@ import { F, pipe } from '../..'
 
 describe('throttle', () => {
   beforeEach(() => {
-    jest.useFakeTimers('modern')
+    jest.useFakeTimers()
   })
 
   afterEach(() => {
@@ -89,7 +89,7 @@ describe('throttle', () => {
 
 describe('throttle (pipe)', () => {
   beforeEach(() => {
-    jest.useFakeTimers('modern')
+    jest.useFakeTimers()
   })
 
   afterEach(() => {

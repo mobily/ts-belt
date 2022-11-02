@@ -51,10 +51,8 @@ describe('deleteKeys (pipe)', () => {
 
   it('*', () => {
     expect(pipe({ name: 'Joe', location: 'Warsaw' }, D.deleteKeys([]))).toEqual(
-      {
-        name: 'Joe',
-        location: 'Warsaw',
-      },
+      // prettier-ignore
+      { name: 'Joe', location: 'Warsaw' },
     )
     expect(
       pipe({ name: 'Joe', location: 'Warsaw' }, D.deleteKeys(['name'])),

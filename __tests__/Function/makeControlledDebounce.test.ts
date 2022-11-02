@@ -4,7 +4,7 @@ import { F, pipe } from '../..'
 
 describe('makeControlledDebounce', () => {
   beforeEach(() => {
-    jest.useFakeTimers('modern')
+    jest.useFakeTimers()
   })
 
   afterEach(() => {
@@ -155,7 +155,7 @@ describe('makeControlledDebounce', () => {
 
 describe('makeControlledDebounce (pipe)', () => {
   beforeEach(() => {
-    jest.useFakeTimers('modern')
+    jest.useFakeTimers()
   })
 
   afterEach(() => {

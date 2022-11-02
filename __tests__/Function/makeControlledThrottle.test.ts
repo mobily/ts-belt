@@ -4,7 +4,7 @@ import { F, pipe } from '../..'
 
 describe('makeControlledThrottle', () => {
   beforeEach(() => {
-    jest.useFakeTimers('modern')
+    jest.useFakeTimers()
   })
 
   afterEach(() => {
@@ -149,7 +149,7 @@ describe('makeControlledThrottle', () => {
 
 describe('makeControlledThrottle (pipe)', () => {
   beforeEach(() => {
-    jest.useFakeTimers('modern')
+    jest.useFakeTimers()
   })
 
   afterEach(() => {
