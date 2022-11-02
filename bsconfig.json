@@ -25,7 +25,7 @@
       "dir": "tools/rescript-externals"
     }
   ],
-  "bs-dependencies": [],
+  "bs-dependencies": ["@ryyppy/rescript-promise"],
   "bs-dev-dependencies": [],
   "ppx-flags": [
     ["./tools/comment-ppx/ppx.exe -as-ppx"]
