@@ -10,6 +10,10 @@ const entryPoints = [
   'String',
   'Dict',
   'Number',
+  'AsyncData',
+  'AsyncOption',
+  'AsyncResult',
+  'AsyncDataResult',
 ].map(entryPoint => `src/${entryPoint}/index.js`)
 const rootPoints = ['src/index.js', 'src/pipe.js', 'src/flow.js']
 
