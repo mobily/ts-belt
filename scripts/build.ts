@@ -35,7 +35,7 @@ task<Options>('dist', async ctx => {
     `node node_modules/.bin/jscodeshift --run-in-band -t tools/javascript-codemods/post/index.ts ${js}`,
   )
 
-  await ctx.exec(['yarn generate tsc', 'yarn generate flow'])
+  await ctx.exec('yarn generate tsc')
   await ctx.fs.copyFile('./src/global.d.ts', './dist/types/global.d.ts')
   await ctx.fs.copyFile('./src/types.ts', './dist/types/types.d.ts')
 
