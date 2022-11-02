@@ -1,4 +1,4 @@
-import { API, FileInfo } from 'jscodeshift'
+import { API, Collection, FileInfo } from 'jscodeshift'
 
 import * as path from 'path'
 import * as fs from 'fs'
@@ -29,57 +29,113 @@ const transform = (file: FileInfo, api: API) => {
     return fn(acc, j, ctx)
   }, file.source)
 
-  const root = j(source)
+  const currentExports = j(source)
+    .find(j.Program)
+    .replaceWith(_p => {
+      return j.program(ctx.currentExports.filter(Boolean))
+    })
+    .toSource()
 
-  const addImport = (name: string, path?: string) => {
-    if (name === basename && basename !== 'Array') {
-      return
-    }
+  const root = j(currentExports)
 
-    let hasType = false
+  const imports = (collection: Collection<any>, xs: [string, string?][]) => {
+    return xs.reduce((collection, value) => {
+      const [name, path] = value
+      let hasType = false
+      let isAlreadyDefined = false
 
-    root
-      .find(j.TSTypeReference, {
-        typeName: {
-          name,
-        },
-      })
-      .forEach(_p => {
-        hasType = true
-      })
+      const root = j(collection.toSource())
 
-    if (hasType) {
-      return j.importDeclaration(
-        [j.importSpecifier(j.identifier(name))],
-        j.literal(path ?? `../${name}`),
-      )
-    }
+      root
+        .find(j.TSTypeAliasDeclaration, {
+          id: {
+            name,
+          },
+        })
+        .forEach(_p => {
+          isAlreadyDefined = true
+        })
+
+      root
+        .find(j.TSTypeReference, {
+          typeName: {
+            name,
+          },
+        })
+        .forEach(_p => {
+          hasType = true
+        })
+
+      if (hasType && !isAlreadyDefined) {
+        let isAlreadyImported = false
+
+        const importDeclarations = j(root.toSource()).find(
+          j.ImportDeclaration,
+          {
+            source: {
+              value: path,
+            },
+          },
+        )
+
+        importDeclarations.forEach(_p => {
+          isAlreadyImported = true
+        })
+
+        if (isAlreadyImported) {
+          root
+            .find(j.ImportDeclaration, {
+              source: {
+                value: path,
+              },
+            })
+            .forEach(p => {
+              p.value.specifiers = [
+                ...p.value.specifiers,
+                j.importSpecifier(j.identifier(name)),
+              ]
+            })
+
+          return root
+        }
+
+        root.find(j.Program).forEach(p => {
+          p.value.body = [
+            j.importDeclaration(
+              [j.importSpecifier(j.identifier(name))],
+              j.literal(path ?? `../${name}`),
+            ),
+            ...p.value.body,
+          ]
+        })
+      }
+
+      return root
+    }, collection)
   }
 
-  fs.writeFileSync(
-    path.resolve(dirname, 'index.ts'),
-    root
-      .find(j.Program)
-      .replaceWith(_p => {
-        return j.program(
-          [
-            addImport('Option'),
-            addImport('Result'),
-            addImport('ExtractValue', '../types'),
-            addImport('ExtractNested', '../types'),
-            addImport('GuardValue', '../types'),
-            addImport('GuardObject', '../types'),
-            addImport('GuardPromise', '../types'),
-            addImport('GuardArray', '../types'),
-            addImport('Array', '../types'),
-            addImport('Mutable', '../types'),
-            ...ctx.currentExports,
-          ].filter(Boolean),
-        )
-      })
-      .toSource(),
-    { encoding: 'utf-8' },
-  )
+  const body = imports(root, [
+    ['Option'],
+    ['Result'],
+    ['AsyncOption'],
+    ['AsyncResult'],
+    ['Ok', '../Result'],
+    ['Error', '../Result'],
+    ['Some', '../Option'],
+    ['None', '../Option'],
+    ['AsyncData', '../AsyncData'],
+    ['Complete', '../AsyncData'],
+    ['Reloading', '../AsyncData'],
+    ['ExtractValue', '../types'],
+    ['StringKeyOf', '../types'],
+    ['UnpackArray', '../types'],
+    ['Array', '../types'],
+    ['Mutable', '../types'],
+  ])
+
+  fs.writeFileSync(path.resolve(dirname, 'index.ts'), body.toSource(), {
+    encoding: 'utf-8',
+  })
 
   return root.toSource()
 }

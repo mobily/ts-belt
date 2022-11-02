@@ -1,6 +1,8 @@
 external coerce: 'a => 'b = "%identity"
 external raw_comment: string => 'a = "#raw_stmt"
 
+external unsafeToJsExn: 'a => Js.Exn.t = "%identity"
+
 @val
 external assign: (Js.Dict.t<'a>, Js.Dict.t<'a>) => Js.Dict.t<'a> = "Object.assign"
 
