@@ -15,17 +15,17 @@ export declare function ifElse<A>(
 
 export declare function inverse(value: boolean): boolean
 
-/** Alias for inverse. */
+/** Alias for `inverse`. */
 
 export declare function not(value: boolean): boolean
 
-/** Combines two boolean using `AND` → `a && b`. */
+/** Combines two booleans using `AND` → `a && b`. */
 
 export declare function and(b: boolean): (a: boolean) => boolean
 
 export declare function and(a: boolean, b: boolean): boolean
 
-/** Combines two boolean using `OR` → `a || b`. */
+/** Combines two booleans using `OR` → `a || b`. */
 
 export declare function or(b: boolean): (a: boolean) => boolean
 

@@ -1,6 +1,19 @@
 open Externals
 
-let placeholder = () => Js.Undefined.empty
+exception ResultError({message: string})
+
+let mapException = exn => {
+  switch exn {
+  | Promise.JsError(error) => Error(error)
+  | _ as exn => Error(unsafeToJsExn(exn))
+  }
+}
+
+@gentype
+let makeOk = value => Ok(value)
+
+@gentype
+let makeError = value => Error(value)
 
 %comment("Returns `Ok(value)` if `value` is non-nullable, otherwise, returns `Error(errorValue)`.")
 @gentype
@@ -37,8 +50,8 @@ let fromExecution = fn => {
 )
 @gentype
 let fromPromise = promise => {
-  open Js.Promise
-  promise->then_(value => resolve(Ok(value)), _)->catch(err => resolve(Error(err)), _)
+  open Promise
+  promise->thenResolve(value => Ok(value))->catch(exn => resolve(mapException(exn)))
 }
 
 %comment(
@@ -171,3 +184,28 @@ let flip = result =>
   | Ok(value) => Error(value)
   | Error(err) => Ok(err)
   }
+
+@gentype
+let filter = (result, predicateFn) => {
+  Belt.Result.flatMapU(result, (. value) =>
+    predicateFn(value) ? Ok(value) : Error(ResultError({message: "[Result.filter]: not found"}))
+  )
+}
+
+@gentype
+let fold = (result, okFn, errorFn) =>
+  switch result {
+  | Ok(value) => okFn(value)
+  | Error(error) => errorFn(error)
+  }
+
+@gentype
+let all = xs =>
+  Belt.Array.reduceU(xs, Ok([]), (. acc, data) => {
+    acc->Belt.Result.flatMapU((. xs) => {
+      switch data {
+      | Ok(value) => Ok(Belt.Array.concat(xs, [value]))
+      | Error(_) => Error(ResultError({message: "[Result.all]: found Error data type"}))
+      }
+    })
+  })

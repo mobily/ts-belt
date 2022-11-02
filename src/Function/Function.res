@@ -128,14 +128,14 @@ let makeControlledThrottle = (fn, options) => {
       schedule(restArgs)
     }
 
-  {schedule: make, invoke: invoke, cancel: cancel, isScheduled: isScheduled}
+  {schedule: make, invoke, cancel, isScheduled}
 }
 
 %comment(
   "Takes a function and returns a new function (no control values) which when used, suppresses calls to the given function to only once within the given `delay`."
 )
 @gentype
-let throttle = (fn, delay) => makeControlledThrottle(fn, {delay: delay, leading: false}).schedule
+let throttle = (fn, delay) => makeControlledThrottle(fn, {delay, leading: false}).schedule
 
 %comment(
   "Takes a function, and returns a new function (and other control values) which when called, will only invoke the given input function after a period of inactivity. If `leading` is set to `true`, the function will be invoked immediately."
@@ -170,14 +170,14 @@ let makeControlledDebounce = (fn, options) => {
       schedule(restArgs)
     }
 
-  {schedule: make, invoke: invoke, cancel: cancel, isScheduled: isScheduled}
+  {schedule: make, invoke, cancel, isScheduled}
 }
 
 %comment(
   "Takes a function, and returns a new function (no control values) which when called, will only invoke the given input function after a period of inactivity."
 )
 @gentype
-let debounce = (fn, delay) => makeControlledDebounce(fn, {delay: delay, leading: false}).schedule
+let debounce = (fn, delay) => makeControlledDebounce(fn, {delay, leading: false}).schedule
 
 %comment(
   "Takes a function, which is called in the `try/catch` block, and returns the `Result` data type."
@@ -187,11 +187,8 @@ let tryCatch = (value, fn) => {
   try {
     Ok(fn(value))
   } catch {
-  | Js.Exn.Error(obj) =>
-    switch Js.Exn.message(obj) {
-    | Some(message) => Error(message)
-    | None => Error("F.tryCatch: unknown error")
-    }
+  | JsError(error) => Error(unsafeToJsExn(error))
+  | _ as exn => Error(unsafeToJsExn(exn))
   }
 }
 
@@ -288,3 +285,6 @@ let toMutable = value => value
 %comment("Takes a value and coerces a new type.")
 @gentype
 let coerce = value => value
+
+@gentype
+let andThen = (value, fn) => fn(value)

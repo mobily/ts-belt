@@ -2,6 +2,12 @@ open Externals
 
 let placeholder = () => Js.Undefined.empty
 
+@gentype
+let makeSome = value => Some(value)
+
+@gentype
+let makeNone = () => None
+
 %comment("Returns `Some(value)` if the provided value is non-nullable, otherwise, returns `None`.")
 @gentype
 let fromNullable = value => Js.Nullable.toOption(value)
@@ -32,8 +38,8 @@ let fromExecution = fn => {
 %comment("Returns `Some(value)` if `promise` is resolved successfully, otherwise, returns `None`.")
 @gentype
 let fromPromise = promise => {
-  open Js.Promise
-  promise->then_(value => resolve(Some(value)), _)->catch(_ => resolve(None), _)
+  open Promise
+  promise->thenResolve(value => Some(value))->catch(_ => resolve(None))
 }
 
 %comment(
@@ -94,8 +100,8 @@ let toUndefined = option => getWithDefault(option, Js.undefined)
 @gentype
 let toResult = (option, errorValue) =>
   switch option {
-  | Some(value) => Belt.Result.Ok(value)
-  | None => Belt.Result.Error(errorValue)
+  | Some(value) => Ok(value)
+  | None => Error(errorValue)
   }
 
 %comment(
@@ -152,3 +158,21 @@ let zipWith = (fstOption, sndOption, mapFn) =>
   | (Some(x), Some(y)) => Some(mapFn(x, y))
   | _ => None
   }
+
+@gentype
+let fold = (option, someFn, noneFn) =>
+  switch option {
+  | Some(value) => someFn(value)
+  | None => noneFn()
+  }
+
+@gentype
+let all = xs =>
+  Belt.Array.reduceU(xs, Some([]), (. acc, data) => {
+    acc->Belt.Option.flatMapU((. xs) => {
+      switch data {
+      | Some(value) => Some(Belt.Array.concat(xs, [value]))
+      | None => None
+      }
+    })
+  })

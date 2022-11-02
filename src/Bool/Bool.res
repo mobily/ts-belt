@@ -12,15 +12,15 @@ let ifElse = (value, truthyFn, falsyFn) => value ? truthyFn() : falsyFn()
 @gentype
 let inverse = value => !value
 
-%comment("Alias for inverse.")
+%comment("Alias for `inverse`.")
 @gentype
 let not_ = value => !value
 
-%comment("Combines two boolean using `AND` → `a && b`.")
+%comment("Combines two booleans using `AND` → `a && b`.")
 @gentype
 let and_ = (a, b) => a && b
 
-%comment("Combines two boolean using `OR` → `a || b`.")
+%comment("Combines two booleans using `OR` → `a || b`.")
 @gentype
 let or_ = (a, b) => a || b
 

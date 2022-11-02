@@ -1,6 +1,5 @@
-import { Option } from '../Option'
 import { Array } from '../types'
-
+import { Option } from '../Option'
 /** Converts the given value to a string. */
 
 export declare function make<A>(value: A): string
@@ -163,11 +162,14 @@ export declare function search(regex: RegExp): (str: string) => Option<number>
 
 /** Matches the given string against the provided regular expression, ir returns `None` if there is no match. */
 
-export declare function match(str: string, regex: RegExp): Option<Array<string>>
+export declare function match(
+  str: string,
+  regex: RegExp,
+): Option<Array<Option<string>>>
 
 export declare function match(
   regex: RegExp,
-): (str: string) => Option<Array<string>>
+): (str: string) => Option<Array<Option<string>>>
 
 /** Returns a string consisting of `n` repetitions of `str`. */
 

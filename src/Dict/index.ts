@@ -1,6 +1,5 @@
+import { Array } from '../types'
 import { Option } from '../Option'
-import { ExtractValue, Array, StringKeyOf } from '../types'
-
 /** Creates an empty object. Alternative for `const obj = {} as SomeObjectType`. */
 
 export declare function makeEmpty<T>(): T
@@ -18,11 +17,11 @@ export declare function getUnsafe<T, K extends keyof T>(
 export declare function get<T, K extends keyof T>(
   dict: T,
   key: K,
-): Option<ExtractValue<T[K]>>
+): Option<NonNullable<T[K]>>
 
 export declare function get<T, K extends keyof T>(
   key: K,
-): (dict: T) => Option<ExtractValue<T[K]>>
+): (dict: T) => Option<NonNullable<T[K]>>
 
 /** @deprecated Use either `D.get` or `D.getUnsafe` instead. */
 
@@ -46,7 +45,7 @@ export declare function values<T extends string | number, R>(
 
 export declare function keys<T extends Record<string, unknown>>(
   dict: T,
-): Array<StringKeyOf<T>>
+): Array<`${Extract<keyof T, string | number>}`>
 
 /** Creates a new object from an array of tuples (`[key, value]`). */
 

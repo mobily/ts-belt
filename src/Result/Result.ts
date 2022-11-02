@@ -1,55 +1,64 @@
-import type { Option } from '../Option/Option'
-import type { ExtractValue } from '../types'
+import { Option } from '../Option'
 
 export declare type Ok<T> = {
   readonly TAG: 0
-  readonly _0: NonNullable<T>
+  readonly _0: T
 } & { __: 'Ok' }
 export declare type Error<T> = {
   readonly TAG: 1
-  readonly _0: NonNullable<T>
+  readonly _0: T
 } & { __: 'Error' }
 
 export declare type Result<A, B> = Ok<A> | Error<B>
 
-export declare const Ok: <T>(value: NonNullable<T>) => Ok<T>
-export declare const Error: <T>(value: NonNullable<T>) => Error<T>
+export declare const Ok: <T>(value: T) => Ok<T>
+export declare const Error: <T>(value: T) => Error<T>
+
+export declare type TypeOfResult<T> = T extends Ok<infer U> ? U : never
+
+export declare type TypeOfResultArray<T extends readonly [...any[]]> =
+  T extends [infer Head, ...infer Tail]
+    ? readonly [TypeOfResult<Head>, ...TypeOfResultArray<Tail>]
+    : readonly []
+
+export declare function makeOk<A, B>(value: A): Result<A, B>
+export declare function makeError<A, B>(value: B): Result<A, B>
 
 export declare function fromNullable<A, B>(
   value: A,
-  errorValue: NonNullable<B>,
-): Result<ExtractValue<A>, B>
+  errorValue: B,
+): Result<NonNullable<A>, B>
 export declare function fromFalsy<A, B>(
   value: A,
-  errorValue: NonNullable<B>,
-): Result<ExtractValue<A>, B>
+  errorValue: B,
+): Result<NonNullable<A>, B>
 export declare function fromPredicate<A, B>(
   value: A,
   predicateFn: (value: NonNullable<A>) => boolean,
-  errorValue: NonNullable<B>,
-): Result<ExtractValue<A>, B>
+  errorValue: B,
+): Result<NonNullable<A>, B>
 export declare function fromExecution<A>(
   fn: () => A,
-): Result<ExtractValue<A>, globalThis.Error>
+): Result<NonNullable<A>, globalThis.Error>
 export declare function fromPromise<A>(
   promise: Promise<A>,
-): Promise<Result<ExtractValue<A>, globalThis.Error>>
-export declare function flatMap<A, B, C>(
+): Promise<Result<NonNullable<A>, globalThis.Error>>
+export declare function flatMap<A, B, C, D = B>(
   result: Result<A, B>,
-  mapFn: (value: A) => Result<C, B>,
+  mapFn: (value: A) => Result<C, D>,
+): Result<C, D>
+export declare function map<A, B, C>(
+  result: Result<A, B>,
+  mapFn: (value: A) => C,
 ): Result<C, B>
-export declare function map<A, B, R>(
+export declare function mapWithDefault<A, B, C>(
   result: Result<A, B>,
-  mapFn: (value: A) => NonNullable<R>,
-): Result<R, B>
-export declare function mapWithDefault<A, B, R>(
-  result: Result<A, B>,
-  defaultValue: NonNullable<R>,
-  mapFn: (value: A) => NonNullable<R>,
-): R
+  defaultValue: C,
+  mapFn: (value: A) => C,
+): C
 export declare function getWithDefault<A, B>(
   result: Result<A, B>,
-  defaultValue: NonNullable<A>,
+  defaultValue: A,
 ): A
 export declare function getExn<A, B>(result: Result<A, B>): A | never
 export declare function match<A, B, R>(
@@ -72,11 +81,11 @@ export declare function tapError<A, B>(
 ): Result<A, B>
 export declare function handleError<A, B>(
   result: Result<A, B>,
-  mapFn: (err: B) => NonNullable<A>,
+  mapFn: (err: B) => A,
 ): Result<A, void>
 export declare function mapError<A, B, C>(
   result: Result<A, B>,
-  mapFn: (err: B) => NonNullable<C>,
+  mapFn: (err: B) => C,
 ): Result<A, C>
 export declare function catchError<A, B, C>(
   result: Result<A, B>,
@@ -84,6 +93,18 @@ export declare function catchError<A, B, C>(
 ): Result<A, C>
 export declare function recover<A, B>(
   result: Result<A, B>,
-  defaultValue: NonNullable<A>,
+  defaultValue: A,
 ): Result<A, B>
 export declare function flip<A, B>(result: Result<A, B>): Result<B, A>
+export declare function filter<A, B>(
+  result: Result<A, B>,
+  predicateFn: (value: A) => boolean,
+): Result<A, B | globalThis.Error>
+export declare function fold<A, B, C>(
+  result: Result<A, B>,
+  okFn: (value: A) => C,
+  errorFn: (error: B) => C,
+): C
+export declare function all<T extends readonly [...Result<any, any>[]]>(
+  xs: readonly [...T],
+): Result<TypeOfResultArray<T>, globalThis.Error>

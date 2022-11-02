@@ -1,7 +1,5 @@
+import { Array, Mutable } from '../types'
 import { Result } from '../Result'
-import { Array } from '../types'
-import { Mutable } from '../types'
-
 export declare type Controlled<A extends any[]> = {
   readonly cancel: () => void
   readonly invoke: (...args: A) => void
@@ -202,11 +200,11 @@ export declare function debounce<A extends any[]>(
 export declare function tryCatch<A, B>(
   value: A,
   fn: (value: A) => B,
-): Result<B, string>
+): Result<B, globalThis.Error>
 
 export declare function tryCatch<A, B>(
   fn: (value: A) => B,
-): (value: A) => Result<B, string>
+): (value: A) => Result<B, globalThis.Error>
 
 /** Takes a function and returns a new function which when called, will allow the first `times` calls to invoke the given function, and any successive calls will be suppressed and the last result will be returned. */
 
@@ -260,3 +258,6 @@ export declare function toMutable<T>(value: T): Mutable<T>
 /** Takes a value and coerces a new type. */
 
 export declare function coerce<T>(value: any): T
+
+export declare function andThen<A, B>(value: A, fn: (value: A) => B): B
+export declare function andThen<A, B>(fn: (value: A) => B): (value: A) => B

@@ -1,7 +1,5 @@
+import { UnpackArray, Array } from '../types'
 import { Option } from '../Option'
-import { ExtractNested } from '../types'
-import { Array } from '../types'
-
 /** Creates an empty array. Alternative for `const xs = [] as ReadonlyArray<A>`. */
 
 export declare function makeEmpty<A>(): Array<A>
@@ -674,14 +672,14 @@ export declare function sortBy<A, B>(
 
 /** Splits the given array into sub-arrays in an object, grouped by the result of running each value through the provided function. */
 
-export declare function groupBy<A, B extends PropertyKey>(
+export declare function groupBy<A>(
   xs: Array<A>,
-  groupFn: (item: A) => B,
-): Partial<Record<B, readonly [A, ...A[]]>>
+  groupFn: (item: A) => PropertyKey,
+): Record<PropertyKey, readonly [A, ...A[]]>
 
-export declare function groupBy<A, B extends PropertyKey>(
-  groupFn: (item: A) => B,
-): (xs: Array<A>) => Partial<Record<B, readonly [A, ...A[]]>>
+export declare function groupBy<A>(
+  groupFn: (item: A) => PropertyKey,
+): (xs: Array<A>) => Record<PropertyKey, readonly [A, ...A[]]>
 
 /** Creates a new array with all sub-array elements concatenated into it (the single level depth). */
 
@@ -691,7 +689,7 @@ export declare function flat<A>(
 
 /** Creates a new array with all sub-array elements concatenated into it recursively up to the `Infinite` depth. */
 
-export declare function deepFlat<A>(xs: Array<A>): Array<ExtractNested<A>>
+export declare function deepFlat<A>(xs: Array<A>): Array<UnpackArray<A>>
 
 /** Converts the given array to the TypeScript's tuple. */
 
@@ -797,3 +795,4 @@ export declare function intersection<A>(
 ): (xs: Array<A>) => Array<A>
 
 export declare function intersection<A>(xs: Array<A>, ys: Array<A>): Array<A>
+export declare function sample<A>(xs: Array<A>): A

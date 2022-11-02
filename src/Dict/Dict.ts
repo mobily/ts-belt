@@ -1,11 +1,11 @@
 import { Option } from '../Option'
-import { Array, ExtractValue, StringKeyOf } from '../types'
+import { Array, NonNullable } from '../types'
 
 export declare function makeEmpty<T>(): T
 export declare function get<T, K extends keyof T>(
   dict: T,
   key: K,
-): Option<ExtractValue<T[K]>>
+): Option<NonNullable<T[K]>>
 export declare function getUnsafe<T, K extends keyof T>(dict: T, key: K): T[K]
 export declare function prop<T, K extends keyof T>(dict: T, key: K): T[K]
 export declare function values<T extends string | number, R>(
@@ -13,7 +13,7 @@ export declare function values<T extends string | number, R>(
 ): Array<R>
 export declare function keys<T extends Record<string, unknown>>(
   dict: T,
-): Array<StringKeyOf<T>>
+): Array<`${Extract<keyof T, string | number>}`>
 export declare function merge<A, B>(fst: A, snd: B): A & B
 export declare function set<T, K extends string | number, V>(
   dict: T,

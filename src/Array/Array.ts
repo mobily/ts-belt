@@ -1,13 +1,13 @@
-import { ExtractNested, Array } from '../types'
+import { UnpackArray, Array } from '../types'
 
-export declare function groupBy<A, B extends PropertyKey>(
+export declare function groupBy<A>(
   xs: Array<A>,
-  groupFn: (item: A) => B,
-): Partial<Record<B, readonly [A, ...A[]]>>
+  groupFn: (item: A) => PropertyKey,
+): Record<PropertyKey, readonly [A, ...A[]]>
 export declare function flat<A>(
   xs: Array<A>,
 ): Array<A extends Array<infer B> ? B : A>
-export declare function deepFlat<A>(xs: Array<A>): Array<ExtractNested<A>>
+export declare function deepFlat<A>(xs: Array<A>): Array<UnpackArray<A>>
 export declare function toTuple<T extends Array<any>>(
   xs: readonly [...T],
 ): readonly [...T]

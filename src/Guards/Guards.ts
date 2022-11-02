@@ -1,27 +1,49 @@
-import { GuardArray, GuardValue, GuardObject, GuardPromise } from '../types'
+export declare type ArrayGuard<T extends unknown> = Extract<
+  T,
+  Array<any>
+> extends never
+  ? Array<unknown>
+  : Extract<T, Array<any>>
+export declare type PromiseGuard<T extends unknown> = Extract<
+  T,
+  Promise<any>
+> extends never
+  ? Promise<unknown>
+  : Extract<T, Promise<any>>
+export declare type ObjectGuard<T extends unknown> = Exclude<
+  Extract<T, object>,
+  Function | Array<any>
+> extends never
+  ? { [k: string]: unknown }
+  : Exclude<Extract<T, object>, Function | Array<any>>
+export declare type Guard<T, V> = Extract<T, V> extends never
+  ? V
+  : Extract<T, V> extends any
+  ? V
+  : Extract<T, V>
 
 export declare function isString<A>(
   value: A | string,
-): value is GuardValue<A, string>
+): value is Guard<A, string>
 export declare function isNumber<A>(
   value: A | number,
-): value is GuardValue<A, number>
+): value is Guard<A, number>
 export declare function isBoolean<A>(
   value: A | boolean,
-): value is GuardValue<A, boolean>
+): value is Guard<A, boolean>
 export declare function isPromise<A>(
   value: A | Promise<unknown>,
-): value is GuardPromise<A>
+): value is PromiseGuard<A>
 export declare function isArray<A>(
   value: A | ReadonlyArray<unknown>,
-): value is GuardArray<A>
-export declare function isObject<A>(value: A | object): value is GuardObject<A>
+): value is ArrayGuard<A>
+export declare function isObject<A>(value: A | object): value is ObjectGuard<A>
 export declare function isFunction<A>(
   value: A | Function,
-): value is GuardValue<A, Function>
+): value is Guard<A, Function>
 export declare function isError<A>(
-  value: A | Error,
-): value is GuardValue<A, Error>
+  value: A | globalThis.Error,
+): value is Guard<A, globalThis.Error>
 export declare function isNullable<A>(
   value: A,
 ): value is Extract<A, null | undefined>

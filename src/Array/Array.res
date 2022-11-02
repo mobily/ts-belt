@@ -661,3 +661,9 @@ let intersection = (xs, ys) => {
   let (xs, ys) = Belt.Array.length(xs) > Belt.Array.length(ys) ? (xs, ys) : (ys, xs)
   xs->filter(value => includes(ys, value))->uniq
 }
+
+@gentype
+let sample = xs => {
+  let offset = xs->Belt.Array.length->pred
+  Belt.Array.getUnsafe(xs, Js.Math.random_int(0, offset))
+}

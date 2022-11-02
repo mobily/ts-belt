@@ -37,7 +37,7 @@ export declare function throttle<A extends any[]>(
 export declare function tryCatch<A, B>(
   value: A,
   fn: (value: A) => B,
-): Result<B, string>
+): Result<B, globalThis.Error>
 export declare function once<A extends any[], B>(
   fn: (...args: A) => B,
 ): (...args: A) => B
@@ -68,3 +68,4 @@ export declare function unless<A, B>(
   predicateFn: (value: A) => boolean,
   falsyFn: (value: A) => B,
 ): A | B
+export declare function andThen<A, B>(value: A, fn: (value: A) => B): B
