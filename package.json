@@ -2,14 +2,89 @@
   "name": "@mobily/ts-belt",
   "description": "🔧 Fast, modern, and practical utility library for FP in TypeScript.",
   "version": "4.0.0-rc.0",
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.js",
+  "main": "./dist",
+  "module": "./dist/index.mjs",
   "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
       "types": "./dist/types/index.d.ts"
+    },
+    "./pipe": {
+      "import": "./dist/pipe.mjs",
+      "require": "./dist/pipe.js",
+      "types": "./dist/types/pipe.d.ts"
+    },
+    "./flow": {
+      "import": "./dist/flow.mjs",
+      "require": "./dist/flow.js",
+      "types": "./dist/types/flow.d.ts"
+    },
+    "./Array": {
+      "import": "./dist/Array.mjs",
+      "require": "./dist/Array.js",
+      "types": "./dist/types/Array/index.d.ts"
+    },
+    "./AsyncData": {
+      "import": "./dist/AsyncData.mjs",
+      "require": "./dist/AsyncData.js",
+      "types": "./dist/types/AsyncData/index.d.ts"
+    },
+    "./AsyncDataResult": {
+      "import": "./dist/AsyncDataResult.mjs",
+      "require": "./dist/AsyncDataResult.js",
+      "types": "./dist/types/AsyncDataResult/index.d.ts"
+    },
+    "./AsyncOption": {
+      "import": "./dist/AsyncOption.mjs",
+      "require": "./dist/AsyncOption.js",
+      "types": "./dist/types/AsyncOption/index.d.ts"
+    },
+    "./AsyncResult": {
+      "import": "./dist/AsyncResult.mjs",
+      "require": "./dist/AsyncResult.js",
+      "types": "./dist/types/AsyncResult/index.d.ts"
+    },
+    "./Bool": {
+      "import": "./dist/Bool.mjs",
+      "require": "./dist/Bool.js",
+      "types": "./dist/types/Bool/index.d.ts"
+    },
+    "./Dict": {
+      "import": "./dist/Dict.mjs",
+      "require": "./dist/Dict.js",
+      "types": "./dist/types/Dict/index.d.ts"
+    },
+    "./Function": {
+      "import": "./dist/Function.mjs",
+      "require": "./dist/Function.js",
+      "types": "./dist/types/Function/index.d.ts"
+    },
+    "./Guards": {
+      "import": "./dist/Guards.mjs",
+      "require": "./dist/Guards.js",
+      "types": "./dist/types/Guards/index.d.ts"
+    },
+    "./Number": {
+      "import": "./dist/Number.mjs",
+      "require": "./dist/Number.js",
+      "types": "./dist/types/Number/index.d.ts"
+    },
+    "./Option": {
+      "import": "./dist/Option.mjs",
+      "require": "./dist/Option.js",
+      "types": "./dist/types/Option/index.d.ts"
+    },
+    "./Result": {
+      "import": "./dist/Result.mjs",
+      "require": "./dist/Result.js",
+      "types": "./dist/types/Result/index.d.ts"
+    },
+    "./String": {
+      "import": "./dist/String.mjs",
+      "require": "./dist/String.js",
+      "types": "./dist/types/String/index.d.ts"
     },
     "./package.json": "./package.json"
   },
