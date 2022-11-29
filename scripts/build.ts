@@ -25,10 +25,10 @@ task<Options>('dist', async ctx => {
     'yarn re:build',
     'yarn transform all',
     'yarn generate docs',
-    'node esbuild.config.js',
+    'yarn rollup -c rollup.config.js --bundleConfigAsCjs',
   ])
 
-  const files = await globby('dist/**/index.js')
+  const files = await globby('dist/*.js')
   const js = files.join(' ')
 
   await ctx.exec(
@@ -54,10 +54,10 @@ task<DevOptions>('dev', async ctx => {
 
   await ctx.exec([
     `yarn transform all -r -n ${ctx.options.namespace}`,
-    'node esbuild.config.js',
+    'yarn rollup -c rollup.config.js --bundleConfigAsCjs',
   ])
 
-  const files = await globby(`dist/**/${ctx.options.namespace}/index.js`)
+  const files = await globby(`dist/*.js`)
   const js = files.join(' ')
 
   await ctx.exec(
