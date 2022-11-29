@@ -13,7 +13,6 @@ export * as B from './Bool'
 export * as N from './Number'
 
 export * as AD from './AsyncData'
+export * as ADR from './AsyncDataResult'
 export * as AO from './AsyncOption'
 export * as AR from './AsyncResult'
-
-export * as ADR from './AsyncDataResult'
