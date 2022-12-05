@@ -521,6 +521,20 @@ let sortBy = (xs, sortFn) =>
     a === b ? 0 : a < b ? -1 : 1
   })
 
+%comment("Returns a new array, sorted according to the provided functions.")
+@gentype
+let sortWith = (xs, sortFns) =>
+  sort(xs, (. a, b) => {
+    let value = ref(0)
+    let index = ref(0)
+    while(value.contents === 0 && index.contents < length(sortFns)) {
+      let sortFn = Belt.Array.getUnsafe(sortFns, index.contents)
+      value := sortFn(a, b)
+      index := index.contents + 1
+    }
+    value.contents
+  })
+
 %comment(
   "Splits the given array into sub-arrays in an object, grouped by the result of running each value through the provided function."
 )

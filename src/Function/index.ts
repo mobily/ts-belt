@@ -261,3 +261,41 @@ export declare function coerce<T>(value: any): T
 
 export declare function andThen<A, B>(value: A, fn: (value: A) => B): B
 export declare function andThen<A, B>(fn: (value: A) => B): (value: A) => B
+
+/** Takes a value and converts its immutable type to a mutable one. */
+
+export declare function ascend<A, B extends keyof A>(
+  fn: (value: A) => A[B],
+): (a: A, b: A) => number
+
+/** Takes a value and converts its immutable type to a mutable one. */
+
+export declare function ascend<A, B extends keyof A>(
+  fn: (value: A) => A[B],
+  a: A,
+  b: A,
+): number
+
+export declare function ascend<A, B extends keyof A>(
+  a: A,
+  b: A,
+): (fn: (value: A) => A[B]) => number
+
+/** Takes a value and converts its immutable type to a mutable one. */
+
+export declare function descend<A, B extends keyof A>(
+  fn: (value: A) => A[B],
+): (a: A, b: A) => number
+
+/** Takes a value and converts its immutable type to a mutable one. */
+
+export declare function descend<A, B extends keyof A>(
+  fn: (value: A) => A[B],
+  a: A,
+  b: A,
+): number
+
+export declare function descend<A, B extends keyof A>(
+  a: A,
+  b: A,
+): (fn: (value: A) => A[B]) => number

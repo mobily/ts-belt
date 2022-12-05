@@ -69,3 +69,21 @@ export declare function unless<A, B>(
   falsyFn: (value: A) => B,
 ): A | B
 export declare function andThen<A, B>(value: A, fn: (value: A) => B): B
+
+export declare function ascend<A, B extends keyof A>(
+  fn: (value: A) => A[B],
+): (a: A, b: A) => number
+export declare function ascend<A, B extends keyof A>(
+  fn: (value: A) => A[B],
+  a: A,
+  b: A,
+): number
+
+export declare function descend<A, B extends keyof A>(
+  fn: (value: A) => A[B],
+): (a: A, b: A) => number
+export declare function descend<A, B extends keyof A>(
+  fn: (value: A) => A[B],
+  a: A,
+  b: A,
+): number
