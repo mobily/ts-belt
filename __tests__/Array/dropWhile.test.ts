@@ -13,8 +13,8 @@ describe('dropWhile', () => {
   })
 
   it('drops elements from the beginning of the array until an element is reached which does not satisfy the given predicate', () => {
-    const result = A.dropWhile(xs, x => x < 4)
-    expect(result).toEqual([4, 5, 6, 7])
+    expect(A.dropWhile(xs, x => x < 4)).toEqual([4, 5, 6, 7])
+    expect(A.dropWhile([1, 3, 5, 7, 9], x => x < 5)).toEqual([5, 7, 9])
   })
 
   it('returns correct array elements if either true or false', () => {

@@ -172,13 +172,24 @@ let takeExactly = (xs, n) =>
   "Returns a new array, filled with elements from the provided array until an element doesn't pass the provided predicate."
 )
 @gentype
-let takeWhile = (xs, predicateFn) =>
-  Belt.Array.reduceU(xs, [], (. acc, element) => {
-    if predicateFn(element) {
-      Js.Array2.push(acc, element)->ignore
+let takeWhile = (xs, predicateFn) => {
+  let index = ref(0)
+  let break = ref(false)
+  let arr = []
+
+  while index.contents < length(xs) && !break.contents {
+    let value = Belt.Array.getUnsafe(xs, index.contents)
+
+    if predicateFn(value) {
+      Js.Array2.push(arr, value)->ignore
+      index := succ(index.contents)
+    } else {
+      break := true
     }
-    acc
-  })
+  }
+
+  arr
+}
 
 %comment(
   "Returns a new array that does not contain the first `n` elements of the provided array, or an empty array if `n` is either less than `0` or greater than the length of the provided array."
