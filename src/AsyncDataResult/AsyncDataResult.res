@@ -242,3 +242,6 @@ let toAsyncData = data =>
   | Complete(Ok(value)) =>
     Complete(value)
   }
+
+@gentype
+let all = data => data->AsyncData.all->AsyncData.map(Result.all)

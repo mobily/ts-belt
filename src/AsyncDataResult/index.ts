@@ -11,6 +11,21 @@ export declare const ReloadingError: <T>(value: T) => Reloading<Error<T>>
 export declare const CompleteOk: <T>(value: T) => Complete<Ok<T>>
 export declare const CompleteError: <T>(value: T) => Complete<Error<T>>
 
+export declare type TypeOfAsyncDataResult<A> = A extends
+  | Reloading<infer U>
+  | Complete<infer U>
+  ? U extends Ok<infer A>
+    ? A
+    : never
+  : never
+export declare type TypeOfAsyncDataResultArray<T extends readonly [...any[]]> =
+  T extends [infer Head, ...infer Tail]
+    ? readonly [
+        TypeOfAsyncDataResult<Head>,
+        ...TypeOfAsyncDataResultArray<Tail>,
+      ]
+    : readonly []
+
 export declare function makeInit<A, B>(): AsyncDataResult<A, B>
 export declare function makeLoading<A, B>(): AsyncDataResult<A, B>
 export declare function makeReloadingOk<A, B>(value: A): AsyncDataResult<A, B>
@@ -127,3 +142,9 @@ export declare function foldError<A, B, C>(
 export declare function toAsyncData<A, B>(
   data: AsyncDataResult<A, B>,
 ): AsyncData<A>
+
+export declare function all<
+  A extends readonly [...AsyncDataResult<any, any>[]],
+>(
+  xs: readonly [...A],
+): AsyncDataResult<TypeOfAsyncDataResultArray<A>, globalThis.Error>
