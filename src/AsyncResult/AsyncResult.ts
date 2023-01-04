@@ -10,7 +10,7 @@ export declare function make<A, B = globalThis.Error>(
 export declare function flatMap<A, B, C, D = B>(
   promise: AsyncResult<A, B>,
   mapFn: (value: A) => AsyncResult<C, D>,
-): AsyncResult<C, D>
+): AsyncResult<C, B | D>
 
 export declare function fold<A, B, C, D = B>(
   promise: AsyncResult<A, B>,

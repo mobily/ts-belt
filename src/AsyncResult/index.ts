@@ -23,10 +23,10 @@ export declare function map<A, B, C>(
 export declare function flatMap<A, B, C, D = B>(
   promise: AsyncResult<A, B>,
   mapFn: (value: A) => AsyncResult<C, D>,
-): AsyncResult<C, D>
+): AsyncResult<C, B | D>
 export declare function flatMap<A, B, C, D = B>(
   mapFn: (value: A) => AsyncResult<C, D>,
-): (promise: AsyncResult<A, B>) => AsyncResult<C, D>
+): (promise: AsyncResult<A, B>) => AsyncResult<C, B | D>
 export declare function fold<A, B, C, D = B>(
   promise: AsyncResult<A, B>,
   mapFn: (value: A) => Result<C, D>,

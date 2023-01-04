@@ -1,7 +1,28 @@
+import { expectType } from 'ts-expect'
 import { pipe, R } from '../..'
+
+class Error1 extends Error {}
+class Error2 extends Error {}
 
 describe('flatMap', () => {
   it('returns Error', () => {
+    expectType<R.Result<string, Error1 | Error2>>(
+      pipe(
+        R.fromNullable('test', new Error1()),
+        R.flatMap(value => {
+          return Math.random() < 0.5 ? R.Ok(value) : R.Error(new Error2())
+        }),
+      ),
+    )
+    expectType<R.Result<string, Error1>>(
+      pipe(
+        R.fromNullable('test', new Error1()),
+        R.flatMap(value => {
+          return Math.random() < 0.5 ? R.Ok(value) : R.Error(new Error1())
+        }),
+      ),
+    )
+
     expect(
       pipe(
         R.fromNullable('value', 'this is bad'),

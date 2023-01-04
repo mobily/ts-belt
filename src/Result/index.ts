@@ -99,11 +99,11 @@ export declare function mapWithDefault<A, B, C>(
 export declare function flatMap<A, B, C, D = B>(
   result: Result<A, B>,
   mapFn: (value: A) => Result<C, D>,
-): Result<C, D>
+): Result<C, B | D>
 
 export declare function flatMap<A, B, C, D = B>(
   mapFn: (value: A) => Result<C, D>,
-): (result: Result<A, B>) => Result<C, D>
+): (result: Result<A, B>) => Result<C, B | D>
 
 /** Returns `value` if `result` is `Ok(value)`, otherwise, throws an exception. */
 

@@ -46,7 +46,7 @@ export declare function fromPromise<A>(
 export declare function flatMap<A, B, C, D = B>(
   result: Result<A, B>,
   mapFn: (value: A) => Result<C, D>,
-): Result<C, D>
+): Result<C, B | D>
 export declare function map<A, B, C>(
   result: Result<A, B>,
   mapFn: (value: A) => C,
