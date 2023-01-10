@@ -288,3 +288,21 @@ let coerce = value => value
 
 @gentype
 let andThen = (value, fn) => fn(value)
+
+%comment("Takes comparator fn and compares values ascending")
+@genType
+let ascend = (fn, a, b) => {
+  let resultA = fn(a)
+  let resultB = fn(b)
+
+  resultA < resultB ? -1 : resultA > resultB ? 1 : 0
+}
+
+%comment("Takes comparator fn and compares values descending")
+@genType
+let descend = (fn, a, b) => {
+  let resultA = fn(a)
+  let resultB = fn(b)
+
+  resultA > resultB ? -1 : resultA < resultB ? 1 : 0
+}

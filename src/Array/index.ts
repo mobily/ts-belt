@@ -670,6 +670,17 @@ export declare function sortBy<A, B>(
   sortFn: (_1: A) => B,
 ): (xs: Array<A>) => Array<A>
 
+/** Returns a new array, sorted according to the provided functions. */
+
+export declare function sortWith<A>(
+  sortFns: Array<(_1: A, _2: A) => number>,
+): (xs: Array<A>) => Array<A>
+
+export declare function sortWith<A>(
+  xs: Array<A>,
+  sortFns: Array<(_1: A, _2: A) => number>,
+): Array<A>
+
 /** Splits the given array into sub-arrays in an object, grouped by the result of running each value through the provided function. */
 
 export declare function groupBy<A>(
