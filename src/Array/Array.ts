@@ -51,3 +51,7 @@ export declare function partition<A>(
   xs: Array<A>,
   predicateFn: (value: A) => boolean,
 ): readonly [Array<A>, Array<A>]
+export declare function flatMap<A, B>(
+  xs: Array<A>,
+  fn: (value: A) => B | Array<B>,
+): Array<B>

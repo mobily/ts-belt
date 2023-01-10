@@ -796,3 +796,10 @@ export declare function intersection<A>(
 
 export declare function intersection<A>(xs: Array<A>, ys: Array<A>): Array<A>
 export declare function sample<A>(xs: Array<A>): A
+export declare function flatMap<A, B>(
+  xs: Array<A>,
+  fn: (value: A) => B | Array<B>,
+): Array<B>
+export declare function flatMap<A, B>(
+  fn: (value: A) => B | Array<B>,
+): (xs: Array<A>) => Array<B>

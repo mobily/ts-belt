@@ -9,6 +9,7 @@ const testFiles = [
   './simple/filter',
   './simple/find',
   './simple/flat',
+  './simple/flatMap',
   // './simple/forEach', // skip this one as there is no output to compare
   './simple/fromPairs',
   './simple/groupBy',

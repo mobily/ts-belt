@@ -678,3 +678,8 @@ let sample = xs => {
   let offset = xs->Belt.Array.length->pred
   Belt.Array.getUnsafe(xs, Js.Math.random_int(0, offset))
 }
+
+@gentype
+let flatMap = (xs, fn) => {
+  xs->map(fn)->flat
+}
