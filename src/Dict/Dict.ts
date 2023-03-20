@@ -15,7 +15,7 @@ export declare function keys<T extends Record<string, unknown>>(
   dict: T,
 ): Array<`${Extract<keyof T, string | number>}`>
 export declare function merge<A, B>(fst: A, snd: B): A & B
-export declare function set<T, K extends string | number, V>(
+export declare function set<T, K extends (keyof T | string | number), V extends (K extends keyof T ? T[K] : any)>(
   dict: T,
   key: K,
   value: V,
