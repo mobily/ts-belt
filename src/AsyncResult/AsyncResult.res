@@ -56,6 +56,22 @@ let filter = (promise, predicateFn) => {
 }
 
 @gentype
+let isOk = result => {
+  switch result {
+  | Ok(_) => true
+  | Error(_) => false
+  }
+}
+
+@gentype
+let isError = result => {
+  switch result {
+  | Ok(_) => false
+  | Error(_) => true
+  }
+}
+
+@gentype
 let match = (promise, okFn, errorFn) => {
   promise->thenResolve(option => {
     switch option {
