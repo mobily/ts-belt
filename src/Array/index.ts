@@ -672,14 +672,14 @@ export declare function sortBy<A, B>(
 
 /** Splits the given array into sub-arrays in an object, grouped by the result of running each value through the provided function. */
 
-export declare function groupBy<A>(
+export declare function groupBy<A, B>(
   xs: Array<A>,
-  groupFn: (item: A) => PropertyKey,
-): Record<PropertyKey, readonly [A, ...A[]]>
+  groupFn: (item: A) => B,
+): Record<B, Array<A>>
 
-export declare function groupBy<A>(
-  groupFn: (item: A) => PropertyKey,
-): (xs: Array<A>) => Record<PropertyKey, readonly [A, ...A[]]>
+export declare function groupBy<A, B>(
+  groupFn: (item: A) => B,
+): (xs: Array<A>) => Record<B, Array<A>>
 
 /** Creates a new array with all sub-array elements concatenated into it (the single level depth). */
 
