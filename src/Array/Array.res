@@ -211,14 +211,26 @@ let dropExactly = (xs, n) => n < 0 || n > length(xs) ? None : Some(Belt.Array.sl
   "Drops elements from the beginning of the array until an element is reached which does not satisfy the given predicate."
 )
 @gentype
-let dropWhile = (xs, predicateFn) =>
-  Belt.Array.reduceU(xs, [], (. acc, element) => {
-    if !predicateFn(element) {
-      Js.Array2.push(acc, element)->ignore
-    }
-    acc
-  })
+let dropWhile = (xs, predicateFn) => {
+  let index = ref(0)
+  let break = ref(false)
+  let arr = []
 
+  while index.contents < length(xs) && !break.contents {
+    let value = Belt.Array.getUnsafe(xs, index.contents)
+
+    if predicateFn(value) {
+      index := succ(index.contents)
+    } else {
+      break := true
+    }
+  }
+  while index.contents < length(xs) {
+    Js.Array2.push(arr, Belt.Array.getUnsafe(xs, index.contents))->ignore
+    index := succ(index.contents)
+  }
+  arr
+}
 %comment(
   "Splits the provided array into head and tail parts (as a tuple), but only if the array is not empty."
 )

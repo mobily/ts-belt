@@ -3,6 +3,7 @@ import { expectType } from 'ts-expect'
 import { A, S, pipe } from '../..'
 
 const xs = [1, 2, 3, 4, 5, 6, 7]
+const ys = [1, 2, 3, 4, 3, 2, 1]
 
 // TODO: expectType
 describe('dropWhile', () => {
@@ -30,5 +31,6 @@ describe('dropWhile (pipe)', () => {
       A.dropWhile(x => x < 4),
     )
     expect(result).toEqual([4, 5, 6, 7])
+    expect(A.dropWhile(ys,x=>x<=3)).toEqual([4, 3, 2, 1])
   })
 })
