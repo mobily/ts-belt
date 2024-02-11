@@ -106,6 +106,17 @@ export declare function filter<A>(
   predicateFn: (value: A) => boolean,
 ): (option: Option<A>) => Option<A>
 
+/** Returns `Some(value)` if `option` is `Some(value)` and the result of `predicateFn` is truthy, otherwise, returns `None`. */
+
+export declare function filter<A, B extends A>(
+  option: Option<A>,
+  predicateFn: (value: A) => value is B,
+): Option<B>
+
+export declare function filter<A, B extends A>(
+  predicateFn: (value: A) => value is B,
+): (option: Option<A>) => Option<B>
+
 /** Returns `value` if `option` is `Some(value)`, otherwise, returns a default value. */
 
 export declare function getWithDefault<A extends NonNullable<any>>(

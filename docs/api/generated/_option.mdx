@@ -21,6 +21,8 @@ Returns `Some(value)` if `option` is `Some(value)` and the result of `predicateF
 ```ts
 function filter<A>(option: Option<A>, predicateFn: (value: A) => boolean): Option<A>
 function filter<A>(predicateFn: (value: A) => boolean): (option: Option<A>) => Option<A>
+function filter<A, B extends A>(option: Option<A>, predicateFn: (value: A) => value is B): Option<B>
+function filter<A, B extends A>(predicateFn: (value: A) => value is B): (option: Option<A>) => Option<B>
 ```
 
 ```ts
