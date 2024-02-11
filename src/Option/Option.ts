@@ -35,6 +35,10 @@ export declare function filter<A>(
   option: Option<A>,
   predicateFn: (value: A) => boolean,
 ): Option<A>
+export declare function filter<A,B extends A>(
+  option: Option<A>,
+  predicateFn: (value: A) => value is B,
+): Option<B>
 export declare function map<A, B>(
   option: Option<A>,
   mapFn: (value: A) => NonNullable<B>,
