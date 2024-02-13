@@ -106,6 +106,21 @@ A.difference([1, 2, 3, 4], [3, 4, 5, 6]) // → [1, 2]
 pipe([5, 2, 3, 5, 6], A.difference([5, 2, 3, 1, 5, 4])) // → [6]
 ```
 
+### differenceWith
+
+Returns elements from the first array, not existing in the second array, based on a comparison function.
+
+
+```ts
+function differenceWith<A>(xs: Array<A>, ys: Array<A>, compareFn: (_1: A, _2: A) => boolean): Array<A>
+function differenceWith<A>(ys: Array<A>, compareFn: (_1: A, _2: A) => boolean): (xs: Array<A>) => Array<A>
+```
+
+```ts
+A.differenceWith([1, 2, 3, 4],[3, 4, 5, 6], F.equals) // → [1, 2]
+pipe([5, 2, 3, 5, 6], A.differenceWith([5, 2, 3, 1, 5, 4],F.equals)) // → [6]
+```
+
 ### drop
 
 Returns a new array that does not contain the first `n` elements of the provided array, or an empty array if `n` is either less than `0` or greater than the length of the provided array.

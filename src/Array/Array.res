@@ -662,6 +662,15 @@ let any = (xs, predicateFn) => Belt.Array.someU(xs, (. value) => predicateFn(val
 @gentype
 let difference = (xs, ys) => xs->uniq->reject(value => includes(ys, value))
 
+%comment(
+  "Returns elements from the first array, not existing in the second array, based on a comparison function."
+)
+@gentype
+let differenceWith = (xs: array<'A>, ys: array<'A>, compareFn) => {
+  let _ys = ys->uniq
+  xs->uniq->reject(value => _ys->some((. y) => compareFn(value, y)))
+}
+
 %comment("Returns union of two arrays.")
 @gentype
 let union = (xs, ys) => xs->concat(ys)->uniq
