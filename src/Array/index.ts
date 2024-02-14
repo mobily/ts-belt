@@ -787,12 +787,12 @@ export declare function difference<A>(xs: Array<A>, ys: Array<A>): Array<A>
 export declare function differenceWith<A>(
   xs: Array<A>,
   ys: Array<A>,
-  compareFn: (_1: A, _2: A) => boolean,
+  fn: (x: A) => unknown,
 ): Array<A>
 
 export declare function differenceWith<A>(
   ys: Array<A>,
-  compareFn: (_1: A, _2: A) => boolean,
+  fn: (x: A) => unknown,
 ): (xs: Array<A>) => Array<A>
 
 /** Returns union of two arrays. */

@@ -666,9 +666,9 @@ let difference = (xs, ys) => xs->uniq->reject(value => includes(ys, value))
   "Returns elements from the first array, not existing in the second array, based on a comparison function."
 )
 @gentype
-let differenceWith = (xs: array<'A>, ys: array<'A>, compareFn) => {
-  let _ys = ys->uniq
-  xs->uniq->reject(value => _ys->some((. y) => compareFn(value, y)))
+let differenceWith = (xs, ys, selectFn) => {
+  let _ys = ys->uniq->Belt.Array.map(selectFn)
+  xs->uniq->reject(value => _ys->Belt.Array.someU((. y) => y == selectFn(value)))
 }
 
 %comment("Returns union of two arrays.")
