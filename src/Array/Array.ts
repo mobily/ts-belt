@@ -55,3 +55,8 @@ export declare function flatMap<A, B>(
   xs: Array<A>,
   fn: (value: A) => B | Array<B>,
 ): Array<B>
+export declare function differenceWith<A>(
+  xs: Array<A>,
+  ys: Array<A>,
+  fn: (x: A) => unknown,
+): Array<A>

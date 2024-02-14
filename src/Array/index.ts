@@ -782,6 +782,19 @@ export declare function difference<A>(ys: Array<A>): (xs: Array<A>) => Array<A>
 
 export declare function difference<A>(xs: Array<A>, ys: Array<A>): Array<A>
 
+/** Returns elements from the first array, not existing in the second array, based on a comparison function. */
+
+export declare function differenceWith<A>(
+  xs: Array<A>,
+  ys: Array<A>,
+  fn: (x: A) => unknown,
+): Array<A>
+
+export declare function differenceWith<A>(
+  ys: Array<A>,
+  fn: (x: A) => unknown,
+): (xs: Array<A>) => Array<A>
+
 /** Returns union of two arrays. */
 
 export declare function union<A>(ys: Array<A>): (xs: Array<A>) => Array<A>
