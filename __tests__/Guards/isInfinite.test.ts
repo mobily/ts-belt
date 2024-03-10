@@ -7,5 +7,4 @@ describe('isInFinite', () => {
     expect(G.isInfinite(Infinity)).toEqual(true)
     expect(G.isInfinite(1/0)).toEqual(true)
   })
-
 })
