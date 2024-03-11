@@ -61,3 +61,5 @@ export declare function isNot<A>(
   predicateFn: (value: A) => any,
 ): boolean
 export declare function isDate<A>(value: A): value is Extract<A, Date>
+export declare function isFinite<A>(value: A | number): value is Guard<A, number>
+export declare function isInfinite<A>(value: A | number): value is Guard<A, number>
