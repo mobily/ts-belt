@@ -66,6 +66,13 @@ export declare function match<A, B, R>(
   okFn: (value: A) => R,
   errorFn: (value: B) => R,
 ): R
+
+export declare function matchW<A,B,C,D>(
+  result: Result<A, B>,
+  okFn: (value: A) => C,
+  errorFn: (value: B) => D
+): C | D 
+
 export declare function toNullable<A, B>(result: Result<A, B>): A | null
 export declare function toOption<A, B>(result: Result<A, B>): Option<A>
 export declare function toUndefined<A, B>(result: Result<A, B>): A | undefined
