@@ -23,8 +23,12 @@ export declare type Guard<T, V> = Extract<T, V> extends never
   ? V
   : Extract<T, V>
 
-export declare function isFinite(value: number): boolean
-export declare function isInfinite(value: number): boolean
+export declare function isFinite<A>(
+  value: A | number,
+): value is Guard<A, number>
+export declare function isInfinite<A>(
+  value: A | number,
+): value is Guard<A, number>
 
 export declare function isString<A>(
   value: A | string,
