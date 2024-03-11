@@ -2,11 +2,11 @@ import { Option } from '../Option'
 export declare type Ok<T> = {
   readonly TAG: 0
   readonly _0: T
-} & { __: 'Ok' }
+}
 export declare type Error<T> = {
   readonly TAG: 1
   readonly _0: T
-} & { __: 'Error' }
+}
 
 export declare type Result<A, B> = Ok<A> | Error<B>
 
