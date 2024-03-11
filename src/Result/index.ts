@@ -144,6 +144,15 @@ export declare function match<A, B, R>(
   okFn: (value: A) => R,
   errorFn: (value: B) => R,
 ): (result: Result<A, B>) => R
+export declare function matchW<A, B, C, D>(
+  result: Result<A, B>,
+  okFn: (value: A) => C,
+  errorFn: (value: B) => D,
+): C | D
+export declare function matchW<A, B, C, D>(
+  okFn: (value: A) => C,
+  errorFn: (value: B) => D,
+): (result: Result<A, B>) => C | D
 
 /** Returns `true` if the provided `result` is `Error(errorValue)`, otherwise, returns `false`. */
 
