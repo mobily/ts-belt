@@ -1,3 +1,5 @@
+const {dependencies} =require('./package.json')
+const package = require('../package.json')
 const _ = require('lodash/fp')
 const ramda = require('ramda')
 const rambda = require('rambda')
@@ -40,10 +42,10 @@ const addBenchmarkSuite = (label, module) => mapFn => {
   }
 }
 
-exports.addTsBelt = addBenchmarkSuite('@mobily/ts-belt', belt)
-exports.addRamda = addBenchmarkSuite('ramda', ramda)
-exports.addRambda = addBenchmarkSuite('rambda', rambda)
-exports.addRemeda = addBenchmarkSuite('remeda', remeda)
+exports.addTsBelt = addBenchmarkSuite(`@mobily/ts-belt ${package['version']}`, belt)
+exports.addRamda = addBenchmarkSuite(`ramda ${dependencies['ramda']}`, ramda)
+exports.addRambda = addBenchmarkSuite(`rambda ${dependencies['rambda']}`, rambda)
+exports.addRemeda = addBenchmarkSuite(`remeda ${dependencies['remeda']}`, remeda)
 exports.addLodashFp = addBenchmarkSuite('lodash/fp', _)
 exports.addNative = addBenchmarkSuite('native', native)
 exports.addFunkiaList = addBenchmarkSuite('funkia/list', L)

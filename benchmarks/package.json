@@ -14,9 +14,9 @@
   },
   "dependencies": {
     "list": "^2.0.19",
-    "lodash": "^4.17.21",
-    "rambda": "^6.9.0",
-    "ramda": "^0.27.1",
-    "remeda": "^0.0.32"
+    "lodash": "4.17.21",
+    "rambda": "9.1.0",
+    "ramda": "0.29.1",
+    "remeda": "1.47.1"
   }
 }
