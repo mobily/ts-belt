@@ -66,12 +66,13 @@ let match = (promise, okFn, errorFn) => {
 }
 
 @gentype
-let toOption = promise => {
-  promise->thenResolve(option => {
-    switch option {
+let toOption = asyncResult => {
+  asyncResult->thenResolve(result => {
+    switch result {
+    | Ok(None) => None
     | Ok(value) => Some(value)
     | Error(_) => None
-    }
+    }->Js.Promise.resolve
   })
 }
 
