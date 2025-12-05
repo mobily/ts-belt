@@ -1,10 +1,10 @@
-import React from 'react'
-import * as Belt from '../../../..'
+import React from "react";
+import * as Belt from "../../../..";
 
 const ReactLiveScope = {
-  React,
-  ...Belt,
-  ...React,
-}
+	React,
+	...Belt,
+	...React,
+};
 
-export default ReactLiveScope
+export default ReactLiveScope;

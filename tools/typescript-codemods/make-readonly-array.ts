@@ -1,44 +1,44 @@
-import { API } from 'jscodeshift'
+import type { API } from "jscodeshift";
 
-const transform = (source: string, j: API['jscodeshift']): string => {
-  const root = j(source)
+const transform = (source: string, j: API["jscodeshift"]): string => {
+	const root = j(source);
 
-  root
-    .find(j.TSFunctionType, {
-      typeAnnotation: {
-        typeAnnotation: {
-          type: 'TSArrayType',
-        },
-      },
-    })
-    .replaceWith(p => {
-      if (p.value.typeAnnotation?.typeAnnotation?.type === 'TSArrayType') {
-        const fn = j.tsFunctionType(p.value.parameters)
-        fn.typeParameters = p.value.typeParameters
-        fn.typeAnnotation = j.tsTypeAnnotation(
-          p.value.typeAnnotation.typeAnnotation,
-        )
-        return fn
-      }
+	root
+		.find(j.TSFunctionType, {
+			typeAnnotation: {
+				typeAnnotation: {
+					type: "TSArrayType",
+				},
+			},
+		})
+		.replaceWith((p) => {
+			if (p.value.typeAnnotation?.typeAnnotation?.type === "TSArrayType") {
+				const fn = j.tsFunctionType(p.value.parameters);
+				fn.typeParameters = p.value.typeParameters;
+				fn.typeAnnotation = j.tsTypeAnnotation(
+					p.value.typeAnnotation.typeAnnotation,
+				);
+				return fn;
+			}
 
-      return p.value
-    })
+			return p.value;
+		});
 
-  // T[] to Array<T>
-  root.find(j.TSArrayType).replaceWith(p => {
-    const elementType = p.value.elementType
+	// T[] to Array<T>
+	root.find(j.TSArrayType).replaceWith((p) => {
+		const elementType = p.value.elementType;
 
-    if (elementType) {
-      return j.tsTypeReference(
-        j.identifier('Array'),
-        j.tsTypeParameterInstantiation([elementType]),
-      )
-    }
+		if (elementType) {
+			return j.tsTypeReference(
+				j.identifier("Array"),
+				j.tsTypeParameterInstantiation([elementType]),
+			);
+		}
 
-    return p.value
-  })
+		return p.value;
+	});
 
-  return root.toSource()
-}
+	return root.toSource();
+};
 
-export default transform
+export default transform;

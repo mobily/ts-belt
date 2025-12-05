@@ -1,1 +1,1 @@
-export * from './AsyncResult.bs.js'
+export * from "./AsyncResult.bs.js";

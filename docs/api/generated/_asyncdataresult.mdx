@@ -1,0 +1,225 @@
+### all
+
+
+```ts
+function all<
+	A extends readonly [...AsyncDataResult<any, any>[]],
+>(xs: readonly [...A]): AsyncDataResult<TypeOfAsyncDataResultArray<A>, globalThis.Error>
+```
+
+### flatMap
+
+
+```ts
+function flatMap<A, B, C, D = B>(data: AsyncDataResult<A, B>, mapFn: (value: A) => AsyncDataResult<C, D>): AsyncDataResult<C, D>
+function flatMap<A, B, C, D = B>(mapFn: (value: A) => AsyncDataResult<C, D>): (data: AsyncDataResult<A, B>) => AsyncDataResult<C, D>
+```
+
+### fold
+
+
+```ts
+function fold<A, B, C>(
+    data: AsyncDataResult<A, B>,
+    okFn: (value: A) => C,
+    errorFn: (error: B) => C,
+    emptyFn: () => C
+): C
+function fold<A, B, C>(okFn: (value: A) => C, errorFn: (error: B) => C, emptyFn: () => C): (data: AsyncDataResult<A, B>) => C
+```
+
+### foldError
+
+
+```ts
+function foldError<A, B, C>(
+    data: AsyncDataResult<A, B>,
+    errorFn: (error: B) => C,
+    otherFn: (data: AsyncDataResult<A, B>) => C
+): C
+function foldError<A, B, C>(errorFn: (error: B) => C, otherFn: (data: AsyncDataResult<A, B>) => C): (data: AsyncDataResult<A, B>) => C
+```
+
+### foldOk
+
+
+```ts
+function foldOk<A, B, C>(
+    data: AsyncDataResult<A, B>,
+    okFn: (value: A) => C,
+    otherFn: (data: AsyncDataResult<A, B>) => C
+): C
+function foldOk<A, B, C>(okFn: (value: A) => C, otherFn: (data: AsyncDataResult<A, B>) => C): (data: AsyncDataResult<A, B>) => C
+```
+
+### fromAsyncData
+
+
+```ts
+function fromAsyncData<A>(data: AsyncData<A>): AsyncDataResult<A, undefined>
+```
+
+### getCompleteError
+
+
+```ts
+function getCompleteError<A, B>(data: AsyncDataResult<A, B>): Option<B>
+```
+
+### getCompleteOk
+
+
+```ts
+function getCompleteOk<A, B>(data: AsyncDataResult<A, B>): Option<A>
+```
+
+### getError
+
+
+```ts
+function getError<A, B>(data: AsyncDataResult<A, B>): Option<B>
+```
+
+### getOk
+
+
+```ts
+function getOk<A, B>(data: AsyncDataResult<A, B>): Option<A>
+```
+
+### getReloadingError
+
+
+```ts
+function getReloadingError<A, B>(data: AsyncDataResult<A, B>): Option<B>
+```
+
+### getReloadingOk
+
+
+```ts
+function getReloadingOk<A, B>(data: AsyncDataResult<A, B>): Option<A>
+```
+
+### isCompleteError
+
+
+```ts
+function isCompleteError<A, B>(data: AsyncDataResult<A, B>): data is Complete<Error<B>>
+```
+
+### isCompleteOk
+
+
+```ts
+function isCompleteOk<A, B>(data: AsyncDataResult<A, B>): data is Complete<Ok<A>>
+```
+
+### isError
+
+
+```ts
+function isError<A, B>(data: AsyncDataResult<A, B>): data is Complete<Error<B>> | Reloading<Error<B>>
+```
+
+### isOk
+
+
+```ts
+function isOk<A, B>(data: AsyncDataResult<A, B>): data is Complete<Ok<A>> | Reloading<Ok<A>>
+```
+
+### isReloadingError
+
+
+```ts
+function isReloadingError<A, B>(data: AsyncDataResult<A, B>): data is Reloading<Error<B>>
+```
+
+### isReloadingOk
+
+
+```ts
+function isReloadingOk<A, B>(data: AsyncDataResult<A, B>): data is Reloading<Ok<A>>
+```
+
+### makeCompleteError
+
+
+```ts
+function makeCompleteError<A, B>(error: B): AsyncDataResult<A, B>
+```
+
+### makeCompleteOk
+
+
+```ts
+function makeCompleteOk<A, B>(value: A): AsyncDataResult<A, B>
+```
+
+### makeInit
+
+
+```ts
+function makeInit<A, B>(): AsyncDataResult<A, B>
+```
+
+### makeLoading
+
+
+```ts
+function makeLoading<A, B>(): AsyncDataResult<A, B>
+```
+
+### makeReloadingError
+
+
+```ts
+function makeReloadingError<A, B>(error: B): AsyncDataResult<A, B>
+```
+
+### makeReloadingOk
+
+
+```ts
+function makeReloadingOk<A, B>(value: A): AsyncDataResult<A, B>
+```
+
+### map
+
+
+```ts
+function map<A, B, C>(data: AsyncDataResult<A, B>, mapFn: (value: A) => C): AsyncDataResult<C, B>
+function map<A, B, C>(mapFn: (value: A) => C): (data: AsyncDataResult<A, B>) => AsyncDataResult<C, B>
+```
+
+### mapError
+
+
+```ts
+function mapError<A, B, C>(data: AsyncDataResult<A, B>, mapFn: (error: B) => C): AsyncDataResult<A, C>
+function mapError<A, B, C>(mapFn: (error: B) => C): (data: AsyncDataResult<A, B>) => AsyncDataResult<A, C>
+```
+
+### tap
+
+
+```ts
+function tap<A, B>(data: AsyncDataResult<A, B>, okFn: (value: A) => void): AsyncDataResult<A, B>
+function tap<A, B>(okFn: (value: A) => void): (data: AsyncDataResult<A, B>) => AsyncDataResult<A, B>
+```
+
+### tapError
+
+
+```ts
+function tapError<A, B>(data: AsyncDataResult<A, B>, errorFn: (error: B) => void): AsyncDataResult<A, B>
+function tapError<A, B>(errorFn: (error: B) => void): (data: AsyncDataResult<A, B>) => AsyncDataResult<A, B>
+```
+
+### toAsyncData
+
+
+```ts
+function toAsyncData<A, B>(data: AsyncDataResult<A, B>): AsyncData<A>
+```

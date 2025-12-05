@@ -5,214 +5,222 @@
  * work well for content-centric websites.
  */
 
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&display=swap");
 
 /* You can override the default Infima variables here. */
 :root {
-  font-family: "IBM Plex Sans";
+	font-family: "IBM Plex Sans";
 
-  --ifm-color-primary: #0057FF;
-  --ifm-color-primary-dark: rgb(33, 175, 144);
-  --ifm-color-primary-darker: rgb(31, 165, 136);
-  --ifm-color-primary-darkest: rgb(26, 136, 112);
-  --ifm-color-primary-light: rgb(70, 203, 174);
-  --ifm-color-primary-lighter: rgb(102, 212, 189);
-  --ifm-color-primary-lightest: rgb(146, 224, 208);
-  --ifm-code-font-size: 95%;
-  --ifm-h4-font-size: 1.18rem;
-  --ifm-menu-color-background-active: rgba(0, 122, 255, 0.05);
-  --ifm-global-shadow-lw: 0 1px 12px 0 rgba(0, 0, 0, 0.05);
-  --ifm-menu-color: var(--ifm-navbar-link-color);
-  --ifm-toc-link-color: var(--ifm-navbar-link-color);
-  --ifm-menu-link-sublist-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24"><path fill="rgba(0,0,0,0.1)" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path></svg>');
-  --ifm-toc-border-color: var(--ifm-color-gray-100);
-  --ifm-font-family-base: "'IBM Plex Sans', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif BlinkMacSystemFont,'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'";
+	--ifm-color-primary: #0057ff;
+	--ifm-color-primary-dark: rgb(33, 175, 144);
+	--ifm-color-primary-darker: rgb(31, 165, 136);
+	--ifm-color-primary-darkest: rgb(26, 136, 112);
+	--ifm-color-primary-light: rgb(70, 203, 174);
+	--ifm-color-primary-lighter: rgb(102, 212, 189);
+	--ifm-color-primary-lightest: rgb(146, 224, 208);
+	--ifm-code-font-size: 95%;
+	--ifm-h4-font-size: 1.18rem;
+	--ifm-menu-color-background-active: rgba(0, 122, 255, 0.05);
+	--ifm-global-shadow-lw: 0 1px 12px 0 rgba(0, 0, 0, 0.05);
+	--ifm-menu-color: var(--ifm-navbar-link-color);
+	--ifm-toc-link-color: var(--ifm-navbar-link-color);
+	--ifm-menu-link-sublist-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24"><path fill="rgba(0,0,0,0.1)" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path></svg>');
+	--ifm-toc-border-color: var(--ifm-color-gray-100);
+	--ifm-font-family-base: "'IBM Plex Sans', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif BlinkMacSystemFont,'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'";
 
-  --docusaurus-announcement-bar-height: 44px !important;
+	--docusaurus-announcement-bar-height: 44px !important;
 }
 
 html {
-  font-family: "IBM Plex Sans";
+	font-family: "IBM Plex Sans";
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: "IBM Plex Sans";
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: "IBM Plex Sans";
 }
 
 .footer__title {
-  font-family: "IBM Plex Sans";
+	font-family: "IBM Plex Sans";
 }
 
 .navbar__logo {
-  height: 2.8rem;
+	height: 2.8rem;
 }
 
 .navbar__title {
-  color: var(--ifm-color-gray-400);
-  font-size: 0.85rem;
-  position: relative;
-  top: 3px;
-  letter-spacing: -1px;
+	color: var(--ifm-color-gray-400);
+	font-size: 0.85rem;
+	position: relative;
+	top: 3px;
+	letter-spacing: -1px;
 }
 
 .navbar__link {
-  font-size: 1.1rem;
+	font-size: 1.1rem;
 }
 
 .docusaurus-highlight-code-line {
-  background-color: rgb(72, 77, 91);
-  display: block;
-  margin: 0 calc(-1 * var(--ifm-pre-padding));
-  padding: 0 var(--ifm-pre-padding);
+	background-color: rgb(72, 77, 91);
+	display: block;
+	margin: 0 calc(-1 * var(--ifm-pre-padding));
+	padding: 0 var(--ifm-pre-padding);
 }
 
 svg[class*="ExternalLink"] {
-  display: none;
+	display: none;
 }
 
 .navbar__search-input:focus {
-  outline-color: var(--ifm-color-primary);
+	outline-color: var(--ifm-color-primary);
 }
 
 .header-github-link:before {
-  content: "";
-  display: flex;
-  height: 28px;
-  width: 28px;
-  background: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23000' d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E") no-repeat;
+	content: "";
+	display: flex;
+	height: 28px;
+	width: 28px;
+	background: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23000' d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E")
+		no-repeat;
 }
 
 .sidebar-api {
-  border-bottom: 1px solid var(--ifm-color-gray-100);
+	border-bottom: 1px solid var(--ifm-color-gray-100);
 }
 
 .sidebar-api > .menu__link {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .sidebar-api > .menu__link:after {
-  display: block;
-  font-size: 0.85rem;
-  margin-top: 4px;
-  font-weight: normal;
-  color: var(--ifm-color-gray-600);
-  line-height: 1.1rem;
+	display: block;
+	font-size: 0.85rem;
+	margin-top: 4px;
+	font-weight: normal;
+	color: var(--ifm-color-gray-600);
+	line-height: 1.1rem;
 }
 
 .sidebar-api-array > .menu__link:after {
-  content: "Utility functions for Array";
+	content: "Utility functions for Array";
 }
 
 .sidebar-api-option > .menu__link:after {
-  content: "Functions for handling the Option data type that represents the existence and nonexistence of a value";
+	content: "Functions for handling the Option data type that represents the existence and nonexistence of a value";
 }
 
 .sidebar-api-function > .menu__link:after {
-  content: "Other useful functions";
+	content: "Other useful functions";
 }
 
 .sidebar-api-guards > .menu__link:after {
-  content: "Various TypeScript guards";
+	content: "Various TypeScript guards";
 }
 
 .sidebar-api-object > .menu__link:after {
-  content: "Utility functions for Object";
+	content: "Utility functions for Object";
 }
 
 .sidebar-api-boolean > .menu__link:after {
-  content: "Utility functions for Boolean";
+	content: "Utility functions for Boolean";
 }
 
 .sidebar-api-number > .menu__link:after {
-  content: "Utility functions for Number";
+	content: "Utility functions for Number";
 }
 
 .sidebar-api-string > .menu__link:after {
-  content: "Utility functions for String";
+	content: "Utility functions for String";
 }
 
 .sidebar-api-result > .menu__link:after {
-  content: "Functions for describing the result of a certain operation without relying on exceptions";
+	content: "Functions for describing the result of a certain operation without relying on exceptions";
 }
 
 .sidebar-api-pipe-flow > .menu__link:after {
-  content: "Create a function composition";
+	content: "Create a function composition";
 }
 
 .menu__list-item {
-  padding: 4px 0;
+	padding: 4px 0;
 }
 
 .menu__list-item:last-child {
-  border-bottom: none;
+	border-bottom: none;
 }
 
 .menu__list-item:not(:first-child) {
-  margin-top: 0;
+	margin-top: 0;
 }
 
-div[class^="playgroundHeader"], div[class^="playgroundHeader"]:first-of-type {
-  background: var(--ifm-color-gray-200);
-  font-size: 1.1rem;
-  color: var(--ifm-color-gray-600);
-  text-transform: none;
-  font-weight: 500;
-  letter-spacing: 0.3px;
+div[class^="playgroundHeader"],
+div[class^="playgroundHeader"]:first-of-type {
+	background: var(--ifm-color-gray-200);
+	font-size: 1.1rem;
+	color: var(--ifm-color-gray-600);
+	text-transform: none;
+	font-weight: 500;
+	letter-spacing: 0.3px;
 }
 
 .table-of-contents {
-  font-size: 0.9rem;
+	font-size: 0.9rem;
 }
 
 .theme-back-to-top-button {
-  background-color: var(--ifm-color-primary) !important;
+	background-color: var(--ifm-color-primary) !important;
 }
 
 .theme-back-to-top-button::after {
-  background-color: #fff !important;
-  mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24"><path fill="rgba(255,255,255,1)" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path></svg>') !important;
+	background-color: #fff !important;
+	mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24"><path fill="rgba(255,255,255,1)" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path></svg>') !important;
 }
 
 table {
-  width: 100%;
-  display: table;
+	width: 100%;
+	display: table;
 }
 
 table thead tr {
-  border-bottom-width: 1px;
+	border-bottom-width: 1px;
 }
 
 table th {
-  text-align: left;
+	text-align: left;
 }
 
-div[class^="codeBlockContainer"], div[class^="playgroundContainer"] {
-  box-shadow: none;
+div[class^="codeBlockContainer"],
+div[class^="playgroundContainer"] {
+	box-shadow: none;
 }
 
 .sidebar-api-button:not(:first-child) {
-  margin-top: 8px;
-  padding-top: 12px;
-  border-top: 1px solid var(--ifm-color-gray-100);
+	margin-top: 8px;
+	padding-top: 12px;
+	border-top: 1px solid var(--ifm-color-gray-100);
 }
 
 .sidebar-api-button .menu__link:after {
-  display: block;
-  content: '';
-  width: 20px;
-  height: 20px;
-  background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8' standalone='yes'%3F%3E%3C!-- Generator: Adobe Illustrator 19.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0) --%3E%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' id='Layer_1' x='0px' y='0px' width='20px' height='20px' viewBox='0 0 92 92' enable-background='new 0 0 92 92' xml:space='preserve'%3E%3Cpath id='XMLID_1478_' d='M15.7,22c0-2.2,1.8-4,4-4h52.5c2.2,0,4,1.8,4,4s-1.8,4-4,4H19.7C17.5,26,15.7,24.2,15.7,22z M26.3,12h39.4 c1.9,0,3.5-1.6,3.5-3.5S67.6,5,65.7,5H26.3c-1.9,0-3.5,1.6-3.5,3.5S24.4,12,26.3,12z M92,26.6v10.9c0,0,0,0,0,0c0,0,0,0,0,0 c0,0,0,0,0,0c0,0,0,0,0,0c0,0.4-0.1,0.8-0.2,1.1L79,85.1C78.5,86.8,77,88,75.2,88H16.6c-1.8,0-3.4-1.2-3.9-3L0.2,38.6 C0.1,38.4,0.1,38.2,0,38c0-0.2,0-0.4,0-0.6V26.6c0-2.2,1.8-4,4-4s4,1.8,4,4V34h76v-7.4c0-2.2,1.8-4,4-4S92,24.4,92,26.6z M82.7,42 H9.2l10.4,38H46h26.1L82.7,42z M34.2,62h23.6c2.2,0,4-1.8,4-4s-1.8-4-4-4H34.2c-2.2,0-4,1.8-4,4S32,62,34.2,62z'%3E%3C/path%3E%3C/svg%3E");
+	display: block;
+	content: "";
+	width: 20px;
+	height: 20px;
+	background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8' standalone='yes'%3F%3E%3C!-- Generator: Adobe Illustrator 19.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0) --%3E%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' id='Layer_1' x='0px' y='0px' width='20px' height='20px' viewBox='0 0 92 92' enable-background='new 0 0 92 92' xml:space='preserve'%3E%3Cpath id='XMLID_1478_' d='M15.7,22c0-2.2,1.8-4,4-4h52.5c2.2,0,4,1.8,4,4s-1.8,4-4,4H19.7C17.5,26,15.7,24.2,15.7,22z M26.3,12h39.4 c1.9,0,3.5-1.6,3.5-3.5S67.6,5,65.7,5H26.3c-1.9,0-3.5,1.6-3.5,3.5S24.4,12,26.3,12z M92,26.6v10.9c0,0,0,0,0,0c0,0,0,0,0,0 c0,0,0,0,0,0c0,0,0,0,0,0c0,0.4-0.1,0.8-0.2,1.1L79,85.1C78.5,86.8,77,88,75.2,88H16.6c-1.8,0-3.4-1.2-3.9-3L0.2,38.6 C0.1,38.4,0.1,38.2,0,38c0-0.2,0-0.4,0-0.6V26.6c0-2.2,1.8-4,4-4s4,1.8,4,4V34h76v-7.4c0-2.2,1.8-4,4-4S92,24.4,92,26.6z M82.7,42 H9.2l10.4,38H46h26.1L82.7,42z M34.2,62h23.6c2.2,0,4-1.8,4-4s-1.8-4-4-4H34.2c-2.2,0-4,1.8-4,4S32,62,34.2,62z'%3E%3C/path%3E%3C/svg%3E");
 }
 
-button[class*=announcementBarClose_] {
-  opacity: 0.75;
+button[class*="announcementBarClose_"] {
+	opacity: 0.75;
 }
 
 div[class*="announcementBarContent_"] {
-  font-size: 95%;
+	font-size: 95%;
 }
 
 .footer--dark {
-  --ifm-footer-background-color: #111;
+	--ifm-footer-background-color: #111;
 }

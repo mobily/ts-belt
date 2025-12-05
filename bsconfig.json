@@ -1,33 +1,31 @@
 {
-  "name": "@mobily/ts-belt",
-  "version": "3.0.0",
-  "namespace": false,
-  "bsc-flags": ["-bs-super-errors", "-bs-no-version-header"],
-  "gentypeconfig": {
-    "language": "typescript",
-    "importPath": "relative",
-    "debug": {
-      "all": false
-    },
-    "exportInterfaces": false
-  },
-  "suffix": ".bs.js",
-  "package-specs": {
-    "module": "es6",
-    "in-source": true
-  },
-  "sources": [
-    {
-      "dir": "src",
-      "subdirs": true
-    },
-    {
-      "dir": "tools/rescript-externals"
-    }
-  ],
-  "bs-dependencies": ["@ryyppy/rescript-promise"],
-  "bs-dev-dependencies": [],
-  "ppx-flags": [
-    ["./tools/comment-ppx/ppx.exe -as-ppx"]
-  ]
+	"name": "@mobily/ts-belt",
+	"version": "3.0.0",
+	"namespace": false,
+	"bsc-flags": ["-bs-super-errors", "-bs-no-version-header"],
+	"gentypeconfig": {
+		"language": "typescript",
+		"importPath": "relative",
+		"debug": {
+			"all": false
+		},
+		"exportInterfaces": false
+	},
+	"suffix": ".bs.js",
+	"package-specs": {
+		"module": "es6",
+		"in-source": true
+	},
+	"sources": [
+		{
+			"dir": "src",
+			"subdirs": true
+		},
+		{
+			"dir": "tools/rescript-externals"
+		}
+	],
+	"bs-dependencies": ["@ryyppy/rescript-promise"],
+	"bs-dev-dependencies": [],
+	"ppx-flags": [["./tools/comment-ppx/ppx.exe -as-ppx"]]
 }

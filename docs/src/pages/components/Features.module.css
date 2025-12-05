@@ -1,16 +1,16 @@
 .features {
-  text-align: center;
-  max-width: 74vw;
+	text-align: center;
+	max-width: 74vw;
 }
 
 @media screen and (max-width: 768px) {
-  .features {
-    max-width: 100vh;
-    padding: 0 1rem;
-  }
+	.features {
+		max-width: 100vh;
+		padding: 0 1rem;
+	}
 }
 
 .dot {
-  margin: 0 16px;
-  color: #000;
+	margin: 0 16px;
+	color: #000;
 }

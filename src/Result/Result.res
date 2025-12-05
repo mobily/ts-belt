@@ -109,6 +109,13 @@ let match = (result, okFn, errorFn) =>
   | Error(value) => errorFn(value)
   }
 
+@gentype
+let bimap = (result, okFn, errorFn) =>
+  switch result {
+  | Ok(value) => okFn(value)
+  | Error(value) => errorFn(value)
+  }
+
 %comment(
   "Returns `true` if the provided `result` is `Error(errorValue)`, otherwise, returns `false`."
 )

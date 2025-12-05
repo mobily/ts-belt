@@ -1,22 +1,22 @@
 {
-  "name": "ts-belt-benchmarks",
-  "private": true,
-  "version": "0.1.0",
-  "main": "index.js",
-  "license": "MIT",
-  "scripts": {
-    "test": "NODE_ENV=test node ./ensure-identical-output.js",
-    "start": "bash ./scripts/run.sh",
-    "generate": "bash ./scripts/generate.sh"
-  },
-  "devDependencies": {
-    "benchr": "^4.3.0"
-  },
-  "dependencies": {
-    "list": "^2.0.19",
-    "lodash": "^4.17.21",
-    "rambda": "^6.9.0",
-    "ramda": "^0.27.1",
-    "remeda": "^0.0.32"
-  }
+	"name": "ts-belt-benchmarks",
+	"private": true,
+	"version": "0.1.0",
+	"main": "index.js",
+	"license": "MIT",
+	"scripts": {
+		"test": "NODE_ENV=test node ./ensure-identical-output.js",
+		"start": "bash ./scripts/run.sh",
+		"generate": "bash ./scripts/generate.sh"
+	},
+	"devDependencies": {
+		"benchr": "^4.3.0"
+	},
+	"dependencies": {
+		"list": "^2.0.19",
+		"lodash": "^4.17.21",
+		"rambda": "^6.9.0",
+		"ramda": "^0.27.1",
+		"remeda": "^0.0.32"
+	}
 }

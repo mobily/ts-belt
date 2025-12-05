@@ -1,1 +1,1 @@
-export * from './Bool.bs.js'
+export * from "./Bool.bs.js";
