@@ -9,8 +9,8 @@ function deleteKey<T, K extends keyof T>(key: K): (dict: T) => Omit<T, K>
 ```
 
 ```ts
-D.deleteKey({ name: 'Joe', location: 'Warsaw' }, 'location') // → { name: 'Joe' }
-pipe({ name: 'Joe', location: 'Warsaw' }, D.deleteKey('location')) // → { name: 'Joe' }
+D.deleteKey({ name: "Joe", location: "Warsaw" }, "location") // → { name: "Joe" }
+pipe({ name: "Joe", location: "Warsaw" }, D.deleteKey("location")) // → { name: "Joe" }
 ```
 
 ### deleteKeys
@@ -24,20 +24,17 @@ function deleteKeys<T, K extends keyof T>(keys: ReadonlyArray<K>): (dict: T) => 
 ```
 
 ```ts
-D.deleteKeys({ name: 'Joe', location: 'Warsaw' }, []) // → {
-  name: 'Joe',
-  location: 'Warsaw',
+D.deleteKeys({ name: "Joe", location: "Warsaw" }, []) // → {
+    name: "Joe",
+    location: "Warsaw",
 }
-D.deleteKeys({ name: 'Joe', location: 'Warsaw' }, ['name']) // → { location: 'Warsaw' }
-D.deleteKeys({ name: 'Joe', location: 'Warsaw' }, ['name', 'location']) // → {}
-pipe({ name: 'Joe', location: 'Warsaw' }, D.deleteKeys([])) // → {
-  name: 'Joe',
-  location: 'Warsaw',
-}
-pipe({ name: 'Joe', location: 'Warsaw' }, D.deleteKeys(['name'])) // → { location: 'Warsaw' }
+D.deleteKeys({ name: "Joe", location: "Warsaw" }, ["name"]) // → { location: "Warsaw" }
+D.deleteKeys({ name: "Joe", location: "Warsaw" }, ["name", "location"]) // → {}
+pipe({ name: "Joe", location: "Warsaw" }, D.deleteKeys([])) // → { name: "Joe", location: "Warsaw" }
+pipe({ name: "Joe", location: "Warsaw" }, D.deleteKeys(["name"])) // → { location: "Warsaw" }
 pipe(
-  { name: 'Joe', location: 'Warsaw' },
-  D.deleteKeys(['name', 'location']),
+    { name: "Joe", location: "Warsaw" },
+    D.deleteKeys(["name", "location"]),
 ) // → {}
 ```
 
@@ -52,14 +49,14 @@ function filter<T extends Record<string, any>>(predicateFn: (value: T[keyof T]) 
 ```
 
 ```ts
-D.filter({ name: 'Joe', age: 20 }, value => value === 20) // → { age: 20 }
+D.filter({ name: "Joe", age: 20 }, (value) => value === 20) // → { age: 20 }
 pipe(
-  {
-    name: 'Joe',
-    age: 20,
-  },
-  D.filter(value => value === 'Joe'),
-) // → { name: 'Joe' }
+    {
+        name: "Joe",
+        age: 20,
+    },
+    D.filter((value) => value === "Joe"),
+) // → { name: "Joe" }
 ```
 
 ### filterWithKey
@@ -74,17 +71,17 @@ function filterWithKey<T extends Record<string, any>>(predicateFn: (key: keyof T
 
 ```ts
 D.filterWithKey(
-  { name: 'Joe', age: 20 },
-  (key, value) => value === 30 && key === 'age',
+    { name: "Joe", age: 20 },
+    (key, value) => value === 30 && key === "age",
 ) // → {}
 
 pipe(
-  {
-    name: 'Joe',
-    age: 20,
-  },
-  D.filterWithKey((key, _) => key === 'name'),
-) // → { name: 'Joe' }
+    {
+        name: "Joe",
+        age: 20,
+    },
+    D.filterWithKey((key, _) => key === "name"),
+) // → { name: "Joe" }
 ```
 
 ### fromPairs
@@ -98,17 +95,17 @@ function fromPairs<T, K extends string | number>(xs: Array<readonly [K, T]>): Re
 
 ```ts
 D.fromPairs([
-  ['name', 'Joe'],
-  ['location', 'Warsaw'],
-] as const) // → { name: 'Joe', location: 'Warsaw' }
+    ["name", "Joe"],
+    ["location", "Warsaw"],
+] as const) // → { name: "Joe", location: "Warsaw" }
 
 pipe(
-  [
-    ['name', 'Joe'],
-    ['location', 'Warsaw'],
-  ] as const,
-  D.fromPairs,
-) // → { name: 'Joe', location: 'Warsaw' }
+    [
+        ["name", "Joe"],
+        ["location", "Warsaw"],
+    ] as const,
+    D.fromPairs,
+) // → { name: "Joe", location: "Warsaw" }
 ```
 
 ### get
@@ -117,14 +114,14 @@ Returns `Some(value)` if the given key exists, otherwise returns `None`.
 
 
 ```ts
-function get<T, K extends keyof T>(dict: T, key: K): Option<ExtractValue<T[K]>>
-function get<T, K extends keyof T>(key: K): (dict: T) => Option<ExtractValue<T[K]>>
+function get<T, K extends keyof T>(dict: T, key: K): Option<NonNullable<T[K]>>
+function get<T, K extends keyof T>(key: K): (dict: T) => Option<NonNullable<T[K]>>
 ```
 
 ```ts
-D.get({ name: 'Joe', location: 'Warsaw' }, 'location') // → Some('Warsaw')
-pipe({ name: 'Joe', location: 'Warsaw' }, D.get('location')) // → Some('Warsaw')
-pipe([{ name: 'Joe' }, { location: 'Warsaw' }], A.map(D.get('name'))) // → [Some('Joe'), None]
+D.get({ name: "Joe", location: "Warsaw" }, "location") // → Some("Warsaw")
+pipe({ name: "Joe", location: "Warsaw" }, D.get("location")) // → Some("Warsaw")
+pipe([{ name: "Joe" }, { location: "Warsaw" }], A.map(D.get("name"))) // → [Some("Joe"), None]
 ```
 
 ### getUnsafe
@@ -138,12 +135,12 @@ function getUnsafe<T, K extends keyof T>(key: K): (dict: T) => T[K]
 ```
 
 ```ts
-D.getUnsafe({ name: 'Joe', location: 'Warsaw' }, 'location') // → 'Warsaw'
-pipe({ name: 'Joe', location: 'Warsaw' }, D.getUnsafe('location')) // → 'Warsaw'
+D.getUnsafe({ name: "Joe", location: "Warsaw" }, "location") // → "Warsaw"
+pipe({ name: "Joe", location: "Warsaw" }, D.getUnsafe("location")) // → "Warsaw"
 pipe(
-  [{ name: 'Joe' }, { location: 'Warsaw' }],
-  A.map(D.getUnsafe('name')),
-) // → ['Joe', undefined]
+    [{ name: "Joe" }, { location: "Warsaw" }],
+    A.map(D.getUnsafe("name")),
+) // → ["Joe", undefined]
 ```
 
 ### isEmpty
@@ -156,14 +153,14 @@ function isEmpty<T extends Record<string, any>>(dict: T): boolean
 ```
 
 ```ts
-D.isEmpty({ name: 'Joe', age: 20 }) // → false
+D.isEmpty({ name: "Joe", age: 20 }) // → false
 D.isEmpty({}) // → true
 pipe(
-  {
-    name: 'Joe',
-    age: 20,
-  },
-  D.isEmpty,
+    {
+        name: "Joe",
+        age: 20,
+    },
+    D.isEmpty,
 ) // → false
 
 pipe({}, D.isEmpty) // → true
@@ -179,14 +176,14 @@ function isNotEmpty<T extends Record<string, any>>(dict: T): boolean
 ```
 
 ```ts
-D.isNotEmpty({ name: 'Joe', age: 20 }) // → true
+D.isNotEmpty({ name: "Joe", age: 20 }) // → true
 D.isNotEmpty({}) // → false
 pipe(
-  {
-    name: 'Joe',
-    age: 20,
-  },
-  D.isNotEmpty,
+    {
+        name: "Joe",
+        age: 20,
+    },
+    D.isNotEmpty,
 ) // → true
 
 pipe({}, D.isNotEmpty) // → false
@@ -198,22 +195,22 @@ Returns a new array that contains all keys of the provided object.
 
 
 ```ts
-function keys<T extends Record<string, unknown>>(dict: T): Array<keyof T>
+function keys<T extends Record<string, unknown>>(dict: T): Array<`${Extract<keyof T, string | number>}`>
 ```
 
 ```ts
 D.keys({
-  name: 'Joe',
-  age: 20,
-}) // → ['name', 'age']
+    name: "Joe",
+    age: 20,
+}) // → ["name", "age"]
 
 pipe(
-  {
-    name: 'Joe',
-    age: 20,
-  },
-  D.keys,
-) // → ['name', 'age']
+    {
+        name: "Joe",
+        age: 20,
+    },
+    D.keys,
+) // → ["name", "age"]
 ```
 
 ### makeEmpty
@@ -237,19 +234,19 @@ function map<T extends Record<string, any>, R>(mapFn: (value: T[keyof T]) => R):
 
 ```ts
 D.map(
-  {
-    name: 'Joe',
-    location: 'Warsaw',
-  },
-  value => value.length,
+    {
+        name: "Joe",
+        location: "Warsaw",
+    },
+    (value) => value.length,
 ) // → { name: 3, location: 6 }
 
 pipe(
-  {
-    name: 'Joe',
-    location: 'Warsaw',
-  },
-  D.map(value => value.length),
+    {
+        name: "Joe",
+        location: "Warsaw",
+    },
+    D.map((value) => value.length),
 ) // → { name: 3, location: 6 }
 ```
 
@@ -265,20 +262,20 @@ function mapWithKey<T extends Record<string, any>, R>(mapFn: (key: keyof T, valu
 
 ```ts
 D.mapWithKey(
-  {
-    name: 'Joe',
-    location: 'Warsaw',
-  },
-  (key, value) => `${key}-${value.toLowerCase()}`,
-) // → { name: 'name-joe', location: 'location-warsaw' }
+    {
+        name: "Joe",
+        location: "Warsaw",
+    },
+    (key, value) => `${key}-${value.toLowerCase()}`,
+) // → { name: "name-joe", location: "location-warsaw" }
 
 pipe(
-  {
-    name: 'Joe',
-    location: 'Warsaw',
-  },
-  D.mapWithKey((key, value) => `${key}-${value.toLowerCase()}`),
-) // → { name: 'name-joe', location: 'location-warsaw' }
+    {
+        name: "Joe",
+        location: "Warsaw",
+    },
+    D.mapWithKey((key, value) => `${key}-${value.toLowerCase()}`),
+) // → { name: "name-joe", location: "location-warsaw" }
 ```
 
 ### merge
@@ -317,13 +314,13 @@ function reject<T extends Record<string, any>>(predicateFn: (value: T[keyof T]) 
 ```
 
 ```ts
-D.reject({ name: 'Joe', age: 20 }, value => value === 20) // → { name: 'Joe' }
+D.reject({ name: "Joe", age: 20 }, (value) => value === 20) // → { name: "Joe" }
 pipe(
-  {
-    name: 'Joe',
-    age: 20,
-  },
-  D.reject(value => value === 'Joe'),
+    {
+        name: "Joe",
+        age: 20,
+    },
+    D.reject((value) => value === "Joe"),
 ) // → { age: 20 }
 ```
 
@@ -339,16 +336,16 @@ function rejectWithKey<T extends Record<string, any>>(predicateFn: (key: keyof T
 
 ```ts
 D.rejectWithKey(
-  { name: 'Joe', age: 20 },
-  (key, value) => value === 20 && key === 'age',
-) // → { name: 'Joe' }
+    { name: "Joe", age: 20 },
+    (key, value) => value === 20 && key === "age",
+) // → { name: "Joe" }
 
 pipe(
-  {
-    name: 'Joe',
-    age: 20,
-  },
-  D.rejectWithKey((key, _) => key === 'name'),
+    {
+        name: "Joe",
+        age: 20,
+    },
+    D.rejectWithKey((key, _) => key === "name"),
 ) // → { age: 20 }
 ```
 
@@ -363,21 +360,21 @@ function selectKeys<T, K extends keyof T>(keys: ReadonlyArray<K>): (dict: T) => 
 ```
 
 ```ts
-D.selectKeys({ name: 'Joe', location: 'Warsaw', age: 42 }, [
-  'name',
-  'age',
-]) // → { name: 'Joe', age: 42 }
+D.selectKeys({ name: "Joe", location: "Warsaw", age: 42 }, [
+    "name",
+    "age",
+]) // → { name: "Joe", age: 42 }
 
 // ⬇️ const obj: Record<string, string> = { name: 'Joe', location: 'Warsaw' }
-D.selectKeys(obj, ['name', 'age']) // → { name: 'Joe' }
+D.selectKeys(obj, ["name", "age"]) // → { name: "Joe" }
 
 pipe(
-  { name: 'Joe', location: 'Warsaw', age: 42 },
-  D.selectKeys(['name', 'age']),
-) // → { name: 'Joe', age: 42 }
+    { name: "Joe", location: "Warsaw", age: 42 },
+    D.selectKeys(["name", "age"]),
+) // → { name: "Joe", age: 42 }
 
 // ⬇️ const obj: Record<string, string> = { name: 'Joe', location: 'Warsaw' }
-pipe(obj, D.selectKeys(['name', 'age'])) // → { name: 'Joe' }
+pipe(obj, D.selectKeys(["name", "age"])) // → { name: "Joe" }
 ```
 
 ### set
@@ -391,10 +388,10 @@ function set<T, K extends string | number, V>(key: K, value: V): (dict: T) => T 
 ```
 
 ```ts
-D.set({ name: 'Joe', location: 'Warsaw' }, 'location', 'Gdańsk') // → { name: 'Joe', location: 'Gdańsk' }
-D.set({ 0: false, 1: true }, 1, 'abc') // → { 0: false, 1: 'abc' }
-pipe({ name: 'Joe', location: 'Warsaw' }, D.set('location', 'Gdańsk')) // → { name: 'Joe', location: 'Gdańsk' }
-pipe({ 0: false, 1: true }, D.set(1, 'abc')) // → { 0: false, 1: 'abc' }
+D.set({ name: "Joe", location: "Warsaw" }, "location", "Gdańsk") // → { name: "Joe", location: "Gdańsk" }
+D.set({ 0: false, 1: true }, 1, "abc") // → { 0: false, 1: "abc" }
+pipe({ name: "Joe", location: "Warsaw" }, D.set("location", "Gdańsk")) // → { name: "Joe", location: "Gdańsk" }
+pipe({ 0: false, 1: true }, D.set(1, "abc")) // → { 0: false, 1: "abc" }
 ```
 
 ### toPairs
@@ -408,17 +405,23 @@ function toPairs<T, K extends string | number>(dict: Record<K, T>): Array<readon
 
 ```ts
 D.toPairs({
-  name: 'Joe',
-  age: 20,
-}) // → [['name', 'Joe'], ['age', 20]]
+    name: "Joe",
+    age: 20,
+}) // → [
+    ["name", "Joe"],
+    ["age", 20],
+]
 
 pipe(
-  {
-    name: 'Joe',
-    age: 20,
-  },
-  D.toPairs,
-) // → [['name', 'Joe'], ['age', 20]]
+    {
+        name: "Joe",
+        age: 20,
+    },
+    D.toPairs,
+) // → [
+    ["name", "Joe"],
+    ["age", 20],
+]
 ```
 
 ### update
@@ -432,29 +435,29 @@ function update<T, K extends keyof T, R>(key: K, fn: (value: Option<T[K]>) => R)
 ```
 
 ```ts
-D.update({ name: 'Joe', location: 'Warsaw' }, 'name', option =>
-  O.mapWithDefault(option, 'unknown', S.toUpperCase),
-) // → { name: 'JOE', location: 'Warsaw' }
+D.update({ name: "Joe", location: "Warsaw" }, "name", (option) =>
+    O.mapWithDefault(option, "unknown", S.toUpperCase),
+) // → { name: "JOE", location: "Warsaw" }
 
 // ⬇️ const obj: Record<string, string> = { name: 'Joe', location: 'Warsaw' }
-D.update(obj, 'key', option =>
-  O.mapWithDefault(option, 'unknown', S.toUpperCase),
-) // → { name: 'Joe', key: 'unknown', location: 'Warsaw' }
+D.update(obj, "key", (option) =>
+    O.mapWithDefault(option, "unknown", S.toUpperCase),
+) // → { name: "Joe", key: "unknown", location: "Warsaw" }
 
 pipe(
-  { name: 'Joe', location: 'Warsaw' },
-  D.update('name', option =>
-    O.mapWithDefault(option, 'unknown', S.toUpperCase),
-  ),
-) // → { name: 'JOE', location: 'Warsaw' }
+    { name: "Joe", location: "Warsaw" },
+    D.update("name", (option) =>
+        O.mapWithDefault(option, "unknown", S.toUpperCase),
+    ),
+) // → { name: "JOE", location: "Warsaw" }
 
 // ⬇️ const obj: Record<string, string> = { name: 'Joe', location: 'Warsaw' }
 pipe(
-  obj,
-  D.update('key', option =>
-    O.mapWithDefault(option, 'unknown', S.toUpperCase),
-  ),
-) // → { name: 'Joe', key: 'unknown', location: 'Warsaw' }
+    obj,
+    D.update("key", (option) =>
+        O.mapWithDefault(option, "unknown", S.toUpperCase),
+    ),
+) // → { name: "Joe", key: "unknown", location: "Warsaw" }
 ```
 
 ### updateUnsafe
@@ -469,16 +472,16 @@ function updateUnsafe<T, K extends keyof T, R>(key: K, fn: (value: T[K]) => R): 
 
 ```ts
 D.updateUnsafe(
-  { name: 'Joe', location: 'Warsaw' },
-  'name',
-  S.toUpperCase,
-) // → { name: 'JOE', location: 'Warsaw' }
+    { name: "Joe", location: "Warsaw" },
+    "name",
+    S.toUpperCase,
+) // → { name: "JOE", location: "Warsaw" }
 
 D.updateUnsafe({ 0: false, 1: true }, 1, B.inverse) // → { 0: false, 1: false }
 pipe(
-  { name: 'Joe', location: 'Warsaw' },
-  D.updateUnsafe('name', S.toUpperCase),
-) // → { name: 'JOE', location: 'Warsaw' }
+    { name: "Joe", location: "Warsaw" },
+    D.updateUnsafe("name", S.toUpperCase),
+) // → { name: "JOE", location: "Warsaw" }
 
 pipe({ 0: false, 1: true }, D.updateUnsafe(1, B.inverse)) // → { 0: false, 1: false }
 ```
@@ -494,15 +497,15 @@ function values<T extends string | number, R>(dict: Record<T, R>): Array<R>
 
 ```ts
 D.values({
-  name: 'Joe',
-  age: 20,
-}) // → ['Joe', 20]
+    name: "Joe",
+    age: 20,
+}) // → ["Joe", 20]
 
 pipe(
-  {
-    name: 'Joe',
-    age: 20,
-  },
-  D.values,
-) // → ['Joe', 20]
+    {
+        name: "Joe",
+        age: 20,
+    },
+    D.values,
+) // → ["Joe", 20]
 ```

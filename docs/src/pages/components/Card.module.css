@@ -1,39 +1,40 @@
 .card {
-  border: 1px solid var(--ifm-color-gray-200);
-  border-radius: 4px;
-  display: block;
-  cursor: pointer;
-  transition: all .5s;
-  min-height: 175px;
-  color: #111;
+	border: 1px solid var(--ifm-color-gray-200);
+	border-radius: 4px;
+	display: block;
+	cursor: pointer;
+	transition: all .5s;
+	min-height: 175px;
+	color: #111;
 }
 
 @media screen and (max-width: 768px) {
-  .card {
-    min-height: 0;
-  }
+	.card {
+		min-height: 0;
+	}
 }
 
 .card:hover {
-  text-decoration: none;
-  box-shadow: 0 6px 16px -8px #00000014, 0 9px 28px #0000000d, 0 12px 48px 16px #00000008;
-  border-color: transparent;
-  background-color: rgba(255, 255, 255, 0.33);
+	text-decoration: none;
+	box-shadow: 0 6px 16px -8px #00000014, 0 9px 28px #0000000d, 0 12px 48px 16px
+		#00000008;
+	border-color: transparent;
+	background-color: rgba(255, 255, 255, 0.33);
 }
 
 .title {
-  padding: 12px;
-  border-bottom: 1px solid var(--ifm-color-gray-200);
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--ifm-color-gray-700);
-  transition: color .5s;
+	padding: 12px;
+	border-bottom: 1px solid var(--ifm-color-gray-200);
+	font-size: 1rem;
+	font-weight: 500;
+	color: var(--ifm-color-gray-700);
+	transition: color .5s;
 }
 
 .card:hover > .title {
-  color: #000;
+	color: #000;
 }
 
 .body {
-  padding: 12px;
+	padding: 12px;
 }

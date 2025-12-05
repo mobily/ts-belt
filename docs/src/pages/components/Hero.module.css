@@ -1,92 +1,92 @@
 .hero {
-  background-color: unset;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 60vw;
+	background-color: unset;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	max-width: 60vw;
 }
 
 @media screen and (max-width: 768px) {
-  .hero {
-    max-width: 100vh;
-    padding: 0 1rem;
-  }
+	.hero {
+		max-width: 100vh;
+		padding: 0 1rem;
+	}
 }
 
 .container {
-  display: flex;
-  flex-direction: row;
-  justify-content: content;
-  margin-bottom: 1.2rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: content;
+	margin-bottom: 1.2rem;
 }
 
 .title {
-  font-size: 4.4rem;
-  line-height: 100px;
-  color: var(--ifm-color-gray-900);
-  text-align: center;
+	font-size: 4.4rem;
+	line-height: 100px;
+	color: var(--ifm-color-gray-900);
+	text-align: center;
 }
 
 @media screen and (max-width: 992px) {
-  .title {
-    line-height: 80px;
-    font-size: 3.2rem;
-  }
+	.title {
+		line-height: 80px;
+		font-size: 3.2rem;
+	}
 }
 
 @media screen and (max-width: 768px) {
-  .title {
-    line-height: 60px;
-    font-size: 2.4rem;
-  }
+	.title {
+		line-height: 60px;
+		font-size: 2.4rem;
+	}
 }
 
 .logo {
-  height: 100px;
-  margin-right: 20px;
+	height: 100px;
+	margin-right: 20px;
 }
 
 @media screen and (max-width: 992px) {
-  .logo {
-    height: 80px;
-  }
+	.logo {
+		height: 80px;
+	}
 }
 
 @media screen and (max-width: 768px) {
-  .logo {
-    height: 60px;
-    margin-right: 10px;
-  }
+	.logo {
+		height: 60px;
+		margin-right: 10px;
+	}
 }
 
 .summary {
-  color: var(--ifm-color-gray-900);
-  font-size: 1.8rem;
-  line-height: 2.4rem;
-  margin-bottom: 40px;
-  text-align: center;
+	color: var(--ifm-color-gray-900);
+	font-size: 1.8rem;
+	line-height: 2.4rem;
+	margin-bottom: 40px;
+	text-align: center;
 }
 
 @media screen and (max-width: 992px) {
-  .summary {
-    font-size: 1.6rem;
-    line-height: 2rem;
-  }
+	.summary {
+		font-size: 1.6rem;
+		line-height: 2rem;
+	}
 }
 
 @media screen and (max-width: 768px) {
-  .summary {
-    font-size: 1.3rem;
-    line-height: 1.6rem;
-  }
+	.summary {
+		font-size: 1.3rem;
+		line-height: 1.6rem;
+	}
 }
 
 .buttons {
-  display: flex;
+	display: flex;
 }
 
 @media screen and (max-width: 992px) {
-  .buttons {
-    flex-direction: column;
-  }
+	.buttons {
+		flex-direction: column;
+	}
 }

@@ -1,0 +1,259 @@
+### all
+
+
+```ts
+function all<T extends readonly [...AsyncData<any>[]]>(xs: readonly [...T]): AsyncData<TypeOfAsyncDataArray<T>>
+```
+
+### flatMap
+
+Applies a monadic function to the value contained by `Reloading` or `Complete`.
+
+
+```ts
+function flatMap<A, B>(data: AsyncData<A>, mapFn: (value: A) => AsyncData<B>): AsyncData<B>
+function flatMap<A, B>(mapFn: (value: A) => AsyncData<B>): (data: AsyncData<A>) => AsyncData<B>
+```
+
+### fold
+
+
+```ts
+function fold<A, B>(data: AsyncData<A>, notEmptyFn: (value: A) => B, emptyFn: () => B): B
+function fold<A, B>(notEmptyFn: (value: A) => B, emptyFn: () => B): (data: AsyncData<A>) => B
+```
+
+### getComplete
+
+Get `Some(value)` only from the `Complete` state, and `None` in all other cases, including `Reloading`.
+
+
+```ts
+function getComplete<A>(data: AsyncData<A>): Option<A>
+```
+
+### getReloading
+
+Get `Some(value)` only from the `Reloading` state, and `None` in all other cases, including `Complete`.
+
+
+```ts
+function getReloading<A>(data: AsyncData<A>): Option<A>
+```
+
+### getValue
+
+Get `Some(value)` from the `Complete` state if the `AsyncData` is complete, or the last known complete value in `Reloading`.
+
+
+```ts
+function getValue<A>(data: AsyncData<A>): Option<A>
+```
+
+### getWithDefault
+
+Returns a value if the `AsyncData` is either in the `Complete` or `Reloading` state, otherwise, returns `defaultValue`.
+
+
+```ts
+function getWithDefault<A>(data: AsyncData<A>, defaultValue: A): A
+function getWithDefault<A>(defaultValue: A): (data: AsyncData<A>) => A
+```
+
+### isBusy
+
+Checks if the provided `AsyncData` value is working (`Loading` or `Reloading`).
+
+
+```ts
+function isBusy<A>(data: AsyncData<A>): data is Reloading<A> | Loading
+```
+
+### isComplete
+
+Checks if the provided `AsyncData` value is `Complete`.
+
+
+```ts
+function isComplete<A>(data: AsyncData<A>): data is Complete<A>
+```
+
+### isEmpty
+
+Checks if the provided `AsyncData` value is `Init` or `Loading`.
+
+
+```ts
+function isEmpty<A>(data: AsyncData<A>): data is Init | Loading
+```
+
+### isIdle
+
+Checks if the provided `AsyncData` value is not working (`Init` or `Complete`).
+
+
+```ts
+function isIdle<A>(data: AsyncData<A>): data is Init | Complete<A>
+```
+
+### isInit
+
+Checks if the provided `AsyncData` value is `Init`.
+
+
+```ts
+function isInit<A>(data: AsyncData<A>): data is Init
+```
+
+### isLoading
+
+Checks if the provided `AsyncData` value is `Loading`.
+
+
+```ts
+function isLoading<A>(data: AsyncData<A>): data is Loading
+```
+
+### isNotEmpty
+
+Checks if the provided `AsyncData` value is `Reloading` or `Complete`.
+
+
+```ts
+function isNotEmpty<A>(data: AsyncData<A>): data is Reloading<A> | Complete<A>
+```
+
+### isReloading
+
+Checks if the provided `AsyncData` value is `Reloading`.
+
+
+```ts
+function isReloading<A>(data: AsyncData<A>): data is Reloading<A>
+```
+
+### makeComplete
+
+
+```ts
+function makeComplete<T>(value: T): AsyncData<T>
+```
+
+### makeInit
+
+
+```ts
+function makeInit<T>(): AsyncData<T>
+```
+
+### makeLoading
+
+
+```ts
+function makeLoading<T>(): AsyncData<T>
+```
+
+### makeReloading
+
+
+```ts
+function makeReloading<T>(value: T): AsyncData<T>
+```
+
+### map
+
+Maps a pure function over the value contained by `Reloading` or `Complete`.
+
+
+```ts
+function map<A, B>(data: AsyncData<A>, mapFn: (value: A) => B): AsyncData<B>
+function map<A, B>(mapFn: (value: A) => B): (data: AsyncData<A>) => AsyncData<B>
+```
+
+### mapWithDefault
+
+Maps the `AsyncData` into a new value by providing a strict value to use when there is no data, or function to handle when there is data.
+
+
+```ts
+function mapWithDefault<A, B>(data: AsyncData<A>, defaultValue: B, mapFn: (value: A) => B): B
+function mapWithDefault<A, B>(defaultValue: B, mapFn: (value: A) => B): (data: AsyncData<A>) => B
+```
+
+### tapComplete
+
+Applies a side effect function if the value is `Complete`.
+
+
+```ts
+function tapComplete<A>(data: AsyncData<A>, completeFn: (value: A) => void): AsyncData<A>
+function tapComplete<A>(completeFn: (value: A) => void): (data: AsyncData<A>) => AsyncData<A>
+```
+
+### tapEmpty
+
+Applies a side effect function if the value is `Init` or `Loading`.
+
+
+```ts
+function tapEmpty<A>(data: AsyncData<A>, emptyFn: () => void): AsyncData<A>
+function tapEmpty<A>(emptyFn: () => void): (data: AsyncData<A>) => AsyncData<A>
+```
+
+### tapInit
+
+Applies a side effect function if the value is `Init`.
+
+
+```ts
+function tapInit<A>(data: AsyncData<A>, initFn: () => void): AsyncData<A>
+function tapInit<A>(initFn: () => void): (data: AsyncData<A>) => AsyncData<A>
+```
+
+### tapLoading
+
+Applies a side effect function if the value is `Loading`.
+
+
+```ts
+function tapLoading<A>(data: AsyncData<A>, loadingFn: () => void): AsyncData<A>
+function tapLoading<A>(loadingFn: () => void): (data: AsyncData<A>) => AsyncData<A>
+```
+
+### tapNotEmpty
+
+Applies a side effect function if the value is `Reloading` or `Complete`.
+
+
+```ts
+function tapNotEmpty<A>(data: AsyncData<A>, notEmptyFn: (value: A) => void): AsyncData<A>
+function tapNotEmpty<A>(notEmptyFn: (value: A) => void): (data: AsyncData<A>) => AsyncData<A>
+```
+
+### tapReloading
+
+Applies a side effect function if the value is `Reloading`.
+
+
+```ts
+function tapReloading<A>(data: AsyncData<A>, reloadingFn: (value: A) => void): AsyncData<A>
+function tapReloading<A>(reloadingFn: (value: A) => void): (data: AsyncData<A>) => AsyncData<A>
+```
+
+### toBusy
+
+Creates a new `AsyncData` by transitioning the given `AsyncData` into a busy state (`Loading` or `Reloading`), and carrying over the internal data if available.
+
+
+```ts
+function toBusy<A>(data: AsyncData<A>): AsyncData<A>
+```
+
+### toIdle
+
+Creates a new `AsyncData` by transitioning the given `AsyncData` into an idle state (`Init` or `Complete`), and carrying over the internal data if available.
+
+
+```ts
+function toIdle<A>(data: AsyncData<A>): AsyncData<A>
+```

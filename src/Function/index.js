@@ -1,1 +1,1 @@
-export * from './Function.bs.js'
+export * from "./Function.bs.js";

@@ -1,36 +1,30 @@
 {
-  "compilerOptions": {
-    "forceConsistentCasingInFileNames": true,
-    "emitDeclarationOnly": true,
-    "rootDir": "./src",
-    "baseUrl": ".",
-    "lib": ["esnext"],
-    "declaration": true,
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "target": "esnext",
-    "strict": true,
-    "sourceMap": false,
-    "pretty": true,
-    "skipLibCheck": true,
-    "noImplicitAny": true,
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    "exactOptionalPropertyTypes": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitOverride": true,
-    "noImplicitReturns": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noUncheckedIndexedAccess": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true
-  },
-  "include": [
-    "./__tests__/**/*",
-    "./playground/*.ts",
-    "./src/**/index.ts"
-  ],
-  "exclude": [
-    "./src/**/*.gen.tsx"
-  ]
+	"compilerOptions": {
+		"forceConsistentCasingInFileNames": true,
+		"emitDeclarationOnly": true,
+		"rootDir": "./src",
+		"baseUrl": ".",
+		"lib": ["esnext"],
+		"declaration": true,
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"target": "esnext",
+		"strict": true,
+		"sourceMap": false,
+		"pretty": true,
+		"skipLibCheck": true,
+		"noImplicitAny": true,
+		"allowUnreachableCode": false,
+		"allowUnusedLabels": false,
+		"exactOptionalPropertyTypes": true,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitOverride": true,
+		"noImplicitReturns": true,
+		"noPropertyAccessFromIndexSignature": true,
+		"noUncheckedIndexedAccess": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true
+	},
+	"include": ["./__tests__/**/*", "./playground/*.ts", "./src/**/index.ts"],
+	"exclude": ["./src/**/*.gen.tsx"]
 }

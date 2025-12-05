@@ -39,12 +39,12 @@ export declare function modulo(a: number, b: number): number
 /** Returns the quotient and remainder of a number division. */
 
 export declare function divideWithModulo(
-  b: number,
+	b: number,
 ): (a: number) => readonly [number, number]
 
 export declare function divideWithModulo(
-  a: number,
-  b: number,
+	a: number,
+	b: number,
 ): readonly [number, number]
 
 /** Returns `true` if the first argument is greater than second argument. Otherwise it returns `false` */

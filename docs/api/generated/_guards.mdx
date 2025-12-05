@@ -2,19 +2,19 @@
 
 
 ```ts
-function isArray<A>(value: A | ReadonlyArray<unknown>): value is GuardArray<A>
+function isArray<A>(value: A | ReadonlyArray<unknown>): value is ArrayGuard<A>
 ```
 
 ```ts
 G.isArray([1, 2, 3]) // → true
-pipe(['hello', 'world'], G.isArray) // → true
+pipe(["hello", "world"], G.isArray) // → true
 ```
 
 ### isBoolean
 
 
 ```ts
-function isBoolean<A>(value: A | boolean): value is GuardValue<A, boolean>
+function isBoolean<A>(value: A | boolean): value is Guard<A, boolean>
 ```
 
 ```ts
@@ -38,19 +38,19 @@ pipe(new Date(), G.isDate) // → true
 
 
 ```ts
-function isError<A>(value: A | Error): value is GuardValue<A, Error>
+function isError<A>(value: A | globalThis.Error): value is Guard<A, globalThis.Error>
 ```
 
 ```ts
-G.isError(new Error('oops!')) // → true
-pipe(new Error('oops!'), G.isError) // → true
+G.isError(new Error("oops!")) // → true
+pipe(new Error("oops!"), G.isError) // → true
 ```
 
 ### isFunction
 
 
 ```ts
-function isFunction<A>(value: A | Function): value is GuardValue<A, Function>
+function isFunction<A>(value: A | Function): value is Guard<A, Function>
 ```
 
 ```ts
@@ -72,7 +72,7 @@ function isNot<A>(predicateFn: (value: A) => any): (value: A) => boolean
 // ⬇️ const isNotString = G.isNot(G.isString)
 isNotString(0) // → true
 
-pipe('ts-belt', G.isNot(G.isString)) // → false
+pipe("ts-belt", G.isNot(G.isString)) // → false
 ```
 
 ### isNotNullable
@@ -83,7 +83,7 @@ function isNotNullable<A>(value: A): value is NonNullable<A>
 ```
 
 ```ts
-G.isNotNullable('ts-belt') // → true
+G.isNotNullable("ts-belt") // → true
 G.isNotNullable(null) // → false
 pipe(0, G.isNotNullable) // → true
 pipe(undefined, G.isNotNullable) // → false
@@ -117,7 +117,7 @@ pipe(undefined, G.isNullable) // → true
 
 
 ```ts
-function isNumber<A>(value: A | number): value is GuardValue<A, number>
+function isNumber<A>(value: A | number): value is Guard<A, number>
 ```
 
 ```ts
@@ -129,7 +129,7 @@ pipe(3, G.isNumber) // → true
 
 
 ```ts
-function isObject<A>(value: A | object): value is GuardObject<A>
+function isObject<A>(value: A | object): value is ObjectGuard<A>
 ```
 
 ```ts
@@ -141,7 +141,7 @@ pipe({}, G.isObject) // → true
 
 
 ```ts
-function isPromise<A>(value: A | Promise<unknown>): value is GuardPromise<A>
+function isPromise<A>(value: A | Promise<unknown>): value is PromiseGuard<A>
 ```
 
 ```ts
@@ -153,12 +153,12 @@ pipe(Promise.resolve(1), G.isPromise) // → true
 
 
 ```ts
-function isString<A>(value: A | string): value is GuardValue<A, string>
+function isString<A>(value: A | string): value is Guard<A, string>
 ```
 
 ```ts
-G.isString('ts') // → true
-pipe('belt', G.isString) // → true
+G.isString("ts") // → true
+pipe("belt", G.isString) // → true
 ```
 
 ### isUndefined
