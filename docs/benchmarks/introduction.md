@@ -24,23 +24,23 @@ git clone https://github.com/mobily/ts-belt.git
 Install all dependencies and build `ts-belt`:
 
 ```bash
-yarn
-yarn build dist -t
+bun
+bun build dist -t
 ```
 
 Go to the `benchmarks` directory and install all dependencies as well:
 
 ```bash
 cd ./benchmarks
-yarn
+bun
 ```
 
 Then, run the following command in order to run benchmark suites:
 
 ```bash
-yarn start
+bun start
 # or
-yarn generate # if you want to generate a markdown file
+bun generate # if you want to generate a markdown file
 ```
 
 :::info

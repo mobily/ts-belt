@@ -36,6 +36,14 @@ Returns a function that always returns the provided value.
 function always<A>(value: A): () => A
 ```
 
+### andThen
+
+
+```ts
+function andThen<A, B>(value: A, fn: (value: A) => B): B
+function andThen<A, B>(fn: (value: A) => B): (value: A) => B
+```
+
 ### anyPass
 
 Determines whether at least one of the provided predicate returns `true` for the given value.
@@ -105,7 +113,7 @@ function defaultTo<A, B extends NonNullable<A>>(defaultValue: B): (value: A) => 
 ```
 
 ```ts
-F.defaultTo(nullable, 'default') // → 'default'
+F.defaultTo(nullable, "default") // → "default"
 pipe(2, F.defaultTo(1)) // → 2
 ```
 
@@ -133,7 +141,7 @@ function equals(): boolean
 
 ```ts
 F.equals([1, [2]], [1, [2]]) // → true
-pipe({ name: 'Joe' }, F.equals({ name: 'John' })) // → false
+pipe({ name: "Joe" }, F.equals({ name: "John" })) // → false
 ```
 
 ### falsy
@@ -224,8 +232,8 @@ function memoizeWithKey<A extends any[], B>(makeKeyFn: (...args: A) => string, f
 ```ts
 let calls = 0
 const makeArray = F.memoizeWithKey(S.make, (value: number) => {
-  calls = calls + 1
-  return A.makeWithIndex(value, index => index * 2)
+calls = calls + 1
+return A.makeWithIndex(value, index => index * 2)
 })
 
 makeArray(4) // → [0, 2, 4, 6]
@@ -265,9 +273,9 @@ function tap<A>(fn: (_1: A) => void): (value: A) => A
 
 ```ts
 pipe(
-  A.makeWithIndex(3, N.succ),
-  F.tap(xs => console.log(xs)),
-  A.map(value => value * 2),
+    A.makeWithIndex(3, N.succ),
+    F.tap((xs) => console.log(xs)),
+    A.map((value) => value * 2),
 ) // → [2, 4, 6]
 ```
 
@@ -305,23 +313,23 @@ Takes a function, which is called in the `try/catch` block, and returns the `Res
 
 
 ```ts
-function tryCatch<A, B>(value: A, fn: (value: A) => B): Result<B, string>
-function tryCatch<A, B>(fn: (value: A) => B): (value: A) => Result<B, string>
+function tryCatch<A, B>(value: A, fn: (value: A) => B): Result<B, globalThis.Error>
+function tryCatch<A, B>(fn: (value: A) => B): (value: A) => Result<B, globalThis.Error>
 ```
 
 ```ts
 type User = {
-  readonly prop: string
+readonly prop: string
 }
 
 F.tryCatch('{"name": "Joe"}', JSON.parse) // → Ok({ name: 'Joe' })
 
-F.tryCatch('<>', JSON.parse) // → Error('Unexpected token < in JSON at position 0')
+F.tryCatch('<>', JSON.parse) // → R.Error(new Error(`Unexpected token '<', "<>" is not valid JSON`))
 pipe(
-  '{"name": "Joe"}',
-  F.tryCatch<string, User>(JSON.parse),
-  R.map(user => user.name),
-  R.getWithDefault('oops'),
+    '{"name": "Joe"}',
+    F.tryCatch<string, User>(JSON.parse),
+    R.map(user => user.name),
+    R.getWithDefault('oops'),
 ) // → 'Joe'
 
 pipe('<>', F.tryCatch(JSON.parse), R.toOption, O.getWithDefault('oops')) // → 'oops'
@@ -339,18 +347,18 @@ function unless<A, B>(predicateFn: (value: A) => boolean, falsyFn: (value: A) =>
 
 ```ts
 F.unless(
-  'ts',
-  value => value.length > 2,
-  value => `${value}-belt`,
-) // → 'ts-belt'
+    "ts",
+    (value) => value.length > 2,
+    (value) => `${value}-belt`,
+) // → "ts-belt"
 
 pipe(
-  'ts',
-  F.unless(
-    value => value.length > 0,
-    value => `${value}-belt`,
-  ),
-) // → 'ts'
+    "ts",
+    F.unless(
+        (value) => value.length > 0,
+        (value) => `${value}-belt`,
+    ),
+) // → "ts"
 ```
 
 ### when
@@ -365,16 +373,16 @@ function when<A, B>(predicateFn: (value: A) => boolean, truthyFn: (value: A) => 
 
 ```ts
 F.when(
-  'ts',
-  value => value.length > 1,
-  value => `${value}-belt`,
-) // → 'ts-belt'
+    "ts",
+    (value) => value.length > 1,
+    (value) => `${value}-belt`,
+) // → "ts-belt"
 
 pipe(
-  'ts',
-  F.when(
-    value => value.length > 2,
-    value => `${value}-belt`,
-  ),
-) // → 'ts'
+    "ts",
+    F.when(
+        (value) => value.length > 2,
+        (value) => `${value}-belt`,
+    ),
+) // → "ts"
 ```

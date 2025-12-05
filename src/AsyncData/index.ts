@@ -2,26 +2,26 @@ import { Option } from '../Option'
 export declare type Init = 0 & { __: 'Init' }
 export declare type Loading = 1 & { __: 'Loading' }
 export declare type Reloading<T> = {
-  readonly TAG: 0
-  readonly _0: T
+	readonly TAG: 0
+	readonly _0: T
 } & { __: 'Reloading' }
 export declare type Complete<T> = {
-  readonly TAG: 1
-  readonly _0: T
+	readonly TAG: 1
+	readonly _0: T
 } & { __: 'Complete' }
 
 export declare type AsyncData<T> = Init | Loading | Reloading<T> | Complete<T>
 
 export declare type TypeOfAsyncData<T> = T extends
-  | Reloading<infer U>
-  | Complete<infer U>
-  ? U
-  : never
+	| Reloading<infer U>
+	| Complete<infer U>
+	? U
+	: never
 
 export declare type TypeOfAsyncDataArray<T extends readonly [...any[]]> =
-  T extends [infer Head, ...infer Tail]
-    ? readonly [TypeOfAsyncData<Head>, ...TypeOfAsyncDataArray<Tail>]
-    : readonly []
+	T extends [infer Head, ...infer Tail]
+		? readonly [TypeOfAsyncData<Head>, ...TypeOfAsyncDataArray<Tail>]
+		: readonly []
 
 export declare const Init: Init
 export declare const Loading: Loading
@@ -52,13 +52,13 @@ export declare function isComplete<A>(data: AsyncData<A>): data is Complete<A>
 /** Checks if the provided `AsyncData` value is working (`Loading` or `Reloading`). */
 
 export declare function isBusy<A>(
-  data: AsyncData<A>,
+	data: AsyncData<A>,
 ): data is Reloading<A> | Loading
 
 /** Checks if the provided `AsyncData` value is not working (`Init` or `Complete`). */
 
 export declare function isIdle<A>(
-  data: AsyncData<A>,
+	data: AsyncData<A>,
 ): data is Init | Complete<A>
 
 /** Checks if the provided `AsyncData` value is `Init` or `Loading`. */
@@ -68,7 +68,7 @@ export declare function isEmpty<A>(data: AsyncData<A>): data is Init | Loading
 /** Checks if the provided `AsyncData` value is `Reloading` or `Complete`. */
 
 export declare function isNotEmpty<A>(
-  data: AsyncData<A>,
+	data: AsyncData<A>,
 ): data is Reloading<A> | Complete<A>
 
 /** Creates a new `AsyncData` by transitioning the given `AsyncData` into a busy state (`Loading` or `Reloading`), and carrying over the internal data if available. */
@@ -86,12 +86,12 @@ export declare function getValue<A>(data: AsyncData<A>): Option<A>
 /** Returns a value if the `AsyncData` is either in the `Complete` or `Reloading` state, otherwise, returns `defaultValue`. */
 
 export declare function getWithDefault<A>(
-  data: AsyncData<A>,
-  defaultValue: A,
+	data: AsyncData<A>,
+	defaultValue: A,
 ): A
 
 export declare function getWithDefault<A>(
-  defaultValue: A,
+	defaultValue: A,
 ): (data: AsyncData<A>) => A
 
 /** Get `Some(value)` only from the `Reloading` state, and `None` in all other cases, including `Complete`. */
@@ -105,112 +105,112 @@ export declare function getComplete<A>(data: AsyncData<A>): Option<A>
 /** Maps a pure function over the value contained by `Reloading` or `Complete`. */
 
 export declare function map<A, B>(
-  data: AsyncData<A>,
-  mapFn: (value: A) => B,
+	data: AsyncData<A>,
+	mapFn: (value: A) => B,
 ): AsyncData<B>
 
 export declare function map<A, B>(
-  mapFn: (value: A) => B,
+	mapFn: (value: A) => B,
 ): (data: AsyncData<A>) => AsyncData<B>
 
 /** Maps the `AsyncData` into a new value by providing a strict value to use when there is no data, or function to handle when there is data. */
 
 export declare function mapWithDefault<A, B>(
-  data: AsyncData<A>,
-  defaultValue: B,
-  mapFn: (value: A) => B,
+	data: AsyncData<A>,
+	defaultValue: B,
+	mapFn: (value: A) => B,
 ): B
 
 export declare function mapWithDefault<A, B>(
-  defaultValue: B,
-  mapFn: (value: A) => B,
+	defaultValue: B,
+	mapFn: (value: A) => B,
 ): (data: AsyncData<A>) => B
 
 /** Applies a monadic function to the value contained by `Reloading` or `Complete`. */
 
 export declare function flatMap<A, B>(
-  data: AsyncData<A>,
-  mapFn: (value: A) => AsyncData<B>,
+	data: AsyncData<A>,
+	mapFn: (value: A) => AsyncData<B>,
 ): AsyncData<B>
 
 export declare function flatMap<A, B>(
-  mapFn: (value: A) => AsyncData<B>,
+	mapFn: (value: A) => AsyncData<B>,
 ): (data: AsyncData<A>) => AsyncData<B>
 
 /** Applies a side effect function if the value is `Init`. */
 
 export declare function tapInit<A>(
-  data: AsyncData<A>,
-  initFn: () => void,
+	data: AsyncData<A>,
+	initFn: () => void,
 ): AsyncData<A>
 
 export declare function tapInit<A>(
-  initFn: () => void,
+	initFn: () => void,
 ): (data: AsyncData<A>) => AsyncData<A>
 
 /** Applies a side effect function if the value is `Loading`. */
 
 export declare function tapLoading<A>(
-  data: AsyncData<A>,
-  loadingFn: () => void,
+	data: AsyncData<A>,
+	loadingFn: () => void,
 ): AsyncData<A>
 
 export declare function tapLoading<A>(
-  loadingFn: () => void,
+	loadingFn: () => void,
 ): (data: AsyncData<A>) => AsyncData<A>
 
 /** Applies a side effect function if the value is `Reloading`. */
 
 export declare function tapReloading<A>(
-  data: AsyncData<A>,
-  reloadingFn: (value: A) => void,
+	data: AsyncData<A>,
+	reloadingFn: (value: A) => void,
 ): AsyncData<A>
 
 export declare function tapReloading<A>(
-  reloadingFn: (value: A) => void,
+	reloadingFn: (value: A) => void,
 ): (data: AsyncData<A>) => AsyncData<A>
 
 /** Applies a side effect function if the value is `Complete`. */
 
 export declare function tapComplete<A>(
-  data: AsyncData<A>,
-  completeFn: (value: A) => void,
+	data: AsyncData<A>,
+	completeFn: (value: A) => void,
 ): AsyncData<A>
 
 export declare function tapComplete<A>(
-  completeFn: (value: A) => void,
+	completeFn: (value: A) => void,
 ): (data: AsyncData<A>) => AsyncData<A>
 
 /** Applies a side effect function if the value is `Init` or `Loading`. */
 
 export declare function tapEmpty<A>(
-  data: AsyncData<A>,
-  emptyFn: () => void,
+	data: AsyncData<A>,
+	emptyFn: () => void,
 ): AsyncData<A>
 
 export declare function tapEmpty<A>(
-  emptyFn: () => void,
+	emptyFn: () => void,
 ): (data: AsyncData<A>) => AsyncData<A>
 
 /** Applies a side effect function if the value is `Reloading` or `Complete`. */
 
 export declare function tapNotEmpty<A>(
-  data: AsyncData<A>,
-  notEmptyFn: (value: A) => void,
+	data: AsyncData<A>,
+	notEmptyFn: (value: A) => void,
 ): AsyncData<A>
 
 export declare function tapNotEmpty<A>(
-  notEmptyFn: (value: A) => void,
+	notEmptyFn: (value: A) => void,
 ): (data: AsyncData<A>) => AsyncData<A>
 export declare function all<T extends readonly [...AsyncData<any>[]]>(
-  xs: readonly [...T],
+	xs: readonly [...T],
 ): AsyncData<TypeOfAsyncDataArray<T>>
 export declare function fold<A, B>(
-  data: AsyncData<A>,
-  notEmptyFn: (value: A) => B,
-  emptyFn: () => B,
+	data: AsyncData<A>,
+	notEmptyFn: (value: A) => B,
+	emptyFn: () => B,
 ): B
 export declare function fold<A, B>(
-  notEmptyFn: (value: A) => B,
-  emptyFn: () => B,
+	notEmptyFn: (value: A) => B,
+	emptyFn: () => B,
 ): (data: AsyncData<A>) => B

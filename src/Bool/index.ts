@@ -1,14 +1,14 @@
 /** Folds a boolean value into a value of a different type, using a function for the `true` and `false` cases. */
 
 export declare function ifElse<A>(
-  value: boolean,
-  truthyFn: () => A,
-  falsyFn: () => A,
+	value: boolean,
+	truthyFn: () => A,
+	falsyFn: () => A,
 ): A
 
 export declare function ifElse<A>(
-  truthyFn: () => A,
-  falsyFn: () => A,
+	truthyFn: () => A,
+	falsyFn: () => A,
 ): (value: boolean) => A
 
 /** Negates the given boolean. */

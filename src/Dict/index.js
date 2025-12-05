@@ -1,1 +1,1 @@
-export * from './Dict.bs.js'
+export * from "./Dict.bs.js";

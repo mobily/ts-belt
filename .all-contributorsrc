@@ -1,134 +1,96 @@
 {
-  "projectName": "ts-belt",
-  "projectOwner": "mobily",
-  "repoType": "github",
-  "repoHost": "https://github.com",
-  "files": [
-    "README.md"
-  ],
-  "imageSize": 100,
-  "commit": false,
-  "contributors": [
-    {
-      "login": "mobily",
-      "name": "Marcin Dziewulski",
-      "avatar_url": "https://avatars1.githubusercontent.com/u/1467712?v=4",
-      "profile": "https://twitter.com/__marcin_",
-      "contributions": [
-        "code",
-        "doc",
-        "test",
-        "design",
-        "maintenance"
-      ]
-    },
-    {
-      "login": "foull",
-      "name": "Krzysztof Lenda",
-      "avatar_url": "https://avatars.githubusercontent.com/u/902819?v=4",
-      "profile": "http://github.com/foull",
-      "contributions": [
-        "doc"
-      ]
-    },
-    {
-      "login": "panr",
-      "name": "Radek Kozieł",
-      "avatar_url": "https://avatars.githubusercontent.com/u/1303365?v=4",
-      "profile": "https://github.com/panr",
-      "contributions": [
-        "doc"
-      ]
-    },
-    {
-      "login": "Fortidude",
-      "name": "Artur",
-      "avatar_url": "https://avatars.githubusercontent.com/u/8781462?v=4",
-      "profile": "https://github.com/Fortidude",
-      "contributions": [
-        "doc"
-      ]
-    },
-    {
-      "login": "domeknn",
-      "name": "Dominik Łopaciński",
-      "avatar_url": "https://avatars.githubusercontent.com/u/9402280?v=4",
-      "profile": "https://github.com/domeknn",
-      "contributions": [
-        "code",
-        "doc",
-        "test"
-      ]
-    },
-    {
-      "login": "Eghizio",
-      "name": "Jakub Wąsik",
-      "avatar_url": "https://avatars.githubusercontent.com/u/32049761?v=4",
-      "profile": "https://github.com/Eghizio",
-      "contributions": [
-        "doc"
-      ]
-    },
-    {
-      "login": "Dilven",
-      "name": "Krystian Mateusiak",
-      "avatar_url": "https://avatars.githubusercontent.com/u/26671751?v=4",
-      "profile": "https://github.com/Dilven",
-      "contributions": [
-        "code",
-        "doc",
-        "test"
-      ]
-    },
-    {
-      "login": "mmiszy",
-      "name": "Michał Miszczyszyn",
-      "avatar_url": "https://avatars.githubusercontent.com/u/1338731?v=4",
-      "profile": "https://typeofweb.com/",
-      "contributions": [
-        "ideas"
-      ]
-    },
-    {
-      "login": "remnantkevin",
-      "name": "Kevin",
-      "avatar_url": "https://avatars.githubusercontent.com/u/8270635?v=4",
-      "profile": "https://github.com/remnantkevin",
-      "contributions": [
-        "doc"
-      ]
-    },
-    {
-      "login": "anthony-khong",
-      "name": "Anthony Khong",
-      "avatar_url": "https://avatars.githubusercontent.com/u/12151757?v=4",
-      "profile": "https://github.com/anthony-khong",
-      "contributions": [
-        "code",
-        "doc",
-        "test"
-      ]
-    },
-    {
-      "login": "Pyrolistical",
-      "name": "Pyrolistical",
-      "avatar_url": "https://avatars.githubusercontent.com/u/463642?v=4",
-      "profile": "http://pyrolistical.github.com/",
-      "contributions": [
-        "doc",
-        "maintenance",
-        "ideas"
-      ]
-    },
-    {
-      "login": "zoontek",
-      "name": "Mathieu Acthernoene",
-      "avatar_url": "https://avatars.githubusercontent.com/u/1902323?v=4",
-      "profile": "https://zoontek.me/",
-      "contributions": [
-        "ideas"
-      ]
-    }
-  ],
-  "commitConvention": "none"
+	"projectName": "ts-belt",
+	"projectOwner": "mobily",
+	"repoType": "github",
+	"repoHost": "https://github.com",
+	"files": ["README.md"],
+	"imageSize": 100,
+	"commit": false,
+	"contributors": [
+		{
+			"login": "mobily",
+			"name": "Marcin Dziewulski",
+			"avatar_url": "https://avatars1.githubusercontent.com/u/1467712?v=4",
+			"profile": "https://twitter.com/__marcin_",
+			"contributions": ["code", "doc", "test", "design", "maintenance"]
+		},
+		{
+			"login": "foull",
+			"name": "Krzysztof Lenda",
+			"avatar_url": "https://avatars.githubusercontent.com/u/902819?v=4",
+			"profile": "http://github.com/foull",
+			"contributions": ["doc"]
+		},
+		{
+			"login": "panr",
+			"name": "Radek Kozieł",
+			"avatar_url": "https://avatars.githubusercontent.com/u/1303365?v=4",
+			"profile": "https://github.com/panr",
+			"contributions": ["doc"]
+		},
+		{
+			"login": "Fortidude",
+			"name": "Artur",
+			"avatar_url": "https://avatars.githubusercontent.com/u/8781462?v=4",
+			"profile": "https://github.com/Fortidude",
+			"contributions": ["doc"]
+		},
+		{
+			"login": "domeknn",
+			"name": "Dominik Łopaciński",
+			"avatar_url": "https://avatars.githubusercontent.com/u/9402280?v=4",
+			"profile": "https://github.com/domeknn",
+			"contributions": ["code", "doc", "test"]
+		},
+		{
+			"login": "Eghizio",
+			"name": "Jakub Wąsik",
+			"avatar_url": "https://avatars.githubusercontent.com/u/32049761?v=4",
+			"profile": "https://github.com/Eghizio",
+			"contributions": ["doc"]
+		},
+		{
+			"login": "Dilven",
+			"name": "Krystian Mateusiak",
+			"avatar_url": "https://avatars.githubusercontent.com/u/26671751?v=4",
+			"profile": "https://github.com/Dilven",
+			"contributions": ["code", "doc", "test"]
+		},
+		{
+			"login": "mmiszy",
+			"name": "Michał Miszczyszyn",
+			"avatar_url": "https://avatars.githubusercontent.com/u/1338731?v=4",
+			"profile": "https://typeofweb.com/",
+			"contributions": ["ideas"]
+		},
+		{
+			"login": "remnantkevin",
+			"name": "Kevin",
+			"avatar_url": "https://avatars.githubusercontent.com/u/8270635?v=4",
+			"profile": "https://github.com/remnantkevin",
+			"contributions": ["doc"]
+		},
+		{
+			"login": "anthony-khong",
+			"name": "Anthony Khong",
+			"avatar_url": "https://avatars.githubusercontent.com/u/12151757?v=4",
+			"profile": "https://github.com/anthony-khong",
+			"contributions": ["code", "doc", "test"]
+		},
+		{
+			"login": "Pyrolistical",
+			"name": "Pyrolistical",
+			"avatar_url": "https://avatars.githubusercontent.com/u/463642?v=4",
+			"profile": "http://pyrolistical.github.com/",
+			"contributions": ["doc", "maintenance", "ideas"]
+		},
+		{
+			"login": "zoontek",
+			"name": "Mathieu Acthernoene",
+			"avatar_url": "https://avatars.githubusercontent.com/u/1902323?v=4",
+			"profile": "https://zoontek.me/",
+			"contributions": ["ideas"]
+		}
+	],
+	"commitConvention": "none"
 }

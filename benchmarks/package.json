@@ -15,8 +15,8 @@
   "dependencies": {
     "list": "^2.0.19",
     "lodash": "^4.17.21",
-    "rambda": "^6.9.0",
-    "ramda": "^0.27.1",
-    "remeda": "^0.0.32"
+    "rambda": "^9.2.0",
+    "ramda": "^0.30.0",
+    "remeda": "^1.61.0"
   }
 }

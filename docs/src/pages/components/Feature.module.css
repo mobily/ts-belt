@@ -1,15 +1,15 @@
 .feature {
-  font-size: 1.3rem;
-  line-height: 2rem;
-  color: var(--ifm-color-gray-700);
+	font-size: 1.3rem;
+	line-height: 2rem;
+	color: var(--ifm-color-gray-700);
 }
 
 @media screen and (max-width: 992px) {
-  .feature {
-    font-size: 1.2rem;
-  }
+	.feature {
+		font-size: 1.2rem;
+	}
 }
 
 .feature > strong {
-  color: #000;
+	color: #000;
 }

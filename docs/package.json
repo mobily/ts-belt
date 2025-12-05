@@ -1,28 +1,28 @@
 {
-  "name": "ts-belt-docs",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "docusaurus": "docusaurus",
-    "dev": "docusaurus start",
-    "build": "docusaurus build",
-    "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy",
-    "serve": "docusaurus serve",
-    "clear": "docusaurus clear"
-  },
-  "dependencies": {
-    "@docusaurus/core": "^2.0.0-beta.10",
-    "@docusaurus/preset-classic": "^2.0.0-beta.10",
-    "@docusaurus/theme-live-codeblock": "^2.0.0-beta.10",
-    "@easyops-cn/docusaurus-search-local": "^0.20.0",
-    "@mdx-js/react": "^1.6.21",
-    "@svgr/webpack": "^5.5.0",
-    "clsx": "^1.1.1",
-    "file-loader": "^6.2.0",
-    "prism-react-renderer": "^1.2.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "url-loader": "^4.1.1"
-  }
+	"name": "ts-belt-docs",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"docusaurus": "docusaurus",
+		"dev": "docusaurus start",
+		"build": "docusaurus build",
+		"swizzle": "docusaurus swizzle",
+		"deploy": "docusaurus deploy",
+		"serve": "docusaurus serve",
+		"clear": "docusaurus clear"
+	},
+	"dependencies": {
+		"@docusaurus/core": "^2.0.0-beta.10",
+		"@docusaurus/preset-classic": "^2.0.0-beta.10",
+		"@docusaurus/theme-live-codeblock": "^2.0.0-beta.10",
+		"@easyops-cn/docusaurus-search-local": "^0.20.0",
+		"@mdx-js/react": "^1.6.21",
+		"@svgr/webpack": "^5.5.0",
+		"clsx": "^1.1.1",
+		"file-loader": "^6.2.0",
+		"prism-react-renderer": "^1.2.1",
+		"react": "^17.0.1",
+		"react-dom": "^17.0.1",
+		"url-loader": "^4.1.1"
+	}
 }

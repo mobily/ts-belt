@@ -1,36 +1,26 @@
 {
-  "name": "comment-ppx",
-  "version": "0.1.0",
-  "esy": {
-    "buildsInSource": "_build",
-    "build": "dune build -p comment-ppx",
-    "buildDev": [
-      [
-        "dune",
-        "build",
-        "--promote-install-files",
-        "--root",
-        "."
-      ]
-    ],
-    "release": {
-      "bin": [
-        "bin"
-      ]
-    }
-  },
-  "devDependencies": {
-    "ocaml": "~4.10.0",
-    "@esy-ocaml/reason": "^3.6.2",
-    "@opam/dune": ">=2.8.4",
-    "@opam/ppxlib": "0.22.0",
-    "@reason-native/rely": "^3.2.1",
-    "@opam/ocaml-lsp-server": "1.4.1"
-  },
-  "scripts": {
-    "build": "esy dune build -p comment-ppx",
-    "dev": "esy build dune build -p comment-ppx",
-    "format": "esy dune build @fmt --auto-promote",
-    "utop": "esy dune utop lib -- -implicit-bindings"
-  }
+	"name": "comment-ppx",
+	"version": "0.1.0",
+	"esy": {
+		"buildsInSource": "_build",
+		"build": "dune build -p comment-ppx",
+		"buildDev": [["dune", "build", "--promote-install-files", "--root", "."]],
+		"release": {
+			"bin": ["bin"]
+		}
+	},
+	"devDependencies": {
+		"ocaml": "~4.10.0",
+		"@esy-ocaml/reason": "^3.6.2",
+		"@opam/dune": ">=2.8.4",
+		"@opam/ppxlib": "0.22.0",
+		"@reason-native/rely": "^3.2.1",
+		"@opam/ocaml-lsp-server": "1.4.1"
+	},
+	"scripts": {
+		"build": "esy dune build -p comment-ppx",
+		"dev": "esy build dune build -p comment-ppx",
+		"format": "esy dune build @fmt --auto-promote",
+		"utop": "esy dune utop lib -- -implicit-bindings"
+	}
 }
